@@ -1,1 +1,1 @@
-﻿rule for js: 
+﻿rule for js:
