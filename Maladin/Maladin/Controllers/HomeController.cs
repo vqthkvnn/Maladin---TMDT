@@ -26,5 +26,10 @@ namespace Maladin.Controllers
 
             return View();
         }
+
+        public ActionResult ShoppingCart()
+        {
+            return View();
+        }
     }
 }

@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\readme.txt" />
+    <Content Include="assets\image\giang_test_img\product.jpg" />
     <Content Include="assets\image\readme.txt" />
     <Content Include="assets\js\readme.txt" />
     <Content Include="Content\animate.css" />
@@ -188,6 +189,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
