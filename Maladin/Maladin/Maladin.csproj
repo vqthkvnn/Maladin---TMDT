@@ -133,6 +133,7 @@
   <ItemGroup>
     <Content Include="assets\css\readme.txt" />
     <Content Include="assets\image\giang_test_img\product.jpg" />
+    <Content Include="assets\image\logo.png" />
     <Content Include="assets\image\readme.txt" />
     <Content Include="assets\js\readme.txt" />
     <Content Include="Content\animate.css" />
