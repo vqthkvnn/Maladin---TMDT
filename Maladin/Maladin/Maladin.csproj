@@ -142,8 +142,15 @@
     <Compile Include="Areas\API\APIAreaRegistration.cs" />
     <Compile Include="Areas\API\Controllers\ProductController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
+    <Compile Include="Areas\Partner\Common\LoginPartner.cs" />
+    <Compile Include="Areas\Partner\Common\LoginPartnerSession.cs" />
+    <Compile Include="Areas\Partner\Controllers\BaseController.cs" />
     <Compile Include="Areas\Partner\Controllers\HomeController.cs" />
     <Compile Include="Areas\Partner\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Partner\DAO\AccountPartnerDAO.cs" />
+    <Compile Include="Areas\Partner\DAO\TMDT_MaladinDbContext.cs" />
+    <Compile Include="Areas\Partner\Models\ListProduct.cs" />
+    <Compile Include="Areas\Partner\Models\LoginPartnerModel.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EF\ACCOUNT.cs" />
@@ -2031,6 +2038,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="public\image\avt\face15.jpg" />
+    <Content Include="public\image\avt\face18.jpg" />
+    <Content Include="public\image\avt\face19.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -2152,6 +2162,7 @@
     <Content Include="Areas\Partner\Views\Shared\_layout_partner_left.cshtml" />
     <Content Include="Areas\Partner\Views\Shared\_layout_partner_footer.cshtml" />
     <Content Include="Areas\Partner\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Partner\Views\Login\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
@@ -2203,14 +2214,11 @@
     <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Customer\Views\Shared\" />
-    <Folder Include="Areas\Partner\Common\" />
-    <Folder Include="Areas\Partner\DAO\" />
     <Folder Include="Areas\Partner\Data\" />
-    <Folder Include="Areas\Partner\Models\" />
-    <Folder Include="Areas\Partner\Views\Login\" />
+    <Folder Include="Areas\Partner\Views\Base\" />
     <Folder Include="DAO\" />
     <Folder Include="Models\" />
-    <Folder Include="public\image\" />
+    <Folder Include="public\image\product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

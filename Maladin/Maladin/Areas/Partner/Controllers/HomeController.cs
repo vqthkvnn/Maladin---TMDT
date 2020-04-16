@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Maladin.Areas.Partner.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Partner/Home
         public ActionResult Index()
