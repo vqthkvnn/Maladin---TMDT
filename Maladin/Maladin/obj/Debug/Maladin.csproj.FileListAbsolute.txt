@@ -155,3 +155,7 @@ C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Debug\Maladin
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Debug\Maladin.csproj.CopyComplete
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Debug\Maladin.dll
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Debug\Maladin.pdb
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.dll
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.SqlServer.dll
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.xml
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.SqlServer.xml
