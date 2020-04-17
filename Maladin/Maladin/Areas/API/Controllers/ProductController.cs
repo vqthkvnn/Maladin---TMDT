@@ -19,15 +19,23 @@ namespace Maladin.Areas.API.Controllers
             return Json("hello json from post method", JsonRequestBehavior.DenyGet);
         }
         [HttpPost]
-        public JsonResult insertProduct()
+        public JsonResult insertProduct(string id, string name, string idProducer, string idTypeProduct, string des)
         {
-            return Json("true", JsonRequestBehavior.DenyGet);
+            /*
+             , string idOr,
+                string price, string rating, string note, string idacc, string date, string admin = "ADMIN", bool isSell = false*/
+            string insertQuery = "Insert PRODUCT(ID_PRODUCT,NAME_PRODUCT,ID_PRODUCER ,ID_TYPE_PRODUCT,DESCRIBE_PRODUCT," +
+                "ID_ORIGIN ,PRICE_PRODUCT ,RATING_PRODUCT ,NOTE_PRODUCT,ID_INFO,DATE_PRODUCT,USER_ACC,IS_SELL) " +
+                "VALUES ('" + id + "', N'" + name + "', '" + idProducer + "','" + idTypeProduct + "', N'" + des + "'";
+
+            return Json(id + name, JsonRequestBehavior.DenyGet);
 
         }
         [HttpPost]
-        public JsonResult getOrigin()
+        public JsonResult getOrigin(string id, string name)
         {
-            return Json("", JsonRequestBehavior.DenyGet);
+            string get = id + " chuoi " + name;
+            return Json(get, JsonRequestBehavior.DenyGet);
         }
         [HttpPost]
         public JsonResult deleteProduct(string id)

@@ -1,0 +1,28 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+    @Styles.Render("~/Areas/Partner/allcss")
+    
+</head>
+<body>
+    <!-- Header - navbar -->
+    @RenderPage("~/Areas/Partner/Views/Shared/_layout_partner_header.cshtml")
+
+    <div class="container-fluid page-body-wrapper">
+        @RenderPage("~/Areas/Partner/Views/Shared/_layout_partner_left.cshtml")
+        <div class="main-panel">
+            <div class="content-wrapper">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Areas/Partner/alljs")
+    @RenderSection("Scripts", false/*required*/)
+
+</body>
+</html>

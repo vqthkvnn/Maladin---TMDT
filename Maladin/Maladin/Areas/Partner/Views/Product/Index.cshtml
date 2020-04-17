@@ -1,0 +1,130 @@
+﻿@{
+
+    Layout = Request.IsAjaxRequest() ? null : "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+}
+@model Maladin.Areas.Partner.Models.ProductModels
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            // code to read selected table row cell data (values).
+            $("#recent-purchases-listing").on('click', '.delete-btn', function () {
+                // get the current row
+                var currentRow = $(this).closest("tr");
+
+                var col1 = currentRow.find("td:eq(0)").text(); // get current row 1st TD value
+                console.log(col1);
+                $('#content-modal').text("bạn có muốn hủy kích hoạt cho sản phẩm có id:" + col1.toString());
+                $('.btn-model-confirm').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: 'Product/Delete?id=' + col1,
+                        dataType: "json",                
+                        cache: false,
+                        success: function () {
+                            $('#modalDelete').modal('hide');
+                            alert('Success');
+                            window.location.reload();
+                            
+                        },
+                        error: function () { alert('fail'); }
+                    });
+                });
+            });
+        });
+
+    </script>
+}
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Danh Sách Các Sản Phẩn Của User</h4>
+            <p class="card-description">
+                Tùy Chọn hiển thị:
+            </p>
+            <div class="table-responsive">
+                <table class="table table-hover" id="recent-purchases-listing">
+                    <thead>
+                        <tr>
+                            <th class="id-product">ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Mã công ty</th>
+                            <th>Mã loại sản phẩm</th>
+                            <th>Xuất xứ</th>
+                            <th>Giá sản phẩm</th>
+                            <th>Đánh giá</th>
+                            <th>Ngày được thêm</th>
+                            <th>Người phê duyệt sản phẩm</th>
+                            <th>Trạng thái</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.PRODUCT)
+                        {
+
+                            <tr>
+                                <td>@item.ID_PRODUCT</td>
+                                <td>@item.NAME_PRODUCT</td>
+                                <td>@item.ID_PRODUCER</td>
+                                <td>@item.ID_TYPE_PRODUCT</td>
+                                <td>@item.ID_ORIGIN</td>
+                                <td>@item.PRICE_PRODUCT</td>
+                                <td>@item.RATING_PRODUCT</td>
+                                <td>@item.DATE_PRODUCT</td>
+                                <td>@item.USER_ACC</td>
+                                @if (@item.IS_SELL)
+                                {
+                                    <td><label class="badge badge-danger">No Active</label></td>
+                                }
+                                else
+                                {
+                                    <td><label class="badge badge-success">Active</label></td>
+                                }
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon edit-btn">
+                                        <i class="mdi mdi mdi-tooltip-edit"></i>
+                                    </button>
+
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon delete-btn" data-target="#modalDelete" data-toggle="modal">
+                                        <i class="mdi mdi mdi-delete-sweep"></i>
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" id="content-modal">
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary btn-model-confirm">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        }
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

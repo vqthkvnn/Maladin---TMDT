@@ -1,0 +1,16 @@
+﻿
+@{
+    
+    Layout = Request.IsAjaxRequest() ? null : "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+}
+@model Maladin.Areas.Partner.Models.HomeModels
+@section Scripts{
+    <script>
+    $('#avt-profile').attr("src",'@Model.iNFOMATION.AVT_ACC');
+    $('#name-user-profile').text('@Model.iNFOMATION.NAME_INFO');
+    </script>
+}
+<div>
+    <p></p>
+</div>
+
