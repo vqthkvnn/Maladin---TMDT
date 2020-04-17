@@ -1,7 +1,7 @@
 ﻿<header id="header" class="nav-collapse">
     <div class="header-form-container">
         <div class="container">
-            <a class="logo" href="#">
+            <a class="logo" href="@Url.Action("Index", "Home")">
                 <img src="~/assets/image/logo.png" alt="Day la logo nhe hihi" style="height:40px"/>
             </a>
             <div class="form-search">
@@ -32,9 +32,17 @@
                 </div>
                 <div class="user-profile item" id="header-user">
                     <div>
-                        <div>
+                        <!--
+                            <div>
                             <i class="fa fa-user cart-icon" aria-hidden="true"></i>
                             <span>Đăng nhập <br />tài khoản</span>
+                        </div>
+                         -->
+                        <div>
+                            <a rel="nofollow" href="@Url.Action("WishList", "User")">
+                                <i class="fa fa-user cart-icon" aria-hidden="true"></i>
+                                <span>Đăng nhập <br />tài khoản</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -42,7 +50,7 @@
                     <a rel="nofollow" href="@Url.Action("ShoppingCart", "Home")" class="header-cart item">
                         <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
                         <span class="cart-text">Giỏ hàng </span>
-                        <span class="badge badge-primary">0</span>
+                        <span class="badge badge-primary" style="background-color: #fcdf03; color: black;">0</span>
                     </a>
                 </div>
             </div>

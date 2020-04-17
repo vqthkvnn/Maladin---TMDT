@@ -3124,4 +3124,382 @@ header#header .main-nav .nav-main-toggle .long {
     position: absolute;
     top: -1px;
 }
+
 /*End Header Maintain*/
+
+/*Start common content user function*/
+.maladin-account .wrap {
+    min-height: 500px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.maladin-account {
+    font-family: Roboto, sans-serif, arial;
+}
+
+.maladin-account .wrap .row-style-1 {
+    background: 0 0;
+    box-shadow: none;
+}
+
+.maladin-account .wrap .list-item .item:first-child {
+    border-top: none;
+}
+
+.maladin-account .wrap .list-item .item {
+    width: 100%;
+    padding: 20px 15px;
+    position: relative;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.maladin-account .wrap .list-item .item .item-col-1 {
+    display: table-cell;
+    width: 130px;
+    vertical-align: top;
+}
+
+.maladin-account .wrap .list-item .item .image {
+    width: 130px;
+    height: 182px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 25px;
+    margin-bottom: 0;
+}
+
+.maladin-account .wrap .list-item .item .image a {
+    display: block;
+}
+
+.maladin-account .wrap .list-item .item .item-col-2 {
+    display: table-cell;
+    width: 75%;
+    vertical-align: top;
+}
+
+.maladin-account .wrap .list-item .item .information .title {
+    display: block;
+    margin: 0;
+}
+
+.maladin-account .wrap .list-item .item .information .title a {
+    font-size: 14px;
+    color: #242424;
+}
+
+.maladin-account .wrap .list-item .item .information .description {
+    text-align: justify;
+    font-size: 13px;
+    line-height: 20px;
+    width: 100%;
+    margin-top: 13px;
+}
+
+.maladin-account .wrap .list-item .item .item-col-3 {
+    display: table-cell;
+    vertical-align: top;
+    width: 25%;
+    padding: 0 0 0 25px;
+}
+
+.maladin-account .wrap .list-item .item .price-sale {
+    font-size: 16px;
+    color: #242424;
+    font-weight: 700;
+    text-align: right;
+    margin-right: 45px;
+    margin-bottom: 0;
+}
+
+.maladin-account .wrap .list-item .item .price-sale span {
+    font-size: 13px;
+    color: #787878;
+    text-decoration: line-through;
+    font-weight: 400;
+    padding: 5px 0 0;
+    display: inline-block;
+}
+
+.maladin-account .wrap .list-item .item .price-sale span.sale-tag {
+    text-decoration: none;
+    color: #242424;
+    padding: 5px 0 0 5px;
+    position: relative;
+    margin-left: 18px;
+}
+
+.maladin-account .wrap .list-item .item .price-sale span.sale-tag:before {
+    content: "";
+    width: 1px;
+    height: 10px;
+    background: #787878;
+    position: absolute;
+    left: -7px;
+    top: 10px;
+}
+
+.maladin-account .wrap .list-item .item .btn-custom1 {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+.maladin-account .wrap .btn-custom1 {
+    border: none;
+    font-size: 14px;
+    background: 0 0;
+}
+/*End common content user function*/
+
+/*Start left menu user*/
+.maladin-account .menu-left {
+    width: 250px;
+    padding-right: 0px;
+    padding-left: 0px;
+    float: left;
+    margin-right: 10px;
+    padding-bottom: 20px;
+}
+
+.maladin-account .wrap .profiles {
+    background: 0 0;
+    color: #fff;
+    padding: 10px 5px 5px;
+}
+
+.maladin-account .wrap .profiles:before {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+.maladin-account .wrap p {
+    margin-top: 10px!important;
+}
+
+.maladin-account .wrap .profiles .image {
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.maladin-account .wrap .profiles .image img {
+    border-radius: 50%;
+}
+
+.maladin-account .wrap .profiles .name {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #242424;
+    font-weight: 300;
+}
+
+.maladin-account .wrap .profiles h6 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    color: #242424;
+}
+
+.maladin-account .wrap .menu {
+    margin-top: 0;
+}
+
+.maladin-account .wrap .menu ul {
+    list-style: none;
+    display: block;
+    background: 0 0;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    z-index: 1;
+    box-shadow: none;
+}
+
+.maladin-cart .wrap .menu .dropdown-menu-1 {
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    padding: 5px 0;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 4px;
+    float: left;
+}
+
+.maladin-account .wrap .menu ul li a {
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    text-align: left;
+    color: #4a4a4a;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 60px;
+    position: relative;
+}
+
+.maladin-account .wrap .menu ul li a i {
+    font-size: 18px;
+    height: 30px;
+    text-align: center;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    left: 7px;
+    bottom: 0;
+    margin: auto;
+    line-height: 30px;
+    color: #999;
+}
+
+.maladin-account .content-right {
+    width: 975px;
+    float: left;
+    margin-left: 5px;
+    position: relative;
+}
+
+.maladin-account .wrap  h1 {
+    font-size: 15px;
+    margin: 20px 0 0;
+    font-weight: 600;
+}
+
+.maladin-account .wrap h1.have-margin {
+    margin-bottom: 15px;
+    font-size: 19px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    color: #242424;
+}
+
+.empty-content {
+    display: block;
+    margin: 20px 0;
+    width: 100%;
+    padding: 50px 20px 70px;
+    background: #fff;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.empty-content p {
+    margin: 0 0 20px!important;
+}
+
+.empty-content i {
+    color: #ff3945;
+}
+
+.empty-content .btn-blue {
+    width: 190px;
+    border-radius: 4px;
+    color: black;
+    font-size: 14px;
+    background-color: #189eff;
+    display: block;
+    padding: 10px 30px;
+    margin: auto;
+}
+/*End left menu user*/
+/*Start mini item*/
+.lndPa {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 16px;
+}
+
+.item-picture {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.img-detail-mini {
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease 0s;
+}
+
+.lndPa .item-title {
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-height: 40px;
+    width: 100%;
+    color: rgb(36, 36, 36);
+    font-size: 12px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.54;
+    letter-spacing: 0.1px;
+    text-align: left;
+    text-overflow: ellipsis;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.lndPa .item-price {
+    align-self: stretch;
+    color: rgb(36, 36, 36);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0px;
+    padding: 8px 0px 0px;
+}
+
+.lndPa .item-price .percent {
+    margin-left: 8px;
+    color: rgb(120, 120, 120);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.lndPa .item-price .original {
+    display: block;
+    margin-left: 0px;
+    color: rgb(120, 120, 120);
+    font-size: 13px;
+    font-weight: 300;
+    text-decoration: line-through;
+}
+
+.lndPa .gray-badge {
+    text-align: left;
+    width: 100%;
+}
+
+.lndPa .gray-badge__item {
+    display: inline-block;
+    width: auto;
+    color: rgb(36, 36, 36);
+    font-size: 11px;
+    background-color: rgb(242, 242, 242);
+    margin: 8px 0px 0px;
+    padding: 4px;
+    border-radius: 2px;
+}
+/*End mini item*/

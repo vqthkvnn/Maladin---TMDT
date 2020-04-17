@@ -125,6 +125,7 @@
     <Compile Include="Areas\API\APIAreaRegistration.cs" />
     <Compile Include="Areas\API\Controllers\ProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -132,8 +133,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\readme.txt" />
+    <Content Include="assets\image\avatar.png" />
+    <Content Include="assets\image\Baymax-NoContent.png" />
     <Content Include="assets\image\giang_test_img\product.jpg" />
     <Content Include="assets\image\logo.png" />
+    <Content Include="assets\image\product.png" />
     <Content Include="assets\image\readme.txt" />
     <Content Include="assets\js\readme.txt" />
     <Content Include="Content\animate.css" />
@@ -192,6 +196,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ShoppingCart.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\LeftMenuUser.cshtml" />
+    <Content Include="Views\Shared\UserLayout.cshtml" />
+    <Content Include="Views\User\WishList.cshtml" />
+    <Content Include="Views\Home\ProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

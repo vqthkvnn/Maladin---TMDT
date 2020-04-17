@@ -31,5 +31,15 @@ namespace Maladin.Controllers
         {
             return View();
         }
+
+        public ActionResult ProductDetail()
+        {
+            return View();
+        }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }
