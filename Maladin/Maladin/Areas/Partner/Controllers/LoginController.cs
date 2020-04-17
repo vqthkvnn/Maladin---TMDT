@@ -14,17 +14,31 @@ namespace Maladin.Areas.Partner.Controllers
         // GET: Partner/Login
         public ActionResult Index(LoginPartnerModel loginPartnerModel)
         {
-            if (ModelState.IsValid|| loginPartnerModel.UserName=="")
+            var dao = new AccountPartnerDAO();
+            var modelAccount = new AccountInfomationModel();
+            if (Session[LoginPartnerSession.USER_SESSION] != null)
             {
-                var dao = new AccountPartnerDAO();
+                
+                return RedirectToAction("Index", "Home", new { username = Session[LoginPartnerSession.USER_SESSION].ToString() });
+            }
+
+            if (ModelState.IsValid|| loginPartnerModel.UserName!="")
+            {
+                
+                
+                
                 var res = dao.CheckLogin(loginPartnerModel.UserName, loginPartnerModel.UserPassword);
                 if (res == 1)
                 {
                     var user = dao.GetByNameAccount(loginPartnerModel.UserName);
                     var userSession = new LoginPartner();
                     userSession.USER_ACC = user.USER_ACC;
-                    Session.Add(LoginPartnerSession.USER_SESSION, userSession);
-                    return RedirectToAction("Index", "Home");
+                    Session[LoginPartnerSession.USER_SESSION] = loginPartnerModel.UserName;
+                    modelAccount.ACCOUNT = dao.GetByNameAccount(loginPartnerModel.UserName);
+                    modelAccount.iNFOMATION = dao.getInfomationByAccount(loginPartnerModel.UserName);
+
+                    return RedirectToAction("Index", "Home", new { username = modelAccount.ACCOUNT.USER_ACC });
+
                 }
                 else if (res == 0)
                 {
@@ -43,15 +57,17 @@ namespace Maladin.Areas.Partner.Controllers
                     ModelState.AddModelError("", "Sai password");
                 }
             }
-            else
-            {
-
-            }
+            
             return View();
         }
         public ActionResult ForgotPassword()
         {
             return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Remove(LoginPartnerSession.USER_SESSION);
+            return View("Index");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Maladin.Areas.Partner.Controllers
         // GET: Partner/Base
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var sess = (LoginPartner)Session[LoginPartnerSession.USER_SESSION];
+            var sess = Session[LoginPartnerSession.USER_SESSION];
             if (sess == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(

@@ -68,6 +68,7 @@ namespace Maladin
                 "~/Areas/Partner/assets/vendors/base/vendor.bundle.base.js",
                 "~/Areas/Partner/assets/js/off-canvas.js",
                 "~/Areas/Partner/assets/js/hoverable-collapse.js",
+                "~/Areas/Partner/assets/customJs/home_index.js",
                 "~/Areas/Partner/assets/js/template.js",
                 "~/Areas/Partner/assets/js/chart.js",
                 "~/Areas/Partner/assets/vendors/chart.js/Chart.min.js"

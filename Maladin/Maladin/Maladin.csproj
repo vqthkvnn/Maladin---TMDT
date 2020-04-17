@@ -147,10 +147,15 @@
     <Compile Include="Areas\Partner\Controllers\BaseController.cs" />
     <Compile Include="Areas\Partner\Controllers\HomeController.cs" />
     <Compile Include="Areas\Partner\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Partner\Controllers\ProductController.cs" />
     <Compile Include="Areas\Partner\DAO\AccountPartnerDAO.cs" />
+    <Compile Include="Areas\Partner\DAO\ProductDao.cs" />
     <Compile Include="Areas\Partner\DAO\TMDT_MaladinDbContext.cs" />
-    <Compile Include="Areas\Partner\Models\ListProduct.cs" />
+    <Compile Include="Areas\Partner\Models\AccountInfomationModel.cs" />
+    <Compile Include="Areas\Partner\Models\HomeModels.cs" />
+    <Compile Include="Areas\Partner\Models\InfomationProduct.cs" />
     <Compile Include="Areas\Partner\Models\LoginPartnerModel.cs" />
+    <Compile Include="Areas\Partner\Models\ProductModels.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EF\ACCOUNT.cs" />
@@ -1967,6 +1972,7 @@
     <Content Include="Areas\Admin\assets\vendor\popper.js\umd\popper.js" />
     <Content Include="Areas\Admin\assets\vendor\popper.js\umd\popper.min.js" />
     <Content Include="Areas\Partner\assets\css\style.css" />
+    <Content Include="Areas\Partner\assets\customJs\home_index.js" />
     <Content Include="Areas\Partner\assets\images\auth\lockscreen-bg.jpg" />
     <Content Include="Areas\Partner\assets\images\auth\login-bg.jpg" />
     <Content Include="Areas\Partner\assets\images\auth\register-bg.jpg" />
@@ -2038,9 +2044,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="public\image\avt\avt-defult.png" />
     <Content Include="public\image\avt\face15.jpg" />
     <Content Include="public\image\avt\face18.jpg" />
     <Content Include="public\image\avt\face19.jpg" />
+    <Content Include="public\logo-mini.svg" />
+    <Content Include="public\logo.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -2163,6 +2172,7 @@
     <Content Include="Areas\Partner\Views\Shared\_layout_partner_footer.cshtml" />
     <Content Include="Areas\Partner\Views\Home\Index.cshtml" />
     <Content Include="Areas\Partner\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Partner\Views\Product\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />

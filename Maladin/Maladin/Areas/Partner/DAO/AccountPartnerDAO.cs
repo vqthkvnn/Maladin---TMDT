@@ -12,17 +12,62 @@ namespace Maladin.Areas.Partner.DAO
         {
             dbContext = new TMDT_Maladin();
         }
-        public string Insert(ACCOUNT entity)
+        public bool Insert(ACCOUNT entity)
         {
             try
             {
                 dbContext.ACCOUNTs.Add(entity);
                 dbContext.SaveChanges();
-                return entity.USER_ACC;
+                return true;
             }
             catch(Exception e)
             {
-                return "error";
+                return false;
+            }
+        }
+        public List<ACCOUNT> getAllAccounts()
+        {
+            return dbContext.ACCOUNTs.ToList<ACCOUNT>();
+        }
+        public INFOMATION_ACCOUNT getInfomationByAccount(string account)
+        {
+            return dbContext.INFOMATION_ACCOUNT.Where(x => x.USER_ACC == account).FirstOrDefault();
+        }
+        public bool Update(ACCOUNT entity)
+        {
+            try
+            {
+                var product = GetByNameAccount(entity.USER_ACC);
+                dbContext.ACCOUNTs.Attach(product);
+                product.PASSWORD_ACC = entity.PASSWORD_ACC;
+                product.TYPE_ACCOUNT = entity.TYPE_ACCOUNT;
+                product.IS_ACTIVE_ACC = entity.IS_ACTIVE_ACC;
+                product.NOTI_ACC = entity.NOTI_ACC;
+                product.COINT_ACC = entity.COINT_ACC;
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+        public bool Delete(string user)
+        {
+            try
+            {
+                var informationAcc = getInfomationByAccount(user);
+                dbContext.INFOMATION_ACCOUNT.Attach(informationAcc);
+                informationAcc.USER_ACC = "null";
+                var product = GetByNameAccount(user);
+                dbContext.ACCOUNTs.Remove(product);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                
+                return false;
             }
         }
         public ACCOUNT GetByNameAccount(string user_name)

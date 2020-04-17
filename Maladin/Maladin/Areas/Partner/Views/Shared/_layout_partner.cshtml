@@ -4,8 +4,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>_layout_partner</title>
+    <title>Home</title>
     @Styles.Render("~/Areas/Partner/allcss")
+    
 </head>
 <body>
     <!-- Header - navbar -->
@@ -21,5 +22,7 @@
     </div>
 
     @Scripts.Render("~/Areas/Partner/alljs")
+    @RenderSection("Scripts", false/*required*/)
+
 </body>
 </html>
