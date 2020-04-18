@@ -5,6 +5,10 @@
 @model Maladin.Areas.Partner.Models.ProductModels
 @section Scripts{
     <script>
+        $('#btn-add-product').click(function () {
+            window.location = '@Url.Action("Add","Product")';
+                
+            });
 
         $(document).ready(function () {
 
@@ -32,7 +36,10 @@
                     });
                 });
             });
+            
+            
         });
+        
 
     </script>
 }
@@ -43,6 +50,21 @@
             <p class="card-description">
                 Tùy Chọn hiển thị:
             </p>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="search">
+                        <i class="mdi mdi-magnify"></i>
+                    </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search">
+                <button type="button" class="btn btn-inverse-info btn-icon">
+                    <i class="mdi mdi-account-search"></i>
+                </button>
+                <button type="button" class="btn btn-inverse-info btn-icon" id="btn-add-product">
+                    <i class="mdi mdi-account-plus"></i>
+                </button>
+            </div>
+            
             <div class="table-responsive">
                 <table class="table table-hover" id="recent-purchases-listing">
                     <thead>
@@ -119,12 +141,24 @@
 
                         }
 
-
-
                     </tbody>
                 </table>
             </div>
+
         </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled" id="prviewc">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" id="prview" disabled>Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#" id="num1">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" id="num2">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" id="num3">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" id="next">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
 </div>

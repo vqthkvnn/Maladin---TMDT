@@ -6,13 +6,17 @@ using System.Web.Mvc;
 using Maladin.Areas.Partner.DAO;
 using Maladin.Areas.Partner.Models;
 using Maladin.Areas.Partner.Common;
+using System.Text;
+using Maladin.EF;
+
 namespace Maladin.Areas.Partner.Controllers
 {
-    public class ProductController : BaseController
+    public class ProductController : Controller
     {
-        
+
 
         // GET: Partner/Product
+        
         public ActionResult Index()
         {
             var dao = new ProductDao();
@@ -34,6 +38,41 @@ namespace Maladin.Areas.Partner.Controllers
                 return Json("false", JsonRequestBehavior.AllowGet);
             }
             
+        }
+        public ActionResult Edit(string id)
+        {
+            return View();
+        }
+        public ActionResult Add(InfomationProductModel model)
+        {
+            var dao = new InformationProductDAO();
+            model.TYPE_PRODUCT = dao.GetAllTypePRoduct();
+            model.PRODUCER_INFO = dao.GetAllProducer();
+            model.ORIGIN = dao.GetAllOrigin();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddProduct(string nameProduct, string price, string nameProducer, string nameType, string nameOrigin, string desPro, 
+            string note)
+        {
+            string timeNow = DateTime.Now.ToString("yyyy-MM-dd");
+            var dao = new WaitProductDAO();
+            WAIT_PRODUCT wAIT_PRODUCT = new WAIT_PRODUCT();
+            wAIT_PRODUCT.NAME_PRODUCT = nameProduct;
+            wAIT_PRODUCT.ID_PRODUCER = nameProducer;
+            wAIT_PRODUCT.ID_ORIGIN = nameOrigin;
+            wAIT_PRODUCT.ID_TYPE_PRODUCT = nameType;
+            wAIT_PRODUCT.PRICE_PRODUCT = Int32.Parse(price);
+            wAIT_PRODUCT.DESCRIBE_PRODUCT = desPro;
+            wAIT_PRODUCT.NOTE_PRODUCT = note;
+            wAIT_PRODUCT.DATE_PRODUCT = Convert.ToDateTime(timeNow);
+            wAIT_PRODUCT.ID_INFO = Session[LoginPartnerSession.USER_SESSION].ToString();
+            if (dao.InsertByCode(wAIT_PRODUCT))
+            {
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            return Json("false", JsonRequestBehavior.AllowGet);
+
         }
     }
 }

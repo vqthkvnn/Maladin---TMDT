@@ -1,0 +1,246 @@
+﻿
+@{
+
+    Layout = Request.IsAjaxRequest() ? null : "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+}
+@model Maladin.Areas.Partner.Models.InfomationProductModel
+@section Scripts{
+    <script charset="utf-8">
+        var value_producer = $('select[name=producer] option').filter(':selected').val();
+        var value_type = $('select[name=type-pro] option').filter(':selected').val();
+        var value_origin = $('select[name=origin] option').filter(':selected').val();
+        function decodeHtml(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+        }
+        // get value from model
+        var producerList = [];
+        var originList = [];
+        var typeProduct = [];
+        @foreach(var it in Model.PRODUCER_INFO)
+        {
+            @:producerList.push({'id':'@it.ID_PRODUCER', 'name':'@WebUtility.HtmlDecode(it.NAME_PRODUCER.ToString())','phone':'@WebUtility.HtmlDecode(it.PHONE_PRODUCER.ToString())',
+            @:'email':'@WebUtility.HtmlDecode(it.EMAIL_PRODUCER)', 'adress':'@WebUtility.HtmlDecode(it.ADRESS_PRODUCER)'});
+        }
+        @foreach(var it in Model.ORIGIN)
+        {
+            @:originList.push({'id':'@it.ID_ORIGIN', 'name':"@WebUtility.HtmlDecode(it.NAME_ORIGIN.ToString())",'note':'@WebUtility.HtmlDecode(it.NOTE_ORIGIN)'});
+        }
+        @foreach(var it in Model.TYPE_PRODUCT)
+        {
+            @:typeProduct.push({'id':'@it.ID_TYPE_PRODUCT', 'name':'@WebUtility.HtmlDecode(it.NAME_TYPE_PRODUCT)','note':'@WebUtility.HtmlDecode(it.NOTE_TYPE_PRODUCT)'});
+        }
+        // get value default
+        for (var i = 0;i< originList.length;i++)
+        {
+             if (originList[i]["id"] == value_origin){
+            $('#name-origin').text(decodeHtml(originList[i]['name']));
+            $('#note-orgin').text(decodeHtml(originList[i]['note']));
+            
+            }
+        }
+        for (var i = 0;i< typeProduct.length;i++)
+        {
+             if (typeProduct[i]["id"] == value_type){
+            $('#name-type-product').text(decodeHtml(typeProduct[i]['name']));
+            $('#note-type-product').text(decodeHtml(typeProduct[i]['note']));
+            
+            }
+        }
+        for (var i = 0;i< producerList.length;i++)
+        {
+             if (producerList[i]["id"] == value_producer){
+            $('#name-producer').text(decodeHtml(producerList[i]['name']));
+            $('#email-producer').text(decodeHtml(producerList[i]['email']));
+            $('#phone-producer').text(decodeHtml(producerList[i]['phone']));
+            $('#adress-producer').text(decodeHtml(producerList[i]['adress']));
+            
+            }
+        }
+        // end get default;
+        function getTypeProduct(value)
+        {
+        
+            for (var i = 0;i< typeProduct.length;i++)
+        {
+             if (typeProduct[i]["id"] == value.value){
+            $('#name-type-product').text(decodeHtml(typeProduct[i]['name']));
+            $('#note-type-product').text(decodeHtml(typeProduct[i]['note']));
+            
+            }
+        }
+        }
+        function getProducer(value)
+        {
+        
+            for (var i = 0;i< producerList.length;i++)
+        {
+             if (producerList[i]["id"] == value.value){
+            $('#name-producer').text(decodeHtml(producerList[i]['name']));
+            $('#email-producer').text(decodeHtml(producerList[i]['email']));
+            $('#phone-producer').text(decodeHtml(producerList[i]['phone']));
+            $('#adress-producer').text(decodeHtml(producerList[i]['adress']));
+            
+            }
+        }
+        }
+        function getOrigin(value)
+        {
+        
+            for (var i = 0;i< originList.length;i++)
+        {
+             if (originList[i]["id"] == value.value){
+            $('#name-origin').text(decodeHtml(originList[i]['name']));
+            $('#note-orgin').text(decodeHtml(originList[i]['note']));
+            
+            }
+        }
+        }
+
+        $('#btn-submit').click(function(){
+        var path ='AddProduct?nameProduct=' + $('#name-product').val()+'&price='+$('#price-product').val()+'&nameProducer='+$('select[name=producer] option').filter(':selected').val()+
+            '&nameType='+$('select[name=type-pro] option').filter(':selected').val()+'&nameOrigin='+$('select[name=origin] option').filter(':selected').val()+
+            '&desPro='+$('#des-product').val()+'&note='+$('#note-product').val();
+        console.log(path);
+            $.ajax({
+        type: "POST",
+        url: path,
+        dataType: "json",
+        cache: false,
+        success: function () {
+            
+            alert('Thêm Thành công vào hàng chờ');
+            
+
+        },
+        error: function () { alert('Bạn vừa thêm thất bị vui lòng kiểm tra lại dữ liệu'); }
+    });
+        });
+
+
+    </script>
+    
+}
+<div class="row">
+    <div id="add-product-layout" class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">THÊM MỚI SẢN PHẨM</h4>
+                <form class="form-add">
+                    <p class="card-description">
+                        LƯU Ý: SẢN PHẨM NÀY SẼ ĐƯỢC CHUYỂN QUA DANH SÁCH CHỜ ADMIN PHÊ DUYỆT
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="name-product" placeholder="Nhập tên sản phẩm" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="price-product" placeholder="Giá sản phẩm (Số nguyên)" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Công ty:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="producer" onchange="getProducer(this);">
+                                        @foreach (var item in Model.PRODUCER_INFO)
+                                        {
+                                            <option>@item.ID_PRODUCER</option>
+                                        }
+
+                                    </select>
+                                    <div class="card card-body produer">
+                                        <p>Tên công ty:</p>
+                                        <p id="name-producer"></p>
+                                        <br />
+                                        <p>Điện thoại công ty:</p>
+                                        <p id="phone-producer"></p>
+                                        <br />
+                                        <p>Email công ty:</p>
+                                        <p id="email-producer"></p>
+                                        <br />
+                                        <p>Địa chỉ công ty:</p>
+                                        <p id="adress-producer"></p>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Loại sản phẩm:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="type-pro" onchange="getTypeProduct(this);">
+
+                                        @foreach (var item in Model.TYPE_PRODUCT)
+                                        {
+                                            <option>@item.ID_TYPE_PRODUCT</option>
+                                        }
+                                    </select>
+                                    <div class="card card-body type-product">
+                                        <p>Tên loại sản phẩm:</p>
+                                        <p id="name-type-product"></p>
+                                        <br />
+                                        <p>Ghi chú lọai sản phẩm:</p>
+                                        <p id="note-type-product"></p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Xuất xứ:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="origin" onchange="getOrigin(this);">
+
+                                        @foreach (var item in Model.ORIGIN)
+                                        {
+                                            <option>@item.ID_ORIGIN</option>
+                                        }
+                                    </select>
+                                    <div class="card card-body origin">
+                                        <p>Tên quốc gia:</p>
+                                        <p id="name-origin"></p>
+                                        <br />
+                                        <p>Ghi chú quốc gia:</p>
+                                        <p id="note-origin"></p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <label for="des-product">Mô tả sản phẩm</label>
+                        <textarea class="form-control" id="des-product" rows="4" required></textarea>
+                    </div>
+                    <div class="row">
+                        <label for="note-product">Ghi chú sản phẩm</label>
+                        <textarea class="form-control" id="note-product" rows="4" required></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-icon-text mr-2" id="btn-submit">
+                        <i class="mdi mdi-file-check btn-icon-prepend"></i>
+                        Xác Nhận
+                    </button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
