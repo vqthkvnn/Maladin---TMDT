@@ -8,18 +8,184 @@
     <link href="~/Content/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/price-range.css" rel="stylesheet">
     <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/main.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/responsive.css" rel="stylesheet">
-    <link href="~/Content/main.css" rel="stylesheet" type="text/css" runat="server">
-    @Scripts.Render("~/Scripts/main.js")
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
 </head>
-<body class="badge-v2 maladin-cart maladin-product">
-    @RenderPage("Header.cshtml")
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <!--<div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div> -->
+            <div class="header-middle">
+                <!--header-middle-->
+                <div class="container">
+                    <div class="row" style="padding-bottom: 0px; ">
+                        <div class="col-md-2" style="top: -17px;">
+                            <div class="logo pull-left">
+                                <a href="index.html"><img src="~/assets/image/logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <form class="card card-sm">
+                                <div class="card-body no-gutters align-items-center search-wrapper">
+                                    <div class="input-search">
+                                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
+                                    </div>
+                                    <div class="button-search">
+                                        <button class="btn btn-search custom-btn-search" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="col-md-3" style="padding-left: 0px;">
+                                <a href="index.html">
+                                    <div class="common-button-header header-nopadding">
+                                        <i class="fa fa-truck cart-icon" aria-hidden="true"></i>
+                                        <span>Theo dõi đơn hàng</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3" style="padding-left: 0px;">
+                                <a href="index.html">
+                                    <div class="common-button-header header-nopadding">
+                                        <i class="fa fa-bell cart-icon" aria-hidden="true"></i>
+                                        <span>Thông báo của tôi</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3" style="padding-left: 0px;">
+                                <a href="index.html">
+                                    <div class="common-button-header header-nopadding">
+                                        <i class="fa fa-user cart-icon" aria-hidden="true"></i>
+                                        <span>Tài khoản đăng nhập</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 cart-margin-3" style="padding-left: 0px;">
+                                <a href="index.html">
+                                    <div class="cart-shopping">
+                                        <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
+                                        <span class="cart-text">Giỏ hàng </span>
+                                        <span class="badge badge-primary">0</span>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/header-middle-->
+
+            <div class="header-bottom">
+                <!--header-bottom-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="mainmenu pull-left">
+                                <ul class="nav navbar-nav collapse navbar-collapse">
+                                    <li><a href="index.html">DANH MỤC SẢN PHẨM</a></li>
+                                    
+                                    
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
     </div>
-    @RenderPage("Footer.cshtml")
+    <footer id="footer">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="single-widget">
+                            <h2>Đội ngũ phát triển</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Trần Hoàng Giang - CEO</a></li>
+                                <li><a href="#">Vũ Quang Tuyền - CTO</a></li>
+                                <li><a href="#">Trần Văn Toàn - DEV 1</a></li>
+                                <li><a href="#">Bùi Quang Duy - DEV 2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="single-widget">
+                            <h2>Liên hệ với chúng tôi</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-facebook" aria-hidden="true" style="margin-right: 5px;"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram" aria-hidden="true" style="margin-right: 5px;"></i>
+                                        <span>Instagram</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-twitter" aria-hidden="true" style="margin-right: 5px;"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="single-widget">
+                            <h2>Về sản phẩm</h2>
+                            <form action="#" class="searchform">
+                                <input type="text" placeholder="Your email address" />
+                                <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+                                <p>Đây là bài tập lớn môn học Web Programming của chúng tôi, nếu bạn muốn nhận thông báo về những sản phẩm mới nhất vui lòng để lại email và chúng tôi sẽ liên hệ</p>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2020 Dinosaur.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="https://www.facebook.com/giang.tranhoang.14">Giang Dinosaur</a></span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
     
 
     @Scripts.Render("~/bundles/jquery")

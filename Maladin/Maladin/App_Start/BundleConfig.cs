@@ -25,10 +25,6 @@ namespace Maladin
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/MyCss/css").Include(
-                      "~/Content/main.css"));
-
             // style for admin
             bundles.Add(new StyleBundle("~/Areas/Admin/allcss").Include(
                 "~/Areas/Admin/assets/vendor/font-awesome/css/font-awesome.min.css",

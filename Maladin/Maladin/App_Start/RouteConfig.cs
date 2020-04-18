@@ -19,18 +19,6 @@ namespace Maladin
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional,},
                 namespaces: new [] {typeof(Controllers.HomeController).Namespace }
             );
-
-            routes.MapRoute(
-                name: "User",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "WishList", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Products",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Products", action = "DetailProduct", id = UrlParameter.Optional }
-            );
         }
     }
 }
