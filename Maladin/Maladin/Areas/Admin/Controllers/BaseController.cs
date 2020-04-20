@@ -13,7 +13,7 @@ namespace Maladin.Areas.Admin.Controllers
         // GET: Admin/Base
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var sess = (LoginAdmin)Session[LoginSession.ADMIN_SESSION];
+            var sess = Session[LoginAdminSession.ADMIN_SESSION];
             if (sess == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(

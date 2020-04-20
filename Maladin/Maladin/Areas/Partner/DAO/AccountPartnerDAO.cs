@@ -31,6 +31,12 @@ namespace Maladin.Areas.Partner.DAO
         }
         public INFOMATION_ACCOUNT getInfomationByAccount(string account)
         {
+            var acc = dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == account);
+            if (acc.ID_TYPE_ACC != "CTV")
+            {
+                return new INFOMATION_ACCOUNT();
+            }
+            
             return dbContext.INFOMATION_ACCOUNT.Where(x => x.USER_ACC == account).FirstOrDefault();
         }
         public bool Update(ACCOUNT entity)
@@ -52,27 +58,16 @@ namespace Maladin.Areas.Partner.DAO
                 return false;
             }
         }
-        public bool Delete(string user)
-        {
-            try
-            {
-                var informationAcc = getInfomationByAccount(user);
-                dbContext.INFOMATION_ACCOUNT.Attach(informationAcc);
-                informationAcc.USER_ACC = "null";
-                var product = GetByNameAccount(user);
-                dbContext.ACCOUNTs.Remove(product);
-                dbContext.SaveChanges();
-                return true;
-            }
-            catch(Exception e)
-            {
-                
-                return false;
-            }
-        }
+        
         public ACCOUNT GetByNameAccount(string user_name)
         {
-            return dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user_name);
+            var acc = dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user_name);
+            if (acc.ID_TYPE_ACC !="CTV")
+            {
+                return new ACCOUNT();
+            }
+            return acc;
+            
         }
         public int CheckLogin(string user_name, string password)
         {

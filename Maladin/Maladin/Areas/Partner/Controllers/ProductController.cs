@@ -11,7 +11,7 @@ using Maladin.EF;
 
 namespace Maladin.Areas.Partner.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
 
 
