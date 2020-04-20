@@ -3504,3 +3504,172 @@ header#header .main-nav .nav-main-toggle .long {
     border-radius: 2px;
 }
 /*End mini item*/
+
+/*Start detail information user */
+.maladin-account .wrap .right-information-user {
+
+}
+
+.maladin-account .wrap .right-information-user h3 {
+    font-size: 19px;
+    line-height: 21px;
+    font-weight: 300;
+    margin: 20px 0px 15px;
+}
+
+.maladin-account .wrap .information-user-detail {
+    background-color: #fff;
+    padding: 30px 20px;
+    border-radius: 4px;
+}
+
+.maladin-account .wrap .information-user-detail form {
+    width: 600px;
+}
+
+.maladin-account .wrap .information-user-detail .form-control {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px;
+}
+
+.maladin-account .wrap .information-user-detail .input-label {
+    width: 110px;
+    min-width: 110px;
+    font-size: 13px;
+    color: rgb(51, 51, 51);
+}
+
+.information-user-detail .form-control .input-txt {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    flex: 1 1 0%;
+}
+
+.information-user-detail .form-control input {
+    flex: 1 1 0%;
+}
+
+.value-input {
+    height: 34px;
+    line-height: 34px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    border-radius: 4px;
+    padding: 6px 12px;
+    outline: none;
+}
+
+.phone-wrap-div {
+    display: flex;
+    flex: 1 1 0%;
+}
+
+.phone-wrap-div input {
+    border-right: 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.phone-wrap-div button {
+    width: 160px;
+    color: rgb(74, 74, 74);
+    font-size: 13px;
+    background-color: #189eff;
+    height: 34px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 500;
+    cursor: pointer;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    outline: 0px;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.radio-gender {
+    display: flex;
+    margin-right: 15px;
+}
+
+.radio-gender input[type="radio"] {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.radio-gender .label {
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.dob-user select {
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    box-shadow: none;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(204, 204, 204);
+    border-image: initial;
+    padding: 6px 12px;
+    outline: none;
+    border-radius: 4px;
+    margin: 0px 12px 0px 0px;
+    background: 0px center;
+}
+
+.checkbox-change-password {
+    display: inline-block;
+}
+
+.checkbox-change-password input[type="checkbox"] {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    visibility: hidden;
+    clip: rect(0px, 0px, 0px, 0px);
+    opacity: 0;
+}
+
+.checkbox-change-password .label {
+    font-size: 14px;
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.information-user-detail .btn-submit {
+    width: 176px;
+    height: 40px;
+    color: #000000;
+    font-size: 16px;
+    background-color: #189eff;
+    cursor: pointer;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 4px;
+}
+
+.information-user-detail .form-control {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+/*End detail information user */
