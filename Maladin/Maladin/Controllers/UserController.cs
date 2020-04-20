@@ -18,5 +18,10 @@ namespace Maladin.Controllers
         {
             return View();
         }
+
+        public ActionResult AccountInformation()
+        {
+            return View();
+        }
     }
 }
