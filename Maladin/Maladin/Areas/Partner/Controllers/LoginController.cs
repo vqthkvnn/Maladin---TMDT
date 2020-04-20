@@ -21,13 +21,16 @@ namespace Maladin.Areas.Partner.Controllers
                 
                 return RedirectToAction("Index", "Home", new { username = Session[LoginPartnerSession.USER_SESSION].ToString() });
             }
-
-            if (ModelState.IsValid|| loginPartnerModel.UserName!="")
+            
+            if (ModelState.IsValid && loginPartnerModel.UserName!="")
             {
-                
-                
+
                 
                 var res = dao.CheckLogin(loginPartnerModel.UserName, loginPartnerModel.UserPassword);
+                if (loginPartnerModel.UserName == null || loginPartnerModel.UserPassword == null)
+                {
+                    res = -4;
+                }
                 if (res == 1)
                 {
                     var user = dao.GetByNameAccount(loginPartnerModel.UserName);
@@ -42,7 +45,7 @@ namespace Maladin.Areas.Partner.Controllers
                 }
                 else if (res == 0)
                 {
-                    ModelState.AddModelError("", "Tài khoản không tồn tại");
+                    
                 }
                 else if (res == -1)
                 {
@@ -51,6 +54,10 @@ namespace Maladin.Areas.Partner.Controllers
                 else if (res == -2)
                 {
                     ModelState.AddModelError("", "Tài khoản không được cấp quyền");
+                }
+                else if (res == -4)
+                {
+                    
                 }
                 else
                 {

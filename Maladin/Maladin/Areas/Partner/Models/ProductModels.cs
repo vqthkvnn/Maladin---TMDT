@@ -8,7 +8,7 @@ namespace Maladin.Areas.Partner.Models
     public class ProductModels
     {
         public List<PRODUCT> PRODUCT { get; set; }
-        public int sizePage { get; set; }
+        public int maxPage { get; set; }
 
     }
 }

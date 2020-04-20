@@ -17,9 +17,13 @@ namespace Maladin.EF
         public virtual DbSet<ACCOUNT_COMMENT> ACCOUNT_COMMENT { get; set; }
         public virtual DbSet<APPROVED_PRODUCT_WAIT> APPROVED_PRODUCT_WAIT { get; set; }
         public virtual DbSet<APPROVED_USER_WAIT> APPROVED_USER_WAIT { get; set; }
+        public virtual DbSet<GROUP_CHAT> GROUP_CHAT { get; set; }
         public virtual DbSet<GUEST_QUESTION> GUEST_QUESTION { get; set; }
         public virtual DbSet<INFOMATION_ACCOUNT> INFOMATION_ACCOUNT { get; set; }
         public virtual DbSet<INFOMATION_GUEST> INFOMATION_GUEST { get; set; }
+        public virtual DbSet<MEMBER_GROUP_CHAT> MEMBER_GROUP_CHAT { get; set; }
+        public virtual DbSet<MESSAGE_SEND_TO> MESSAGE_SEND_TO { get; set; }
+        public virtual DbSet<MESSAGE_SEND_TO_GR> MESSAGE_SEND_TO_GR { get; set; }
         public virtual DbSet<NOTI_ACC> NOTI_ACC { get; set; }
         public virtual DbSet<NOTIFICATION_> NOTIFICATION_ { get; set; }
         public virtual DbSet<ODER> ODERs { get; set; }
@@ -35,6 +39,7 @@ namespace Maladin.EF
         public virtual DbSet<USES_WAIT> USES_WAIT { get; set; }
         public virtual DbSet<VOCHER> VOCHERs { get; set; }
         public virtual DbSet<WAIT_PRODUCT> WAIT_PRODUCT { get; set; }
+        public virtual DbSet<WATCHED_PRODUCT> WATCHED_PRODUCT { get; set; }
         public virtual DbSet<VOCHER_AREA> VOCHER_AREA { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -71,6 +76,11 @@ namespace Maladin.EF
                 .WithRequired(e => e.ACC_PRODUCT)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<ACC_PRODUCT>()
+                .HasMany(e => e.WATCHED_PRODUCT)
+                .WithRequired(e => e.ACC_PRODUCT)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<ACCOUNT>()
                 .Property(e => e.USER_ACC)
                 .IsUnicode(false);
@@ -104,6 +114,28 @@ namespace Maladin.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ACCOUNT>()
+                .HasMany(e => e.MEMBER_GROUP_CHAT)
+                .WithRequired(e => e.ACCOUNT)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ACCOUNT>()
+                .HasMany(e => e.MESSAGE_SEND_TO)
+                .WithRequired(e => e.ACCOUNT)
+                .HasForeignKey(e => e.FROM_ACC)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ACCOUNT>()
+                .HasMany(e => e.MESSAGE_SEND_TO1)
+                .WithRequired(e => e.ACCOUNT1)
+                .HasForeignKey(e => e.TO_ACC)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ACCOUNT>()
+                .HasMany(e => e.MESSAGE_SEND_TO_GR)
+                .WithRequired(e => e.ACCOUNT)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ACCOUNT>()
                 .HasMany(e => e.NOTI_ACC)
                 .WithRequired(e => e.ACCOUNT)
                 .WillCascadeOnDelete(false);
@@ -118,6 +150,11 @@ namespace Maladin.EF
                 .HasMany(e => e.USES_WAIT1)
                 .WithRequired(e => e.ACCOUNT1)
                 .HasForeignKey(e => e.USER_ACC_WANT)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ACCOUNT>()
+                .HasMany(e => e.WATCHED_PRODUCT)
+                .WithRequired(e => e.ACCOUNT)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ACCOUNT_COMMENT>()
@@ -135,6 +172,16 @@ namespace Maladin.EF
             modelBuilder.Entity<APPROVED_USER_WAIT>()
                 .Property(e => e.USER_ACC)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<GROUP_CHAT>()
+                .HasMany(e => e.MEMBER_GROUP_CHAT)
+                .WithRequired(e => e.GROUP_CHAT)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<GROUP_CHAT>()
+                .HasMany(e => e.MESSAGE_SEND_TO_GR)
+                .WithRequired(e => e.GROUP_CHAT)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<GUEST_QUESTION>()
                 .Property(e => e.ID_ACC_PRODUCT)
@@ -180,6 +227,22 @@ namespace Maladin.EF
                 .HasMany(e => e.ODERs)
                 .WithOptional(e => e.INFOMATION_GUEST)
                 .HasForeignKey(e => e.ID_GUEST_NO_ACC);
+
+            modelBuilder.Entity<MEMBER_GROUP_CHAT>()
+                .Property(e => e.USER_ACC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MESSAGE_SEND_TO>()
+                .Property(e => e.FROM_ACC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MESSAGE_SEND_TO>()
+                .Property(e => e.TO_ACC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MESSAGE_SEND_TO_GR>()
+                .Property(e => e.USER_ACC)
+                .IsUnicode(false);
 
             modelBuilder.Entity<NOTI_ACC>()
                 .Property(e => e.USER_ACC)
@@ -387,6 +450,14 @@ namespace Maladin.EF
                 .HasMany(e => e.APPROVED_PRODUCT_WAIT)
                 .WithRequired(e => e.WAIT_PRODUCT)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<WATCHED_PRODUCT>()
+                .Property(e => e.USER_ACC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<WATCHED_PRODUCT>()
+                .Property(e => e.ID_ACC_PRODUCT)
+                .IsUnicode(false);
 
             modelBuilder.Entity<VOCHER_AREA>()
                 .Property(e => e.ID_VOCHER)

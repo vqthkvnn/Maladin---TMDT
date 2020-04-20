@@ -16,6 +16,7 @@ namespace Maladin.EF
             ODERs = new HashSet<ODER>();
             TYPE_ODER_ACC_PRODUCT = new HashSet<TYPE_ODER_ACC_PRODUCT>();
             VOCHER_AREA = new HashSet<VOCHER_AREA>();
+            WATCHED_PRODUCT = new HashSet<WATCHED_PRODUCT>();
         }
 
         [Key]
@@ -62,5 +63,8 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VOCHER_AREA> VOCHER_AREA { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WATCHED_PRODUCT> WATCHED_PRODUCT { get; set; }
     }
 }

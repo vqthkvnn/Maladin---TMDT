@@ -5,6 +5,43 @@
 @model Maladin.Areas.Partner.Models.ProductModels
 @section Scripts{
     <script>
+        $("#next").click(function () {
+    // console.log("run:", $("#num1").text(),".");
+    var num1 = parseInt($("#num1").text());
+    var num2 = parseInt($("#num2").text());
+    var num3 = parseInt($("#num3").text());
+    if (num3 == 3) {
+        // console.log("run value");
+        $("#prviewc").removeClass('disabled');
+        $("#prview").attr("aria-disabled", 'false');
+    }
+    num1++; num2++; num3++;
+    $("#num3").text(String(num3));
+    $("#num2").text(String(num2));
+    $("#num1").text(String(num1));
+});
+$("#prview").click(function () {
+    var num1 = parseInt($("#num1").text());
+    var num2 = parseInt($("#num2").text());
+    var num3 = parseInt($("#num3").text());
+    if (num1 == 1) {
+        $("#prviewc").addClass('disabled');
+        $("#prview").attr("aria-disabled", 'true');
+    }
+    else {
+        num1--; num2--; num3--;
+        $("#num3").text(String(num3));
+        $("#num2").text(String(num2));
+        $("#num1").text(String(num1));
+        if (num1 == 1) {
+            ("#prviewc").addClass('disabled');
+            $("#prview").attr("aria-disabled", 'true');
+        }
+    }
+});
+
+    </script>
+    <script>
         $('#btn-add-product').click(function () {
             window.location = '@Url.Action("Add","Product")';
                 
@@ -36,6 +73,7 @@
                     });
                 });
             });
+            $('').append($('<li>').text());
             
             
         });
@@ -47,24 +85,41 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Danh Sách Các Sản Phẩn Của User</h4>
-            <p class="card-description">
-                Tùy Chọn hiển thị:
-            </p>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="search">
-                        <i class="mdi mdi-magnify"></i>
-                    </span>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6"><label for="exampleFormControlSelect3">Tùy Chọn hiển thị:</label></div>
+                        <div class="col-md-6">
+                            <select class="form-control" id="exampleFormControlSelect3">
+                                <option>8</option>
+                                <option>16</option>
+                                <option>24</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    
+                    
                 </div>
-                <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search">
-                <button type="button" class="btn btn-inverse-info btn-icon">
-                    <i class="mdi mdi-account-search"></i>
-                </button>
-                <button type="button" class="btn btn-inverse-info btn-icon" id="btn-add-product">
-                    <i class="mdi mdi-account-plus"></i>
-                </button>
-            </div>
-            
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="search">
+                                <i class="mdi mdi-magnify"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search">
+                        <button type="button" class="btn btn-inverse-info btn-icon">
+                            <i class="mdi mdi-account-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-inverse-info btn-icon" id="btn-add-product">
+                            <i class="mdi mdi-account-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div> 
+            <hr />
             <div class="table-responsive">
                 <table class="table table-hover" id="recent-purchases-listing">
                     <thead>
@@ -120,7 +175,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Thông báo xóa</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -146,6 +201,7 @@
             </div>
 
         </div>
+        <hr />
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled" id="prviewc">

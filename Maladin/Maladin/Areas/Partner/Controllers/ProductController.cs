@@ -74,5 +74,10 @@ namespace Maladin.Areas.Partner.Controllers
             return Json("false", JsonRequestBehavior.AllowGet);
 
         }
+        public ActionResult Search(string key, string option, int pageSize, int page)
+        {
+            ProductModels models = new ProductModels();
+            return View("Index", models);
+        }
     }
 }

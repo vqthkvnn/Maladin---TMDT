@@ -18,10 +18,15 @@ namespace Maladin.EF
             APPROVED_USER_WAIT = new HashSet<APPROVED_USER_WAIT>();
             INFOMATION_ACCOUNT = new HashSet<INFOMATION_ACCOUNT>();
             INFOMATION_GUEST = new HashSet<INFOMATION_GUEST>();
+            MEMBER_GROUP_CHAT = new HashSet<MEMBER_GROUP_CHAT>();
+            MESSAGE_SEND_TO = new HashSet<MESSAGE_SEND_TO>();
+            MESSAGE_SEND_TO1 = new HashSet<MESSAGE_SEND_TO>();
+            MESSAGE_SEND_TO_GR = new HashSet<MESSAGE_SEND_TO_GR>();
             NOTI_ACC = new HashSet<NOTI_ACC>();
             ODERs = new HashSet<ODER>();
             USES_WAIT = new HashSet<USES_WAIT>();
             USES_WAIT1 = new HashSet<USES_WAIT>();
+            WATCHED_PRODUCT = new HashSet<WATCHED_PRODUCT>();
         }
 
         [Key]
@@ -66,6 +71,18 @@ namespace Maladin.EF
         public virtual ICollection<INFOMATION_GUEST> INFOMATION_GUEST { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MEMBER_GROUP_CHAT> MEMBER_GROUP_CHAT { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MESSAGE_SEND_TO> MESSAGE_SEND_TO { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MESSAGE_SEND_TO> MESSAGE_SEND_TO1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MESSAGE_SEND_TO_GR> MESSAGE_SEND_TO_GR { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTI_ACC> NOTI_ACC { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -76,5 +93,8 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USES_WAIT> USES_WAIT1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WATCHED_PRODUCT> WATCHED_PRODUCT { get; set; }
     }
 }

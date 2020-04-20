@@ -76,6 +76,7 @@ namespace Maladin.Areas.Partner.DAO
         }
         public int CheckLogin(string user_name, string password)
         {
+            
             var res = dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user_name);
             if (res == null)
             {
