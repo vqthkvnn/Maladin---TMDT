@@ -99,6 +99,7 @@
         }
 
         function submit_add() {
+
             var path ='AddProduct?nameProduct=' + $('#name-product').val()+'&price='+$('#price-product').val()+'&nameProducer='+$('select[name=producer] option').filter(':selected').val()+
             '&nameType='+$('select[name=type-pro] option').filter(':selected').val()+'&nameOrigin='+$('select[name=origin] option').filter(':selected').val()+
             '&desPro='+$('#des-product').val()+'&note='+$('#note-product').val();
