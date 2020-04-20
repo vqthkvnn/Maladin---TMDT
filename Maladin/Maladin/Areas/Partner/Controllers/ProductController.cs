@@ -11,7 +11,7 @@ using Maladin.EF;
 
 namespace Maladin.Areas.Partner.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
 
 
@@ -55,23 +55,30 @@ namespace Maladin.Areas.Partner.Controllers
         public ActionResult AddProduct(string nameProduct, string price, string nameProducer, string nameType, string nameOrigin, string desPro, 
             string note)
         {
-            string timeNow = DateTime.Now.ToString("yyyy-MM-dd");
-            var dao = new WaitProductDAO();
-            WAIT_PRODUCT wAIT_PRODUCT = new WAIT_PRODUCT();
-            wAIT_PRODUCT.NAME_PRODUCT = nameProduct;
-            wAIT_PRODUCT.ID_PRODUCER = nameProducer;
-            wAIT_PRODUCT.ID_ORIGIN = nameOrigin;
-            wAIT_PRODUCT.ID_TYPE_PRODUCT = nameType;
-            wAIT_PRODUCT.PRICE_PRODUCT = Int32.Parse(price);
-            wAIT_PRODUCT.DESCRIBE_PRODUCT = desPro;
-            wAIT_PRODUCT.NOTE_PRODUCT = note;
-            wAIT_PRODUCT.DATE_PRODUCT = Convert.ToDateTime(timeNow);
-            wAIT_PRODUCT.ID_INFO = Session[LoginPartnerSession.USER_SESSION].ToString();
-            if (dao.InsertByCode(wAIT_PRODUCT))
+            try
             {
-                return Json("true", JsonRequestBehavior.AllowGet);
+                string timeNow = DateTime.Now.ToString("yyyy-MM-dd");
+                var dao = new WaitProductDAO();
+                WAIT_PRODUCT wAIT_PRODUCT = new WAIT_PRODUCT();
+                wAIT_PRODUCT.NAME_PRODUCT = nameProduct;
+                wAIT_PRODUCT.ID_PRODUCER = nameProducer;
+                wAIT_PRODUCT.ID_ORIGIN = nameOrigin;
+                wAIT_PRODUCT.ID_TYPE_PRODUCT = nameType;
+                wAIT_PRODUCT.PRICE_PRODUCT = Int32.Parse(price);
+                wAIT_PRODUCT.DESCRIBE_PRODUCT = desPro;
+                wAIT_PRODUCT.NOTE_PRODUCT = note;
+                wAIT_PRODUCT.DATE_PRODUCT = Convert.ToDateTime(timeNow);
+                wAIT_PRODUCT.ID_INFO = Session[LoginPartnerSession.USER_SESSION].ToString();
+                if (dao.InsertByCode(wAIT_PRODUCT))
+                {
+                    return Json("true", JsonRequestBehavior.AllowGet);
+                }
+                return Json("false", JsonRequestBehavior.AllowGet);
             }
-            return Json("false", JsonRequestBehavior.AllowGet);
+            catch(Exception e)
+            {
+                return Json("false", JsonRequestBehavior.AllowGet);
+            }
 
         }
         public ActionResult Search(string key, string option, int pageSize, int page)

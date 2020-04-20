@@ -27,35 +27,30 @@ namespace Maladin
                       "~/Content/site.css"));
             // style for admin
             bundles.Add(new StyleBundle("~/Areas/Admin/allcss").Include(
-                "~/Areas/Admin/assets/vendor/font-awesome/css/font-awesome.min.css",
-                "~/Areas/Admin/assets/css/fontastic.css",
-                "~/Areas/Admin/assets/css/grasp_mobile_progress_circle-1.0.0.min.css",
-                "~/Areas/Admin/assets/css/fontastic.css",
-                "~/Areas/Admin/assets/css/style.default.css",
-                "~/Areas/Admin/assets/css/custom.css",
-                "~/Areas/Admin/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"
+
+                "~/Areas/Admin/assets/vendors/mdi/css/materialdesignicons.min.css",
+                "~/Areas/Admin/assets/vendors/base/vendor.bundle.base.css",
+                "~/Areas/Admin/assets/css/style.css"
+
 
                 ));
+
             bundles.Add(new ScriptBundle("~/Areas/Admin/alljs").Include(
-                "~/Areas/Admin/assets/js/grasp_mobile_progress_circle-1.0.0.min.js",
-                "~/Areas/Admin/assets/vendor/jquery.cookie/jquery.cookie.js",
-                "~/Areas/Admin/assets/vendor/chart.js/Chart.min.js",
-                "~/Areas/Admin/assets/vendor/jquery-validation/jquery.validate.min.js",
-                "~/Areas/Admin/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
-                "~/Areas/Admin/assets/js/charts-home.js",
-                "~/Areas/Admin/assets/js/front.js"
+  
+                "~/Areas/Admin/assets/vendors/base/vendor.bundle.base.js",
+                "~/Areas/Admin/assets/vendors/chart.js/Chart.min.js",
+                "~/Areas/Admin/assets/vendors/progressbar.js/progressbar.min.js",
+                "~/Areas/Admin/assets/vendors/chartjs-plugin-datalabels/chartjs-plugin-datalabels.js",
+                "~/Areas/Admin/assets/vendors/justgage/raphael-2.1.4.min.js",
+                "~/Areas/Admin/assets/vendors/justgage/justgage.js",
+                "~/Areas/Admin/assets/js/dashboard.js",
+                "~/Areas/Admin/assets/js/template.js"
                 
 
                 ));
             bundles.Add(new ScriptBundle("~/Areas/Admin/loginjs").Include(
-                "~/Areas/Admin/assets/vendor/jquery/jquery.min.js",
-                "~/Areas/Admin/assets/popper.js/umd/popper.min.js",
-                "~/Areas/Admin/assets/vendor/bootstrap/js/bootstrap.min.js",
-                "~/Areas/Admin/assets/js/grasp_mobile_progress_circle-1.0.0.min.js",
-                "~/Areas/Admin/assets/vendor/jquery.cookie/jquery.cookie.js",
-                "~/Areas/Admin/assets/vendor/chart.js/Chart.min.js",
-                "~/Areas/Admin/assets/vendor/jquery-validation/jquery.validate.min.js",
-                "~/Areas/Admin/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"
+                "~/Areas/Admin/assets/vendors/base/vendor.bundle.base.js",
+                "~/Areas/Admin/assets/js/template.js"
                 ));
             bundles.Add(new StyleBundle("~/Areas/Partner/allcss").Include(
                 "~/Areas/Partner/assets/vendors/mdi/css/materialdesignicons.min.css",

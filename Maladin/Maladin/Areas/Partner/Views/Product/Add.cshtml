@@ -98,25 +98,35 @@
         }
         }
 
-        $('#btn-submit').click(function(){
-        var path ='AddProduct?nameProduct=' + $('#name-product').val()+'&price='+$('#price-product').val()+'&nameProducer='+$('select[name=producer] option').filter(':selected').val()+
+        function submit_add() {
+            var path ='AddProduct?nameProduct=' + $('#name-product').val()+'&price='+$('#price-product').val()+'&nameProducer='+$('select[name=producer] option').filter(':selected').val()+
             '&nameType='+$('select[name=type-pro] option').filter(':selected').val()+'&nameOrigin='+$('select[name=origin] option').filter(':selected').val()+
             '&desPro='+$('#des-product').val()+'&note='+$('#note-product').val();
         console.log(path);
             $.ajax({
         type: "POST",
-        url: path,
+                url: path,
+                data: { get_param: 'value' },
         dataType: "json",
         cache: false,
-        success: function () {
+                success: function (data) {
+                    
+                    if (data == "true") {
+                        alert('Thêm Thành công vào hàng chờ');
+                    }
+                    else {
+                        
+                        alert('Lỗi login khi thêm vào hàng chờ');
+                    }
             
-            alert('Thêm Thành công vào hàng chờ');
+            
             
 
         },
         error: function () { alert('Bạn vừa thêm thất bị vui lòng kiểm tra lại dữ liệu'); }
     });
-        });
+        }
+        
 
 
     </script>
@@ -235,11 +245,12 @@
                         <label for="note-product">Ghi chú sản phẩm</label>
                         <textarea class="form-control" id="note-product" rows="4" required></textarea>
                     </div>
-                    <button type="button" class="btn btn-primary btn-icon-text mr-2" id="btn-submit">
+                    <button class="btn btn-primary btn-icon-text mr-2" id="btn-submit" onclick="submit_add()">
                         <i class="mdi mdi-file-check btn-icon-prepend"></i>
                         Xác Nhận
                     </button>
-                    <button class="btn btn-light">Cancel</button>
+                    
+                    <input type="button" class="btn btn-light" id="cancel-add" value="Cancal" onclick="alert('running');" />
                 </form>
             </div>
         </div>
