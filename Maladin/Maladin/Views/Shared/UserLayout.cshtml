@@ -10,15 +10,23 @@
     <link href="~/Content/animate.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Content/responsive.css" rel="stylesheet">
-    <link href="~/Content/main.css" rel="stylesheet" type="text/css" runat="server">
-    @Scripts.Render("~/Scripts/main.js")
+    <link href="~/Content/main.css" rel="stylesheet" type="text/css" />
     <title>@ViewBag.Title</title>
 </head>
-<body class="badge-v2 maladin-cart maladin-product">
+<body class="badge-v2 maladin-account maladin-cart">
     @RenderPage("Header.cshtml")
-    <div class="container body-content">
-        @RenderBody()
+
+    <div class="wrap">
+        <div class="container">
+            <div class="row-style-1">
+                @RenderPage("LeftMenuUser.cshtml")
+                <div class="content-right">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
+
     @RenderPage("Footer.cshtml")
 
 
