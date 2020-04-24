@@ -28,8 +28,16 @@ namespace Maladin.Areas.Partner.Controllers
 
             var dao = new ProductDao();
             var model = new ProductModels();
-            model.PRODUCT = dao.GetListProductByPage(pS, p);
-            model.maxPage =(int) dao.GetCount()/pS+1;
+            model.maxPage = (int)dao.GetCount() / pS + 1;
+            if (model.maxPage<p || p<1)
+            {
+                model.PRODUCT = dao.GetListProductByPage(pS, 1);
+            }
+            else
+            {
+                model.PRODUCT = dao.GetListProductByPage(pS, p);
+            }
+            
             model.page = p;
             model.pageSize = pS;
             

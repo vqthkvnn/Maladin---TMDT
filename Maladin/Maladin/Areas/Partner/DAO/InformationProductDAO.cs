@@ -27,5 +27,33 @@ namespace Maladin.Areas.Partner.DAO
             return dbContext.TYPE_PRODUCT.ToList<TYPE_PRODUCT>();
 
         }
+        public INFOMATION_ACCOUNT getInfoByUser(string user)
+        {
+            return dbContext.INFOMATION_ACCOUNT.SingleOrDefault(x=>x.USER_ACC == user);
+        }
+        public bool Update(INFOMATION_ACCOUNT aCCOUNT)
+        {
+            try
+            {
+                //var dao = new AccountPartnerDAO();
+                var acc = getInfoByUser(aCCOUNT.USER_ACC);
+                dbContext.INFOMATION_ACCOUNT.Attach(acc);
+                acc.NAME_INFO = aCCOUNT.NAME_INFO;
+                acc.PHONE_INFO = aCCOUNT.PHONE_INFO;
+                acc.ADRESS_INFO = aCCOUNT.ADRESS_INFO;
+                acc.EMAIL_INFO = aCCOUNT.EMAIL_INFO;
+                acc.BIRTH_INFO = aCCOUNT.BIRTH_INFO;
+                acc.NOTE_INFO = aCCOUNT.NOTE_INFO;
+                acc.CMND_INFO = aCCOUNT.CMND_INFO;
+                acc.SEX_INFO = aCCOUNT.SEX_INFO;
+                acc.AVT_ACC = aCCOUNT.AVT_ACC;
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -151,7 +151,6 @@
     <Compile Include="Areas\Partner\Controllers\ProductController.cs" />
     <Compile Include="Areas\Partner\DAO\AccountPartnerDAO.cs" />
     <Compile Include="Areas\Partner\DAO\ProductDao.cs" />
-    <Compile Include="Areas\Partner\DAO\TMDT_MaladinDbContext.cs" />
     <Compile Include="Areas\Partner\DAO\InformationProductDAO.cs" />
     <Compile Include="Areas\Partner\DAO\WaitProductDAO.cs" />
     <Compile Include="Areas\Partner\Models\AccountInfomationModel.cs" />
@@ -520,6 +519,7 @@
     <Content Include="Areas\Admin\assets\vendors\progressbar.js\progressbar.min.js.map" />
     <Content Include="Areas\Admin\Views\Shared\_layout_home_header.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_layout_home_footer.cshtml" />
+    <Content Include="Areas\Partner\Views\Home\Infomation.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
