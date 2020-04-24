@@ -154,57 +154,58 @@
                         @foreach (var item in Model.PRODUCT)
                         {
 
-                            <tr>
-                                <td>@item.ID_PRODUCT</td>
-                                <td>@item.NAME_PRODUCT</td>
-                                <td>@item.ID_PRODUCER</td>
-                                <td>@item.ID_TYPE_PRODUCT</td>
-                                <td>@item.ID_ORIGIN</td>
-                                <td>@item.PRICE_PRODUCT</td>
-                                <td>@item.RATING_PRODUCT</td>
-                                <td>@item.DATE_PRODUCT</td>
-                                <td>@item.USER_ACC</td>
-                                @if (@item.IS_SELL)
-                                {
-                                    <td><label class="badge badge-danger">No Active</label></td>
-                                }
-                                else
-                                {
-                                    <td><label class="badge badge-success">Active</label></td>
-                                }
-                                <td>
-                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon edit-btn">
-                                        <i class="mdi mdi mdi-tooltip-edit"></i>
-                                    </button>
+                        <tr>
+                            <td>@item.ID_PRODUCT</td>
+                            <td>@item.NAME_PRODUCT</td>
+                            <td>@item.ID_PRODUCER</td>
+                            <td>@item.ID_TYPE_PRODUCT</td>
+                            <td>@item.ID_ORIGIN</td>
+                            <td>@item.PRICE_PRODUCT</td>
+                            <td>@item.RATING_PRODUCT</td>
+                            <td>@item.DATE_PRODUCT</td>
+                            <td>@item.USER_ACC</td>
+                            @if (@item.IS_SELL)
+                            {
+                                <td><label class="badge badge-success">Active</label></td>
 
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon delete-btn" data-target="#modalDelete" data-toggle="modal">
-                                        <i class="mdi mdi mdi-delete-sweep"></i>
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thông báo xóa</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body" id="content-modal">
+                            }
+                            else
+                            {
+                                <td><label class="badge badge-danger">No Active</label></td>
+                            }
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon edit-btn">
+                                    <i class="mdi mdi mdi-tooltip-edit"></i>
+                                </button>
 
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary btn-model-confirm">Save changes</button>
-                                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon delete-btn" data-target="#modalDelete" data-toggle="modal">
+                                    <i class="mdi mdi mdi-delete-sweep"></i>
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Thông báo xóa</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="content-modal">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary btn-model-confirm">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
-                                </td>
+                                </div>
+                            </td>
 
-                            </tr>
+                        </tr>
 
                         }
 

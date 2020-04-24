@@ -6,8 +6,17 @@
 @model Maladin.Areas.Partner.Models.HomeModels
 @section Scripts{
     <script>
-    $('#avt-profile').attr("src",'@Model.iNFOMATION.AVT_ACC');
-    $('#name-user-profile').text('@Model.iNFOMATION.NAME_INFO');
+        @if(Model.iNFOMATION.AVT_ACC==null)
+        {
+            @:$("p").text("Tài khoản này không có avt");
+        }
+        else
+        {
+            @:$('#avt-profile').attr("src",'@Model.iNFOMATION.AVT_ACC');
+            @:$('#name-user-profile').text('@Model.iNFOMATION.NAME_INFO');
+            @:$("p").text("Tài khoản này không có avt nè");
+        }
+    
     </script>
 }
 <div>

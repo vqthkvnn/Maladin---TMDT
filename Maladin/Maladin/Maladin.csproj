@@ -178,6 +178,7 @@
     <Compile Include="EF\NOTI_ACC.cs" />
     <Compile Include="EF\ODER.cs" />
     <Compile Include="EF\ORIGIN.cs" />
+    <Compile Include="EF\PAYMENT_ODER.cs" />
     <Compile Include="EF\PRODUCER_INFO.cs" />
     <Compile Include="EF\PRODUCT.cs" />
     <Compile Include="EF\PRODUCT_IMAGE.cs" />
