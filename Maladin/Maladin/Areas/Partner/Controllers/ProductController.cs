@@ -17,11 +17,21 @@ namespace Maladin.Areas.Partner.Controllers
 
         // GET: Partner/Product
         
-        public ActionResult Index()
+        public ActionResult Index(string page, string pageSize)
         {
+            int p =1, pS = 8;
+            if (page != null || pageSize != null)
+            {
+                p = Convert.ToInt32(page);
+                pS = Convert.ToInt32(pageSize);
+            }
+
             var dao = new ProductDao();
             var model = new ProductModels();
-            model.PRODUCT = dao.getAllProduct();
+            model.PRODUCT = dao.GetListProductByPage(pS, p);
+            model.maxPage =(int) dao.GetCount()/pS+1;
+            model.page = p;
+            model.pageSize = pS;
             
             return View(model);
         }

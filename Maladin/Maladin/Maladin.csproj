@@ -560,6 +560,7 @@
     <Content Include="Views\Shared\UserLayout.cshtml" />
     <Content Include="Views\Home\ShoppingCart.cshtml" />
     <Content Include="Views\User\AccountInformation.cshtml" />
+    <Content Include="Views\User\Infomation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -579,7 +580,6 @@
     <Folder Include="Areas\Partner\Views\Base\" />
     <Folder Include="DAO\" />
     <Folder Include="Models\" />
-    <Folder Include="public\image\product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

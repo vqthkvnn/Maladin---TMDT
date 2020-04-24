@@ -23,5 +23,9 @@ namespace Maladin.Controllers
         {
             return View();
         }
+        public ActionResult Infomation()
+        {
+            return View();
+        }
     }
 }

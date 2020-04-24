@@ -1,6 +1,6 @@
 ﻿@{
 
-    Layout = Request.IsAjaxRequest() ? null : "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+    Layout = "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
 }
 @model Maladin.Areas.Partner.Models.ProductModels
 @section Scripts{
@@ -20,24 +20,28 @@
     $("#num2").text(String(num2));
     $("#num1").text(String(num1));
 });
-$("#prview").click(function () {
-    var num1 = parseInt($("#num1").text());
-    var num2 = parseInt($("#num2").text());
-    var num3 = parseInt($("#num3").text());
+        $("#prview").click(function () {
+       
+            var num1 = parseInt($("#num1").text());
+            var num2 = parseInt($("#num2").text());
+            var num3 = parseInt($("#num3").text());
+            console.log("Trước:"+num1);
     if (num1 == 1) {
         $("#prviewc").addClass('disabled');
         $("#prview").attr("aria-disabled", 'true');
     }
     else {
         num1--; num2--; num3--;
-        $("#num3").text(String(num3));
-        $("#num2").text(String(num2));
-        $("#num1").text(String(num1));
+        
         if (num1 == 1) {
-            ("#prviewc").addClass('disabled');
+            $("#prviewc").addClass('disabled');
             $("#prview").attr("aria-disabled", 'true');
         }
-    }
+            }
+            console.log("Sau:"num1);
+            $("#num3").text(String(num3));
+        $("#num2").text(String(num2));
+        $("#num1").text(String(num1));
 });
 
     </script>
@@ -80,6 +84,14 @@ $("#prview").click(function () {
         
 
     </script>
+    <script>
+        //Add link
+        $("#num1").click(function () {
+            var page = parseInt($("#num1").text());
+            var pageSize = $('select[name=chooseSizePage] option').filter(':selected').val();
+            $("#num1").attr("href", "@Url.Action("Index", "Product")?page=" + page + "&pageSize=" + pageSize)
+        });
+    </script>
 }
 <div>
     <div class="card">
@@ -90,7 +102,7 @@ $("#prview").click(function () {
                     <div class="row">
                         <div class="col-md-6"><label for="exampleFormControlSelect3">Tùy Chọn hiển thị:</label></div>
                         <div class="col-md-6">
-                            <select class="form-control" id="exampleFormControlSelect3">
+                            <select class="form-control" name="chooseSizePage">
                                 <option>8</option>
                                 <option>16</option>
                                 <option>24</option>
