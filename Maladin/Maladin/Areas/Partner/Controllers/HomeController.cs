@@ -77,5 +77,9 @@ namespace Maladin.Areas.Partner.Controllers
                 return Json("false", JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult Reward()
+        {
+            return View();
+        }
     }
 }
