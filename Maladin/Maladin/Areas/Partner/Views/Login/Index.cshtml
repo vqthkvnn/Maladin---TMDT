@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width" charset="utf-8"/>
     <title>Index</title>
     @Styles.Render("~/Areas/Partner/allcss")
 </head>
@@ -21,7 +21,7 @@
                             <div class="brand-logo">
                                 <img src="../../images/logo.svg" alt="logo">
                             </div>
-                            <h4>Maladin.com xin chào!</h4>
+                            <h4><strong style="color:blue;">Maladin.com</strong> xin chào!</h4>
                             <h6 class="font-weight-light">Đăng nhập để sử dụng các tính năng của đối tác</h6>
                             @using (Html.BeginForm("Index", "Login", FormMethod.Post, htmlAttributes: new { @class ="pt-3" }))
                             {

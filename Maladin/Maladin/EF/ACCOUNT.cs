@@ -24,6 +24,7 @@ namespace Maladin.EF
             MESSAGE_SEND_TO_GR = new HashSet<MESSAGE_SEND_TO_GR>();
             NOTI_ACC = new HashSet<NOTI_ACC>();
             ODERs = new HashSet<ODER>();
+            PAYMENT_ODER = new HashSet<PAYMENT_ODER>();
             USES_WAIT = new HashSet<USES_WAIT>();
             USES_WAIT1 = new HashSet<USES_WAIT>();
             WATCHED_PRODUCT = new HashSet<WATCHED_PRODUCT>();
@@ -47,8 +48,6 @@ namespace Maladin.EF
         public DateTime? DATE_CREATE_ACC { get; set; }
 
         public bool? IS_ACTIVE_ACC { get; set; }
-
-        public bool HAS_CTV { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ACC_PRODUCT> ACC_PRODUCT { get; set; }
@@ -87,6 +86,9 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODER> ODERs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PAYMENT_ODER> PAYMENT_ODER { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USES_WAIT> USES_WAIT { get; set; }

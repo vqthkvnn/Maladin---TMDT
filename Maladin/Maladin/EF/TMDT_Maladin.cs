@@ -28,6 +28,7 @@ namespace Maladin.EF
         public virtual DbSet<NOTIFICATION_> NOTIFICATION_ { get; set; }
         public virtual DbSet<ODER> ODERs { get; set; }
         public virtual DbSet<ORIGIN> ORIGINs { get; set; }
+        public virtual DbSet<PAYMENT_ODER> PAYMENT_ODER { get; set; }
         public virtual DbSet<PRODUCER_INFO> PRODUCER_INFO { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
         public virtual DbSet<PRODUCT_IMAGE> PRODUCT_IMAGE { get; set; }
@@ -137,6 +138,11 @@ namespace Maladin.EF
 
             modelBuilder.Entity<ACCOUNT>()
                 .HasMany(e => e.NOTI_ACC)
+                .WithRequired(e => e.ACCOUNT)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ACCOUNT>()
+                .HasMany(e => e.PAYMENT_ODER)
                 .WithRequired(e => e.ACCOUNT)
                 .WillCascadeOnDelete(false);
 
@@ -281,6 +287,11 @@ namespace Maladin.EF
                 .Property(e => e.ID_VOCHER)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<ODER>()
+                .HasMany(e => e.PAYMENT_ODER)
+                .WithRequired(e => e.ODER)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<ORIGIN>()
                 .Property(e => e.ID_ORIGIN)
                 .IsUnicode(false);
@@ -294,6 +305,14 @@ namespace Maladin.EF
                 .HasMany(e => e.WAIT_PRODUCT)
                 .WithRequired(e => e.ORIGIN)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PAYMENT_ODER>()
+                .Property(e => e.USER_ACC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PAYMENT_ODER>()
+                .Property(e => e.ID_ODER)
+                .IsUnicode(false);
 
             modelBuilder.Entity<PRODUCER_INFO>()
                 .Property(e => e.ID_PRODUCER)

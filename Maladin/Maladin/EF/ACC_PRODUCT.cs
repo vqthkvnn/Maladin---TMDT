@@ -43,6 +43,10 @@ namespace Maladin.EF
         [Column(TypeName = "date")]
         public DateTime? DATE_END_SELL { get; set; }
 
+        public int? TOTAL_COUNT { get; set; }
+
+        public int? SELL_COUNT { get; set; }
+
         public bool IS_SELL { get; set; }
 
         public virtual PRODUCT PRODUCT { get; set; }

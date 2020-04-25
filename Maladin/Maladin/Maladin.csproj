@@ -148,16 +148,19 @@
     <Compile Include="Areas\Partner\Controllers\BaseController.cs" />
     <Compile Include="Areas\Partner\Controllers\HomeController.cs" />
     <Compile Include="Areas\Partner\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Partner\Controllers\OderController.cs" />
     <Compile Include="Areas\Partner\Controllers\ProductController.cs" />
     <Compile Include="Areas\Partner\DAO\AccountPartnerDAO.cs" />
+    <Compile Include="Areas\Partner\DAO\OderDAO.cs" />
     <Compile Include="Areas\Partner\DAO\ProductDao.cs" />
-    <Compile Include="Areas\Partner\DAO\TMDT_MaladinDbContext.cs" />
     <Compile Include="Areas\Partner\DAO\InformationProductDAO.cs" />
     <Compile Include="Areas\Partner\DAO\WaitProductDAO.cs" />
     <Compile Include="Areas\Partner\Models\AccountInfomationModel.cs" />
     <Compile Include="Areas\Partner\Models\HomeModels.cs" />
     <Compile Include="Areas\Partner\Models\InfomationProductModel.cs" />
     <Compile Include="Areas\Partner\Models\LoginPartnerModel.cs" />
+    <Compile Include="Areas\Partner\Models\OderModel.cs" />
+    <Compile Include="Areas\Partner\Models\OderModels.cs" />
     <Compile Include="Areas\Partner\Models\ProductModels.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="EF\NOTI_ACC.cs" />
     <Compile Include="EF\ODER.cs" />
     <Compile Include="EF\ORIGIN.cs" />
+    <Compile Include="EF\PAYMENT_ODER.cs" />
     <Compile Include="EF\PRODUCER_INFO.cs" />
     <Compile Include="EF\PRODUCT.cs" />
     <Compile Include="EF\PRODUCT_IMAGE.cs" />
@@ -522,6 +526,9 @@
     <Content Include="Areas\Admin\assets\vendors\progressbar.js\progressbar.min.js.map" />
     <Content Include="Areas\Admin\Views\Shared\_layout_home_header.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_layout_home_footer.cshtml" />
+    <Content Include="Areas\Partner\Views\Home\Infomation.cshtml" />
+    <Content Include="Areas\Partner\Views\Oder\Index.cshtml" />
+    <Content Include="Areas\Partner\Views\Home\Reward.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
@@ -566,6 +573,7 @@
     <Content Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Infomation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -585,7 +593,6 @@
     <Folder Include="Areas\Partner\Views\Base\" />
     <Folder Include="DAO\" />
     <Folder Include="Models\" />
-    <Folder Include="public\image\product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

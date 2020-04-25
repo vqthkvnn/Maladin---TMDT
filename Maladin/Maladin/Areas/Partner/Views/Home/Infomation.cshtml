@@ -1,0 +1,205 @@
+﻿
+@{
+    Layout = "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+}
+@model Maladin.Areas.Partner.Models.AccountInfomationModel
+@section Scripts{
+    <script>
+        var id;
+        var cmnd;
+        var name;
+        var adr;
+        var phone;
+        var birth;
+        var email;
+        var note;
+        @if(Model.iNFOMATION == null)
+        {
+            @:console.log("Van null");
+
+            // neu null thi k lam gi
+        }
+        else
+        {
+            // set value
+
+            var time = Convert.ToDateTime(Model.iNFOMATION.BIRTH_INFO).ToString("yyyy-MM-dd");
+            var timeCreate = Convert.ToDateTime(Model.iNFOMATION.DATE_CREATE_INFO).ToString("yyyy-MM-dd");
+            var st = WebUtility.HtmlDecode(Model.iNFOMATION.NOTE_INFO);
+            @:note = $('<textarea />').html("@st").text();
+            @:id ="@Model.iNFOMATION.ID_INFO";
+            @:cmnd ="@Model.iNFOMATION.CMND_INFO";
+            @:name =$("<textarea />").html('@Model.iNFOMATION.NAME_INFO').text();
+            @:adr =$("<textarea />").html("@Model.iNFOMATION.ADRESS_INFO").text();;
+            @:phone ="@Model.iNFOMATION.PHONE_INFO";
+            @:email ="@Model.iNFOMATION.EMAIL_INFO";
+            @:birth ="@time";
+
+            @:$("#idInformation").attr("value", id);
+            @:$("#cmndInformation").attr("value", cmnd);
+            @:$("#NameInformation").attr("value", name);
+            @:$("#addressInformation").attr("value", adr);
+            @:$("#phoneInformation").attr("value", phone);
+            @:$("#birthInformation").attr("value", birth);
+            @:$("#emailInformation").attr("value", email);
+            @:$("#dateCreateInformation").attr("value", "@timeCreate");
+            @:$("#noteInformation").text(note);
+        }
+        // load xong thì add event
+        function submitData() {
+            if ($("#btnEdit").text() == "Sửa") {
+                $("#cmndInformation").removeAttr("disabled");
+                $("#NameInformation").removeAttr("disabled");
+                $("#addressInformation").removeAttr("disabled");
+                $("#phoneInformation").removeAttr("disabled");
+                $("#birthInformation").removeAttr("disabled");
+
+                $("#emailInformation").removeAttr("disabled");
+                $("#noteInformation").removeAttr("disabled");
+                $("#noteInformation").removeAttr("disabled");
+                $("#submitBtn").removeAttr("hidden");
+                $("#btnEdit").text("Hủy");
+            }
+            else {
+                //$("#cmndInformation").attr("value", cmnd);
+                $("#cmndInformation").val(cmnd);
+                //$("#NameInformation").attr("value", name);
+                $("#NameInformation").val(name);
+                //$("#addressInformation").attr("value", adr);
+                $("#addressInformation").val(adr);
+                //$("#phoneInformation").attr("value", phone);
+                $("#phoneInformation").val(phone);
+                //$("#birthInformation").attr("value", birth);
+                $("#birthInformation").val(birth);
+                //$("#emailInformation").attr("value", email);
+                $("#emailInformation").val(email);
+                //$("#noteInformation").text(note);
+                $("#noteInformation").val(note);
+
+                $("#cmndInformation").attr("disabled",true);
+                $("#NameInformation").attr("disabled",true);
+                $("#addressInformation").attr("disabled",true);
+                $("#phoneInformation").attr("disabled",true);
+                $("#birthInformation").attr("disabled",true);
+
+                $("#emailInformation").attr("disabled",true);
+                $("#noteInformation").attr("disabled",true);
+                $("#noteInformation").attr("disabled",true);
+                $("#submitBtn").attr("hidden", true);
+                $("#btnEdit").text("Sửa");
+            
+            }
+        }
+        function updateSubmit() {
+            var path ='Infomation?cmnd=' + $('#cmndInformation').val()+'&name='+$('#NameInformation').val()+'&adr='+$('#addressInformation').val()+
+            '&sdt='+$('#phoneInformation').val()+'&birth='+$('#birthInformation').val()+'&gt=true'+
+            '&email='+$('#emailInformation').val()+'&note='+$('#noteInformation').val();
+            console.log(path);
+            $.ajax({
+                type: "POST",
+                url: path,
+                data: { get_param: 'value' },
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    if (data == "true") {
+                        alert('Update Thành công!');
+                    }
+                    else {
+                        alert('Lỗi update');
+                    }
+                },
+                error: function () { alert('Update thất bị vui lòng kiểm tra lại dữ liệu'); }
+            });
+        }
+
+    </script>
+}
+<div class="row">
+    
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Thông tin tài khoản</h4>
+
+                <form class="forms-sample">
+                    <div class="form-group row">
+                        <label for="idInformation" class="col-sm-3 col-form-label">ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="idInformation" disabled value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="dateCreateInformation" class="col-sm-3 col-form-label">Date Create Account</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="dateCreateInformation" disabled value="" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cmndInformation" class="col-sm-3 col-form-label">CMND</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="cmndInformation" disabled value="" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="NameInformation" class="col-sm-3 col-form-label">Họ tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="NameInformation" disabled value="" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="addressInformation" class="col-sm-3 col-form-label">Địa chỉ</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="addressInformation" disabled value="" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phoneInformation" class="col-sm-3 col-form-label">Số điện thoại</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="phoneInformation" disabled value="" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="birthInformation" class="col-sm-3 col-form-label">Sinh nhật</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="birthInformation" disabled value="" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="checkInformation" class="col-sm-3 col-form-label">Giới tính</label>
+                        <div class="col-sm-3">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" checked>
+                                Nam
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" checked>
+                                Nữ
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="emailInformation" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="emailInformation" disabled value="" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="noteInformation" class="col-sm-3 col-form-label">Ghi chú</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="noteInformation" rows="4" disabled required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-warning" id="btnEdit" onclick="submitData()">Sửa</button>
+                    <button type="submit" class="btn btn-primary mr-2" id="submitBtn" hidden onclick="updateSubmit()">Xác Nhận</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+

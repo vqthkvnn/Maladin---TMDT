@@ -1,50 +1,83 @@
 ﻿@{
 
-    Layout = Request.IsAjaxRequest() ? null : "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+    Layout = "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
 }
 @model Maladin.Areas.Partner.Models.ProductModels
 @section Scripts{
+
     <script>
-        $("#next").click(function () {
-    // console.log("run:", $("#num1").text(),".");
-    var num1 = parseInt($("#num1").text());
-    var num2 = parseInt($("#num2").text());
-    var num3 = parseInt($("#num3").text());
-    if (num3 == 3) {
-        // console.log("run value");
-        $("#prviewc").removeClass('disabled');
-        $("#prview").attr("aria-disabled", 'false');
-    }
-    num1++; num2++; num3++;
-    $("#num3").text(String(num3));
-    $("#num2").text(String(num2));
-    $("#num1").text(String(num1));
-});
-$("#prview").click(function () {
-    var num1 = parseInt($("#num1").text());
-    var num2 = parseInt($("#num2").text());
-    var num3 = parseInt($("#num3").text());
-    if (num1 == 1) {
-        $("#prviewc").addClass('disabled');
-        $("#prview").attr("aria-disabled", 'true');
-    }
-    else {
-        num1--; num2--; num3--;
-        $("#num3").text(String(num3));
-        $("#num2").text(String(num2));
-        $("#num1").text(String(num1));
-        if (num1 == 1) {
-            ("#prviewc").addClass('disabled');
-            $("#prview").attr("aria-disabled", 'true');
+        // giá tri khi mới vào: add event phân trang
+        var page = @Model.page;
+        var pageSize = @Model.pageSize;
+        var maxPage = @Model.maxPage;
+        //var pageSizeNext = $('select[name=chooseSizePage] option').filter(':selected').val();
+        // hết khai báo biến
+        $("#selectPageSize").val(String(pageSize)).change();
+        if (page <1)
+        {
+
         }
-    }
-});
+        else if (page == 1) {
+            $("#next").attr("href", "@Url.Action("Index", "Product")?page=" + String(page + 1) + "&pageSize=" + pageSize)
+
+        }
+        else if (page == 2) {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#prviewc").removeClass("disabled");
+            $("#next").attr("href", "@Url.Action("Index", "Product")?page=" + String(page + 1) + "&pageSize=" + pageSize)
+            $("#prview").attr("href", "@Url.Action("Index", "Product")?page=" + String(page - 1) + "&pageSize=" + pageSize)
+        }
+        else {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#num1").text(String(page - 1));
+            $("#num2").text(String(page));
+            if (page >= maxPage) {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#btnPage2").addClass("active");
+                $("#next").removeAttr("href");
+                $("#btnNext").addClass("disabled");
+                $("#btnPage3").addClass("disabled");
+                $("#next").attr("aria-disabled", 'true');
+                $("#prview").attr("href", "@Url.Action("Index", "Product")?page=" + String(page - 1) + "&pageSize=" + pageSize)
+            }
+            else {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#next").attr("href", "@Url.Action("Index", "Product")?page=" + String(page + 1) + "&pageSize=" + pageSize)
+                $("#prview").attr("href", "@Url.Action("Index", "Product")?page=" + String(page - 1) + "&pageSize=" + pageSize)
+            }
+        }
+        // add link
+        var pageNext = parseInt($("#num1").text());
+
+        $("#num1").attr("href", "@Url.Action("Index", "Product")?page=" + pageNext + "&pageSize=" + pageSize)
+        $("#num2").attr("href", "@Url.Action("Index", "Product")?page=" + String(pageNext + 1) + "&pageSize=" + pageSize)
+        $("#num3").attr("href", "@Url.Action("Index", "Product")?page=" + String(pageNext + 2) + "&pageSize=" + pageSize)
+        // remove link href:
+        if (page >= 2) {
+            $("#num2").removeAttr("href");
+        }
+
+        if (maxPage == 1) {
+            $("#num2").removeAttr("href");
+            $("#num3").removeAttr("href");
+        }
+        else if (maxPage == 2) {
+            $("#num3").removeAttr("href");
+            $("#next").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+        // add event click
+
 
     </script>
     <script>
         $('#btn-add-product').click(function () {
             window.location = '@Url.Action("Add","Product")';
-                
+
             });
 
         $(document).ready(function () {
@@ -56,30 +89,40 @@ $("#prview").click(function () {
 
                 var col1 = currentRow.find("td:eq(0)").text(); // get current row 1st TD value
                 console.log(col1);
-                $('#content-modal').text("bạn có muốn hủy kích hoạt cho sản phẩm có id:" + col1.toString());
+                $('#content-modal').text("Bạn có muốn hủy kích hoạt cho sản phẩm có id:" + col1.toString());
                 $('.btn-model-confirm').click(function () {
                     $.ajax({
                         type: "POST",
                         url: 'Product/Delete?id=' + col1,
-                        dataType: "json",                
+                        dataType: "json",
                         cache: false,
                         success: function () {
                             $('#modalDelete').modal('hide');
                             alert('Success');
                             window.location.reload();
-                            
+
                         },
                         error: function () { alert('fail'); }
                     });
                 });
             });
             $('').append($('<li>').text());
-            
-            
+
+
         });
-        
+
 
     </script>
+    <script>
+        // add event selected
+        $('#selectPageSize').change(function() {
+        window.location = $(':selected',this).attr('href')
+        });
+
+
+    </script>
+
+
 }
 <div>
     <div class="card">
@@ -90,17 +133,17 @@ $("#prview").click(function () {
                     <div class="row">
                         <div class="col-md-6"><label for="exampleFormControlSelect3">Tùy Chọn hiển thị:</label></div>
                         <div class="col-md-6">
-                            <select class="form-control" id="exampleFormControlSelect3">
-                                <option>8</option>
-                                <option>16</option>
-                                <option>24</option>
+                            <select class="form-control" name="chooseSizePage" id="selectPageSize" ">
+                                <option href='@Url.Action("Index", "Product", new {page = 1, pageSize =8 })'>8</option>
+                                <option href='@Url.Action("Index", "Product", new {page = 1, pageSize =16 })'>16</option>
+                                <option href='@Url.Action("Index", "Product", new {page = 1, pageSize =24 })'>24</option>
 
                             </select>
                         </div>
                     </div>
 
-                    
-                    
+
+
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
@@ -118,7 +161,7 @@ $("#prview").click(function () {
                         </button>
                     </div>
                 </div>
-            </div> 
+            </div>
             <hr />
             <div class="table-responsive">
                 <table class="table table-hover" id="recent-purchases-listing">
@@ -154,11 +197,12 @@ $("#prview").click(function () {
                                 <td>@item.USER_ACC</td>
                                 @if (@item.IS_SELL)
                                 {
-                                    <td><label class="badge badge-danger">No Active</label></td>
+                                    <td><label class="badge badge-success">Active</label></td>
+
                                 }
                                 else
                                 {
-                                    <td><label class="badge badge-success">Active</label></td>
+                                    <td><label class="badge badge-danger">No Active</label></td>
                                 }
                                 <td>
                                     <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon edit-btn">
@@ -207,10 +251,10 @@ $("#prview").click(function () {
                 <li class="page-item disabled" id="prviewc">
                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true" id="prview" disabled>Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#" id="num1">1</a></li>
-                <li class="page-item"><a class="page-link" href="#" id="num2">2</a></li>
-                <li class="page-item"><a class="page-link" href="#" id="num3">3</a></li>
-                <li class="page-item">
+                <li class="page-item active" id="btnPage1"><a class="page-link" href="#" id="num1">1</a></li>
+                <li class="page-item" id="btnPage2"><a class="page-link" href="#" id="num2">2</a></li>
+                <li class="page-item" id="btnPage3"><a class="page-link" href="#" id="num3">3</a></li>
+                <li class="page-item" id="btnNext">
                     <a class="page-link" href="#" id="next">Next</a>
                 </li>
             </ul>

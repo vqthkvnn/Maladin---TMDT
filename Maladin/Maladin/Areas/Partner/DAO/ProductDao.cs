@@ -53,41 +53,78 @@ namespace Maladin.Areas.Partner.DAO
         {
             return dbContext.PRODUCTs.Count();
         }
-        public List<PRODUCT> getListProduct(int pageSize, int page)
+        public List<PRODUCT> GetListProductByPage(int pageSize, int page)
         {
             int count = GetCount();
-            int size = count - page * (pageSize-1);
-            if (size >0 && size>=page)
+            int size = count - pageSize * (page-1);
+            if (size >=0)
             {
-                string sql = "SELECT  RowConstrainedResult.ID_PRODUCT, RowConstrainedResult.NAME_PRODUCT, RowConstrainedResult.ID_PRODUCER, RowConstrainedResult.ID_TYPE_PRODUCT, " +
-                "RowConstrainedResult.DESCRIBE_PRODUCT, RowConstrainedResult.ID_ORIGIN, RowConstrainedResult.PRICE_PRODUCT, RowConstrainedResult.RATING_PRODUCT, "+
-                " RowConstrainedResult.NOTE_PRODUCT,RowConstrainedResult.ID_INFO, RowConstrainedResult.DATE_PRODUCT, RowConstrainedResult.USER_ACC, RowConstrainedResult.IS_SELL "+
-                "FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY DATE_PRODUCT ) AS RowNum, *FROM dbo.PRODUCT ) AS RowConstrainedResult"+
-                "WHERE   RowNum > "+Convert.ToString(page*(pageSize-1))+" AND RowNum <= "+Convert.ToString(page*pageSize)+" ORDER BY RowNum";
-                return getAllProduct();
-            }
-            else if(size > 0 && size < page)
-            {
-                string sql = "SELECT  RowConstrainedResult.ID_PRODUCT, RowConstrainedResult.NAME_PRODUCT, RowConstrainedResult.ID_PRODUCER, RowConstrainedResult.ID_TYPE_PRODUCT, " +
-                "RowConstrainedResult.DESCRIBE_PRODUCT, RowConstrainedResult.ID_ORIGIN, RowConstrainedResult.PRICE_PRODUCT, RowConstrainedResult.RATING_PRODUCT, " +
-                " RowConstrainedResult.NOTE_PRODUCT,RowConstrainedResult.ID_INFO, RowConstrainedResult.DATE_PRODUCT, RowConstrainedResult.USER_ACC, RowConstrainedResult.IS_SELL " +
-                "FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY DATE_PRODUCT ) AS RowNum, *FROM dbo.PRODUCT ) AS RowConstrainedResult" + 
-                "WHERE   RowNum > " + Convert.ToString(page * (pageSize - 1)) + " AND RowNum <= " + Convert.ToString(count- page * (pageSize - 1)) + " ORDER BY RowNum";
-                return getAllProduct();
-            }
-            else
-            {
-                if (count <=0)
+
+                if (size>=page)
                 {
-                    return getAllProduct();
+                    string sql = "SELECT  RowConstrainedResult.ID_PRODUCT, RowConstrainedResult.NAME_PRODUCT, RowConstrainedResult.ID_PRODUCER, RowConstrainedResult.ID_TYPE_PRODUCT, " +
+                " RowConstrainedResult.DESCRIBE_PRODUCT, RowConstrainedResult.ID_ORIGIN, RowConstrainedResult.PRICE_PRODUCT, RowConstrainedResult.RATING_PRODUCT, " +
+                " RowConstrainedResult.NOTE_PRODUCT,RowConstrainedResult.ID_INFO, RowConstrainedResult.DATE_PRODUCT, RowConstrainedResult.USER_ACC, RowConstrainedResult.IS_SELL " +
+                " FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY DATE_PRODUCT ) AS RowNum, *FROM dbo.PRODUCT ) AS RowConstrainedResult" +
+                " WHERE   RowNum > " + Convert.ToString(pageSize * (page - 1)) + " AND RowNum <= " + Convert.ToString(page * pageSize) + " ORDER BY RowNum";
+                    var data = dbContext.Database.SqlQuery<PRODUCT>(sql)
+                        .Select(b => new PRODUCT { 
+                        ID_PRODUCER = b.ID_PRODUCER,
+                        NAME_PRODUCT = b.NAME_PRODUCT,
+                        ID_PRODUCT = b.ID_PRODUCT,
+                        ID_TYPE_PRODUCT = b.ID_TYPE_PRODUCT,
+                        DESCRIBE_PRODUCT = b.DESCRIBE_PRODUCT,
+                        ID_ORIGIN = b.ID_ORIGIN,
+                        PRICE_PRODUCT =Convert.ToInt32(b.PRICE_PRODUCT),
+                        RATING_PRODUCT = Convert.ToInt32(b.RATING_PRODUCT),
+                        NOTE_PRODUCT = b.NOTE_PRODUCT,
+                        ID_INFO = Convert.ToString(b.ID_INFO),
+                        DATE_PRODUCT = b.DATE_PRODUCT,
+                        USER_ACC = b.USER_ACC,
+                        IS_SELL = b.IS_SELL
+
+
+
+                        }).ToList();
+                    return data;
                 }
                 else
                 {
-                    string sql = "SELECT  * " + "FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY DATE_PRODUCT ) AS RowNum, *FROM dbo.PRODUCT ) AS RowConstrainedResult " +
-                "WHERE   RowNum > " + Convert.ToString(page * (pageSize - 1)) + " AND RowNum <= " + Convert.ToString(count) + " ORDER BY RowNum";
-                    return getAllProduct();
+                    string sql = "SELECT  RowConstrainedResult.ID_PRODUCT, RowConstrainedResult.NAME_PRODUCT, RowConstrainedResult.ID_PRODUCER, RowConstrainedResult.ID_TYPE_PRODUCT, " +
+                "RowConstrainedResult.DESCRIBE_PRODUCT, RowConstrainedResult.ID_ORIGIN, RowConstrainedResult.PRICE_PRODUCT, RowConstrainedResult.RATING_PRODUCT, " +
+                " RowConstrainedResult.NOTE_PRODUCT,RowConstrainedResult.ID_INFO, RowConstrainedResult.DATE_PRODUCT, RowConstrainedResult.USER_ACC, RowConstrainedResult.IS_SELL " +
+                " FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY DATE_PRODUCT ) AS RowNum, *FROM dbo.PRODUCT ) AS RowConstrainedResult" +
+                " WHERE   RowNum > " + Convert.ToString(pageSize * (page - 1)) + " AND RowNum <= " + Convert.ToString(count) + " ORDER BY RowNum";
+                    var data = dbContext.Database.SqlQuery<PRODUCT>(sql)
+                        .Select(b => new PRODUCT
+                        {
+                            ID_PRODUCER = b.ID_PRODUCER,
+                            NAME_PRODUCT = b.NAME_PRODUCT,
+                            ID_PRODUCT = b.ID_PRODUCT,
+                            ID_TYPE_PRODUCT = b.ID_TYPE_PRODUCT,
+                            DESCRIBE_PRODUCT = b.DESCRIBE_PRODUCT,
+                            ID_ORIGIN = b.ID_ORIGIN,
+                            PRICE_PRODUCT = Convert.ToInt32(b.PRICE_PRODUCT),
+                            RATING_PRODUCT = Convert.ToInt32(b.RATING_PRODUCT),
+                            NOTE_PRODUCT = b.NOTE_PRODUCT,
+                            ID_INFO = Convert.ToString(b.ID_INFO),
+                            DATE_PRODUCT = b.DATE_PRODUCT,
+                            USER_ACC = b.USER_ACC,
+                            IS_SELL = b.IS_SELL
+
+
+
+                        }).ToList();
+                    return data;
                 }
+                
             }
+            else
+            {
+                return getAllProduct();
+            }
+            
+            
             
         }
     }

@@ -9,6 +9,12 @@ namespace Maladin.EF
     [Table("ODER")]
     public partial class ODER
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ODER()
+        {
+            PAYMENT_ODER = new HashSet<PAYMENT_ODER>();
+        }
+
         [Key]
         [StringLength(10)]
         public string ID_ODER { get; set; }
@@ -50,5 +56,8 @@ namespace Maladin.EF
         public virtual TYPE_ODER TYPE_ODER { get; set; }
 
         public virtual VOCHER VOCHER { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PAYMENT_ODER> PAYMENT_ODER { get; set; }
     }
 }
