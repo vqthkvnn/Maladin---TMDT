@@ -51,5 +51,9 @@ namespace Maladin.Controllers
         {
             return Json("", JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Search(string type, string page, string sortBy)
+        {
+            return View();
+        }
     }
 }
