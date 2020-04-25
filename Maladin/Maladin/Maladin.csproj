@@ -318,6 +318,7 @@
     <Content Include="assets\css\readme.txt" />
     <Content Include="assets\image\avatar.png" />
     <Content Include="assets\image\Baymax-NoContent.png" />
+    <Content Include="assets\image\bg-01.jpg" />
     <Content Include="assets\image\logo.png" />
     <Content Include="assets\image\product.png" />
     <Content Include="assets\image\readme.txt" />
@@ -328,10 +329,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\loginCss.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\price-range.css" />
     <Content Include="Content\responsive.css" />
+    <Content Include="Content\util.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -560,6 +563,9 @@
     <Content Include="Views\Shared\UserLayout.cshtml" />
     <Content Include="Views\Home\ShoppingCart.cshtml" />
     <Content Include="Views\User\AccountInformation.cshtml" />
+    <Content Include="Views\Shared\LoginLayout.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
