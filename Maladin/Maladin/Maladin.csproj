@@ -165,6 +165,7 @@
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAO\ProductHomeDAO.cs" />
     <Compile Include="EF\ACCOUNT.cs" />
     <Compile Include="EF\ACCOUNT_COMMENT.cs" />
     <Compile Include="EF\ACC_PRODUCT.cs" />
@@ -199,6 +200,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemProductModel.cs" />
+    <Compile Include="Models\ItemProductModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -591,8 +594,6 @@
     <Folder Include="Areas\Customer\Views\Shared\" />
     <Folder Include="Areas\Partner\Data\" />
     <Folder Include="Areas\Partner\Views\Base\" />
-    <Folder Include="DAO\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

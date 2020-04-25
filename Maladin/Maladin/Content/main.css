@@ -2,9 +2,7 @@
 *******Typography******
 **************************/
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
-@import url(http://fonts.googleapis.com/css?family=Abel);
+
 body {
     font-family: 'Roboto', sans-serif;
     position: relative;
@@ -15,7 +13,9 @@ body {
     background-color: #189eff!important;
     color: white;
 }
-
+.title-ppp{
+    color:red;
+}
 .navbar-inverse .navbar-nav > li > a {
     color: #ffffff;
 }

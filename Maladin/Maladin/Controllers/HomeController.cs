@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Maladin.Models;
+using Maladin.DAO;
 
 namespace Maladin.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(ItemProductModels models)
         {
-            return View();
+            var dao = new ProductHomeDAO();
+            models.GiayProduct = dao.getListProduct(1, "TP001");
+            models.DongHoProduct = dao.getListProduct(1, "TP003");
+            return View(models);
         }
 
         public ActionResult About()
@@ -41,6 +46,10 @@ namespace Maladin.Controllers
         public ActionResult Test()
         {
             return View();
+        }
+        public JsonResult GetProductList(int page, string type)
+        {
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }

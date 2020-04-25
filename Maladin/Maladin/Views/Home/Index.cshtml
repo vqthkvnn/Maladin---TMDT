@@ -1,50 +1,179 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model Maladin.Models.ItemProductModels
+<div class="row">
+    <div class="header-home col-12">Đây nơi trưng bài sản phẩm</div>
+    <div class="col-12 product-list-home">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Sản phẩm Đồng Hồ <strong>HOT</strong></h4>
+                    <div class="row">
+                        <div class="col-12">
+                            @foreach (var i in Model.DongHoProduct)
+                            {
+                                <a class="link-item product-item" href="#">
+                                    <div class="content">
+                                        <span class="image-item">
+                                            <img src="@i.PathIamge" class="img-detail img-responsive" />
+                                        </span>
+                                        <p class="title-item">
+                                            @i.NameProduct
+                                        </p>
+                                        <p class="price-item">
+                                            <span class="final-price">
+                                                @if (i.SalePricent == 0)
+                                                {
+                                                    @:@i.PriceGoc ₫
+                                                }
+                                                @if (i.SalePricent == 100)
+                                                {
+                                                    @:0 ₫
+                                                }
+                                                @if (i.SalePricent > 0 && i.SalePricent < 100)
+                                                {
+                                                    var mony =i.PriceGoc - (i.PriceGoc * i.SalePricent) / 100;
+                                                    @:@mony ₫
+                                                }
+                                                
+                                                <span class="sale-tag">-@i.SalePricent%</span>
+                                            </span>
+                                            <span class="price-regular">@i.PriceGoc ₫</span>
+                                        </p>
+                                    </div>
+                                    <div class="review-wrap">
+                                        <p class="rating">
+                                            <span class="rating-content">
+                                                @for (int rt = 1; rt <= i.Rating; rt++)
+                                                {
+                                                    <i class="fa fa-star checked" aria-hidden="true"></i>
+                                                }
+                                                @if (i.Rating < 5)
+                                                {
+                                                    for (int j = 5; j > i.Rating; j--)
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                    }
+                                                }
+                                                
+                                            </span>
+                                        </p>
+                                        <p class="review-count">
+                                            (@i.CountComment nhận xét)
+                                        </p>
+                                    </div>
+                                </a>
+                            }
 
-<div class="product-item">
-    <a class="link-item">
-        <div class="content">
-            <span class="image-item">
-                <img src="~/assets/image/product.png" class="img-detail img-responsive" />
-            </span>
-            <p class="title-item">
-                Ghế Aerocool Gaming Chair Iron (Đen) - Hàng chính hãng
-            </p>
-            <p class="price-item">
-                <span class="final-price">
-                    19.490.000 ₫
-                    <span class="sale-tag">-16%</span>
-                </span>
-                <span class="price-regular">22.990.000 ₫</span>
-            </p>
+
+
+                            <a class="link-item product-item" href="#">
+                                <div class="content">
+                                    <span class="image-item">
+                                        <img src="~/assets/image/product.png" class="img-detail img-responsive" />
+                                    </span>
+                                    <p class="title-item">
+                                        Ghế Aerocool Gaming Chair Iron (Đen) - Hàng chính hãng
+                                    </p>
+                                    <p class="price-item">
+                                        <span class="final-price">
+                                            19.490.000 ₫
+                                            <span class="sale-tag">-16%</span>
+                                        </span>
+                                        <span class="price-regular">22.990.000 ₫</span>
+                                    </p>
+                                </div>
+                                <div class="review-wrap">
+                                    <p class="rating">
+                                        <span class="rating-content">
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                    </p>
+                                    <p class="review-count">
+                                        (64 nhận xét)
+                                    </p>
+                                </div>
+                            </a>
+                            <a class="link-item product-item" href="#">
+                                <div class="content">
+                                    <span class="image-item">
+                                        <img src="~/assets/image/product.png" class="img-detail img-responsive" />
+                                    </span>
+                                    <p class="title-item">
+                                        Ghế Aerocool Gaming Chair Iron (Đen) - Hàng chính hãng
+                                    </p>
+                                    <p class="price-item">
+                                        <span class="final-price">
+                                            19.490.000 ₫
+                                            <span class="sale-tag">-16%</span>
+                                        </span>
+                                        <span class="price-regular">22.990.000 ₫</span>
+                                    </p>
+                                </div>
+                                <div class="review-wrap">
+                                    <p class="rating">
+                                        <span class="rating-content">
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                    </p>
+                                    <p class="review-count">
+                                        (64 nhận xét)
+                                    </p>
+                                </div>
+                            </a>
+                            <a class="link-item product-item" href="#">
+                                <div class="content">
+                                    <span class="image-item">
+                                        <img src="~/assets/image/product.png" class="img-detail img-responsive" />
+                                    </span>
+                                    <p class="title-item">
+                                        Ghế Aerocool Gaming Chair Iron (Đen) - Hàng chính hãng
+                                    </p>
+                                    <p class="price-item">
+                                        <span class="final-price">
+                                            19.490.000 ₫
+                                            <span class="sale-tag">-16%</span>
+                                        </span>
+                                        <span class="price-regular">22.990.000 ₫</span>
+                                    </p>
+                                </div>
+                                <div class="review-wrap">
+                                    <p class="rating">
+                                        <span class="rating-content">
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                    </p>
+                                    <p class="review-count">
+                                        (64 nhận xét)
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                        <button type="button" class="btn btn-info">Thêm nữa</button>
+                        <p class="title-ppp">Chay</p>
+                        <div class="col-9-lg">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="review-wrap">
-            <p class="rating">
-                <span class="rating-content">
-                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                    <i class="fa fa-star checked" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                </span>
-            </p>
-            <p class="review-count">
-                (64 nhận xét)
-            </p>
-        </div>
-    </a>
+
+    </div>
 </div>
 
-<!--<i class="star"></i>
-<i class="star"></i>
-<i class="star"></i>
-<i class="star"></i>
-<i class="star"></i>
-<span style="width: 100%;">
-    <i class="star"></i>
-    <i class="star"></i>
-    <i class="star"></i>
-    <i class="star"></i>
-    <i class="star"></i>
-</span>-->
+
