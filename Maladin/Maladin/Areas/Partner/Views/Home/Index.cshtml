@@ -22,162 +22,115 @@
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body dashboard-tabs p-0">
-                <ul class="nav nav-tabs px-4" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Sales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="false">Purchases</a>
-                    </li>
-                </ul>
-                <div class="tab-content py-0 px-0">
-                    <div class="tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                        <div class="d-flex flex-wrap justify-content-xl-between">
-                            <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Start date</small>
-                                    <div class="dropdown">
-                                        <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                            <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                            <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                            <a class="dropdown-item" href="#">21 Oct 2018</a>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                    <div class="d-flex flex-wrap justify-content-xl-between">
+
+                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                            <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
+                            <div class="d-flex flex-column justify-content-around">
+                                <small class="mb-1 text-muted">Maladin Coint Mới Nhận</small>
+                                <h5 class="mr-2 mb-0">$1</h5>
                             </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Revenue</small>
-                                    <h5 class="mr-2 mb-0">$577545</h5>
-                                </div>
+                        </div>
+                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                            <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
+                            <div class="d-flex flex-column justify-content-around">
+                                <small class="mb-1 text-muted">Lượt xem sản phẩm mới</small>
+                                <h5 class="mr-2 mb-0">1</h5>
                             </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Total views</small>
-                                    <h5 class="mr-2 mb-0">9833550</h5>
-                                </div>
+                        </div>
+                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                            <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
+                            <div class="d-flex flex-column justify-content-around">
+                                <small class="mb-1 text-muted">Hóa đơn mới</small>
+                                <h5 class="mr-2 mb-0">1</h5>
                             </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Downloads</small>
-                                    <h5 class="mr-2 mb-0">2233783</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Flagged</small>
-                                    <h5 class="mr-2 mb-0">3497843</h5>
-                                </div>
+                        </div>
+                        <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                            <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
+                            <div class="d-flex flex-column justify-content-around">
+                                <small class="mb-1 text-muted">Số bình luận mới</small>
+                                <h5 class="mr-2 mb-0">1</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
-                        <div class="d-flex flex-wrap justify-content-xl-between">
-                            <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Start date</small>
-                                    <div class="dropdown">
-                                        <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                            <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                            <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                            <a class="dropdown-item" href="#">21 Oct 2018</a>
-                                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Biểu đồ doanh thu -->
+    <div class="row">
+        <!--Biểu đồ coint-->
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <h4 class="card-title">Biểu đồ Biến động coint</h4>
+                    <canvas id="lineChart" width="837" height="418" class="chartjs-render-monitor" style="display: block; height: 335px; width: 670px;"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--Biều đồ lượt xem-->
+        <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <h4 class="card-title">Biểu đồ lượt xem trong 3 tháng gần nhất</h4>
+                    <canvas id="areaChart" width="837" height="418" class="chartjs-render-monitor" style="display: block; height: 335px; width: 670px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Phần danh sách comment mới-->
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Danh Sách Bình Luận/Hỏi đáp Mới</h4>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    ID sản phẩm
+                                </th>
+                                <th>
+                                    Tên Sản phẩm
+                                </th>
+                                <th>
+                                    Nội dung
+                                </th>
+                                <th>
+                                    Loại Bình Luận
+                                </th>
+                                <th>
+                                    Ngày Bình Luận
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-1">
+                                    <img src="../../images/faces/face1.jpg" alt="image">
+                                </td>
+                                <td>
+                                    Herman Beck
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Downloads</small>
-                                    <h5 class="mr-2 mb-0">2233783</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Total views</small>
-                                    <h5 class="mr-2 mb-0">9833550</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Revenue</small>
-                                    <h5 class="mr-2 mb-0">$577545</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Flagged</small>
-                                    <h5 class="mr-2 mb-0">3497843</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
-                        <div class="d-flex flex-wrap justify-content-xl-between">
-                            <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Start date</small>
-                                    <div class="dropdown">
-                                        <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                            <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                            <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                            <a class="dropdown-item" href="#">21 Oct 2018</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Revenue</small>
-                                    <h5 class="mr-2 mb-0">$577545</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Total views</small>
-                                    <h5 class="mr-2 mb-0">9833550</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Downloads</small>
-                                    <h5 class="mr-2 mb-0">2233783</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                                <div class="d-flex flex-column justify-content-around">
-                                    <small class="mb-1 text-muted">Flagged</small>
-                                    <h5 class="mr-2 mb-0">3497843</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </td>
+                                <td>
+                                    $ 77.99
+                                </td>
+                                <td>
+                                    May 15, 2015
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

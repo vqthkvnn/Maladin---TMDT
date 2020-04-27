@@ -64,6 +64,7 @@
         if (maxPage == 1) {
             $("#num2").removeAttr("href");
             $("#num3").removeAttr("href");
+            $("#btnNext").addClass("disabled");
         }
         else if (maxPage == 2) {
             $("#num3").removeAttr("href");
@@ -71,6 +72,10 @@
             $("#btnNext").addClass("disabled");
         }
         // add event click
+        $('#btn-search-product').click(function () {
+            console.log("text:", $('#input-search-product').val());
+            window.location = '@Url.Action("Index","Product")?page=' + page + '&pageSize=' + pageSize + '&q=' + $('#input-search-product').val();
+        });
 
 
     </script>
@@ -118,6 +123,7 @@
         $('#selectPageSize').change(function() {
         window.location = $(':selected',this).attr('href')
         });
+        
 
 
     </script>
@@ -152,8 +158,8 @@
                                 <i class="mdi mdi-magnify"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search">
-                        <button type="button" class="btn btn-inverse-info btn-icon">
+                        <input type="text" class="form-control" placeholder="Search now" aria-label="search" aria-describedby="search" id="input-search-product">
+                        <button type="button" class="btn btn-inverse-info btn-icon" id="btn-search-product">
                             <i class="mdi mdi-account-search"></i>
                         </button>
                         <button type="button" class="btn btn-inverse-info btn-icon" id="btn-add-product">

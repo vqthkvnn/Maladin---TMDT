@@ -60,6 +60,11 @@ namespace Maladin.Areas.Admin.Controllers
             }
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session.Remove(LoginAdminSession.ADMIN_SESSION);
+            return View("Index");
+        }
         
     }
 }

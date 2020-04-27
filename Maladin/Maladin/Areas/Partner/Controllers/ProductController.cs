@@ -17,7 +17,7 @@ namespace Maladin.Areas.Partner.Controllers
 
         // GET: Partner/Product
         
-        public ActionResult Index(string page, string pageSize)
+        public ActionResult Index(string page, string pageSize, string q)
         {
             int p =1, pS = 8;
             if (page != null || pageSize != null)
@@ -28,20 +28,40 @@ namespace Maladin.Areas.Partner.Controllers
 
             var dao = new ProductDao();
             var model = new ProductModels();
-            model.maxPage = (int)dao.GetCount() / pS + 1;
-            if (model.maxPage<p || p<1)
+            if (q == null)
             {
-                model.PRODUCT = dao.GetListProductByPage(pS, 1);
+                model.maxPage = (int)dao.GetCount() / pS + 1;
+                if (model.maxPage < p || p < 1)
+                {
+                    model.PRODUCT = dao.GetListProductByPage(pS, 1);
+                }
+                else
+                {
+                    model.PRODUCT = dao.GetListProductByPage(pS, p);
+                }
+
+                model.page = p;
+                model.pageSize = pS;
+
+                return View(model);
             }
             else
             {
-                model.PRODUCT = dao.GetListProductByPage(pS, p);
+                model.maxPage = (int)dao.GetCount(q) / pS + 1;
+                if (model.maxPage < p || p < 1)
+                {
+                    model.PRODUCT = dao.GetListProductByPage(pS, 1,q);
+                }
+                else
+                {
+                    model.PRODUCT = dao.GetListProductByPage(pS, p,q);
+                }
+
+                model.page = p;
+                model.pageSize = pS;
+
+                return View(model);
             }
-            
-            model.page = p;
-            model.pageSize = pS;
-            
-            return View(model);
         }
         [HttpPost]
         public ActionResult Delete(string id)

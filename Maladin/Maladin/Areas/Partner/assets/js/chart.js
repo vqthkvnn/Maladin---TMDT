@@ -33,7 +33,7 @@ $(function() {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     datasets: [{
         label: 'Dataset 1',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [1, 1, 2 4, 5, 20],
         borderColor: [
           '#587ce4'
         ],

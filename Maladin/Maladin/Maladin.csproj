@@ -139,7 +139,10 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\VoucherController.cs" />
     <Compile Include="Areas\Admin\DAO\AccountAdminDAO.cs" />
+    <Compile Include="Areas\Admin\DAO\WaitProductDAO.cs" />
     <Compile Include="Areas\Admin\Models\LoginAdminModel.cs" />
+    <Compile Include="Areas\Admin\Models\WaitProductModel.cs" />
+    <Compile Include="Areas\Admin\Models\WaitProductModels.cs" />
     <Compile Include="Areas\API\APIAreaRegistration.cs" />
     <Compile Include="Areas\API\Controllers\ProductController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
@@ -351,6 +354,7 @@
     <Content Include="public\image\avt\face15.jpg" />
     <Content Include="public\image\avt\face18.jpg" />
     <Content Include="public\image\avt\face19.jpg" />
+    <Content Include="public\image\home-product\600x600bb.jpg" />
     <Content Include="public\logo-mini.svg" />
     <Content Include="public\logo.svg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -532,6 +536,7 @@
     <Content Include="Areas\Partner\Views\Home\Infomation.cshtml" />
     <Content Include="Areas\Partner\Views\Oder\Index.cshtml" />
     <Content Include="Areas\Partner\Views\Home\Reward.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Approved.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
