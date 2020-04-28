@@ -24,10 +24,11 @@ namespace Maladin.EF
             MESSAGE_SEND_TO_GR = new HashSet<MESSAGE_SEND_TO_GR>();
             NOTI_ACC = new HashSet<NOTI_ACC>();
             ODERs = new HashSet<ODER>();
-            PAYMENT_ODER = new HashSet<PAYMENT_ODER>();
+            PAYMENTs = new HashSet<PAYMENT>();
             USES_WAIT = new HashSet<USES_WAIT>();
             USES_WAIT1 = new HashSet<USES_WAIT>();
             WATCHED_PRODUCT = new HashSet<WATCHED_PRODUCT>();
+            PRODUCTs = new HashSet<PRODUCT>();
         }
 
         [Key]
@@ -37,6 +38,10 @@ namespace Maladin.EF
         [Required]
         [StringLength(30)]
         public string PASSWORD_ACC { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string EMAIL_INFO { get; set; }
 
         [Required]
         [StringLength(10)]
@@ -88,7 +93,7 @@ namespace Maladin.EF
         public virtual ICollection<ODER> ODERs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PAYMENT_ODER> PAYMENT_ODER { get; set; }
+        public virtual ICollection<PAYMENT> PAYMENTs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USES_WAIT> USES_WAIT { get; set; }
@@ -98,5 +103,8 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WATCHED_PRODUCT> WATCHED_PRODUCT { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRODUCT> PRODUCTs { get; set; }
     }
 }

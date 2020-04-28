@@ -41,7 +41,7 @@ namespace Maladin.Areas.Partner.DAO
                 acc.NAME_INFO = aCCOUNT.NAME_INFO;
                 acc.PHONE_INFO = aCCOUNT.PHONE_INFO;
                 acc.ADRESS_INFO = aCCOUNT.ADRESS_INFO;
-                acc.EMAIL_INFO = aCCOUNT.EMAIL_INFO;
+                
                 acc.BIRTH_INFO = aCCOUNT.BIRTH_INFO;
                 acc.NOTE_INFO = aCCOUNT.NOTE_INFO;
                 acc.CMND_INFO = aCCOUNT.CMND_INFO;

@@ -15,8 +15,8 @@ namespace Maladin.EF
 
         [Key]
         [Column(Order = 1)]
-        [StringLength(10)]
-        public string ID_NOTI { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ID_NOTI { get; set; }
 
         public bool? IS_CHECK_NOTI { get; set; }
 

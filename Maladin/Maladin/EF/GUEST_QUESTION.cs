@@ -25,6 +25,8 @@ namespace Maladin.EF
         [Column(TypeName = "date")]
         public DateTime? DATE_QUESTION { get; set; }
 
+        public bool? IS_READ { get; set; }
+
         public virtual ACC_PRODUCT ACC_PRODUCT { get; set; }
     }
 }

@@ -145,6 +145,7 @@
     <Compile Include="Areas\Admin\Models\WaitProductModels.cs" />
     <Compile Include="Areas\API\APIAreaRegistration.cs" />
     <Compile Include="Areas\API\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Customer\Controllers\AccountController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Common\LoginPartner.cs" />
     <Compile Include="Areas\Partner\Common\LoginPartnerSession.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="EF\NOTI_ACC.cs" />
     <Compile Include="EF\ODER.cs" />
     <Compile Include="EF\ORIGIN.cs" />
+    <Compile Include="EF\PAYMENT.cs" />
     <Compile Include="EF\PAYMENT_ODER.cs" />
     <Compile Include="EF\PRODUCER_INFO.cs" />
     <Compile Include="EF\PRODUCT.cs" />
@@ -203,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerLoginModel.cs" />
     <Compile Include="Models\ItemProductModel.cs" />
     <Compile Include="Models\ItemProductModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -537,6 +540,10 @@
     <Content Include="Areas\Partner\Views\Oder\Index.cshtml" />
     <Content Include="Areas\Partner\Views\Home\Reward.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Approved.cshtml" />
+    <Content Include="Areas\Customer\Views\Shared\_Layout_Login.cshtml" />
+    <Content Include="Areas\Customer\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Customer\Views\Account\Register.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
@@ -595,9 +602,7 @@
     <Folder Include="Areas\API\Data\" />
     <Folder Include="Areas\API\Views\Product\" />
     <Folder Include="Areas\API\Views\Shared\" />
-    <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Data\" />
-    <Folder Include="Areas\Customer\Views\Shared\" />
     <Folder Include="Areas\Partner\Data\" />
     <Folder Include="Areas\Partner\Views\Base\" />
   </ItemGroup>

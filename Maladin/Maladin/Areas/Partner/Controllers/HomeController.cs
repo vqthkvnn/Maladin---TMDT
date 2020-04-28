@@ -50,7 +50,7 @@ namespace Maladin.Areas.Partner.Controllers
                 iNFOMATION.ADRESS_INFO = adr;
                 iNFOMATION.PHONE_INFO = sdt;
                 iNFOMATION.ID_INFO = icc.ID_INFO;
-                iNFOMATION.DATE_CREATE_INFO = icc.DATE_CREATE_INFO;
+                
                 iNFOMATION.AVT_ACC = icc.AVT_ACC;
                 iNFOMATION.USER_ACC = icc.USER_ACC;
                 iNFOMATION.BIRTH_INFO = Convert.ToDateTime(DateTime.ParseExact(birth, formats, CultureInfo.InvariantCulture, DateTimeStyles.None).ToString("MM-dd-yyyy"));
@@ -63,7 +63,7 @@ namespace Maladin.Areas.Partner.Controllers
                     iNFOMATION.SEX_INFO = false;
                 }
 
-                iNFOMATION.EMAIL_INFO = email;
+                //iNFOMATION.EMAIL_INFO = email; -- cấm update
                 iNFOMATION.NOTE_INFO = note;
                 bool res = dao.Update(iNFOMATION);
                 if (res)

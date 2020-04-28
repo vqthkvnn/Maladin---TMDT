@@ -32,13 +32,7 @@ namespace Maladin.EF
         public string PHONE_INFO { get; set; }
 
         [StringLength(255)]
-        public string EMAIL_INFO { get; set; }
-
-        [StringLength(255)]
         public string NOTE_INFO { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? DATE_CREATE_INFO { get; set; }
 
         [StringLength(30)]
         public string USER_ACC { get; set; }

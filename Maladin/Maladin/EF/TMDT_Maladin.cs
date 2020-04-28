@@ -28,6 +28,7 @@ namespace Maladin.EF
         public virtual DbSet<NOTIFICATION_> NOTIFICATION_ { get; set; }
         public virtual DbSet<ODER> ODERs { get; set; }
         public virtual DbSet<ORIGIN> ORIGINs { get; set; }
+        public virtual DbSet<PAYMENT> PAYMENTs { get; set; }
         public virtual DbSet<PAYMENT_ODER> PAYMENT_ODER { get; set; }
         public virtual DbSet<PRODUCER_INFO> PRODUCER_INFO { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
@@ -142,7 +143,7 @@ namespace Maladin.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ACCOUNT>()
-                .HasMany(e => e.PAYMENT_ODER)
+                .HasMany(e => e.PAYMENTs)
                 .WithRequired(e => e.ACCOUNT)
                 .WillCascadeOnDelete(false);
 
@@ -254,14 +255,6 @@ namespace Maladin.EF
                 .Property(e => e.USER_ACC)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<NOTI_ACC>()
-                .Property(e => e.ID_NOTI)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NOTIFICATION_>()
-                .Property(e => e.ID_NOTI)
-                .IsUnicode(false);
-
             modelBuilder.Entity<NOTIFICATION_>()
                 .HasMany(e => e.NOTI_ACC)
                 .WithRequired(e => e.NOTIFICATION_)
@@ -306,9 +299,14 @@ namespace Maladin.EF
                 .WithRequired(e => e.ORIGIN)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<PAYMENT_ODER>()
+            modelBuilder.Entity<PAYMENT>()
                 .Property(e => e.USER_ACC)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PAYMENT>()
+                .HasMany(e => e.PAYMENT_ODER)
+                .WithRequired(e => e.PAYMENT)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PAYMENT_ODER>()
                 .Property(e => e.ID_ODER)
@@ -365,6 +363,11 @@ namespace Maladin.EF
                 .HasMany(e => e.PRODUCT_IMAGE)
                 .WithRequired(e => e.PRODUCT)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PRODUCT>()
+                .HasMany(e => e.ACCOUNTs)
+                .WithMany(e => e.PRODUCTs)
+                .Map(m => m.ToTable("FAVORITE_PRODUCT").MapLeftKey("ID_PRODUCT").MapRightKey("USER_ACC"));
 
             modelBuilder.Entity<PRODUCT_IMAGE>()
                 .Property(e => e.ID_PRODUCT)

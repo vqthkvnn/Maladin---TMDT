@@ -24,7 +24,8 @@
             // set value
 
             var time = Convert.ToDateTime(Model.iNFOMATION.BIRTH_INFO).ToString("yyyy-MM-dd");
-            var timeCreate = Convert.ToDateTime(Model.iNFOMATION.DATE_CREATE_INFO).ToString("yyyy-MM-dd");
+            //var timeCreate = Convert.ToDateTime(Model.iNFOMATION.DATE_CREATE_INFO).ToString("yyyy-MM-dd");
+            var timeCreate = "2020-01-01";
             var st = WebUtility.HtmlDecode(Model.iNFOMATION.NOTE_INFO);
             @:note = $('<textarea />').html("@st").text();
             @:id ="@Model.iNFOMATION.ID_INFO";
@@ -32,7 +33,7 @@
             @:name =$("<textarea />").html('@Model.iNFOMATION.NAME_INFO').text();
             @:adr =$("<textarea />").html("@Model.iNFOMATION.ADRESS_INFO").text();;
             @:phone ="@Model.iNFOMATION.PHONE_INFO";
-            @:email ="@Model.iNFOMATION.EMAIL_INFO";
+            @:email ="admin@gmail.com";
             @:birth ="@time";
 
             @:$("#idInformation").attr("value", id);

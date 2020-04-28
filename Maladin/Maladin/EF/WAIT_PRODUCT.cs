@@ -43,6 +43,9 @@ namespace Maladin.EF
         [StringLength(255)]
         public string NOTE_PRODUCT { get; set; }
 
+        [StringLength(255)]
+        public string IMAGE_PRODUCT { get; set; }
+
         [Required]
         [StringLength(10)]
         public string ID_INFO { get; set; }

@@ -30,6 +30,8 @@ namespace Maladin.EF
         [Column(TypeName = "date")]
         public DateTime DATE_COMMENT { get; set; }
 
+        public bool? IS_READ { get; set; }
+
         public virtual ACC_PRODUCT ACC_PRODUCT { get; set; }
 
         public virtual ACCOUNT ACCOUNT { get; set; }
