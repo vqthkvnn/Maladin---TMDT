@@ -6,11 +6,13 @@ using System.Web;
 
 namespace Maladin.Models
 {
-    public class CustomerLoginModel
+    public class RegisterCustomerModel
     {
-        //[Required(ErrorMessage ="Bạn chưa nhập tài khoản")]
+        
         public string UserName { get; set; }
-        //[Required(ErrorMessage = "Bạn chưa nhập nhập khẩu")]
         public string Password { get; set; }
+        [Compare("Password", ErrorMessage = "Mật khẩu phải trùng khớp")]
+        public string RePassword { get; set; }
+        public string Email { get; set; }
     }
 }

@@ -29,10 +29,10 @@ namespace Maladin
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       
                       "~/Content/main.css",
-                      "~/assets/css/bootstrap.min.css",
-                      "~/assets/css/bootstrap.css",
-                      //"~/Content/bootstrap.min.css",
-                      //"~/Content/bootstrap.css",
+                      //"~/assets/css/bootstrap.min.css",
+                      //"~/assets/css/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
             // style for admin
             bundles.Add(new StyleBundle("~/Areas/Admin/allcss").Include(

@@ -145,7 +145,10 @@
     <Compile Include="Areas\Admin\Models\WaitProductModels.cs" />
     <Compile Include="Areas\API\APIAreaRegistration.cs" />
     <Compile Include="Areas\API\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Customer\Common\CustomerSession.cs" />
     <Compile Include="Areas\Customer\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Customer\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Customer\Controllers\LoginController.cs" />
     <Compile Include="Areas\Customer\CustomerAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Common\LoginPartner.cs" />
     <Compile Include="Areas\Partner\Common\LoginPartnerSession.cs" />
@@ -167,8 +170,10 @@
     <Compile Include="Areas\Partner\Models\OderModels.cs" />
     <Compile Include="Areas\Partner\Models\ProductModels.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
+    <Compile Include="Common\CustomerLoginSession.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAO\CustomerLoginDAO.cs" />
     <Compile Include="DAO\ProductHomeDAO.cs" />
     <Compile Include="EF\ACCOUNT.cs" />
     <Compile Include="EF\ACCOUNT_COMMENT.cs" />
@@ -208,6 +213,7 @@
     <Compile Include="Models\CustomerLoginModel.cs" />
     <Compile Include="Models\ItemProductModel.cs" />
     <Compile Include="Models\ItemProductModels.cs" />
+    <Compile Include="Models\RegisterCustomerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -545,8 +551,6 @@
     <Content Include="Areas\Admin\Views\Product\Approved.cshtml" />
     <Content Include="Areas\Customer\Views\Shared\_Layout_Login.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Index.cshtml" />
-    <Content Include="Areas\Customer\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Customer\Views\Account\Register.cshtml" />
     <Content Include="Areas\Partner\Views\Product\ProductSell.cshtml" />
     <Content Include="assets\css\bootstrap-grid.css.map" />
     <Content Include="assets\css\bootstrap-grid.min.css.map" />
@@ -558,6 +562,9 @@
     <Content Include="assets\js\bootstrap.bundle.min.js.map" />
     <Content Include="assets\js\bootstrap.js.map" />
     <Content Include="assets\js\bootstrap.min.js.map" />
+    <Content Include="Areas\Customer\Views\Account\Infomation.cshtml" />
+    <Content Include="Areas\Customer\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Login\Register.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
@@ -617,8 +624,10 @@
     <Folder Include="Areas\API\Views\Product\" />
     <Folder Include="Areas\API\Views\Shared\" />
     <Folder Include="Areas\Customer\Data\" />
+    <Folder Include="Areas\Customer\Views\Base\" />
     <Folder Include="Areas\Partner\Data\" />
     <Folder Include="Areas\Partner\Views\Base\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

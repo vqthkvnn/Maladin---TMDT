@@ -1,7 +1,7 @@
 ﻿<header id="header" class="nav-collapse">
     <div class="header-form-container">
         <div class="container">
-            <a class="logo" href="@Url.Action("Index", "Home")">
+            <a class="logo" href="@Url.Action("Index", "Home",new {area="" })">
                 <img src="~/assets/image/logo.png" alt="Day la logo nhe hihi" style="height:40px" />
             </a>
             <div class="form-search">
@@ -42,8 +42,8 @@
                             </a>
                         </div>
                         <div class="toogler Userstyle_UserDropDown no-user">
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Login", "User")">Đăng nhập</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Register", "User")">Tạo tài khoản</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Index", "Login", new {Area ="Customer" })">Đăng nhập</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Register", "Login", new {Area ="Customer" })">Tạo tài khoản</a>
                         </div>
                     </div>
                 </div>
