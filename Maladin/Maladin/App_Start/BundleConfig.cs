@@ -20,13 +20,19 @@ namespace Maladin
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"
+                      //"~/Scripts/bootstrap.js",
+                      "~/assets/js/bootstrap.js",
+                      "~/assets/js/bootstrap.min.js",
+                      "~/assets/js/popper.min.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      
                       "~/Content/main.css",
-                      "~/Content/bootstrap.min.css",
+                      "~/assets/css/bootstrap.min.css",
+                      "~/assets/css/bootstrap.css",
+                      //"~/Content/bootstrap.min.css",
+                      //"~/Content/bootstrap.css",
                       "~/Content/site.css"));
             // style for admin
             bundles.Add(new StyleBundle("~/Areas/Admin/allcss").Include(
@@ -68,7 +74,7 @@ namespace Maladin
                 "~/Areas/Partner/assets/js/hoverable-collapse.js",
                 "~/Areas/Partner/assets/customJs/home_index.js",
                 "~/Areas/Partner/assets/js/template.js",
-                "~/Areas/Partner/assets/js/chart.js",
+                
                 "~/Areas/Partner/assets/vendors/chart.js/Chart.min.js"
                 ));
         }

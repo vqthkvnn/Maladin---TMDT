@@ -124,5 +124,9 @@ namespace Maladin.Areas.Partner.Controllers
             ProductModels models = new ProductModels();
             return View("Index", models);
         }
+        public ActionResult ProductSell()
+        {
+            return View();
+        }
     }
 }
