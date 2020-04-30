@@ -345,6 +345,7 @@
     <Content Include="assets\image\avenger-nocontent.png" />
     <Content Include="assets\image\Baymax-NoContent.png" />
     <Content Include="assets\image\logo.png" />
+    <Content Include="assets\image\maladin-coin.svg" />
     <Content Include="assets\image\product.png" />
     <Content Include="assets\js\bootstrap.bundle.js" />
     <Content Include="assets\js\bootstrap.bundle.min.js" />
@@ -617,6 +618,11 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Infomation.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\User\MyNotification.cshtml" />
+    <Content Include="Views\User\ManagerOrder.cshtml" />
+    <Content Include="Views\User\ReviewProductBought.cshtml" />
+    <Content Include="Views\User\MyReview.cshtml" />
+    <Content Include="Views\User\ManagerMaladinCoin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
