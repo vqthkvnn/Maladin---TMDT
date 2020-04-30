@@ -334,6 +334,12 @@
     <Content Include="assets\css\bootstrap-reboot.min.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\image\avatar.png" />
+    <Content Include="assets\image\avenger-content.png" />
+    <Content Include="assets\image\avenger-nocontent.png" />
+    <Content Include="assets\image\Baymax-NoContent.png" />
+    <Content Include="assets\image\logo.png" />
+    <Content Include="assets\image\product.png" />
     <Content Include="assets\js\bootstrap.bundle.js" />
     <Content Include="assets\js\bootstrap.bundle.min.js" />
     <Content Include="assets\js\bootstrap.js" />

@@ -1,23 +1,27 @@
-﻿<header id="header" class="nav-collapse">
+﻿<header id="header">
     <div class="header-form-container">
-        <div class="container">
-            <a class="logo" href="@Url.Action("Index", "Home")">
-                <img src="~/assets/image/logo.png" alt="Day la logo nhe hihi" style="height:40px" />
-            </a>
-            <div class="form-search">
-                <form id="search-form" method="get">
-                    <div class="search-wrap">
-                        <div class="input">
-                            <div class="flex">
-                                <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off">
+        <div class="container-1">
+            <div class="left-container">
+                <div class="logo-img">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="~/assets/image/logo.png" alt="Day la logo nhe hihi" style="height:40px" />
+                    </a>
+                </div>
+                <div class="form-search">
+                    <form id="search-form" method="get">
+                        <div class="search-wrap">
+                            <div class="input">
+                                <div class="flex">
+                                    <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off">
+                                </div>
                             </div>
+                            <button type="submit">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <span>Tìm kiếm</span>
+                            </button>
                         </div>
-                        <button type="submit">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                            <span>Tìm kiếm</span>
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
             <div class="header-link">
                 <a href="#" title="Kiểm tra trạng thái đơn hàng của bạn" class="tracking-order item">
@@ -30,32 +34,38 @@
                         <span>Thông báo <br />của tôi</span>
                     </div>
                 </div>
-                <!--
-                    Start neu khong co user dang nhap
-                -->
                 <div class="user-profile item" id="header-user">
-                    <div>
+                    <!-- Start neu khong co user dang nhap -->
+                    <div id="isLogin">
                         <div>
-                            <a rel="nofollow" href="@Url.Action("WishList", "User")">
-                                <i class="fa fa-user cart-icon" aria-hidden="true"></i>
-                                <span>Đăng nhập <br />tài khoản</span>
-                            </a>
+                            <i class="fa fa-user cart-icon" aria-hidden="true"></i>
+                            <span>Đăng nhập <br />tài khoản</span>
                         </div>
                         <div class="toogler Userstyle_UserDropDown no-user">
                             <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Login", "User")">Đăng nhập</a>
                             <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Register", "User")">Tạo tài khoản</a>
                         </div>
                     </div>
+                    <!-- End neu khong co user dang nhap -->
+                    <!-- Start neu co user dang nhap -->
+                    <div id="isLogined">
+                        <div>
+                            <i class="fa fa-user cart-icon" aria-hidden="true"></i>
+                            <span>Xin chào <br />Trần Hoàng Giang</span>
+                        </div>
+                        <div class="toogler Userstyle_UserDropDown no-user">
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("AccountInformation", "User")">Thông tin tài khoản</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="#">Thông báo của tôi</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="#">Quản lý đơn hàng</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="#">Nhận xét sản phẩm đã mua</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("WishList", "User")">Sản phẩm yêu thích</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="#">Quản lý maladin coin</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="#">Nhận xét của tôi</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="#">Đăng xuất</a>
+                        </div>
+                    </div>
+                    <!-- End neu co user dang nhap -->
                 </div>
-                <!--
-                    End neu khong co user dang nhap
-                -->
-                <!--
-                    Start neu co user dang nhap
-                -->
-                <!--
-                    End neu co user dang nhap
-                -->
                 <div id="header-cart">
                     <a rel="nofollow" href="@Url.Action("ShoppingCart", "Home")" class="header-cart item">
                         <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>

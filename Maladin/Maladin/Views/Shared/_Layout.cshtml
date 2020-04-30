@@ -26,5 +26,17 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var isCheckLogin = true; //true la da login, false la chua login
+            if (isCheckLogin === true) {
+                $('#isLogin').hide();
+                $('#isLogined').show();
+            } else {
+                $('#isLogin').show();
+                $('#isLogined').hide();
+            }
+        })
+    </script>
 </body>
 </html>
