@@ -21,5 +21,9 @@ namespace Maladin.Areas.Customer.Controllers
         {
             return View();
         }
+        public ActionResult Cart()
+        {
+            return View();
+        }
     }
 }

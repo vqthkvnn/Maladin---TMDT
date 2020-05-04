@@ -197,6 +197,9 @@ namespace Maladin.EF
             modelBuilder.Entity<INFOMATION_ACCOUNT>()
                 .Property(e => e.ID_INFO)
                 .IsUnicode(false);
+            modelBuilder.Entity<INFOMATION_ACCOUNT>()
+                .Property(e => e.ID_TYPE_ACC)
+                .IsUnicode(false);
 
             modelBuilder.Entity<INFOMATION_ACCOUNT>()
                 .Property(e => e.CMND_INFO)

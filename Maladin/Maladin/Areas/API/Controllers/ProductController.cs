@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Maladin.Areas.API.DAO;
 namespace Maladin.Areas.API.Controllers
 {
     public class ProductController : Controller
@@ -46,6 +46,12 @@ namespace Maladin.Areas.API.Controllers
         public JsonResult editProduct(string id)
         {
             return Json("", JsonRequestBehavior.DenyGet);
+        }
+        public JsonResult getProductBy(string page, string q)
+        {
+            var data = new ProductDAO().getByNameAndPage(page, q);
+
+            return Json(new {count = data.Count,data = data }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Maladin.Areas.Admin.DAO
                 {
                     if (res.PASSWORD_ACC == account.PasswordAdmin)
                     {
-                        if (res.ID_TYPE_ACC == "ADMIN")
+                        if (res.ID_TYPE_ACC == "admin" || res.ID_TYPE_ACC == "ADMIN")
                         {
                             return 1;
                         }

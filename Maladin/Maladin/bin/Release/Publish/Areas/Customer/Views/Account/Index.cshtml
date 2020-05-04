@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div class="right-information-user">
+    <h3 class="title-information-user">
+        Thông tin tài khoản
+    </h3>
+    <div class="information-user-detail">
+        <form class="form-information">
+            <div class="form-control">
+                <label class="input-label">
+                    Họ tên
+                </label>
+                <div class="input-txt">
+                    <input type="text" class="value-input" value="Trần Hoàng Giang" />
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Số điện thoại
+                </label>
+                <div class="input-txt">
+                    <div class="phone-wrap-div">
+                        <input type="tel" placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" value="0362947187" class="value-input" />
+                        <button type="button">Gửi mã xác thực</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Mã xác thực
+                </label>
+                <div class="input-txt">
+                    <input type="text" class="value-input" placeholder="Nhập mã xác thực gửi tới số điện thoại trên" />
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Email
+                </label>
+                <input type="text" disabled class="value-input" value="hoanggiangutc521999@gmail.com" />
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Giới tính
+                </label>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" checked class="custom-control-input" id="male" name="gender" value="male">
+                    <label class="custom-control-label" for="male">Nam</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="female" name="gender" value="female">
+                    <label class="custom-control-label" for="female">Nữ</label>
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Ngày sinh
+                </label>
+                <div class="dob-user input-txt">
+                    <select name="day">
+                        <option value="0">Ngày</option>
+                        @for (int i = 1; i <= 31; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <select name="month">
+                        <option value="0">Tháng</option>
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <select name="year">
+                        <option value="0">Năm</option>
+                        @for (int i = 2000; i <= 2020; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">&nbsp;</label>
+                <label>
+                    <input type="checkbox" />
+                    <span>Thay đổi mật khẩu</span>
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Mật khẩu cũ
+                </label>
+                <div class="input-txt">
+                    <input type="password" disabled class="value-input" value="hoanggiangutc521999@gmail.com" />
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Mật khẩu mới
+                </label>
+                <div class="input-txt">
+                    <input type="password" class="value-input" placeholder="Nhập mật khẩu mới" />
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">
+                    Nhập lại
+                </label>
+                <div class="input-txt">
+                    <input type="password" class="value-input" placeholder="Nhập lại mật khẩu mới" />
+                </div>
+            </div>
+            <div class="form-control">
+                <label class="input-label">&nbsp;</label>
+                <button type="submit" class="btn-submit">Cập nhật</button>
+            </div>
+        </form>
+    </div>
+</div>
+

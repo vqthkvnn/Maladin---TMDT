@@ -36,5 +36,44 @@ namespace Maladin.DAO
                 }).ToList();
             return data;
         }
+        public List<SearchProductModel> getSearchByPage(int page, string q)
+        {
+            string key;
+            if (q == null)
+            {
+                key = "";
+            }
+            else
+            {
+                key = q;
+            }
+            string sql = "SELECT  RowConstrainedResult.ID_ACC_PRODUCT, RowConstrainedResult.ID_PRODUCT, RowConstrainedResult.NAME_PRODUCT, " +
+                "RowConstrainedResult.AMOUNT,RowConstrainedResult.SALE_PERCENT,RowConstrainedResult.SALE_MONEY, " +
+                "RowConstrainedResult.DATE_START_SELL, RowConstrainedResult.DATE_END_SELL, " +
+                "RowConstrainedResult.TOTAL_COUNT,RowConstrainedResult.SELL_COUNT, RowConstrainedResult.RATING_PRODUCT " +
+                "FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY SALE_PERCENT ) AS RowNum, " +
+                "ID_ACC_PRODUCT, ACC_PRODUCT.ID_PRODUCT, ACC_PRODUCT.USER_ACC, AMOUNT, SALE_PERCENT, SALE_MONEY, " +
+                "DATE_START_SELL, DATE_END_SELL,TOTAL_COUNT, SELL_COUNT, ACC_PRODUCT.IS_SELL, NAME_PRODUCT,RATING_PRODUCT " +
+                "FROM dbo.ACC_PRODUCT, dbo.PRODUCT WHERE ACC_PRODUCT.ID_PRODUCT = PRODUCT.ID_PRODUCT ) AS RowConstrainedResult " +
+                "WHERE RowConstrainedResult.NAME_PRODUCT LIKE '%" + key +
+                "%' AND RowConstrainedResult.IS_SELL = 1 AND RowNum > " + Convert.ToString(15 * (page - 1)) +
+                " AND RowNum <= " + Convert.ToString(15 * page) +
+                " ORDER BY RowNum ";
+            var data = dbContext.Database.SqlQuery<SearchProductModel>(sql)
+                .Select(b => new SearchProductModel { 
+                dateEnd = b.dateEnd,
+                    dateStart = b.dateStart,
+                    idLo = b.idLo,
+                    idproduct = b.idproduct,
+                    name = b.name,
+                    price = b.price,
+                    rating = b.rating,
+                    saleMoney = b.saleMoney,
+                    salePerce = b.salePerce,
+                    sell = b.sell,
+                    total = b.total
+                }).ToList();
+            return data;
+        }
     }
 }

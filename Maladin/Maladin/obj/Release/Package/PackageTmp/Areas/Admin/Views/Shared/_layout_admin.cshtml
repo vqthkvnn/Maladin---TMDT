@@ -1,0 +1,33 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin Manager - Maladin.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    @Styles.Render("~/Areas/Admin/allcss")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-scroller">
+        @RenderPage("~/Areas/Admin/Views/Shared/_layout_home_header.cshtml")
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+                @RenderPage("~/Areas/Admin/Views/Shared/_layout_home_footer.cshtml")
+            </div>
+        </div>
+
+
+    </div>
+    @Scripts.Render("~/Areas/Admin/alljs")
+    @RenderSection("Scripts", false)
+</body>
+</html>

@@ -17,6 +17,8 @@ namespace Maladin.EF
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_NOTI { get; set; }
+        [StringLength(255)]
+        public string TITLE_NOTI { get; set; }
 
         [StringLength(255)]
         public string CONTENT_NOTI { get; set; }
