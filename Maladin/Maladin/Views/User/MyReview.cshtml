@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "MyReview";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<h1 class="have-margin">Nhận xét của tôi</h1>
+<!-- nếu đã có nhận xét -->
+<div id="haveContent">
+
+</div>
+<!--nếu chưa có nhận xét nào-->
+<div class="empty-content" id="noContent">
+    <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
+    <p>Viết nhận xét với sản phẩm bạn đã sử dụng để cung cấp thông tin hữu ích cho mọi người</p>
+    <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            checkNullValue();
+        });
+
+        function checkNullValue() {
+            if ($("#haveContent:has(*)").length) {
+                $("#noContent").hide();
+            } else {
+                $("#noContent").show();
+            }
+        }
+    </script>
+}
+
