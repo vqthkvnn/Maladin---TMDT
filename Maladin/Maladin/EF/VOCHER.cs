@@ -36,6 +36,8 @@ namespace Maladin.EF
 
         public bool IS_STATUS { get; set; }
 
+        public int? AMOUNT_VOCHER { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODER> ODERs { get; set; }
 

@@ -75,5 +75,65 @@ namespace Maladin.DAO
                 }).ToList();
             return data;
         }
+        public int AddToCart(string user, string idproduct)
+        {
+            try
+            {
+                var res = dbContext.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idproduct);
+                var account = dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user || x.IS_ACTIVE_ACC == true);
+                if (account == null)
+                {
+                    return -2;
+                }
+                if (res == null)
+                {
+                    return 0;
+                }
+                var check = dbContext.WATCHED_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idproduct &&
+                x.USER_ACC == user);
+                if (check == null)
+                {
+                    WATCHED_PRODUCT wATCHED_PRODUCT = new WATCHED_PRODUCT();
+                    wATCHED_PRODUCT.ID_ACC_PRODUCT = idproduct;
+                    wATCHED_PRODUCT.USER_ACC = user;
+                    wATCHED_PRODUCT.CART_COUNT = 1;
+                    dbContext.WATCHED_PRODUCT.Add(wATCHED_PRODUCT);
+                    dbContext.SaveChanges();
+                    return 1;
+                }
+                else{
+                    if (check.CART_COUNT >0)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        dbContext.WATCHED_PRODUCT.Attach(check);
+                        check.CART_COUNT = 1;
+                        dbContext.SaveChanges();
+                        return 1;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                return -3;
+            }
+        }
+        public bool checkCOD(string idproduct)
+        {
+            var res = dbContext.TYPE_ODER_ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idproduct
+            && x.ID_TYPE_ODER == "TT");
+            if (res == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
     }
 }

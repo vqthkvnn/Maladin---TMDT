@@ -18,6 +18,7 @@ namespace Maladin.EF
         public virtual DbSet<APPROVED_PRODUCT_WAIT> APPROVED_PRODUCT_WAIT { get; set; }
         public virtual DbSet<APPROVED_USER_WAIT> APPROVED_USER_WAIT { get; set; }
         public virtual DbSet<GROUP_CHAT> GROUP_CHAT { get; set; }
+        public virtual DbSet<GROUP_TYPE_PRODUCT> GROUP_TYPE_PRODUCT { get; set; }
         public virtual DbSet<GUEST_QUESTION> GUEST_QUESTION { get; set; }
         public virtual DbSet<INFOMATION_ACCOUNT> INFOMATION_ACCOUNT { get; set; }
         public virtual DbSet<INFOMATION_GUEST> INFOMATION_GUEST { get; set; }
@@ -32,6 +33,7 @@ namespace Maladin.EF
         public virtual DbSet<PAYMENT_ODER> PAYMENT_ODER { get; set; }
         public virtual DbSet<PRODUCER_INFO> PRODUCER_INFO { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
+        public virtual DbSet<PRODUCT_ATT> PRODUCT_ATT { get; set; }
         public virtual DbSet<PRODUCT_IMAGE> PRODUCT_IMAGE { get; set; }
         public virtual DbSet<TYPE_ACCOUNT> TYPE_ACCOUNT { get; set; }
         public virtual DbSet<TYPE_NOTIFICATION> TYPE_NOTIFICATION { get; set; }
@@ -190,15 +192,16 @@ namespace Maladin.EF
                 .WithRequired(e => e.GROUP_CHAT)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<GROUP_TYPE_PRODUCT>()
+                .Property(e => e.ID_GR_TYPE_PR)
+                .IsUnicode(false);
+
             modelBuilder.Entity<GUEST_QUESTION>()
                 .Property(e => e.ID_ACC_PRODUCT)
                 .IsUnicode(false);
 
             modelBuilder.Entity<INFOMATION_ACCOUNT>()
                 .Property(e => e.ID_INFO)
-                .IsUnicode(false);
-            modelBuilder.Entity<INFOMATION_ACCOUNT>()
-                .Property(e => e.ID_TYPE_ACC)
                 .IsUnicode(false);
 
             modelBuilder.Entity<INFOMATION_ACCOUNT>()
@@ -213,20 +216,12 @@ namespace Maladin.EF
                 .Property(e => e.AVT_ACC)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<INFOMATION_ACCOUNT>()
+                .Property(e => e.ID_TYPE_ACC)
+                .IsUnicode(false);
+
             modelBuilder.Entity<INFOMATION_GUEST>()
                 .Property(e => e.PHONE_GUEST)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<INFOMATION_GUEST>()
-                .Property(e => e.AVT_ACC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<INFOMATION_GUEST>()
-                .Property(e => e.USER_ACC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<INFOMATION_GUEST>()
-                .Property(e => e.ID_TYPE_ACC)
                 .IsUnicode(false);
 
             modelBuilder.Entity<INFOMATION_GUEST>()
@@ -363,6 +358,11 @@ namespace Maladin.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PRODUCT>()
+                .HasMany(e => e.PRODUCT_ATT)
+                .WithRequired(e => e.PRODUCT)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PRODUCT>()
                 .HasMany(e => e.PRODUCT_IMAGE)
                 .WithRequired(e => e.PRODUCT)
                 .WillCascadeOnDelete(false);
@@ -371,6 +371,10 @@ namespace Maladin.EF
                 .HasMany(e => e.ACCOUNTs)
                 .WithMany(e => e.PRODUCTs)
                 .Map(m => m.ToTable("FAVORITE_PRODUCT").MapLeftKey("ID_PRODUCT").MapRightKey("USER_ACC"));
+
+            modelBuilder.Entity<PRODUCT_ATT>()
+                .Property(e => e.ID_PRODUCT)
+                .IsUnicode(false);
 
             modelBuilder.Entity<PRODUCT_IMAGE>()
                 .Property(e => e.ID_PRODUCT)
@@ -386,11 +390,6 @@ namespace Maladin.EF
 
             modelBuilder.Entity<TYPE_ACCOUNT>()
                 .HasMany(e => e.ACCOUNTs)
-                .WithRequired(e => e.TYPE_ACCOUNT)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TYPE_ACCOUNT>()
-                .HasMany(e => e.INFOMATION_GUEST)
                 .WithRequired(e => e.TYPE_ACCOUNT)
                 .WillCascadeOnDelete(false);
 
@@ -422,6 +421,10 @@ namespace Maladin.EF
 
             modelBuilder.Entity<TYPE_PRODUCT>()
                 .Property(e => e.ID_TYPE_PRODUCT)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TYPE_PRODUCT>()
+                .Property(e => e.ID_GR_TYPE_PR)
                 .IsUnicode(false);
 
             modelBuilder.Entity<TYPE_PRODUCT>()

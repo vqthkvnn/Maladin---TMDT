@@ -139,21 +139,21 @@
         <div class="container">
             <ul class="nav page-navigation">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="@Url.Action("Index","Home", new {area="Admin" })">
                         <i class="mdi mdi-home menu-icon"></i>
                         <span class="menu-title">Home</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="pages/forms/basic_elements.html" class="nav-link">
+                    <a href="@Url.Action("Index","Oder", new {area="Admin" })" class="nav-link">
                         <i class="mdi mdi-chart-areaspline menu-icon"></i>
-                        <span class="menu-title">Quản lý</span>
+                        <span class="menu-title">Hệ thống đơn hàng</span>
                         <i class="menu-arrow"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="mdi mdi-finance menu-icon"></i>
                         <span class="menu-title">Thống kê</span>
                         <i class="menu-arrow"></i>
@@ -161,35 +161,34 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="mdi mdi-grid menu-icon"></i>
-                        <span class="menu-title">Kiểm duyệt</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="mdi mdi-database-plus menu-icon"></i>
-                        <span class="menu-title">Dữ liệu hệ thống</span>
+                        <i class="mdi mdi-checkbox-marked-circle-outline menu-icon"></i>
+                        <span class="menu-title">Yêu cầu kiểm duyệt</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="submenu">
                         <ul>
-                            <li class="nav-item"><a class="nav-link" href="#">Công ty đối tác</a></li>
-                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Approved","Product")">Sản phẩm</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Tài khoản</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Vocher</a></li>
-                            
-
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("ActiveCTV","Account", new {area="Admin" })">Kích hoạt CTV</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Approved","Product", new {area="Admin" })">Sản phẩm mới</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("CancelOder","Oder", new {area="Admin" })">Hủy đơn hàng</a></li>
                         </ul>
                     </div>
                 </li>
-                
-                
                 <li class="nav-item">
-                    <a href="docs/documentation.html" class="nav-link">
-                        <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                        <span class="menu-title">Report</span>
+                    <a href="#" class="nav-link">
+                        <i class="mdi mdi-database-plus menu-icon"></i>
+                        <span class="menu-title">Dữ liệu toàn hệ thống</span>
+                        <i class="menu-arrow"></i>
                     </a>
+                    <div class="submenu">
+                        <ul>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("AccProduct","Product", new {area="Admin" })">Lô sản phẩm</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Product", new {area="Admin" })">Sản phẩm</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Account", new {area="Admin" })">Tài khoản</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Voucher", new {area="Admin" })">Vocher</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Notification","Account", new {area="Admin" })">Thông báo</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("TypeProducer","Product", new {area="Admin" })">Công ty, Loại sản phẩm</a></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

@@ -12,7 +12,7 @@ namespace Maladin.EF
         public TYPE_ACCOUNT()
         {
             ACCOUNTs = new HashSet<ACCOUNT>();
-            INFOMATION_GUEST = new HashSet<INFOMATION_GUEST>();
+            INFOMATION_ACCOUNT = new HashSet<INFOMATION_ACCOUNT>();
         }
 
         [Key]
@@ -28,6 +28,6 @@ namespace Maladin.EF
         public virtual ICollection<ACCOUNT> ACCOUNTs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INFOMATION_GUEST> INFOMATION_GUEST { get; set; }
+        public virtual ICollection<INFOMATION_ACCOUNT> INFOMATION_ACCOUNT { get; set; }
     }
 }

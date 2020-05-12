@@ -5,18 +5,7 @@
 }
 @model Maladin.Areas.Partner.Models.HomeModels
 @section Scripts{
-    <script>
-        @if(Model.iNFOMATION.AVT_ACC==null)
-        {
-            
-        }
-        else
-        {
-            @:$('#avt-profile').attr("src",'@Model.iNFOMATION.AVT_ACC');
-            @:$('#name-user-profile').text('@Model.iNFOMATION.NAME_INFO');
-            
-        }
-    </script>
+    
     <script>
         $(function () {
     /* ChartJS

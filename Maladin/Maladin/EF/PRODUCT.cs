@@ -13,6 +13,7 @@ namespace Maladin.EF
         public PRODUCT()
         {
             ACC_PRODUCT = new HashSet<ACC_PRODUCT>();
+            PRODUCT_ATT = new HashSet<PRODUCT_ATT>();
             PRODUCT_IMAGE = new HashSet<PRODUCT_IMAGE>();
             VOCHER_AREA = new HashSet<VOCHER_AREA>();
             ACCOUNTs = new HashSet<ACCOUNT>();
@@ -68,6 +69,9 @@ namespace Maladin.EF
         public virtual PRODUCER_INFO PRODUCER_INFO { get; set; }
 
         public virtual TYPE_PRODUCT TYPE_PRODUCT { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRODUCT_ATT> PRODUCT_ATT { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT_IMAGE> PRODUCT_IMAGE { get; set; }

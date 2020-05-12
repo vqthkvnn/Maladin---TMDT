@@ -13,30 +13,21 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/main.js")
     @Scripts.Render("~/bundles/modernizr")
-    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    <link href="~/Content/bs4.pop.css" rel="stylesheet" />
+    <script src="~/Content/bs4.pop.js"></script>
+
 </head>
 <body class="badge-v2 maladin-cart maladin-product">
-    @RenderPage("Header.cshtml")
+    @Html.Action("HeaderRender","PartialRender",new {Area ="" })
     <div class="container body-content">
         @RenderBody()
     </div>
     @RenderPage("Footer.cshtml")
 
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var isCheckLogin = true; //true la da login, false la chua login
-            if (isCheckLogin === true) {
-                $('#isLogin').hide();
-                $('#isLogined').show();
-            } else {
-                $('#isLogin').show();
-                $('#isLogined').hide();
-            }
-        })
-    </script>
 </body>
 </html>

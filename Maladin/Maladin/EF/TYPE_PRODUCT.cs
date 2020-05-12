@@ -26,6 +26,13 @@ namespace Maladin.EF
         [StringLength(255)]
         public string NOTE_TYPE_PRODUCT { get; set; }
 
+        public bool? IS_ACTIVE { get; set; }
+
+        [StringLength(10)]
+        public string ID_GR_TYPE_PR { get; set; }
+
+        public virtual GROUP_TYPE_PRODUCT GROUP_TYPE_PRODUCT { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT> PRODUCTs { get; set; }
 

@@ -1,9 +1,28 @@
 ﻿
 @{
     ViewBag.Title = "Thông tin tài khoản";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
+    
 }
-
+@section Scripts{
+    
+    <script>
+        $(document).ready(function () {
+            if (document.getElementById('isChangePass').checked) {
+                $("#changePass").show();
+            } else {
+                $("#changePass").hide();
+            }
+        });
+        function checkChangePass() {
+            if (document.getElementById('isChangePass').checked) {
+                $("#changePass").show();
+            } else {
+                $("#changePass").hide();
+            }
+        }
+    </script>
+}
 <div class="right-information-user">
     <h3 class="title-information-user">
         Thông tin tài khoản
@@ -41,7 +60,7 @@
                 <label class="input-label">
                     Email
                 </label>
-                <input type="text" disabled class="value-input" value="hoanggiangutc521999@gmail.com" />
+                <input type="text" disabled class="value-input" value="abc@gmail.com" />
             </div>
             <div class="form-control">
                 <label class="input-label">
@@ -51,7 +70,7 @@
                     <input type="radio" checked class="custom-control-input" id="male" name="gender" value="male">
                     <label class="custom-control-label" for="male">Nam</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
+                <div class="custom-control custom-radio custom-control-inline" style="padding-left: 15px;">
                     <input type="radio" class="custom-control-input" id="female" name="gender" value="female">
                     <label class="custom-control-label" for="female">Nữ</label>
                 </div>
@@ -87,32 +106,34 @@
             <div class="form-control">
                 <label class="input-label">&nbsp;</label>
                 <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" id="isChangePass" onclick="checkChangePass()" />
                     <span>Thay đổi mật khẩu</span>
                 </label>
             </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Mật khẩu cũ
-                </label>
-                <div class="input-txt">
-                    <input type="password" disabled class="value-input" value="hoanggiangutc521999@gmail.com" />
+            <div id="changePass">
+                <div class="form-control">
+                    <label class="input-label">
+                        Mật khẩu cũ
+                    </label>
+                    <div class="input-txt">
+                        <input type="password" disabled class="value-input" value="abc@gmail.com" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Mật khẩu mới
-                </label>
-                <div class="input-txt">
-                    <input type="password" class="value-input" placeholder="Nhập mật khẩu mới" />
+                <div class="form-control">
+                    <label class="input-label">
+                        Mật khẩu mới
+                    </label>
+                    <div class="input-txt">
+                        <input type="password" class="value-input" placeholder="Nhập mật khẩu mới" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Nhập lại
-                </label>
-                <div class="input-txt">
-                    <input type="password" class="value-input" placeholder="Nhập lại mật khẩu mới" />
+                <div class="form-control">
+                    <label class="input-label">
+                        Nhập lại
+                    </label>
+                    <div class="input-txt">
+                        <input type="password" class="value-input" placeholder="Nhập lại mật khẩu mới" />
+                    </div>
                 </div>
             </div>
             <div class="form-control">
@@ -122,4 +143,3 @@
         </form>
     </div>
 </div>
-

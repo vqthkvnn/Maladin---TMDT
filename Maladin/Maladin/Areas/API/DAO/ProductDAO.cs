@@ -39,5 +39,6 @@ namespace Maladin.Areas.API.DAO
                 }).ToList();
             return data;
         }
+
     }
 }

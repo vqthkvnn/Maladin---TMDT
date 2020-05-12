@@ -6,10 +6,14 @@ using System.Web.Mvc;
 
 namespace Maladin.Areas.Admin.Controllers
 {
-    public class InvoiceController : BaseController
+    public class OderController : Controller
     {
-        // GET: Admin/Invoice
+        // GET: Admin/Oder
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult CancelOder()
         {
             return View();
         }

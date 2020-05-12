@@ -27,11 +27,13 @@ ul li {
 a:hover {
     outline: none;
     text-decoration: none;
+    
 }
 
 a:focus {
     outline: none;
     outline-offset: 0;
+    
 }
 
 a {
@@ -3991,6 +3993,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
 
 .user-profile:hover .toogler {
     display: block;
+    
 }
 
 .no-user {
@@ -4000,7 +4003,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
     z-index: 15;
     box-shadow: rgba(0, 0, 0, 0.18) 0px 6px 12px 0px;
     position: absolute;
-    top: 45px;
+    top: 42px;
     left: calc(50% + 10px);
     transform: translateX(-50%);
     border-width: 1px;
@@ -4060,7 +4063,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
     content: " ";
     height: 20px;
     width: 150px;
-    top: -20px;
+    top: -10px;
     left: calc(50% - 65px);
     position: absolute;
     display: inline-block;

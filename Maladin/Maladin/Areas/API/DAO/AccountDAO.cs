@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Maladin.EF;
 using Maladin.Areas.API.Models;
+using Maladin.Models;
 
 namespace Maladin.Areas.API.DAO
 {
@@ -29,19 +30,19 @@ namespace Maladin.Areas.API.DAO
                     return -2; // email da ton tai
                 }
                 db.ACCOUNTs.Add(entity);
-                
+                db.SaveChanges();
                 // auto create Infomation
                 var count = db.INFOMATION_ACCOUNT.Count();
                 INFOMATION_ACCOUNT iNFOMATION_ACCOUNT = new INFOMATION_ACCOUNT();
-                iNFOMATION_ACCOUNT.ID_INFO = Convert.ToString(count+1);
-                iNFOMATION_ACCOUNT.ADRESS_INFO = "";
+                iNFOMATION_ACCOUNT.ID_INFO ="CT"+entity.USER_ACC.Substring(0,2)+ Convert.ToString(count+1);
+                //iNFOMATION_ACCOUNT.ADRESS_INFO = "";
                 iNFOMATION_ACCOUNT.AVT_ACC = "/public/image/avt/avtdefult.png";
-                iNFOMATION_ACCOUNT.CMND_INFO = "000000000000";
+                iNFOMATION_ACCOUNT.CMND_INFO = "null";
                 iNFOMATION_ACCOUNT.NAME_INFO = entity.USER_ACC; 
-                iNFOMATION_ACCOUNT.SEX_INFO = true;
-                iNFOMATION_ACCOUNT.PHONE_INFO = "";
-                iNFOMATION_ACCOUNT.NOTE_INFO = "";
-                iNFOMATION_ACCOUNT.BIRTH_INFO = Convert.ToDateTime("01-01-2020");
+                //iNFOMATION_ACCOUNT.SEX_INFO = true;
+                //iNFOMATION_ACCOUNT.PHONE_INFO = "";
+               // iNFOMATION_ACCOUNT.NOTE_INFO = "";
+                //iNFOMATION_ACCOUNT.BIRTH_INFO = Convert.ToDateTime("01-01-2020");
                 iNFOMATION_ACCOUNT.USER_ACC = entity.USER_ACC;
                 iNFOMATION_ACCOUNT.ID_TYPE_ACC = "CT"; // gan mac dinh la khach
                 db.INFOMATION_ACCOUNT.Add(iNFOMATION_ACCOUNT);
@@ -195,6 +196,46 @@ namespace Maladin.Areas.API.DAO
                 ImagePath=b.ImagePath,
                 isRead=b.isRead,
                 titel=b.titel
+                }).ToList();
+            return data;
+        }
+        public List<MessageModel> getChat(string user, string userTo)
+        {
+            string sql = "SELECT ID_MESSAGE as IdMess, CONTEN_MESSAGE as Content, FROM_ACC as FromID, " +
+                "TO_ACC as ToID, DATA_SEND_MESSAGE as DateSend, IS_READ as IsRead " +
+                "FROM dbo.MESSAGE_SEND_TO WHERE (FROM_ACC = '"+user+ "' OR TO_ACC='"+user+ "') AND (FROM_ACC='"+
+                userTo+ "' OR TO_ACC='"+userTo+ "') ORDER BY ID_MESSAGE DESC";
+            var data = db.Database.SqlQuery<MessageModel>(sql)
+                .Select(b => new MessageModel { 
+                Content = b.Content,
+                DateSend = b.DateSend,
+                FromID = b.FromID,
+                IdMess = b.IdMess,
+                IsRead = b.IsRead,
+                ToID = b.ToID
+                
+                }).ToList();
+            return data;
+        }
+        public List<CartProductModel> getAllCart(string user)
+        {
+            string sql = "SELECT AP.ID_ACC_PRODUCT as ID, NAME_PRODUCT as Name, AMOUNT as Price, " +
+                "SALE_PERCENT as saleP, " +
+                "SALE_MONEY as saleM, CART_COUNT as TotalCount," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT, dbo.PRODUCT_IMAGE) AS pathImg, AP.USER_ACC as UserBy " +
+                "FROM dbo.ACC_PRODUCT as AP, dbo.WATCHED_PRODUCT, dbo.PRODUCT WHERE AP.ID_ACC_PRODUCT = WATCHED_PRODUCT.ID_ACC_PRODUCT " +
+                "AND PRODUCT.ID_PRODUCT = AP.ID_PRODUCT AND WATCHED_PRODUCT.USER_ACC = '" + user + "' and CART_COUNT>0";
+            var data = db.Database.SqlQuery<CartProductModel>(sql)
+                .Select(b => new CartProductModel
+                {
+                    ID = b.ID,
+                    Name = b.Name,
+                    Price = b.Price,
+                    saleP = b.saleP,
+                    saleM = b.saleM,
+                    TotalCount = b.TotalCount,
+                    pathImg = b.pathImg,
+                    UserBy = b.UserBy
                 }).ToList();
             return data;
         }

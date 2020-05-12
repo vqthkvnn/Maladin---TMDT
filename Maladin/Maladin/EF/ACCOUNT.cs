@@ -17,7 +17,6 @@ namespace Maladin.EF
             APPROVED_PRODUCT_WAIT = new HashSet<APPROVED_PRODUCT_WAIT>();
             APPROVED_USER_WAIT = new HashSet<APPROVED_USER_WAIT>();
             INFOMATION_ACCOUNT = new HashSet<INFOMATION_ACCOUNT>();
-            INFOMATION_GUEST = new HashSet<INFOMATION_GUEST>();
             MEMBER_GROUP_CHAT = new HashSet<MEMBER_GROUP_CHAT>();
             MESSAGE_SEND_TO = new HashSet<MESSAGE_SEND_TO>();
             MESSAGE_SEND_TO1 = new HashSet<MESSAGE_SEND_TO>();
@@ -70,9 +69,6 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INFOMATION_ACCOUNT> INFOMATION_ACCOUNT { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INFOMATION_GUEST> INFOMATION_GUEST { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEMBER_GROUP_CHAT> MEMBER_GROUP_CHAT { get; set; }

@@ -63,6 +63,14 @@ namespace Maladin.Areas.Admin.Controllers
             }
             
         }
+        public ActionResult AccProduct()
+        {
+            return View();
+        }
+        public ActionResult TypeProducer()
+        {
+            return View();
+        }
 
 
     }

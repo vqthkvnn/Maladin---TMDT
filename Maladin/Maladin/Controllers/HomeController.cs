@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Maladin.Models;
 using Maladin.DAO;
-
+using Maladin.Areas.Customer.Common;
 namespace Maladin.Controllers
 {
     public class HomeController : Controller
@@ -15,6 +15,18 @@ namespace Maladin.Controllers
             var dao = new ProductHomeDAO();
             models.GiayProduct = dao.getListProduct(1, "TP001");
             models.DongHoProduct = dao.getListProduct(1, "TP003");
+            if (Session[CustomerSession.CUSTOMER_SESSION] == null)
+            {
+                ViewBag.IsLogin = null;
+            }
+            else
+            {
+                var da =  new CustomerLoginDAO();
+
+                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString(),
+                   da.getTypeMax(Session[CustomerSession.CUSTOMER_SESSION].ToString()));
+            }
+            
             return View(models);
         }
 

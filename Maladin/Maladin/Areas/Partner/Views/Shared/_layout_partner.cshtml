@@ -10,8 +10,8 @@
 </head>
 <body>
     <!-- Header - navbar -->
+    @Html.Action("RenderHeaderPartner","PartialRender", new { Area = "Partner" })
     
-    @RenderPage("~/Areas/Partner/Views/Shared/_layout_partner_header.cshtml")
 
     <div class="container-fluid page-body-wrapper">
         @RenderPage("~/Areas/Partner/Views/Shared/_layout_partner_left.cshtml")

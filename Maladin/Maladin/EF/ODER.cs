@@ -47,6 +47,9 @@ namespace Maladin.EF
         [Column(TypeName = "date")]
         public DateTime? DATE_COMPLATE_ODER { get; set; }
 
+        [StringLength(255)]
+        public string NOTE_ODER { get; set; }
+
         public virtual ACC_PRODUCT ACC_PRODUCT { get; set; }
 
         public virtual ACCOUNT ACCOUNT { get; set; }

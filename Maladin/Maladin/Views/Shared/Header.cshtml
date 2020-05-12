@@ -1,4 +1,12 @@
-﻿<header id="header">
+﻿@{ 
+    var name ="";
+    if (ViewBag.IsLogin !=null)
+    {
+        name = ViewBag.IsLogin;
+        name = name.Substring(0, 6);
+    }
+}
+<header id="header">
     <div class="header-form-container">
         <div class="container-1">
             <div class="left-container">
@@ -53,26 +61,26 @@
                     <div id="isLogined">
                         <div>
                             <i class="fa fa-user cart-icon" aria-hidden="true"></i>
-                            <span>Xin chào <br />Trần Hoàng Giang</span>
+                            <span id="span-name-user"><br />Tài khoản</span>
                         </div>
-                        <div class="toogler Userstyle_UserDropDown no-user">
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("AccountInformation", "User")">Thông tin tài khoản</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("MyNotification", "User")">Thông báo của tôi</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("ManagerOrder", "User")">Quản lý đơn hàng</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("ReviewProductBought", "User")">Nhận xét sản phẩm đã mua</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("WishList", "User")">Sản phẩm yêu thích</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("ManagerMaladinCoin", "User")">Quản lý maladin coin</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("MyReview", "User")">Nhận xét của tôi</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Login", "User")">Đăng xuất</a>
+                        <div class="toogler Userstyle_UserDropDown no-user" style="">
+                            <a class="dropdown-item" href="@Url.Action("Index", "Account", new {Area ="Customer" })">Thông tin tài khoản</a>
+                            <a class="dropdown-item" href="@Url.Action("MyNotification", "User")">Thông báo của tôi</a>
+                            <a class="dropdown-item" href="@Url.Action("ManagerOrder", "User")">Quản lý đơn hàng</a>
+                            <a class="dropdown-item" href="@Url.Action("ReviewProductBought", "User")">Nhận xét sản phẩm đã mua</a>
+                            <a class="dropdown-item" href="@Url.Action("WishList", "User")">Sản phẩm yêu thích</a>
+                            <a class="dropdown-item" href="@Url.Action("ManagerMaladinCoin", "User")">Quản lý maladin coin</a>
+                            <a class="dropdown-item" href="@Url.Action("MyReview", "User")">Nhận xét của tôi</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Login", new {Area ="Customer" })">Đăng xuất</a>
                         </div>
                     </div>
                     <!-- End neu co user dang nhap -->
                 </div>
                 <div id="header-cart">
-                    <a rel="nofollow" href="@Url.Action("ShoppingCart", "Home")" class="header-cart item">
+                    <a rel="nofollow" href="@Url.Action("Cart", "Account",  new {area="Customer" })" class="header-cart item">
                         <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
                         <span class="cart-text">Giỏ hàng </span>
-                        <span class="badge badge-primary" style="background-color: #fcdf03; color: black;">0</span>
+                        <span class="badge badge-primary" id="cart-total-count" style="background-color: #fcdf03; color: black;">0</span>
                     </a>
                 </div>
             </div>
@@ -91,3 +99,25 @@
         </div>
     </div>
 </header>
+<script>
+        var isCheckLogin;
+            @if (ViewBag.IsLogin == null)
+            {
+                @:isCheckLogin = false;
+            }
+            else
+            {
+                @:isCheckLogin = true;
+                @:$("#span-name-user").text("Chào " + "@name" + "...");
+                @:$("#cart-total-count").text("@ViewBag.TotalCart");
+            }
+            //true la da login, false la chua login
+            if (isCheckLogin === true) {
+                $('#isLogin').hide();
+                $('#isLogined').show();
+            } else {
+                $('#isLogin').show();
+                $('#isLogined').hide();
+    }
+
+</script>

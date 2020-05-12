@@ -28,7 +28,7 @@ namespace Maladin.Areas.Customer.Controllers
                     if (res ==1)
                     {
                         Session[CustomerSession.CUSTOMER_SESSION] = model.UserName;
-                        return RedirectToAction("Index", "Account");
+                        return RedirectToAction("Index", "Account", new { area = "Customer" });
                     }
                     else if (res ==0)
                     {
@@ -48,7 +48,8 @@ namespace Maladin.Areas.Customer.Controllers
                 && model.RePassword != null && model.Email != null)
             {
                 var dao = new CustomerLoginDAO();
-                if (dao.Login(model.UserName, model.Password)==0)
+                var res = dao.Register(model.UserName, model.Email);
+                if (res==0)
                 {
                     ACCOUNT entity = new ACCOUNT();
                     try
@@ -77,11 +78,14 @@ namespace Maladin.Areas.Customer.Controllers
                         ModelState.AddModelError("", "Tạo tài khoản thất bại");
                     }
                 }
-                else
+                else if (res == -1)
                 {
                     ModelState.AddModelError("", "Tài khoản đã tồn tại!");
                 }
-                
+                else if(res == -2)
+                {
+                    ModelState.AddModelError("", "Email đã tồn tại!");
+                }
             }
             return View(model);
         }

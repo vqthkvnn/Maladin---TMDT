@@ -111,6 +111,26 @@ namespace Maladin.Areas.Admin.DAO
                 entity.USER_ACC = admin;
                 db.PRODUCTs.Add(entity);
                 db.SaveChanges();
+                /*
+                 * tao thong bao
+                 */
+                NOTIFICATION_ nOTIFICATION_ = new NOTIFICATION_();
+                nOTIFICATION_.ID_NOTI = db.NOTIFICATION_.Count() + 1;
+                nOTIFICATION_.TITLE_NOTI = "Thông báo kết quả yêu cầu thêm sản phẩm";
+                nOTIFICATION_.CONTENT_NOTI = "Thông báo sản phẩm bạn yêu cầu đã được thêm sản phẩm mới vào hệ thống.";
+                nOTIFICATION_.CONTENT_NOTI += "ID của sản phẩm là:"+idProduct;
+                nOTIFICATION_.ID_TYPE_NOTI = 3;
+                nOTIFICATION_.DATE_NOTI = DateTime.UtcNow;
+                db.NOTIFICATION_.Add(nOTIFICATION_);
+                db.SaveChanges();
+                /*
+                 * add cho tài khoản đang yêu cầu
+                 */
+                NOTI_ACC nOTI_ACC = new NOTI_ACC();
+                nOTI_ACC.USER_ACC = wait.ID_INFO;
+                nOTI_ACC.ID_NOTI = nOTIFICATION_.ID_NOTI;
+                db.NOTI_ACC.Add(nOTI_ACC);
+                db.SaveChanges();
                 return true;
 
             }

@@ -67,6 +67,7 @@ namespace Maladin.Areas.API.Controllers
             var res = new AccountDAO().Insert(aCCOUNT);
             return Json(new { res = res }, JsonRequestBehavior.AllowGet);
         }
+        
 
     }
 }

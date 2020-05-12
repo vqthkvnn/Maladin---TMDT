@@ -36,12 +36,15 @@ namespace Maladin.EF
 
         [StringLength(30)]
         public string USER_ACC { get; set; }
-        [StringLength(10)]
-        public string ID_TYPE_ACC { get; set; }
+
         [StringLength(255)]
         public string AVT_ACC { get; set; }
 
+        [StringLength(10)]
+        public string ID_TYPE_ACC { get; set; }
+
         public virtual ACCOUNT ACCOUNT { get; set; }
+
         public virtual TYPE_ACCOUNT TYPE_ACCOUNT { get; set; }
     }
 }

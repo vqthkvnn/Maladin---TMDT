@@ -13,5 +13,13 @@ namespace Maladin.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Notification()
+        {
+            return View();
+        }
+        public ActionResult ActiveCTV()
+        {
+            return View();
+        }
     }
 }
