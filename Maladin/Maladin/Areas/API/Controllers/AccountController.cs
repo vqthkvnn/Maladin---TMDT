@@ -72,11 +72,16 @@ namespace Maladin.Areas.API.Controllers
             return Json(new {count=data.Count, data=data }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult getChat(string user, string userto)
+        public JsonResult getChat(string user, string userto, string page)
         {
             try
             {
-                var d = new AccountDAO().getChat(user, userto);
+                if (user == null)
+                {
+                    return Json(new { count = 0 }, JsonRequestBehavior.AllowGet);
+                }
+                int i = Convert.ToInt32(page);
+                var d = new AccountDAO().getChat(user, userto,i);
                 return Json(new { count = d.Count, data = d }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
@@ -87,6 +92,10 @@ namespace Maladin.Areas.API.Controllers
         [HttpPost]
         public JsonResult getAllCart(string user)
         {
+            if (user == null)
+            {
+                return Json(new { count = 0 }, JsonRequestBehavior.AllowGet);
+            }
             var dao = new AccountDAO();
             var data = dao.getAllCart(user);
             return Json(new {data = data, count = data.Count() }, JsonRequestBehavior.AllowGet);
@@ -94,7 +103,11 @@ namespace Maladin.Areas.API.Controllers
         [HttpPost]
         public JsonResult Send(string user, string to, string content)
         {
-            
+            if (user == null)
+            {
+                return Json(new { count = 0 }, JsonRequestBehavior.AllowGet);
+            }
+
             var dao = new MessageDAO();
             MESSAGE_SEND_TO msg = new MESSAGE_SEND_TO();
             msg.FROM_ACC = user;
@@ -113,6 +126,10 @@ namespace Maladin.Areas.API.Controllers
         [HttpPost]
         public JsonResult NewMessage(string user, string userTo)
         {
+            if (user == null)
+            {
+                return Json(new { count = 0 }, JsonRequestBehavior.AllowGet);
+            }
             var dao = new MessageDAO();
             var res = dao.CountNewMessage(user, userTo);
             if (res<=0)

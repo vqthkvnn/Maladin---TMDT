@@ -345,7 +345,8 @@ namespace Maladin.DAO
             {
                 var pro = db.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == i.ID_ACC_PRODUCT);
 
-                sumprice += MaxPriceFromVocher(idvoucher, i.ID_ACC_PRODUCT);
+                sumprice -= MaxPriceFromVocher(idvoucher, i.ID_ACC_PRODUCT);
+                sumprice+=Convert.ToInt32(i.CART_COUNT*pro.AMOUNT* (100 - pro.SALE_PERCENT) /100);
             }
             return sumprice;
         }
@@ -367,8 +368,8 @@ namespace Maladin.DAO
             }
             else
             {
-                var product = db.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idP);
-                return Convert.ToInt32(product.AMOUNT * (100 - product.SALE_PERCENT) / 100);
+
+                return 0;
             }
         }
         

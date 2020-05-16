@@ -2,8 +2,13 @@
 @{
     ViewBag.Title = "Thông tin tài khoản";
     Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
-    
+    var info = ViewBag.information;
+    var email = ViewBag.email;
+    var day =ViewBag.day ;
+    var month = ViewBag.month;
+    var year = ViewBag.year;
 }
+
 @section Scripts{
     
     <script>
@@ -21,6 +26,21 @@
                 $("#changePass").hide();
             }
         }
+
+        $("#img-avt-customer").attr("src", "/public/image/avt/face15.jpg");
+        
+        @if (info.SEX_INFO)
+        {
+            @:$("#female").removeAttr("checked");
+            @:$("#male").attr("checked", true);
+
+        }
+        else
+        {
+            @:$("#male").removeAttr("checked");
+            @:$("#female").attr("checked", true);
+
+        }
     </script>
 }
 <div class="right-information-user">
@@ -34,7 +54,7 @@
                     Họ tên
                 </label>
                 <div class="input-txt">
-                    <input type="text" class="value-input" value="Trần Hoàng Giang" />
+                    <input type="text" class="value-input" value="@info.NAME_INFO" />
                 </div>
             </div>
             <div class="form-control">
@@ -43,24 +63,17 @@
                 </label>
                 <div class="input-txt">
                     <div class="phone-wrap-div">
-                        <input type="tel" placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" value="0362947187" class="value-input" />
+                        <input type="tel" placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" value="@info.PHONE_INFO" class="value-input" />
                         <button type="button">Gửi mã xác thực</button>
                     </div>
                 </div>
             </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Mã xác thực
-                </label>
-                <div class="input-txt">
-                    <input type="text" class="value-input" placeholder="Nhập mã xác thực gửi tới số điện thoại trên" />
-                </div>
-            </div>
+            
             <div class="form-control">
                 <label class="input-label">
                     Email
                 </label>
-                <input type="text" disabled class="value-input" value="abc@gmail.com" />
+                <input type="text" disabled class="value-input" value="@email" />
             </div>
             <div class="form-control">
                 <label class="input-label">
@@ -84,21 +97,45 @@
                         <option value="0">Ngày</option>
                         @for (int i = 1; i <= 31; i++)
                         {
-                            <option value="@i">@i</option>
+                            if (i == day)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                            
                         }
                     </select>
                     <select name="month">
                         <option value="0">Tháng</option>
                         @for (int i = 1; i <= 12; i++)
                         {
-                            <option value="@i">@i</option>
+                            if (i == month)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                            
                         }
                     </select>
                     <select name="year">
                         <option value="0">Năm</option>
-                        @for (int i = 2000; i <= 2020; i++)
+                        @for (int i = 1980; i <= 2020; i++)
                         {
-                            <option value="@i">@i</option>
+
+                            if (i == year)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
                         }
                     </select>
                 </div>

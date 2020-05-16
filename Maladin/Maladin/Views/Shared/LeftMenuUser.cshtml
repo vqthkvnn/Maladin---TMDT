@@ -1,13 +1,15 @@
-﻿
+﻿@{ 
+
+}
 <div class="menu-left">
     <div class="profiles">
         <p class="image">
-            <img src="~/assets/image/avatar.png" alt="" style="height:45px; width:45px;"/>
+            <img src="@ViewBag.avt" alt="" id="img-avt-customer" style="height:45px; width:45px;"/>
         </p>
         <p class="name">
             Tài khoản của
         </p>
-        <h6>Trần Hoàng Giang</h6>
+        <h6 id="name-h6">@ViewBag.name</h6>
     </div>
     <div class="menu dropdown">
         <ul class="dropdown-menu" role="menu">

@@ -3,7 +3,7 @@
 	ViewBag.Title = "Giỏ hàng - Maladin.com";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	var sum = 0;
-	var IDVocher = "None";
+	
 }
 <title>@ViewBag.Title</title>
 @section Scripts{
@@ -103,6 +103,7 @@
 		/*
 		 * phan xu lý gio hang
 		 */
+		var idVocher = "None";
 
 		function idpClick(id) {
 
@@ -227,7 +228,36 @@
 			var value = $("#coupon").val();
 
 		}
+		function AddVoucher() {
+			$.ajax({
+				type: "POST",
+				url: '@Url.Action("ApplyVoucher", "Payment", new {Area="Customer" })?vocher=' + $("#coupon").val(),
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					var res = json.sumprice;
+					idVocher=$("#coupon").val();
+					$("#thanhtien").text(res);
+				},
+				error: function () {
+				}
 
+			});
+		}
+		function confirm() {
+			if(idVocher != "None")
+			{
+				document.location.href = "@Url.Action("Confirm", "Payment", new {Area="Customer" })?vocher=" + idVocher;
+				
+			}
+			else
+			{
+				document.location.href = "@Url.Action("Confirm", "Payment", new {Area="Customer" })"
+			}
+		}
 	</script>
 
 
@@ -344,14 +374,15 @@
 									Thành tiền:
 								</span>
 								<div class="amount">
-									<p><strong id="thanhtien">4.990.990đ</strong></p>
+									<p><strong id="thanhtien">
+										@sum đ</strong></p>
 									<p class="text-right">
 										<small>(Đã bao gồm VAT nếu có)</small>
 									</p>
 								</div>
 							</div>
 						</div>
-						<button id="dathang" type="button" class="btn btn-large btn-block btn-danger btn-checkout">Tiến hành đặt hàng</button>
+						<button id="dathang" type="button" class="btn btn-large btn-block btn-danger btn-checkout" onclick="confirm();">Tiến hành đặt hàng</button>
 					</div>
 					<div class="row">
 						<div class="col-xs-12">
@@ -367,7 +398,7 @@
 											<div class="input-group">
 												<input id="coupon" placeholder="Nhập ở đây..." type="text" class="form-control" />
 												<span class="input-group-btn">
-													<button class="btn btn-default btn-coupon" type="button" onclick="bs4pop.notice('This is a notification message', {type: 'success'})">Đồng ý</button>
+													<button class="btn btn-default btn-coupon" type="button" onclick="AddVoucher();">Đồng ý</button>
 												</span>
 											</div>
 										</div>

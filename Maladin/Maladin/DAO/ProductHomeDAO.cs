@@ -36,6 +36,96 @@ namespace Maladin.DAO
                 }).ToList();
             return data;
         }
+        public List<ItemProductModel> searchBy(string q, string type, int page)
+        {
+            string sql = "";
+            if (type == "NEW")
+            {
+                sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
+                "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.DATE_START_SELL DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
+                " AND PR.RowNum<=" + Convert.ToString(16 * page) +
+                " ORDER BY PR.RowNum ASC";
+            }
+            else if (type == "MAXSELL")
+            {
+                sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
+                "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SELL_COUNT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
+                " AND PR.RowNum<=" + Convert.ToString(16 * page) +
+                " ORDER BY PR.RowNum ASC";
+            }
+            else if (type == "MAXSALE")
+            {
+                sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
+                "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SALE_PERCENT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
+                " AND PR.RowNum<=" + Convert.ToString(16 * page) +
+                " ORDER BY PR.RowNum ASC";
+            }
+            else if (type == "MINP")
+            {
+                sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
+                "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.AMOUNT ASC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
+                " AND PR.RowNum<=" + Convert.ToString(16 * page) +
+                " ORDER BY PR.RowNum ASC";
+            }
+            else if (type == "MAXP")
+            {
+                sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
+                "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.AMOUNT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
+                " AND PR.RowNum<=" + Convert.ToString(16 * page) +
+                " ORDER BY PR.RowNum ASC";
+            }
+            else
+            {
+                sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
+                "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SALE_PERCENT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
+                " AND PR.RowNum<=" + Convert.ToString(16 * page) +
+                " ORDER BY PR.RowNum ASC";
+            }
+            var data = dbContext.Database.SqlQuery<ItemProductModel>(sql)
+                .Select(b => new ItemProductModel
+                {
+                    ID = b.ID,
+                    NameProduct = b.NameProduct,
+                    PriceGoc = b.PriceGoc,
+                    SalePricent = b.SalePricent,
+                    SaleMoney = b.SaleMoney,
+                    Rating = b.Rating,
+                    CountComment = b.CountComment,
+                    PathIamge = b.PathIamge
+                }).ToList();
+            return data;
+
+        }
         public List<SearchProductModel> getSearchByPage(int page, string q)
         {
             string key;

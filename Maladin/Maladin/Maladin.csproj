@@ -199,6 +199,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PartialRenderController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\CustomerLoginDAO.cs" />
     <Compile Include="DAO\PaymentDAO.cs" />
@@ -373,6 +374,7 @@
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\custom-search.css" />
+    <Content Include="assets\css\paymentConfirm.css" />
     <Content Include="assets\css\test.css" />
     <Content Include="assets\image\avatar.png" />
     <Content Include="assets\image\avenger-content.png" />
@@ -685,6 +687,7 @@
     <Content Include="Views\User\ReviewProductBought.cshtml" />
     <Content Include="Views\User\MyReview.cshtml" />
     <Content Include="Views\User\ManagerMaladinCoin.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

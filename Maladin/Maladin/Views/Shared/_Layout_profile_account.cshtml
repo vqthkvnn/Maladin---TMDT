@@ -22,7 +22,8 @@
     <div class="wrap">
         <div class="container">
             <div class="row-style-1">
-                @RenderPage("LeftMenuUser.cshtml")
+                @Html.Action("LeftMenuUser", "PartialRender", new { Area = "" })
+                
                 <div class="content-right">
                     @RenderBody()
                 </div>

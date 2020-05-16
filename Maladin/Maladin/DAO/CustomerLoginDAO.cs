@@ -87,10 +87,17 @@ namespace Maladin.DAO
         {
             return db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user).ID_TYPE_ACC;
         }
+        public INFOMATION_ACCOUNT getInformationByUser(string user)
+        {
+            return db.INFOMATION_ACCOUNT.SingleOrDefault(x => x.USER_ACC == user && x.ID_TYPE_ACC == "CT");
+        }
+        public ACCOUNT getAccountByUser(string user)
+        {
+            return db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user);
+        }
         public string getTypeMax(string user)
         {
-            return db.INFOMATION_ACCOUNT.Where(x => x.USER_ACC == user).Where(x => x.ID_TYPE_ACC != "ADMIN")
-                .Where(x => x.ID_TYPE_ACC != "CTV").SingleOrDefault().ID_TYPE_ACC;
+            return db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user).ID_TYPE_ACC;
         }
         public int getTotalCart(string user)
         {

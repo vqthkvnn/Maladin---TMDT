@@ -16,11 +16,11 @@
                     </a>
                 </div>
                 <div class="form-search" style="margin-left: 50px;">
-                    <form id="search-form" method="get">
+                    <form id="search-form" onsubmit="return clickTosearch(this);">
                         <div class="search-wrap">
                             <div class="input">
                                 <div class="flex">
-                                    <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off">
+                                    <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off" id="inputSearch">
                                 </div>
                             </div>
                             <button type="submit">
@@ -119,5 +119,11 @@
                 $('#isLogin').show();
                 $('#isLogined').hide();
     }
+    function clickTosearch(myform) {
+        var value = $('#inputSearch').val();
+        window.location.href = "@Url.Action("Index", "Search")?q=" + value;
+        return false;
+    }
+
 
 </script>

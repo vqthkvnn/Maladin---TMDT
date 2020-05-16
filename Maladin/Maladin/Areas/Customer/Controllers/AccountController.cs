@@ -7,6 +7,7 @@ using Maladin.Areas.Customer.Common;
 using Maladin.DAO;
 using Maladin.Models;
 using Maladin.Common;
+using Maladin.EF;
 
 namespace Maladin.Areas.Customer.Controllers
 {
@@ -15,7 +16,16 @@ namespace Maladin.Areas.Customer.Controllers
         // GET: Customer/Account
         public ActionResult Index()
         {
+
+            var dao = new CustomerLoginDAO();
+            INFOMATION_ACCOUNT info = dao.getInformationByUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
+            var email = dao.getAccountByUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
+            ViewBag.email = email.EMAIL_INFO;
+            ViewBag.information = info;
             
+            ViewBag.day = info.BIRTH_INFO.Value.Day;
+            ViewBag.month = info.BIRTH_INFO.Value.Month;
+            ViewBag.year = info.BIRTH_INFO.Value.Year;
             return View();
         }
         

@@ -134,8 +134,8 @@ namespace Maladin.Areas.API.DAO
         }
         public int CountNewMessage(string user, string userTo)
         {
-            return db.MESSAGE_SEND_TO.Where(x => (x.FROM_ACC == user && x.TO_ACC == userTo)
-            || (x.TO_ACC == user && x.FROM_ACC == user)).Where(x=>x.IS_READ == false).Count();
+            return db.MESSAGE_SEND_TO.Where(x => x.FROM_ACC == user && x.TO_ACC == userTo).
+                Where(x=>x.IS_READ == false).Count();
         }
         public List<MessageModel> GetNewMessage(string user, string userTo)
         {
@@ -155,6 +155,23 @@ namespace Maladin.Areas.API.DAO
 
                 }).ToList();
             return data;
+        }
+        public bool UpdateReadAll(string user, string to)
+        {
+            try
+            {
+                string sql = "UPDATE dbo.MESSAGE_SEND_TO SET IS_READ =1 WHERE FROM_ACC ='" + user + "" +
+                "' AND TO_ACC='" + to + "'";
+                db.Database.ExecuteSqlCommand(sql);
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+
+
         }
         public bool UpdateIsRead(int id)
         {
