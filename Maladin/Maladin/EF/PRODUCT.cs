@@ -16,7 +16,6 @@ namespace Maladin.EF
             PRODUCT_ATT = new HashSet<PRODUCT_ATT>();
             PRODUCT_IMAGE = new HashSet<PRODUCT_IMAGE>();
             VOCHER_AREA = new HashSet<VOCHER_AREA>();
-            ACCOUNTs = new HashSet<ACCOUNT>();
         }
 
         [Key]
@@ -78,8 +77,5 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VOCHER_AREA> VOCHER_AREA { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ACCOUNT> ACCOUNTs { get; set; }
     }
 }

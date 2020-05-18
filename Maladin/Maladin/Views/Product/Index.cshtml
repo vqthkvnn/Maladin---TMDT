@@ -1,0 +1,764 @@
+﻿
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var session = "null";
+    if (ViewBag.IsLogin == null)
+    {
+
+    }
+    else
+    {
+        session = ViewBag.IsLogin.ToString();
+    }
+}
+<title>@ViewBag.Title</title>
+@section Scripts{
+    <link href="~/assets/css/productHome.css" rel="stylesheet" />
+    <style>
+        .alert-container {
+            position: fixed;
+        }
+
+        #alert-container-topcenter {
+            top: 116px;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+
+        .star-comment:hover, .star-comment:hover ~ .star-comment {
+            color: gold;
+        }
+
+        .jWoEvw-tdd {
+            float: left;
+        }
+
+        .star-comment {
+            float: right;
+        }
+    </style>
+    <script>
+        let bs4pop = {};
+        (function (pop) {
+
+            pop.alert = function (content, cb, opts) {
+
+                let dialogOpts = $.extend(true, {
+                    title: 'Alert Dialog',
+                    content: content,
+                    hideRemove: true,
+                    width: 500,
+                    btns: [
+                        {
+                            label: 'Okay',
+                            onClick() {
+                                if (cb) {
+                                    return cb();
+                                }
+                            }
+                        }
+                    ]
+                }, opts);
+
+                return pop.dialog(dialogOpts);
+
+            };
+            pop.notice = function (content, opts) {
+
+                opts = $.extend(true, {
+
+                    type: 'primary', //primary, secondary, success, danger, warning, info, light, dark
+                    position: 'topcenter', //topleft, topcenter, topright, bottomleft, bottomcenter, bottonright, center,
+                    appendType: 'append', //append, prepend
+                    closeBtn: false,
+                    autoClose: 2000,
+                    className: '',
+
+                }, opts);
+
+                // 得到容器 $container
+                let $container = $('#alert-container-' + opts.position);
+                if (!$container.length) {
+                    $container = $('<div id="alert-container-' + opts.position + '" class="alert-container"></div>');
+                    $('body').append($container);
+                }
+
+                // alert $el
+                let $el = $(`
+                                    <div class="alert fade alert-${opts.type}" role="alert">${content}</div>
+                                `);
+                if (opts.autoClose) {
+                    $el
+                        .append(`
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        `)
+                        .addClass('alert-dismissible');
+                }
+
+                if (opts.autoClose) {
+
+                    let t = setTimeout(() => {
+                        $el.alert('close');
+                    }, opts.autoClose);
+
+                }
+
+                opts.appendType === 'append' ? $container.append($el) : $container.prepend($el);
+
+                setTimeout(() => {
+                    $el.addClass('show');
+                }, 50);
+
+                return;
+
+            };
+
+        })(bs4pop);
+    </script>
+    <script>
+        
+        $(function () {
+            $(".btn-open-comment-content").on("click", function (e) {
+                console.log($(".btn-open-comment-content").val());
+                if ($(".btn-open-comment-content").text() == "Đóng") {
+                    $(".comment-content").attr("hidden", true);
+                    $(".btn-open-comment-content").text("Viết nhận xét của bạn");
+                }
+                else {
+                    $(".comment-content").removeAttr("hidden");
+                    $(".btn-open-comment-content").text("Đóng");
+                }
+            });
+        });
+		$(".img-thumbnail").on("click", function () {
+			$("#imagechinh").attr("src",$(this).attr("src"));
+		});
+		$(".btn-add-to-cart").on("click", function () {
+
+			if ("@session" == "null") {
+				bs4pop.notice('Sản phẩm này không hỗ trợ hình thức bán COD. Vui lòng đăng nhập để mua hàng!', { type: 'danger' })
+				setTimeout(() => {
+					$('#alert').alert();
+
+					setTimeout(() => {
+						$('#alert').alert('close');
+					}, 2000);
+				}, 2000);
+
+			}
+			else {
+				$.ajax({
+			type: "POST",
+			url: '@Url.Action("AddToCart", "Product", new {Area="" })?id=' +'@ViewBag.Product.id',
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					if (json.status == "1") {
+						console.log(json.status);
+						bs4pop.notice('Thêm vào giỏ hàng thành công', { type: 'success' })
+						setTimeout(() => {
+						$('#alert').alert();
+
+						setTimeout(() => {
+						$('#alert').alert('close');
+						}, 2000);
+					}, 2000);
+
+					}
+					else {
+						bs4pop.notice('Thêm vào giỏ hàng không thành công do sản phẩm này đã có', { type: 'danger' })
+						setTimeout(() => {
+						$('#alert').alert();
+
+						setTimeout(() => {
+						$('#alert').alert('close');
+						}, 2000);
+					}, 2000);
+					}
+					},
+					error: function () { alert('fail'); }
+					});
+			}
+		});
+		$(".btn-favorite").on("click", function () {
+			if ("@session" == "null") {
+				bs4pop.notice('Đăng nhập để sử dụng tính năng này!', { type: 'danger' })
+				setTimeout(() => {
+					$('#alert').alert();
+
+					setTimeout(() => {
+						$('#alert').alert('close');
+					}, 2000);
+				}, 2000);
+
+			}
+			else {
+				$.ajax({
+			type: "POST",
+			url: '@Url.Action("AddToFarotive", "Product", new {Area="" })?id=' +'@ViewBag.Product.id',
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					if (json.status == "1") {
+						console.log(json.status);
+						bs4pop.notice('Thêm vào danh sách yêu thích thành công!', { type: 'success' })
+						setTimeout(() => {
+						$('#alert').alert();
+
+						setTimeout(() => {
+						$('#alert').alert('close');
+						}, 2000);
+					}, 2000);
+
+					}
+					else {
+						bs4pop.notice('Sản phẩm đã có trong danh sách yêu thích!', { type: 'danger' })
+						setTimeout(() => {
+						$('#alert').alert();
+
+						setTimeout(() => {
+						$('#alert').alert('close');
+						}, 2000);
+					}, 2000);
+					}
+					},
+					error: function () { alert('fail'); }
+					});
+			}
+		});
+    </script>
+}
+<div class="main">
+
+    <div class="row">
+        <div class="col-5">
+            <div class="kQvKqX-tdd">
+                <div class="row">
+                    <div class="col-2">
+                        @for (int i = 0; i < @ViewBag.CountImage; i++)
+                        {
+                            <div class="row ">
+                                <img src="@ViewBag.ListImage[i].IMAGE_PATH" class="img-thumbnail" alt="tai nghe" style="width: 100%;">
+                            </div>
+                        }
+
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <img id="imagechinh" src="@ViewBag.ListImage[0].IMAGE_PATH" alt="" style="        width: 390px;
+        height: 390px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-7">
+            <div class="row">
+                <div class="fSESUp-tdd">
+                    <div class="header border-bottom-tdd">
+                        <h1 class="title" itemprop="name">@ViewBag.Product.name</h1>
+                        <div class="kYNzX-tdd">
+                            <div class="rating">
+                                @for (int i = 0; i < @ViewBag.Product.totalRating; i++)
+                                {
+                                    <span class="fa fa-star checked"></span>
+                                }
+                                @for (int i = 0; i < 5 - @ViewBag.Product.totalRating; i++)
+                                {
+                                    <span class="fa fa-star"></span>
+                                }
+
+                                <a class="number">(Xem @ViewBag.Product.totalComment đánh giá)</a>
+                            </div>
+                        </div>
+                        <div class="brand-tdd">
+                            <h6>Thương hiệu: <a href="#">@ViewBag.Product.producer</a></h6>
+                            <h6>Mã lô hàng: <span>@ViewBag.Product.id</span></h6>
+                            <h6>Đơn vị phân phối: <a href="#">@ViewBag.Product.ctv</a></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="body-tdd">
+                    <div class="summary-tdd">
+                        <div class="left">
+                            <div class="group-tdd">
+                                <p class="price">@Convert.ToInt32(ViewBag.Product.priceG * (100 - ViewBag.Product.saleP) / 100)<!-- --> ₫</p>
+                                <p class="original-price first-child">
+                                    Tiết kiệm:
+                                    <span>@ViewBag.Product.saleP<!-- -->%</span>
+                                    (<!-- -->@Convert.ToInt32(ViewBag.Product.priceG - ViewBag.Product.priceG * (100 - ViewBag.Product.saleP) / 100)<!-- --> ₫)
+                                </p>
+                                <p class="original-price">Giá thị trường: <!-- -->@ViewBag.Product.priceG<!-- --> ₫</p>
+                            </div>
+
+                            <div class="group-tdd border-top-tdd">
+                                <div class="dJbIjB-tdd">
+                                    <div class="fXfceZ-tdd" style="        margin-top: -7px;
+        margin-right: 20px;">
+                                        <p class="label">Số lượng:</p>
+                                        <div class="group-input">
+                                            <button id="minus-btn">-</button>
+                                            <input type="text" value="1" class="input">
+                                            <button id="plus-btn">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="group-button">
+                                        <button type="button" class="btn btn-danger btn-add-to-cart" style="width: 100%;height: 40px;margin-top: 7px;">Chọn mua</button>
+                                    </div>
+
+                                    <button class="btn btn-favorite" style="margin-top:10px"><i class="fa fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="jBMzLQ-tdd">
+                                <div class="delivery-tdd">
+                                    <div class="delivery__title">Thông Tin Giao Hàng Dự Kiến</div>
+                                    <div class="delivery__picker">
+                                        Giao hàng tới Xã Hợp Đồng, Huyện Chương Mỹ, Hà Nội -
+                                        <b class="delivery__picker-link">ĐỔI ĐỊA CHỈ</b>
+                                    </div>
+
+                                    <div class="delivery__options">
+                                        <div class="delivery__option">
+                                            <div class="delivery__time">Giao vào thứ 5, 21/05</div>
+                                            <div class="delivery__wrap">
+                                                <span class="delivery__text">Giao hàng tiêu chuẩn</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<hr>
+<h4 class="cfpgte-tdd">SẢN PHẨM ĐƯỢC XEM CÙNG</h4>
+<div class="main">
+    <div class="slider-container-tdd">
+        <div class="hkkAKO-tdd">
+            <div class="slick-list-tdd">
+                <div class="slick-track" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    <div class="slick-slide slick-active slick-current" style="outline: none; ">
+                        <div>
+                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
+                                <div class="evEsoa-tdd">
+                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+
+
+                                </div>
+                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
+                                <p class="price">
+                                    84.000 ₫
+                                    <span class="percent ">-6%</span>
+                                    <span class="original ">89.000 ₫</span>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-slide slick-active slick-current" style="outline: none; ">
+                        <div>
+                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
+                                <div class="evEsoa-tdd">
+                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+
+
+                                </div>
+                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
+                                <p class="price">
+                                    84.000 ₫
+                                    <span class="percent ">-6%</span>
+                                    <span class="original ">89.000 ₫</span>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-slide slick-active slick-current" style="outline: none;">
+                        <div>
+                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
+                                <div class="evEsoa-tdd">
+                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+
+
+                                </div>
+                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
+                                <p class="price">
+                                    84.000 ₫
+                                    <span class="percent ">-6%</span>
+                                    <span class="original ">89.000 ₫</span>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slick-slide slick-active slick-current" style="outline: none;">
+                        <div>
+                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
+                                <div class="evEsoa-tdd">
+                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+
+
+                                </div>
+                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
+                                <p class="price">
+                                    84.000 ₫
+                                    <span class="percent ">-6%</span>
+                                    <span class="original ">89.000 ₫</span>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<h4 class="cfpgte-tdd">Thông tin chi tiết</h4>
+<div class="main">
+    <div class="group">
+        <div class="content has-table">
+            <table>
+                <tbody>
+                    @foreach (var i in ViewBag.ListAttr)
+                    {
+                        <tr>
+                            <td>@i.KEY_ATT</td>
+                            <td>@i.VALUE_ATT</td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr>
+<h4 class="cfpgte-tdd">MÔ TẢ SẢN PHẨM</h4>
+<div class="main">
+    <div class="title-tdd" style="margin-top: 20px;margin-bottom: 10px;font-size: 18px;padding: 10px 20px;">
+
+        <span> @ViewBag.Product.content</span>
+    </div>
+</div>
+<hr>
+<h4 class="cfpgte-tdd">HỎI, ĐÁP VỀ SẢN PHẨM</h4>
+<div class="main">
+    @if (Convert.ToInt32(ViewBag.CountQuest) <= 0)
+    {
+        <p>Không có câu hỏi nào. Gửi câu hỏi để giải đáp mọi thắc mắc</p>
+    }
+    else
+    {
+        foreach (var i in ViewBag.ListQuest)
+        {
+            <div class="row">
+                <div class="bddLrQ-tdd">
+                    <p class="like">
+                        5
+                        <span>Thích</span>
+                    </p>
+                    <div class="content">
+                        <p class="question"><strong>@i.TITLE_QUESTION</strong></p>
+                        <p class="answer">@i.CONTENT_QUESTION</p>
+                        <p class="author">Thời gian hỏi: @i.DATE_QUESTION</p>
+                        <div class="buttons">
+                            <a class="Nrztj-tdd">
+                                <i class="fa fa-thumbs-up"></i>
+                                Thích
+                            </a>
+                            <a href="#">
+                                <i class="fa fa-reply"></i>
+                                Trả lời
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    }
+
+    <div class="row anhhh">
+        <a href="#" class="jPPwyr-tdd">Xem tất cả các câu hỏi đã được trả lời</a>
+    </div>
+    <hr>
+    <div class="row" style="display: flex ;border: solid 1px gray; margin-bottom:5px;">
+        <div class="form-group" style="width: 100%;">
+            <h4 style="margin-left: 10px;">Đặt câu hỏi:</h4>
+        </div>
+        <div class="form-group" style="width: 80%; margin-left: 10px">
+            <textarea class="form-control" rows="1" id="comment" placeholder="Tiêu đề câu hỏi ...."></textarea>
+            <textarea class="form-control" rows="1" placeholder="Hãy đặt câu hỏi liên quan đến sản phẩm..." id="comment"></textarea>
+        </div>
+        <button type="button" class="btn btn-danger" style="width: 18%;margin-left: 10px;height: 39px;;margin-top: 30px;">Gửi câu hỏi</button>
+
+    </div>
+
+</div>
+<h4 class="cfpgte-tdd">KHÁCH HÀNG NHẬN XÉT</h4>
+<div class="main">
+    <div class="row">
+        <div class="col-4">
+            <div class="escmEg-tdd">
+                <div class="rating">
+                    <h4 class="title">Đánh giá trung bình</h4>
+                    <p class="score">@Convert.ToInt32(ViewBag.Product.totalRating)/5</p>
+                    <p class="iQZcjJ-tdd" style="font-size: 20px;">
+                        @for (int i = 0; i < ViewBag.Product.totalRating; i++)
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        @for (int i = 0; i < 5 - ViewBag.Product.totalRating; i++)
+                        {
+                            <span class="fa fa-star "></span>
+                        }
+
+                    </p>
+                    <a href="#" class="number">(@ViewBag.Product.totalComment nhận xét)</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="star-prrogress-tdd">
+                <div class="star-progress-bar">
+                    <p class="star-number">
+                        <span>5</span>
+                        <i class="fa fa-star checked" style="display: block;margin: 3px;"></i>
+
+                    </p>
+                    <div class="progress" style="width: 100%;">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            70%
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="star-prrogress-tdd">
+                <div class="star-progress-bar">
+                    <p class="star-number">
+                        <span>4</span>
+                        <i class="fa fa-star checked" style="display: block;margin: 3px;"></i>
+
+                    </p>
+                    <div class="progress" style="width: 100%;">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                            50%
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="star-prrogress-tdd">
+                <div class="star-progress-bar">
+                    <p class="star-number">
+                        <span>3</span>
+                        <i class="fa fa-star checked" style="display: block;margin: 3px;"></i>
+
+                    </p>
+                    <div class="progress" style="width: 100%;">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:30%">
+                            30%
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="star-prrogress-tdd">
+                <div class="star-progress-bar">
+                    <p class="star-number">
+                        <span>2</span>
+                        <i class="fa fa-star checked" style="display: block;margin: 3px;"></i>
+
+                    </p>
+                    <div class="progress" style="width: 100%;">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                            20%
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="star-prrogress-tdd">
+                <div class="star-progress-bar">
+                    <p class="star-number">
+                        <span>1</span>
+                        <i class="fa fa-star checked" style="display: block;margin: 3px;"></i>
+
+                    </p>
+                    <div class="progress" style="width: 100%;">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:1%">
+                            1%
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="titlee">
+                <h4 class="title">Chia sẻ nhận xét về sản phẩm</h4>
+                <button type="button" class="btn btn-warning btn-open-comment-content">Viết nhận xét của bạn</button>
+            </div>
+        </div>
+    </div>
+    <div class="row comment-content" style="margin-bottom: 20px; border:solid 1px; margin-bottom:10px;" hidden>
+        <div class="col-6">
+            <div class="left-tdd">
+                <h4 style="margin-bottom: 20px;font-size: 18px;font-weight: 400;margin: 0px 0px 10px;color: rgb(51, 51, 51);">GỬI NHẬN XÉT CỦA BẠN</h4>
+                <div class="stars-tdd" style="display: flex;">
+                    <p class="label">1. Đánh giá của bạn về sản phẩm này:</p>
+                    <div class="jWoEvw-tdd" style="margin-left: 10px; padding-top: 2px; font-size: 22px;">
+                        <span class="fa fa-star star-comment start-select-1" aria-hidden="true"></span>
+                        <span class="fa fa-star star-comment start-select-2" aria-hidden="true"></span>
+                        <span class="fa fa-star star-comment start-select-3" aria-hidden="true"></span>
+                        <span class="fa fa-star star-comment start-select-4" aria-hidden="true"></span>
+                        <span class="fa fa-star star-comment start-select-5" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="stars-tdd">
+                    <div class="form-group" style="width: 90%;">
+                        <label for="comment">2. Tiêu đề của nhận xét:</label>
+                        <textarea class="form-control" rows="1" id="comment" style="width: 100%;"></textarea>
+                    </div>
+                </div>
+                <div class="stars-tdd">
+                    <div class="form-group" style="width: 90%;">
+                        <label for="comment">3. Viết nhận xét của bạn vào bên dưới:</label>
+                        <textarea class="form-control" rows="3" placeholder="Nhận xét của bạn về sản phẩm này" id="comment" style="width: 100%;"></textarea>
+                    </div>
+                </div>
+                <div class="stars-tdd">
+                    <button type="button" class="btn btn-warning">Gửi nhận xét</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <div class="product-tdd">
+                <a href="#" class="thumbnail" style="width:180px; height:180px;">
+                    <img style="max-height: 180px;max-width: 180px;" src="@ViewBag.ListImage[0].IMAGE_PATH" alt="Tai Nghe Nhét Tai Mi Basic Xiaomi HSEJ03JY - Hàng Chính Hãng">
+                </a>
+                <div class="product-info-tdd">
+                    <p class="title">Tai Nghe Nhét Tai Mi Basic Xiaomi HSEJ03JY - Hàng Chính Hãng</p>
+                    <div class="brand">
+                        <h6>
+                            Thương hiệu:
+                            <a href="#">Xiaomi</a>
+                        </h6>
+                        <h6>
+                            <p class="iQZcjJ-tdd" style="display: inline; font-size: 12px;">
+                                <span class="fa fa-star checked" aria-hidden="true"></span>
+                                <span class="fa fa-star checked" aria-hidden="true"></span>
+                                <span class="fa fa-star checked" aria-hidden="true"></span>
+                                <span class="fa fa-star" aria-hidden="true"></span>
+                                <span class="fa fa-star" aria-hidden="true"></span>
+                            </p>
+                            <span>(876 đánh giá)</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Người 1-->
+    @foreach (var i in ViewBag.ListComment)
+    {
+        <div class="row">
+            <div class="col-2">
+                <div class="user-info-tdd">
+                    <div class="avatar-tdd">
+                        <img src="avt.png" alt="avt" class="image">
+                    </div>
+                    <p class="username-tdd">Nam Can</p>
+                    <p class="text-tdd">một năm trước</p>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="information-tdd">
+                    <div class="title-tdd">
+                        <div class="iQZcjJ" style="font-size: 16px;">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>Viết bình luận chính</span>
+                        </div>
+                    </div>
+                    <p class="purchased-tdd">
+                        <i class="fa fa-check-square"></i>
+                        <span style="margin-left: 6px;">Đã mua hàng</span>
+                    </p>
+                    <p class="content-tdd">
+                        abc...ádfasddddddddddddddddddddddddkhksdadhfiueheirhiehriheqifkasndkbi8ewqgirqwie
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+    <!--Người 2-->
+    <div class="row">
+        <div class="col-2">
+            <div class="user-info-tdd">
+                <div class="avatar-tdd">
+                    <img src="avt.png" alt="avt" class="image">
+                </div>
+                <p class="username-tdd">Nam Can</p>
+                <p class="text-tdd">một năm trước</p>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="information-tdd">
+                <div class="title-tdd">
+                    <div class="iQZcjJ" style="font-size: 16px;">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span>Viết bình luận chính</span>
+                    </div>
+                </div>
+                <p class="purchased-tdd">
+                    <i class="fas fa-user-check"></i>
+                    <span style="margin-left: 6px;">Đã mua hàng</span>
+                </p>
+                <p class="content-tdd">
+                    abc...ádfasddddddddddddddddddddddddkhksdadhfiueheirhiehriheqifkasndkbi8ewqgirqwie
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+

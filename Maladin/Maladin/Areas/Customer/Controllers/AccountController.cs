@@ -65,7 +65,8 @@ namespace Maladin.Areas.Customer.Controllers
         }
         public ActionResult Coin()
         {
-
+            var dao = new CustomerLoginDAO();
+            ViewBag.Coin = dao.getCoin(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
             return View();
         }
         public ActionResult Favourite()

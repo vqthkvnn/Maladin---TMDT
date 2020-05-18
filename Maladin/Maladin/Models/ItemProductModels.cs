@@ -10,5 +10,7 @@ namespace Maladin.Models
         public List<ItemProductModel> GiayProduct { get; set; }
         public List<ItemProductModel> AoProduct { get; set; }
         public List<ItemProductModel> DongHoProduct { get; set; }
+        public List<ItemProductModel> KinhProduct { get; set; }
+        
     }
 }

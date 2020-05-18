@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<title>@ViewBag.Title</title>
+@section Scripts{
+    <link href="~/assets/css/productHome.css" rel="stylesheet"/>
+    <script>
+        
+        $(".img-thumbnail").on("click", function () {
+            $("#imagechinh").attr("src",$(this).attr("src")); 
+        });
+        $(".btn-add-to-cart").on("click", function () {
+        });
+        $(".btn-favorite").on("click", function () {
+        });
+    </script>
+}
+<div class="main">
+
+    <div class="row">
+        <div class="col-5">
+            <div class="kQvKqX-tdd">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="row ">
+                            <img src="~/public\image\product\Hat\hat_product2.jpg" class="img-thumbnail" alt="tai nghe" style="width: 100%;" >
+                        </div>
+                        <div class="row">
+                            <img src="~/public\image\product\Hat\hat_product3.jpg" class="img-thumbnail" alt="tai nghe" style="width: 100%;">
+                        </div>
+                        <div class="row">
+                            <img src="~/public\image\product\Hat\hat_product4.jpg" class="img-thumbnail" alt="tai nghe" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <img id="imagechinh" src="~/public\image\product\Hat\hat_product1.jpg" alt="" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-7">
+            <div class="row">
+                <div class="fSESUp-tdd">
+                    <div class="header border-bottom-tdd">
+                        <h1 class="title" itemprop="name">Tai Nghe Nhét Tai Mi Basic Xiaomi HSEJ03JY - Hàng Chính Hãng</h1>
+                        <div class="kYNzX-tdd">
+                            <div class="rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <a class="number">(Xem 875 đánh giá)</a>
+                            </div>
+                        </div>
+                        <div class="brand-tdd">
+                            <h6>Thương hiệu: <a href="/thuong-hieu/xiaomi.html">Xiaomi</a></h6>
+                            <h6>SKU: <span>8683692620378</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="body-tdd">
+                    <div class="summary-tdd">
+                        <div class="left">
+                            <div class="group-tdd">
+                                <p class="price">115.000<!-- --> ₫</p>
+                                <p class="original-price first-child">
+                                    Tiết kiệm:
+                                    <span>23<!-- -->%</span>
+                                    (<!-- -->35.000<!-- --> ₫)
+                                </p>
+                                <p class="original-price">Giá thị trường: <!-- -->150.000<!-- --> ₫</p>
+                            </div>
+                            <div class="group-tdd border-top-tdd">
+                                <ul class="list-tdd">
+                                    <li>Tần số: 20 - 20.000 Hz</li>
+                                    <li>Trở kháng: 32 ohm</li>
+                                    <li>Lõi dây bằng đồng tráng men</li>
+                                    <li>Nút nhét làm bằng silicon mềm mại</li>
+                                    <li>Độ phân giải cao cho chất lượng âm thanh chính xác</li>
+                                </ul>
+                            </div>
+                            <div class="group-tdd border-top-tdd">
+                                <div class="dJbIjB-tdd">
+                                    <div class="fXfceZ-tdd" style="margin-top: -7px;margin-right: 20px;">
+                                        <p class="label">Số lượng:</p>
+                                        <div class="group-input">
+                                            <button>-</button>
+                                            <input type="text" value="1" class="input">
+                                            <button>+</button>
+                                        </div>
+                                    </div>
+                                    <div class="group-button">
+                                        <button type="button" class="btn btn-danger btn-add-to-cart" style="width: 100%;height: 40px;margin-top: 7px;">Chọn mua</button>
+                                    </div>
+                                    
+                                    <button class="btn btn-favorite" style="margin-top:10px"><i class="fa fa-heart"></i></button>
+                                </div>
+                            </div>
+                            <div class="jBMzLQ-tdd">
+                                <div class="delivery-tdd">
+                                    <div class="delivery__title">Thông Tin Giao Hàng Dự Kiến</div>
+                                    <div class="delivery__picker">
+                                        Giao hàng tới Xã Hợp Đồng, Huyện Chương Mỹ, Hà Nội -
+                                        <b class="delivery__picker-link">ĐỔI ĐỊA CHỈ</b>
+                                    </div>
+                                    <div class="delivery__seller">Nhà bán Họ Trần:</div>
+                                    <div class="delivery__options">
+                                        <div class="delivery__option">
+                                            <div class="delivery__time">Giao vào thứ 5, 21/05</div>
+                                            <div class="delivery__wrap">
+                                                <span class="delivery__text">Giao hàng tiêu chuẩn</span>
+                                            </div>
+                                            <span class="delivery__fee ">19.000 ₫</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<hr>
+<h4 class="cfpgte-tdd">SẢN PHẨM ĐƯỢC XEM CÙNG</h4>
+<div class="main">
+    <div class="slider-container-tdd">
+        <div class="hkkAKO-tdd">
+            <a data-role="none" class="slick-arrow slick-prev slick-disabled" style="display: block;">
+                <span class="icon">
+                    <i class="fa fa-chevron-circle-left"></i>
+                </span>
+            </a>
+            <div class="slick-list-tdd">
+                <div class="slick-track" style="width: 4960px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    <div class="slick-slide slick-active slick-current" style="outline: none; width: 248px;">
+                        <div>
+                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none; height:50%">
+                                <div class="evEsoa-tdd">
+                                    <img src="~/public\image\product\Hat\hat_product4.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+                                    <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
+
+                                </div>
+                                <p class="price">
+                                    84.000 ₫
+                                    <span class="percent ">-6%</span>
+                                    <span class="original ">89.000 ₫</span>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h4 class="cfpgte-tdd">Thông tin chi tiết</h4>
+<div class="main">
+    <div class="group">
+        <div class="content has-table">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Thương hiệu</td>
+                        <td>Xiaomi</td>
+                    </tr>
+                    <tr>
+                        <td>Xuất xứ</td>
+                        <td>Trung Quốc</td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td>HSEJ03JY</td>
+                    </tr>
+                    <tr>
+                        <td>Loại Jack cắm</td>
+                        <td>3.5mm</td>
+                    </tr>
+                    <tr>
+                        <td>Tần số</td>
+                        <td>20 - 20.000 Hz</td>
+                    </tr>
+                    <tr>
+                        <td>Độ nhạy</td>
+                        <td>101dB</td>
+                    </tr>
+                    <tr>
+                        <td>Lưu ý</td>
+                        <td>Sản phẩm này có thể sử dụng với các dòng điện thoại android khác với jack cắm 3,5mm</td>
+                    </tr>
+                    <tr>
+                        <td>SKU</td>
+                        <td>7963621275338</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

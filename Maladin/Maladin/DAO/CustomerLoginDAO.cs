@@ -108,9 +108,9 @@ namespace Maladin.DAO
             string sql = "SELECT AP.ID_ACC_PRODUCT as ID, NAME_PRODUCT as Name, AMOUNT as Price, " +
                 "SALE_PERCENT as saleP, " +
                 "SALE_MONEY as saleM, CART_COUNT as TotalCount," +
-                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT, dbo.PRODUCT_IMAGE) AS pathImg, AP.USER_ACC as UserBy " +
-                "FROM dbo.ACC_PRODUCT as AP, dbo.WATCHED_PRODUCT, dbo.PRODUCT WHERE AP.ID_ACC_PRODUCT = WATCHED_PRODUCT.ID_ACC_PRODUCT " +
-                "AND PRODUCT.ID_PRODUCT = AP.ID_PRODUCT AND WATCHED_PRODUCT.USER_ACC = '"+user+ "' and CART_COUNT>0";
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT, dbo.PRODUCT_IMAGE WHERE PRODUCT.ID_PRODUCT = PD.ID_PRODUCT AND PRODUCT.ID_PRODUCT = PRODUCT_IMAGE.ID_PRODUCT) AS pathImg, AP.USER_ACC as UserBy " +
+                "FROM dbo.ACC_PRODUCT as AP, dbo.WATCHED_PRODUCT, dbo.PRODUCT AS PD WHERE AP.ID_ACC_PRODUCT = WATCHED_PRODUCT.ID_ACC_PRODUCT " +
+                "AND PD.ID_PRODUCT = AP.ID_PRODUCT AND WATCHED_PRODUCT.USER_ACC = '" + user+ "' and CART_COUNT>0";
             var data = db.Database.SqlQuery<CartProductModel>(sql)
                 .Select(b => new CartProductModel
                 {
@@ -124,6 +124,10 @@ namespace Maladin.DAO
                     UserBy = b.UserBy
                 }).ToList();
             return data;
+        }
+        public int getCoin(string user)
+        {
+            return (db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user).COINT_ACC ?? 0 );
         }
     }
 }

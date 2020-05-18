@@ -1,0 +1,415 @@
+﻿
+@{
+	ViewBag.Title = "Giỏ hàng - Maladin.com";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	var sum = 0;
+	
+}
+<title>@ViewBag.Title</title>
+@section Scripts{
+
+	<style>
+		.alert-container {
+			position: fixed;
+		}
+
+		#alert-container-topcenter {
+			top: 116px;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+	</style>
+	<script>
+		let bs4pop = {};
+		(function (pop) {
+
+			pop.alert = function (content, cb, opts) {
+
+				let dialogOpts = $.extend(true, {
+					title: 'Alert Dialog',
+					content: content,
+					hideRemove: true,
+					width: 500,
+					btns: [
+						{
+							label: 'Okay',
+							onClick() {
+								if (cb) {
+									return cb();
+								}
+							}
+						}
+					]
+				}, opts);
+
+				return pop.dialog(dialogOpts);
+
+			};
+			pop.notice = function (content, opts) {
+
+				opts = $.extend(true, {
+
+					type: 'primary', //primary, secondary, success, danger, warning, info, light, dark
+					position: 'topcenter', //topleft, topcenter, topright, bottomleft, bottomcenter, bottonright, center,
+					appendType: 'append', //append, prepend
+					closeBtn: false,
+					autoClose: 2000,
+					className: '',
+
+				}, opts);
+
+				// 得到容器 $container
+				let $container = $('#alert-container-' + opts.position);
+				if (!$container.length) {
+					$container = $('<div id="alert-container-' + opts.position + '" class="alert-container"></div>');
+					$('body').append($container);
+				}
+
+				// alert $el
+				let $el = $(`
+					<div class="alert fade alert-${opts.type}" role="alert">${content}</div>
+				`);
+				if (opts.autoClose) {
+					$el
+						.append(`
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						`)
+						.addClass('alert-dismissible');
+				}
+
+				if (opts.autoClose) {
+
+					let t = setTimeout(() => {
+						$el.alert('close');
+					}, opts.autoClose);
+
+				}
+
+				opts.appendType === 'append' ? $container.append($el) : $container.prepend($el);
+
+				setTimeout(() => {
+					$el.addClass('show');
+				}, 50);
+
+				return;
+
+			};
+
+		})(bs4pop);
+	</script>
+	<script>
+		/*
+		 * phan xu lý gio hang
+		 */
+		var idVocher = "None";
+
+		function idpClick(id) {
+
+			var total = parseInt($("input").filter(id).val());
+			var price = parseInt($("price").filter(id).val());
+
+		//console.log(total);
+		if ( total<= 1) {
+
+		}
+		else {
+				total -= 1;
+			$(id).filter(id).val(total.toString());
+			$.ajax({
+			type: "POST",
+			url: '@Url.Action("addToCart", "Payment", new {Area="Customer" })?idp=' + id.substring(1, id.length) + '&count=' + total,
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					if (json.status == "1") {
+						bs4pop.notice('Thêm thành công', { type: 'success' })
+						setTimeout(() => {
+			$('#alert').alert();
+
+			setTimeout(() => {
+				$('#alert').alert('close');
+			}, 2000);
+		}, 2000);
+
+					}
+					else {
+						$(".alert").filter(".alert-fail").removeClass("hide");
+						$(".alert").filter(".alert-fail").addClass("show");
+					}
+					setTimeout(function () {
+						location.reload(1);
+					}, 600);},
+						error: function () { alert('fail'); }
+					});
+		}
+		}
+
+		function idnClick (id) {
+			var total = parseInt($("input").filter(id).val());
+			//console.log(total);
+			total += 1;
+
+			$.ajax({
+				type: "POST",
+				url: '@Url.Action("addToCart", "Payment", new {Area="Customer" })?idp=' + id.substring(1, id.length) + '&count=' + total,
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					if (json.status == "1") {
+
+						bs4pop.notice('Thêm thành công', { type: 'success' })
+						setTimeout(() => {
+			$('#alert').alert();
+
+			setTimeout(() => {
+				$('#alert').alert('close');
+			}, 2000);
+		}, 2000);
+					}
+					else {
+						$(".alert").filter(".alert-fail").removeClass("hide");
+						$(".alert").filter(".alert-fail").addClass("show");
+					}
+					setTimeout(function () {
+						location.reload(1);
+					}, 600);
+
+				},
+				error: function () {
+
+
+				}
+
+					});
+			$(id).filter(id).val(total.toString());
+		}
+		function DeleteCart(id) {
+			$.ajax({
+				type: "POST",
+				url: '@Url.Action("RemoveCart", "Payment", new {Area="Customer" })?idp=' + id,
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					if (json.status == "1") {
+
+						bs4pop.notice('Thêm thành công', { type: 'success' })
+						setTimeout(() => {
+			$('#alert').alert();
+
+			setTimeout(() => {
+				$('#alert').alert('close');
+			}, 2000);
+		}, 2000);
+					}
+					else {
+						//$(".alert").filter(".alert-fail").removeClass("hide");
+						//$(".alert").filter(".alert-fail").addClass("show");
+					}
+
+
+				},
+				error: function () {
+				}
+
+					});
+		}
+		function Accept() {
+			var value = $("#coupon").val();
+
+		}
+		function AddVoucher() {
+			$.ajax({
+				type: "POST",
+				url: '@Url.Action("ApplyVoucher", "Payment", new {Area="Customer" })?vocher=' + $("#coupon").val(),
+				async: false,
+				dataType: "json",
+				contentType: "application/json",
+				jsonpCallback: 'callback',
+				cache: false,
+				success: function (json) {
+					var res = json.sumprice;
+					idVocher=$("#coupon").val();
+					$("#thanhtien").text(res);
+				},
+				error: function () {
+				}
+
+			});
+		}
+		function confirm() {
+			if(idVocher != "None")
+			{
+				document.location.href = "@Url.Action("Confirm", "Payment", new {Area="Customer" })?vocher=" + idVocher;
+				
+			}
+			else
+			{
+				document.location.href = "@Url.Action("Confirm", "Payment", new {Area="Customer" })"
+			}
+		}
+	</script>
+
+
+}
+@model List<Maladin.Models.CartProductModel>
+
+<div class="row-1">
+	<div class="cart-1">
+		<div class="cart-inner">
+			<div class="">
+				<h5 class="maladin-cart-span-h4">
+					GIỎ HÀNG
+					<span>(0 sản phẩm)</span>
+				</h5>
+			</div>
+			<div class="cart-col-1">
+				<form id="shopping-cart-maladin">
+					@foreach (var i in Model)
+					{
+						<div class="row shopping-cart-item">
+							<div class="shopping-cart-item-inner">
+								<div class="col-xs-3 img-item">
+									<p class="image-item">
+										<img class="img-responsive" src="@i.pathImg" />
+									</p>
+								</div>
+								<div class="infomation-item-right col-right">
+									<div class="box-infor-product">
+										<div class="badge-maladin-a">
+											<p class="name">
+												<a href="#" target="_blank">
+													@i.Name
+												</a>
+											</p>
+										</div>
+										<p class="seller-by">
+											Cung cấp bởi
+											<span class="firm">
+												<a href="#">@i.UserBy</a>
+											</span>
+										</p>
+										<p class="action-button">
+											<a onclick="DeleteCart('@i.ID');" class="btn btn-link btn-item-delete">Xóa</a>
+
+										</p>
+									</div>
+									<div class="badge-maladin-a">
+										<div class="box-price">
+											<p class="price @i.ID">
+												@if (i.saleP == 0)
+												{
+
+												}
+												else
+												{
+													var mony = i.Price - (i.saleP * i.Price) / 100;
+													@:@mony ₫
+												}
+
+											</p>
+											<p class="price-2">
+
+												@i.Price đ
+												<span class="sale">
+													-@i.saleP %
+												</span>
+											</p>
+										</div>
+									</div>
+									<div class="badge-maladin-b"></div>
+									<div class="quantity-block">
+										<div class="input-group-2 bootstrap-touchspin count-cart">
+											<span class="input-group-btn">
+												<button id="minusTotal" class="btn btn-default bootstrap-touchspin-down @i.ID" type="button" onclick="idpClick('.'+'@i.ID');">-</button>
+											</span>
+											<input type="tel" id="totalCount" class="form-control quantity-r2 quantity @i.ID" min="0" value="@i.TotalCount" style="display: block;" />
+											<span class="input-group-btn">
+												<button id="plusTotal" class="btn btn-default bootstrap-touchspin-up @i.ID" type="button" onclick="idnClick('.'+'@i.ID');">+</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</form>
+			</div>
+		</div>
+		<div class="cart-total-prices">
+			<div class="cart-col-2">
+				<div class="affix-top" id="right-affix">
+					<div class="each-row">
+						<div class="box-style fee">
+							<p class="list-info-price">
+								<span>Tạm tính: </span>
+								<strong class="money-sum">
+
+									@foreach (var i in Model)
+									{
+										sum += i.Price * i.TotalCount - i.Price * i.saleP * i.TotalCount / 100;
+									}
+									@sum
+								</strong>
+
+							</p>
+
+
+						</div>
+
+
+						<div class="box-style fee">
+							<div class="total2 clearfix">
+								<span class="text-label">
+									Thành tiền:
+								</span>
+								<div class="amount">
+									<p><strong id="thanhtien">
+										@sum đ</strong></p>
+									<p class="text-right">
+										<small>(Đã bao gồm VAT nếu có)</small>
+									</p>
+								</div>
+							</div>
+						</div>
+						<button id="dathang" type="button" class="btn btn-large btn-block btn-danger btn-checkout" onclick="confirm();">Tiến hành đặt hàng</button>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="panel-group coupon" id="accordion">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											Mã giảm giá / Quà tặng
+										</h4>
+									</div>
+									<div class="panel-collapse-2">
+										<div class="panel-body">
+											<div class="input-group">
+												<input id="coupon" placeholder="Nhập ở đây..." type="text" class="form-control" />
+												<span class="input-group-btn">
+													<button class="btn btn-default btn-coupon" type="button" onclick="AddVoucher();">Đồng ý</button>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

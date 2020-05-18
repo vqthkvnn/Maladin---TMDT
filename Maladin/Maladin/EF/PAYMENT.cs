@@ -26,13 +26,12 @@ namespace Maladin.EF
 
         public int RECEIVE_COINT { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime DATE_PAYMENT { get; set; }
-
         [StringLength(255)]
         public string CONTENT_PAYMENT { get; set; }
 
         public bool? IS_CONFIRM { get; set; }
+
+        public DateTime? DATE_PAYMENT { get; set; }
 
         public virtual ACCOUNT ACCOUNT { get; set; }
 

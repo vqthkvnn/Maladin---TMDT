@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "ManagerOrder";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<h1 class="have-margin">Đơn hàng của tôi</h1>
+<!--nếu có đơn hàng-->
+<div id="haveContent">
+
+</div>
+<!--nếu không có đơn hàng-->
+<div class="empty-content" id="noContent">
+    <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
+    <p>Bạn chưa có đơn hàng nào</p>
+    <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            checkNullValue();
+        });
+
+        function checkNullValue() {
+            if ($("#haveContent:has(*)").length) {
+                $("#noContent").hide();
+            } else {
+                $("#noContent").show();
+            }
+        }
+    </script>
+}
+

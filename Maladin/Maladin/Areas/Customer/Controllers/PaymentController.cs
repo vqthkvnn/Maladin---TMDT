@@ -12,6 +12,8 @@ namespace Maladin.Areas.Customer.Controllers
         // GET: Customer/Payment
         public ActionResult Index()
         {
+            
+
             return View();
         }
         [HttpPost]
@@ -81,13 +83,16 @@ namespace Maladin.Areas.Customer.Controllers
         }
         public ActionResult Confirm(string vocher)
         {
-            if(vocher != null)
+            var infoDAO = new CustomerLoginDAO();
+            var payDAO = new PaymentDAO();
+            ViewBag.Voucher = vocher;
+            ViewBag.TotalCart = infoDAO.getTotalCart(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
+            if (vocher != null)
             {
                 /*
                  * Thanh toan bang voucher
                  */
-                var infoDAO = new CustomerLoginDAO();
-                var payDAO = new PaymentDAO();
+                
                 var ifo = infoDAO.getInformationByUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
                 ViewBag.Name = ifo.NAME_INFO;
                 ViewBag.Phone = ifo.PHONE_INFO;
@@ -106,8 +111,7 @@ namespace Maladin.Areas.Customer.Controllers
                 /*
                  * Thanh toan k bang voucher
                  */
-                var infoDAO = new CustomerLoginDAO();
-                var payDAO = new PaymentDAO();
+                
                 var ifo = infoDAO.getInformationByUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
                 ViewBag.Name = ifo.NAME_INFO;
                 ViewBag.Phone = ifo.PHONE_INFO;
@@ -136,7 +140,7 @@ namespace Maladin.Areas.Customer.Controllers
                 sumPrice+= Convert.ToInt32(i.Price * (100 - i.saleP) / 100 * i.TotalCount);
             }
             var user = infoDAO.getAccountByUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
-            if (vocher == null)
+            if (vocher == null || vocher == "")
             {
                 if (user.COINT_ACC - sumPrice >= 0)
                 {

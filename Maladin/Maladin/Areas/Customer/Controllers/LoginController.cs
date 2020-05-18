@@ -7,6 +7,7 @@ using Maladin.Models;
 using Maladin.DAO;
 using Maladin.EF;
 using Maladin.Areas.Customer.Common;
+using Maladin.Common;
 
 namespace Maladin.Areas.Customer.Controllers
 {
@@ -15,7 +16,7 @@ namespace Maladin.Areas.Customer.Controllers
         // GET: Customer/Login
         public ActionResult Index(CustomerLoginModel model)
         {
-            if (Session[CustomerSession.CUSTOMER_SESSION]!=null)
+            if (Session[CustomerLoginSession.CUSTOMER_SESSION]!=null)
             {
                 return RedirectToAction("Index", "Account");
             }
@@ -27,7 +28,7 @@ namespace Maladin.Areas.Customer.Controllers
                     var res = dao.Login(model.UserName, model.Password);
                     if (res ==1)
                     {
-                        Session[CustomerSession.CUSTOMER_SESSION] = model.UserName;
+                        Session[CustomerLoginSession.CUSTOMER_SESSION] = model.UserName;
                         return RedirectToAction("Index", "Account", new { area = "Customer" });
                     }
                     else if (res ==0)
@@ -88,6 +89,11 @@ namespace Maladin.Areas.Customer.Controllers
                 }
             }
             return View(model);
+        }
+        public ActionResult Logout()
+        {
+            Session.Remove(CustomerLoginSession.CUSTOMER_SESSION);
+            return RedirectToAction("Index", "Home", new { Area="" });
         }
     }
 }

@@ -42,13 +42,12 @@ namespace Maladin.EF
         public double SUM_PRICE_ODER { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime DATE_ODER { get; set; }
-
-        [Column(TypeName = "date")]
         public DateTime? DATE_COMPLATE_ODER { get; set; }
 
         [StringLength(255)]
         public string NOTE_ODER { get; set; }
+
+        public DateTime? DATE_ODER { get; set; }
 
         public virtual ACC_PRODUCT ACC_PRODUCT { get; set; }
 

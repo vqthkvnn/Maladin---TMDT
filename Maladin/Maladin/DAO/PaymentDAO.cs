@@ -12,6 +12,10 @@ namespace Maladin.DAO
         {
             db = new TMDT_Maladin();
         }
+        public bool InsertGuest(string s)
+        {
+            return true;
+        }
         public string InserOderByCustomer(string IDACC_PRO, string User, string type, int count, string IDVocher)
         {
             try
@@ -370,6 +374,18 @@ namespace Maladin.DAO
             {
 
                 return 0;
+            }
+        }
+        public bool CheckCoin(string user, int price)
+        {
+            int coin = (db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user).COINT_ACC ?? 0);
+            if (coin - price > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         

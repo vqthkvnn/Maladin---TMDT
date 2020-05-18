@@ -27,7 +27,6 @@ namespace Maladin.EF
             USES_WAIT = new HashSet<USES_WAIT>();
             USES_WAIT1 = new HashSet<USES_WAIT>();
             WATCHED_PRODUCT = new HashSet<WATCHED_PRODUCT>();
-            PRODUCTs = new HashSet<PRODUCT>();
         }
 
         [Key]
@@ -99,8 +98,5 @@ namespace Maladin.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WATCHED_PRODUCT> WATCHED_PRODUCT { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PRODUCT> PRODUCTs { get; set; }
     }
 }

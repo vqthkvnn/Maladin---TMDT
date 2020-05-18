@@ -1,0 +1,129 @@
+﻿@{ 
+    var name ="";
+    if (ViewBag.IsLogin !=null)
+    {
+        name = ViewBag.IsLogin;
+        name = name.Substring(0, 6);
+    }
+}
+<header id="header">
+    <div class="header-form-container">
+        <div class="container-1">
+            <div class="left-container">
+                <div class="logo-img">
+                    <a class="logo" href="@Url.Action("Index", "Home",new {area="" })">
+                        <img src="~/assets/image/logo.png" alt="Day la logo nhe hihi" style="height:40px" />
+                    </a>
+                </div>
+                <div class="form-search" style="margin-left: 50px;">
+                    <form id="search-form" onsubmit="return clickTosearch(this);">
+                        <div class="search-wrap">
+                            <div class="input">
+                                <div class="flex">
+                                    <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off" id="inputSearch">
+                                </div>
+                            </div>
+                            <button type="submit">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <span>Tìm kiếm</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="header-link">
+                <a href="@Url.Action("ManagerOrder", "User")" title="Kiểm tra trạng thái đơn hàng của bạn" class="tracking-order item">
+                    <i class="fa fa-truck cart-icon" aria-hidden="true"></i>
+                    <span> Theo dõi <br />đơn hàng</span>
+                </a>
+                <a href="@Url.Action("MyNotification", "User")" title="Kiểm tra thông báo" style="padding-left: 15px;">
+                    <div class="noti-item tracking-noti item" id="header-noti">
+                        <div>
+                            <i class="fa fa-bell cart-icon" aria-hidden="true"></i>
+                            <span>Thông báo <br />của tôi</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="user-profile item" id="header-user">
+                    <!-- Start neu khong co user dang nhap -->
+                    <div id="isLogin">
+                        <div>
+                            <i class="fa fa-user cart-icon" aria-hidden="true"></i>
+                            <span>Đăng nhập <br />tài khoản</span>
+                        </div>
+                        <div class="toogler Userstyle_UserDropDown no-user">
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Index", "Login", new {Area ="Customer" })">Đăng nhập</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Register", "Login", new {Area ="Customer" })">Tạo tài khoản</a>
+                        </div>
+                    </div>
+                    <!-- End neu khong co user dang nhap -->
+                    <!-- Start neu co user dang nhap -->
+                    <div id="isLogined">
+                        <div>
+                            <i class="fa fa-user cart-icon" aria-hidden="true"></i>
+                            <span id="span-name-user"><br />Tài khoản</span>
+                        </div>
+                        <div class="toogler Userstyle_UserDropDown no-user" style="">
+                            <a class="dropdown-item" href="@Url.Action("Index", "Account", new {Area ="Customer" })">Thông tin tài khoản</a>
+                            <a class="dropdown-item" href="@Url.Action("MyNotification", "User")">Thông báo của tôi</a>
+                            <a class="dropdown-item" href="@Url.Action("ManagerOrder", "User")">Quản lý đơn hàng</a>
+                            <a class="dropdown-item" href="@Url.Action("ReviewProductBought", "User")">Nhận xét sản phẩm đã mua</a>
+                            <a class="dropdown-item" href="@Url.Action("WishList", "User")">Sản phẩm yêu thích</a>
+                            <a class="dropdown-item" href="@Url.Action("ManagerMaladinCoin", "User")">Quản lý maladin coin</a>
+                            <a class="dropdown-item" href="@Url.Action("MyReview", "User")">Nhận xét của tôi</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "Login", new {Area ="Customer" })">Đăng xuất</a>
+                        </div>
+                    </div>
+                    <!-- End neu co user dang nhap -->
+                </div>
+                <div id="header-cart">
+                    <a rel="nofollow" href="@Url.Action("Cart", "Account",  new {area="Customer" })" class="header-cart item">
+                        <i class="fa fa-shopping-cart cart-icon" aria-hidden="true"></i>
+                        <span class="cart-text">Giỏ hàng </span>
+                        <span class="badge badge-primary" id="cart-total-count" style="background-color: #fcdf03; color: black;">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-nav">
+        <div class="container">
+            <nav class="main-nav-wrap">
+                <a href="javascript:" class="nav-main-toggle">
+                    <i class="fa fa-bars cart-icon" aria-hidden="true"></i>
+                    <span class="long">DANH MỤC SẢN PHẨM</span>
+                </a>
+                <ul>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<script>
+        var isCheckLogin;
+            @if (ViewBag.IsLogin == null)
+            {
+                @:isCheckLogin = false;
+            }
+            else
+            {
+                @:isCheckLogin = true;
+                @:$("#span-name-user").text("Chào " + "@name" + "...");
+                @:$("#cart-total-count").text("@ViewBag.TotalCart");
+            }
+            //true la da login, false la chua login
+            if (isCheckLogin === true) {
+                $('#isLogin').hide();
+                $('#isLogined').show();
+            } else {
+                $('#isLogin').show();
+                $('#isLogined').hide();
+    }
+    function clickTosearch(myform) {
+        var value = $('#inputSearch').val();
+        window.location.href = "@Url.Action("Index", "Search")?q=" + value;
+        return false;
+    }
+
+
+</script>

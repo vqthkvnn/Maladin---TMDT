@@ -9,13 +9,15 @@ namespace Maladin.DAO
     public class ProductHomeDAO
     {
         TMDT_Maladin dbContext = null;
+        Maladin.Models.EF_MORE.FV_Maladin dbFV = null;
         public ProductHomeDAO()
         {
             dbContext = new TMDT_Maladin();
+            dbFV = new Models.EF_MORE.FV_Maladin();
         }
         public List<ItemProductModel> getListProduct(int page, string idType)
         {
-            string sql = "SELECT ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT as SalePricent, " +
+            string sql = "SELECT TOP 5 ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AMOUNT as PriceGoc, SALE_PERCENT as SalePricent, " +
                 "SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge  " +
@@ -43,10 +45,10 @@ namespace Maladin.DAO
             {
                 sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
                 "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
-                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.DATE_START_SELL DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.DATE_START_SELL DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AP.AMOUNT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
-                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE N'%" + q +
                 "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
                 " AND PR.RowNum<=" + Convert.ToString(16 * page) +
                 " ORDER BY PR.RowNum ASC";
@@ -55,10 +57,10 @@ namespace Maladin.DAO
             {
                 sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
                 "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
-                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SELL_COUNT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SELL_COUNT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AP.AMOUNT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
-                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE N'%" + q +
                 "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
                 " AND PR.RowNum<=" + Convert.ToString(16 * page) +
                 " ORDER BY PR.RowNum ASC";
@@ -67,10 +69,10 @@ namespace Maladin.DAO
             {
                 sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
                 "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
-                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SALE_PERCENT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SALE_PERCENT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AP.AMOUNT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
-                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE N'%" + q +
                 "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
                 " AND PR.RowNum<=" + Convert.ToString(16 * page) +
                 " ORDER BY PR.RowNum ASC";
@@ -79,10 +81,10 @@ namespace Maladin.DAO
             {
                 sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
                 "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
-                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.AMOUNT ASC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.AMOUNT ASC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AP.AMOUNT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
-                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE N'%" + q +
                 "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
                 " AND PR.RowNum<=" + Convert.ToString(16 * page) +
                 " ORDER BY PR.RowNum ASC";
@@ -91,10 +93,10 @@ namespace Maladin.DAO
             {
                 sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
                 "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
-                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.AMOUNT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.AMOUNT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AP.AMOUNT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
-                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE N'%" + q +
                 "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
                 " AND PR.RowNum<=" + Convert.ToString(16 * page) +
                 " ORDER BY PR.RowNum ASC";
@@ -103,10 +105,10 @@ namespace Maladin.DAO
             {
                 sql = "SELECT PR.ID as ID, PR.NameProduct as NameProduct, PR.PriceGoc as PriceGoc, PR.SalePricent as SalePricent, " +
                 "PR.SaleMoney as SaleMoney, PR.Rating as Rating, PR.CountComment as CountComment, PR.PathIamge as PathIamge " +
-                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SALE_PERCENT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, PRICE_PRODUCT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY AP.SALE_PERCENT DESC) AS RowNum, ID_ACC_PRODUCT AS ID, NAME_PRODUCT as NameProduct, AP.AMOUNT as PriceGoc, SALE_PERCENT AS SalePricent, SALE_MONEY as SaleMoney, RATING_PRODUCT as Rating," +
                 "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE AP.ID_ACC_PRODUCT = ID_ACC_PRODUCT) AS CountComment," +
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge, AP.DATE_START_SELL, AP.SELL_COUNT " +
-                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE '%" + q +
+                "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.NAME_PRODUCT LIKE N'%" + q +
                 "%') AS PR WHERE PR.RowNum>" + Convert.ToString(16 * (page - 1)) +
                 " AND PR.RowNum<=" + Convert.ToString(16 * page) +
                 " ORDER BY PR.RowNum ASC";
@@ -170,14 +172,14 @@ namespace Maladin.DAO
             try
             {
                 var res = dbContext.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idproduct);
-                var account = dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user || x.IS_ACTIVE_ACC == true);
+                var account = dbContext.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user && x.IS_ACTIVE_ACC == true);
                 if (account == null)
                 {
-                    return -2;
+                    return -2; // tai khoan k ton tai
                 }
                 if (res == null)
                 {
-                    return 0;
+                    return 0; // san pham k ton tai
                 }
                 var check = dbContext.WATCHED_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idproduct &&
                 x.USER_ACC == user);
@@ -189,25 +191,25 @@ namespace Maladin.DAO
                     wATCHED_PRODUCT.CART_COUNT = 1;
                     dbContext.WATCHED_PRODUCT.Add(wATCHED_PRODUCT);
                     dbContext.SaveChanges();
-                    return 1;
+                    return 1; // them thanh cong
                 }
                 else{
                     if (check.CART_COUNT >0)
                     {
-                        return -1;
+                        return -1; // San pham da co
                     }
                     else
                     {
                         dbContext.WATCHED_PRODUCT.Attach(check);
                         check.CART_COUNT = 1;
                         dbContext.SaveChanges();
-                        return 1;
+                        return 1; // them thanh cong
                     }
                 }
             }
             catch(Exception e)
             {
-                return -3;
+                return -3; // loi khacs
             }
         }
         public bool checkCOD(string idproduct)
@@ -223,6 +225,100 @@ namespace Maladin.DAO
                 return true;
             }
         }
+       
+        public bool InsertToFavorite(string user, string idp)
+        {
+            try
+            {
+                WATCHED_PRODUCT wATCHED_ = new WATCHED_PRODUCT();
+                wATCHED_.USER_ACC = user;
+                wATCHED_.ID_ACC_PRODUCT = idp;
+                wATCHED_.CART_COUNT = -1;
+                dbContext.WATCHED_PRODUCT.Add(wATCHED_);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+        public ProductHomeModel GetInformationProduct(string id)
+        {
+            string sql = "SELECT AC.ID_ACC_PRODUCT as id,PD.NAME_PRODUCT as name, PC.NAME_PRODUCER as producer, " +
+                "AC.AMOUNT as priceG, AC.SALE_PERCENT as saleP, PD.DESCRIBE_PRODUCT as content," +
+                "(SELECT COUNT(*) FROM dbo.ACCOUNT_COMMENT WHERE ID_ACC_PRODUCT = AC.ID_ACC_PRODUCT) AS totalComment," +
+                "PD.RATING_PRODUCT as  totalRating, AC.USER_ACC AS ctv " +
+                "FROM dbo.PRODUCT AS PD, dbo.PRODUCER_INFO AS PC, dbo.ACC_PRODUCT AS AC " +
+                "WHERE AC.ID_PRODUCT = PD.ID_PRODUCT AND PC.ID_PRODUCER = PD.ID_PRODUCER AND " +
+                "ID_ACC_PRODUCT='"+id+"'";
+            var data = dbContext.Database.SqlQuery<ProductHomeModel>(sql)
+                .Select(b => new ProductHomeModel
+                {
+                    id = b.id,
+                    name = b.name,
+                    producer = b.producer,
+                    content = b.content,
+                    priceG = b.priceG,
+                    saleP = b.saleP,
+                    totalComment = b.totalComment,
+                    totalRating = b.totalRating,
+                    ctv = b.ctv
+
+
+                }).SingleOrDefault();
+            return data;
+
+        }
+        public List<PRODUCT_IMAGE> getTopImage(string id)
+        {
+            string idp = dbContext.ACC_PRODUCT.Where(x => x.ID_ACC_PRODUCT == id).SingleOrDefault().ID_PRODUCT;
+            return dbContext.PRODUCT_IMAGE.Where(x => x.ID_PRODUCT == idp).Take(5).ToList();
+        }
+        public List<PRODUCT_ATT> getAllAttr(string id)
+        {
+            string idp = dbContext.ACC_PRODUCT.Where(x => x.ID_ACC_PRODUCT == id).SingleOrDefault().ID_PRODUCT;
+            return dbContext.PRODUCT_ATT.Where(x => x.ID_PRODUCT == idp).ToList();
+        }
+        public List<GUEST_QUESTION> getAllQuest(string id)
+        {
+
+            return dbContext.GUEST_QUESTION.Where(x => x.ID_ACC_PRODUCT == id).ToList();
+        }
+        public List<ACCOUNT_COMMENT> getAllComment(string id)
+        {
+            return dbContext.ACCOUNT_COMMENT.Where(x => x.ID_ACC_PRODUCT == id).ToList();
+        }
+        public int countTopImage(string id)
+        {
+            string idp = dbContext.ACC_PRODUCT.Where(x => x.ID_ACC_PRODUCT == id).SingleOrDefault().ID_PRODUCT;
+            return dbContext.PRODUCT_IMAGE.Where(x => x.ID_PRODUCT == idp).Take(5).Count();
+        }
+        public int countQuestion(string id)
+        {
+            return dbContext.GUEST_QUESTION.Where(x => x.ID_ACC_PRODUCT == id).Count();
+        }
+        public int countComment(string id)
+        {
+            return dbContext.ACCOUNT_COMMENT.Where(x => x.ID_ACC_PRODUCT == id).Count();
+        }
+        public bool AddToFavorite(string id, string user)
+        {
+            try
+            {
+                Maladin.Models.EF_MORE.FAVORITE_PRODUCT fAVORITE_ = new Maladin.Models.EF_MORE.FAVORITE_PRODUCT();
+                fAVORITE_.ID_ACC_PRODUCT = id;
+                fAVORITE_.USER_ACC = user;
+                dbFV.FAVORITE_PRODUCT.Add(fAVORITE_);
+                dbFV.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+        
 
 
     }

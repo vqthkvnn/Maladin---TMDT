@@ -14,7 +14,8 @@ namespace Maladin.Controllers
         {
             var dao = new ProductHomeDAO();
             models.GiayProduct = dao.getListProduct(1, "TP001");
-            models.DongHoProduct = dao.getListProduct(1, "TP003");
+            models.DongHoProduct = dao.getListProduct(1, "TP002");
+            models.KinhProduct = dao.getListProduct(1, "TP003");
             if (Session[CustomerSession.CUSTOMER_SESSION] == null)
             {
                 ViewBag.IsLogin = null;

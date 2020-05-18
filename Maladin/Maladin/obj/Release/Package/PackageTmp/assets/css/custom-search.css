@@ -34,7 +34,9 @@ h1, h4 {
 }
 
 
-
+.list-group-star {
+    width: 100%;
+}
 .container .row .col-9 .row .option-box .btn-group.sort-box {
     margin-bottom: 0;
     margin-right: 10px;
@@ -110,8 +112,6 @@ button {
     border-bottom: 0px;
 }
 
-;
-
 
 .container .row .col-9 .row .product-box-list {
     font-size: 0;
@@ -152,7 +152,7 @@ button {
     padding: 0 24px 25px;
     border: 1px solid transparent;
     position: relative;
-    width: 33.3%;
+    width: 25%;
     max-width: 100%;
 }
 
@@ -190,7 +190,7 @@ a:hover {
 }
 
 .container .col-9 a:hover {
-    background-color: rgb(233, 227, 227);
+    background-color: aliceblue;
 }
 
 .product-item .content {
@@ -200,8 +200,8 @@ a:hover {
 }
 
     .product-item .content .image {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         margin-bottom: 12px;
         padding-top: 0;
         text-align: center;
@@ -387,9 +387,6 @@ img {
     margin: 0;
 }
 
-.checked {
-    color: orange;
-}
 
 .product-item .rating .rating-content {
     font-size: 0;
@@ -495,13 +492,13 @@ img {
                 text-decoration: none;
             }
 
-.panel-title {
+.panel-title-product {
     margin-top: 0;
     font-size: 16px;
     border-radius: 4px;
 }
 
-    .panel-title a {
+    .panel-title-product a {
         line-height: 20px;
         display: block;
         color: #000;
@@ -556,7 +553,9 @@ img {
         font-size: 13px;
         font-weight: 400;
     }
-
+.left-search {
+    background: white;
+}
 .slider-wrap {
     padding: 0 12px 5px 20px;
     text-align: center;

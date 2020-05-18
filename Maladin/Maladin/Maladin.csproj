@@ -199,6 +199,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PartialRenderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\CustomerLoginDAO.cs" />
@@ -243,8 +244,13 @@
     </Compile>
     <Compile Include="Models\CartProductModel.cs" />
     <Compile Include="Models\CustomerLoginModel.cs" />
+    <Compile Include="Models\EF_MORE\ACCOUNT.cs" />
+    <Compile Include="Models\EF_MORE\ACC_PRODUCT.cs" />
+    <Compile Include="Models\EF_MORE\FAVORITE_PRODUCT.cs" />
+    <Compile Include="Models\EF_MORE\FV_Maladin.cs" />
     <Compile Include="Models\ItemProductModel.cs" />
     <Compile Include="Models\ItemProductModels.cs" />
+    <Compile Include="Models\ProductHomeModel.cs" />
     <Compile Include="Models\RegisterCustomerModel.cs" />
     <Compile Include="Models\SearchProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -375,6 +381,7 @@
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\custom-search.css" />
     <Content Include="assets\css\paymentConfirm.css" />
+    <Content Include="assets\css\productHome.css" />
     <Content Include="assets\css\test.css" />
     <Content Include="assets\image\avatar.png" />
     <Content Include="assets\image\avenger-content.png" />
@@ -635,7 +642,8 @@
     <Content Include="Areas\Customer\Views\Account\Question.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Comment.cshtml" />
     <Content Include="Areas\Customer\Views\Payment\Confirm.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contact.js" />
     <Content Include="Scripts\gmaps.js" />
@@ -688,6 +696,7 @@
     <Content Include="Views\User\MyReview.cshtml" />
     <Content Include="Views\User\ManagerMaladinCoin.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
