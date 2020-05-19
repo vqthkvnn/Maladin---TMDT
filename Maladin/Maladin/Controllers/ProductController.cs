@@ -48,5 +48,9 @@ namespace Maladin.Controllers
                 return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult PayCOD(string id)
+        {
+            return View();
+        }
     }
 }

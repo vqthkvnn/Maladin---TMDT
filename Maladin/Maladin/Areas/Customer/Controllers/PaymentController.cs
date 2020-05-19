@@ -163,7 +163,44 @@ namespace Maladin.Areas.Customer.Controllers
                     return Json(new { status = false }, JsonRequestBehavior.AllowGet);
                 }
             }
-            
+        }
+        [HttpPost]
+        public JsonResult AcceptPaymentCoin(string IDVocher, string type)
+        {
+            /*
+             * chấp nhận thanh toán -> xử lý thanh toán theo hình thức có tài khoản
+             * thêm mới n-> đơn -> n sản phẩm trong lô hàng
+             */
+            var daoP = new PaymentDAO();
+            List<string> allID = new List<string>();
+            allID = daoP.AutoRenderOderFromUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), IDVocher, type);
+            /*
+             * tiếp theo là thanh toán
+             */
+            var resIDP = daoP.Payment(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), allID);
+            return Json(new { status = resIDP}, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult AcceptPaymentNoCoin(string IDVocher, string type)
+        {
+            /*
+             * chấp nhận thanh toán -> xử lý thanh toán theo hình thức có tài khoản
+             * thêm mới n-> đơn -> n sản phẩm trong lô hàng
+             */
+            var daoP = new PaymentDAO();
+            List<string> allID = new List<string>();
+            try
+            {
+                allID = daoP.AutoRenderOderFromUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), IDVocher, type);
+                return Json(new { status = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+            }
+            /*
+             * tiếp theo là thanh toán
+             */
             
         }
     }

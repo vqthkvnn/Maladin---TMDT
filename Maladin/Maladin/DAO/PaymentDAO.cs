@@ -21,8 +21,8 @@ namespace Maladin.DAO
             try
             {
                 /*
-             * them moi cac hoa don
-             */
+                * them moi cac hoa don
+                */
                 int leght = db.ODERs.Where(x => x.ID_ACC_PRODUCT == IDACC_PRO).Count();
                 /*
                  Tao ma cho oder
@@ -35,18 +35,15 @@ namespace Maladin.DAO
                 oDER.ID_ACC_PRODUCT = IDACC_PRO;
                 oDER.COUNT_ODER = count;
                 oDER.ID_TYPE_ODER = type;
-                if (type == "TK")
-                {
-                    oDER.STATUS_ODER = -1; // cho thanh toan
-                }
-                else
-                {
-                    oDER.STATUS_ODER = 0; // da chuyen
-                }
+                oDER.STATUS_ODER = 0; // chuyển đơn cho đơn vị bán -> check tiền auto
                 /*
                  * check vocher:
                  */
                 var MonneyFromVocher = 0;
+                /*
+                 * fix lỗi liên quan đến việc khách k dùng vocher
+                 * đối với khách dùng vocher cần comment lại ở note
+                 */
                 if (CheckAreaVocher(IDVocher, IDACC_PRO))
                 {
                     var vocher = db.VOCHERs.SingleOrDefault(x => x.ID_VOCHER == IDVocher);
@@ -73,6 +70,7 @@ namespace Maladin.DAO
                     {
                         var maxPricent = vocher.PERCENT_VOCHER * count * product.AMOUNT + vocher.MONEY_VOCHER;
                     }
+                    oDER.NOTE_ODER = "Khách thanh toán có sử dụng Voucher: " + IDVocher;
                 }
                 if (count * product.AMOUNT - MonneyFromVocher <= 0)
                 {
@@ -102,6 +100,10 @@ namespace Maladin.DAO
 
             /*check xem vocher co duoc kick hoat cho lo hang kia k*/
             var vocher = db.VOCHERs.SingleOrDefault(x => x.ID_VOCHER == IDVocher);
+            if (vocher == null)
+            {
+                return false;
+            }
             if (!vocher.IS_STATUS|| vocher.AMOUNT_VOCHER<=0)
             {
                 return false;
@@ -216,8 +218,9 @@ namespace Maladin.DAO
         public int Payment(string user, List<string> listoder)
         {
             /*
-             * chuc nang nay chi co khi tai khoan 
-             check kha nang thanh toan cua account -> đang trạng thái chờ đơn
+             * chuc nang nay chi co khi tai khoan
+             * hệ thống kiểm tra khả thanh toán trước khi vào đây
+             * tức là vào đây auto qua đơn
              */
             var res = db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user);
             double totalPay=0;
@@ -280,15 +283,9 @@ namespace Maladin.DAO
                     db.ACC_PRODUCT.Attach(product);
                     product.SELL_COUNT += oder.COUNT_ODER;
                     db.PAYMENTs.Add(pAYMENT);
-                    
-                    
-                    
-
                 }
-
-                
                 db.SaveChanges();
-                return 1;
+                return aYMENT.ID_PAYMENT;
                 /* thanh toan thanh cong*/
             }
             else
@@ -388,7 +385,24 @@ namespace Maladin.DAO
                 return false;
             }
         }
-        
-        
+        public List<string> AutoRenderOderFromUser(string user, string idvocher, string type)
+        {
+            List<WATCHED_PRODUCT> allCart = db.WATCHED_PRODUCT.Where(x => x.USER_ACC == user && x.CART_COUNT > 0).ToList();
+            List<string> allIDOder = new List<string>();
+            for(int i=0;i<allCart.Count();i++)
+            {
+                allIDOder.Add(InserOderByCustomer(allCart[i].ID_ACC_PRODUCT, user, type, 
+                    (allCart[i].CART_COUNT ?? 0), idvocher));
+                /*
+                 * xong đơn phải reset nó về hết
+                 */
+                db.WATCHED_PRODUCT.Attach(allCart[i]);
+                allCart[i].CART_COUNT = 0;
+               
+            }
+            db.SaveChanges();
+            return allIDOder;
+        }
+
     }
 }

@@ -382,6 +382,7 @@
     <Content Include="assets\css\custom-search.css" />
     <Content Include="assets\css\paymentConfirm.css" />
     <Content Include="assets\css\productHome.css" />
+    <Content Include="assets\css\style-paycod.css" />
     <Content Include="assets\css\test.css" />
     <Content Include="assets\image\avatar.png" />
     <Content Include="assets\image\avenger-content.png" />
@@ -697,6 +698,7 @@
     <Content Include="Views\User\ManagerMaladinCoin.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\PayCOD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
