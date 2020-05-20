@@ -1,0 +1,312 @@
+﻿
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <link href="~/assets/css/custom-search.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="row ">
+                <h4 class="panel-title">
+                    <a href="#">Danh Mục Sản Phẩm</a>
+                </h4>
+                <div class="list-group">
+                    <div class="list-group-item is-top">
+                        <a class="category" data-filter-value="8215" rel="" href="#">
+                            Thiết Bị Âm Thanh và Phụ Kiện                                                                <span>(3972)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="1804" rel="" href="#">
+                            Tai Nghe Có Dây
+                            <span>(1854)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="4428" rel="" href="#">
+                            Tai Nghe Có Dây Nhét Tai
+                            <span>(1319)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="5531" rel="" href="#">
+                            Tai Nghe Bluetooth Nhét Tai
+                            <span>(1248)</span>
+                        </a>
+                    </div>
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="1811" rel="" href="#" class="list-group-item">
+                            Tai Nghe Bluetooth
+                            <span>(2011)</span>
+                        </a>
+                    </div>
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="2977" rel="" href="#" class="list-group-item">
+                            Tai Nghe Có Dây Chụp Tai (Over-Ear)
+                            <span>(238)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="8214" rel="" href="" class="list-group-item">
+                            Phụ Kiện Điện Thoại và Máy Tính Bảng
+                            <span>(2471)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="8400" rel="" href="#" class="list-group-item">
+                            Tai Nghe True Wireless
+                            <span>(357)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="28670" rel="" href="#" class="list-group-item">
+                            Phụ kiện máy tính và Laptop
+                            <span>(341)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="2971" rel="" href="#" class="list-group-item">
+                            Tai Nghe Chơi thiet-bi-choi-game-va-phu-kien
+                            <span>(289)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item list-group-show js-list-show">
+                        <a href="#">Xem thêm <i class="fa fa-angle-down"></i></a>
+                    </div>
+                    <!--
+                        <div class="list-group-item">
+                            <a data-filter-code="category" data-filter-value="28642" rel="" href="#" class="list-group-item">
+                                Micro
+                                <span>(2)</span>
+                            </a>
+                        </div>
+
+                    </div>
+                    -->
+                    <div class="list-group-item list-group-hide js-list-hide">
+                        <a href="javascript:void(0)">Thu gọn <i class="fa fa-angle-up"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="panel-title">
+                    <a href="#">Đánh giá</a>
+                </h4>
+                <div class="list-group">
+                    <div class="list-group-item is-top">
+                        <a href="#" style="text-decoration: none;">
+                            <ul class="rating">
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <i style="font-size: 13px;">(Từ 5 sao)</i>
+                            </ul>
+                        </a>
+                    </div>
+                    <div class="list-group-item is-top">
+                        <a href="#" style="text-decoration: none;">
+                            <ul class="rating">
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star"></li>
+                                <i style="font-size: 13px;">(Từ 4 sao)</i>
+                            </ul>
+                        </a>
+                    </div>
+                    <div class="list-group-item is-top">
+                        <a href="#" style="text-decoration: none;">
+                            <ul class="rating">
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star "></li>
+                                <li class="fa fa-star "></li>
+                                <i style="font-size: 13px;">(Từ 3 sao)</i>
+                            </ul>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="panel-title">
+                    <a href="#">Giá</a>
+                </h4>
+                <div class="list-group">
+                    <div class="slider-wrap category-price-slide">
+                        <p class="slider-title">Chọn khoảng giá</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <input type="number" id="1" min="0" step="1000" class="slide-input slide-from">
+                            <span>-</span>
+                            <input type="number" id="2" min="0" step="1000" class="slide-input slide-to">
+                        </div>
+                        <button onclick="reply_click(evt,tmie)" type="submit" class="btn btn-success" style="width: 100%; margin-top: 10px;">OK</button>
+                    </div>
+                    <script type="text/javascript">
+                        function reply_click(gt1, gt2) {
+                            var i;
+                            gt1 = document.getElementById("1");
+                            gt2 = document.getElementById("2");
+                            if (gt2 > gt1)
+                                alert("Vui lòng nhập lại khoảng giá");
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+
+            <div class="product-box no-mg">
+                <div class="row">
+                    <div class="text">
+                        <h1>Kết quả tìm kiếm cho 'bitis hunter': </h1>
+                        <h4>187 kết quả (0.49 giây)</h4>
+                    </div>
+
+
+                    <div class="option-box">
+                        <div class="btn-group pull-left sort-box">
+                            <!-- <span class="span-tile">Ưu tiên xem:</span> -->
+                            <ul class="sort-list" style="bottom: 0; vertical-align: bottom; display: inline-block;">
+                                <li class="" style="padding-top: 7px;"><span style="text-align: center; ">Ưu tiên xem:</span></li>
+                                <li class="" data-order="newest">
+                                    <a href="#"><button type="button" class="btn btn-default">HÀNG MỚI</button></a>
+                                </li>
+                                <li class="" data-order="top_seller">
+                                    <a href="#"><button type="button" class="btn btn-default">BÁN CHẠY</button></a>
+                                </li>
+                                <li class="" data-order="discount_percent,desc">
+                                    <a href="#"><button type="button" class="btn btn-default">GIẢM GIÁ NHIỀU</button></a>
+                                </li>
+
+                                <li class="" data-order="price,asc">
+                                    <a href="#"><button type="button" class="btn btn-default">GIÁ THẤP</button></a>
+                                </li>
+                                <li class="" data-order="price,desc">
+                                    <a href="#"><button type="button" class="btn btn-default">GIÁ CAO</button></a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box-list">
+                <div class="row">
+                    <!--Sản Phẩm 1-->
+                    <a href="#" id="1" class="product-item    search-div-product-item" ">
+                        <div class="content">
+                            <span class="image">
+                                <img class="product-image img-responsive" src="https://salt.tikicdn.com/cache/200x200/ts/product/3a/5c/a7/c6c879117ad5a3e37f4cca2498df4471.jpg" alt="">
+                            </span>
+                            <div class="options-wrap">
+                                <div class="option-slider-wrap">
+                                    <div class="slider " style="position: relative; display: block; width: 100%; height: auto; box-sizing: border-box; visibility: visible;">
+                                        <div class="slider-frame" style="position: relative; display: block; overflow: hidden; height: auto; margin: 0px; padding: 0px; transform: translate3d(0px, 0px, 0px); box-sizing: border-box;">
+                                            <ul class="slider-list" style="transform: translate3d(0px, 0px, 0px); position: relative; display: block; margin: 0px; padding: 0px; height: 34px; width: 144px; cursor: inherit; box-sizing: border-box;">
+                                                <li class="slider-slide" style="position: absolute; left: 0px; top: 0px; display: inline-block; list-style-type: none; vertical-align: top; width: 36px; height: auto; box-sizing: border-box; margin: auto 0px;">
+                                                    <span class="option-item">
+                                                        <img width="32" height="32" src="https://salt.tikicdn.com/cache/64x64/ts/product/6a/8d/4f/f3a5f3ebd9b2e69406821f922cfcc537.jpg">
+                                                    </span>
+                                                </li>
+                                                <li class="slider-slide" style="position: absolute; left: 36px; top: 0px; display: inline-block; list-style-type: none; vertical-align: top; width: 36px; height: auto; box-sizing: border-box; margin: auto 0px;">
+                                                    <span class="option-item">
+                                                        <img width="32" height="32" src="https://salt.tikicdn.com/cache/64x64/ts/product/ca/b5/90/6c79d4052478d66ecf166a42f673b33a.jpg">
+                                                    </span>
+                                                </li>
+                                                <li class="slider-slide" style="position: absolute; left: 72px; top: 0px; display: inline-block; list-style-type: none; vertical-align: top; width: 36px; height: auto; box-sizing: border-box; margin: auto 0px;">
+
+                                                    <span class="selected option-item">
+                                                        <img width="32" height="32" src="https://salt.tikicdn.com/cache/64x64/ts/product/34/aa/38/f0321de429fd271bc5204d6f31af0603.jpg">
+                                                    </span>
+                                                </li>
+                                                <li class="slider-slide" style="position: absolute; left: 108px; top: 0px; display: inline-block; list-style-type: none; vertical-align: top; width: 36px; height: auto; box-sizing: border-box; margin: auto 0px;">
+                                                    <span class="option-item">
+                                                        <img width="32" height="32" src="https://salt.tikicdn.com/cache/64x64/ts/product/3a/5c/a7/c6c879117ad5a3e37f4cca2498df4471.jpg">
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="title">
+                                Tai Nghe Nhét Tai Mi Basic Xiaomi HSEJ03JY -...
+                            </p>
+                            <p class="price-sale">
+
+                                <span class="final-price">
+                                    116.000 ₫
+                                    <span class="sale-tag sale-tag-square">-23%</span>
+                                </span>
+                                <span class="price-regular">150.000 ₫</span>
+                                <span class="sale-tag sale-tag-square">-23%</span>
+                            </p>
+
+                        </div>
+                        <div class="review-wrap">
+
+                            <p class="rating">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            <p class="review">  (836 nhận xét)</p>
+                        </div>
+                    </a>
+                    
+                    
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="list-pager">
+                    <ul>
+
+                        <li><span class="current">1</span></li>
+                        <li>
+                            <a class="normal" href="#">2</a>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">3</a>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">4</a>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">5</a>
+
+                        </li>
+                        <li><a rel="next" class="next" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

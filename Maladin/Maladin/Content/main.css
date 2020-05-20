@@ -3758,7 +3758,7 @@ body.badge-v2 .product-item {
 
 .product-item {
     width: 246px;
-    height: 429px;
+    height: 400px;
 }
 
 body.badge-v2 .product-item>a {
@@ -4149,6 +4149,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
     text-align: left;
     line-height: 20px;
 }
+<<<<<<< HEAD
 
 .dRBGls {
     width: 300px;
@@ -4214,4 +4215,8 @@ body.badge-v2 .product-item .review-wrap .review-count {
 
 .noti-item:hover .dRBGls {
     display: block;
+}
+
+.col-12-lg a:hover {
+    background-color: aliceblue;
 }

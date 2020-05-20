@@ -1,0 +1,254 @@
+﻿
+@{
+    ViewBag.Title = "Tìm kiếm sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<Maladin.Models.ItemProductModel>
+<title>@ViewBag.Title</title>
+@section Scripts{
+    <link href="~/assets/css/custom-search.css" rel="stylesheet" />
+    
+    <script>
+        $("#count-res").text("@ViewBag.count kết quả (@ViewBag.time ms)");
+    </script>
+}
+
+<div class="container" style="background-color:white;">
+    <div class="row">
+        <div class="col-3 left-search">
+            <div class="row ">
+                <h4 class="panel-title-product">
+                    <a href="#">Danh Mục Sản Phẩm</a>
+                </h4>
+                <div class="list-group">
+                    <div class="list-group-item is-top">
+                        <a class="category" data-filter-value="8215" rel="" href="#">
+                            Thiết Bị Âm Thanh và Phụ Kiện                                                                <span>(3972)</span>
+                        </a>
+                    </div>
+
+                    <div class="list-group-item">
+                        <a class="category" data-filter-value="1804" rel="" href="#">
+                            Tai Nghe Có Dây
+                            <span>(1854)</span>
+                        </a>
+                    </div>
+
+
+
+                    <div class="list-group-item list-group-show js-list-show">
+                        <a href="#">Xem thêm <i class="fa fa-angle-down"></i></a>
+                    </div>
+
+
+                    <div class="list-group-item list-group-hide js-list-hide">
+                        <a href="javascript:void(0)">Thu gọn <i class="fa fa-angle-up"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="panel-title-product">
+                    <a href="#">Đánh giá</a>
+                </h4>
+                <div class="list-group-star">
+                    <div class="list-group-item-start is-top">
+                        <a href="#" style="text-decoration: none;">
+                            <ul class="rating">
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <i style="font-size: 13px;">(Từ 5 sao)</i>
+                            </ul>
+                        </a>
+                    </div>
+                    <div class="list-group-item-start is-top">
+                        <a href="#" style="text-decoration: none;">
+                            <ul class="rating">
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star checked"></li>
+                                <li class="fa fa-star"></li>
+                                <i style="font-size: 13px;">(Từ 4 sao)</i>
+                            </ul>
+                        </a>
+                    </div>
+                    <div class="list-group-item-start is-top">
+                        <a href="#" style="text-decoration: none;">
+                            @for (int i = 0; i < 3; i++)
+                            {
+                                <i class="fa fa-star checked" aria-hidden="true"></i>
+                            }
+                            <i class="fa fa-star " aria-hidden="true"></i>
+                            <i class="fa fa-star " aria-hidden="true"></i>
+                            <i style="font-size: 13px;">(Từ 3 sao)</i>
+                            
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="panel-title">
+                    <a href="#">Giá</a>
+                </h4>
+                <div class="list-group">
+                    <div class="slider-wrap category-price-slide">
+                        <p class="slider-title">Chọn khoảng giá</p>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <input type="number" id="1" min="0" step="1000" class="slide-input slide-from">
+                            <span>-</span>
+                            <input type="number" id="2" min="0" step="1000" class="slide-input slide-to">
+                        </div>
+                        <button onclick="reply_click(evt,tmie)" type="submit" class="btn btn-success" style="width: 100%; margin-top: 10px;">OK</button>
+                    </div>
+                    <script type="text/javascript">
+                        function reply_click(gt1, gt2) {
+                            var i;
+                            gt1 = document.getElementById("1");
+                            gt2 = document.getElementById("2");
+                            if (gt2 > gt1)
+                                alert("Vui lòng nhập lại khoảng giá");
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+
+            <div class="product-box no-mg">
+                <div class="row">
+                    <div class="text">
+                        <h1>Kết quả tìm kiếm cho '@ViewBag.q': </h1>
+                        <h4 id="count-res">187 kết quả (0.49 giây)</h4>
+                    </div>
+
+
+                    <div class="option-box">
+                        <div class="btn-group pull-left sort-box">
+
+                            <ul class="sort-list" style="bottom: 0; vertical-align: bottom; display: inline-block;">
+                                <li class="" style="padding-top: 7px;">
+                                    <span style="text-align: center; ">Ưu tiên xem:</span>
+                                </li>
+                                <li class="" data-order="newest">
+                                    <a href="#"><button type="button" class="btn btn-default">HÀNG MỚI</button></a>
+                                </li>
+                                <li class="" data-order="top_seller">
+                                    <a href="#"><button type="button" class="btn btn-default">BÁN CHẠY</button></a>
+                                </li>
+                                <li class="" data-order="discount_percent,desc">
+                                    <a href="#"><button type="button" class="btn btn-default">GIẢM GIÁ NHIỀU</button></a>
+                                </li>
+
+                                <li class="" data-order="price,asc">
+                                    <a href="#"><button type="button" class="btn btn-default">GIÁ THẤP</button></a>
+                                </li>
+                                <li class="" data-order="price,desc">
+                                    <a href="#"><button type="button" class="btn btn-default">GIÁ CAO</button></a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-box-list">
+                <div class="row">
+                    <!--Sản Phẩm 1-->
+
+                    @foreach (var i in Model)
+                    {
+                        <a class="link-item product-item" href="#">
+                            <div class="content">
+                                <span class="image-item">
+                                    <img src="@i.PathIamge" class="img-detail img-responsive" />
+                                </span>
+                                <p class="title-item">
+                                    @i.NameProduct
+                                </p>
+                                <p class="price-item">
+                                    <span class="final-price">
+                                        @if (i.SalePricent == 0)
+                                        {
+                                            @:@i.PriceGoc ₫
+                                        }
+                                        @if (i.SalePricent == 100)
+                                        {
+                                            @:0 ₫
+                                        }
+                                        @if (i.SalePricent > 0 && i.SalePricent < 100)
+                                        {
+                                            var mony = i.PriceGoc - (i.PriceGoc * i.SalePricent) / 100;
+                                            @:@mony ₫
+                                        }
+
+                                        <span class="sale-tag">-@i.SalePricent%</span>
+                                    </span>
+                                    <span class="price-regular">@i.PriceGoc ₫</span>
+                                </p>
+                            </div>
+                            <div class="review-wrap">
+                                <p class="rating">
+                                    <span class="rating-content">
+                                        @for (int rt = 1; rt <= i.Rating; rt++)
+                                        {
+                                            <i class="fa fa-star checked" aria-hidden="true"></i>
+                                        }
+                                        @if (i.Rating < 5)
+                                        {
+                                            for (int j = 5; j > i.Rating; j--)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            }
+                                        }
+
+                                    </span>
+                                </p>
+                                <p class="review-count">
+                                    (@i.CountComment nhận xét)
+                                </p>
+                            </div>
+                        </a>
+                    }
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="list-pager">
+                    <ul>
+                        <li>
+                            <a rel="next" class="next" href="#" hidden><i class="fa fa-chevron-circle-left"></i></a>
+                        </li>
+
+                        <li>
+                            <span class="current">1</span>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">2</a>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">3</a>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">4</a>
+                        </li>
+                        <li>
+                            <a class="normal" href="#">5</a>
+
+                        </li>
+                        <li>
+                            <a rel="next" class="next" href="#"><i class="fa fa-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

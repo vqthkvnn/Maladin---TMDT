@@ -47,6 +47,7 @@ namespace Maladin.Areas.API.Controllers
         {
             return Json("", JsonRequestBehavior.DenyGet);
         }
+        [HttpPost]
         public JsonResult getProductBy(string page, string q)
         {
             var data = new ProductDAO().getByNameAndPage(page, q);

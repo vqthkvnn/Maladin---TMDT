@@ -1,0 +1,306 @@
+﻿
+@{
+    ViewBag.Title = "Thanh Toán Bằng COD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<title>@ViewBag.Title</title>
+@section Scripts{
+    <link href="~/assets/css/style-paycod.css" rel="stylesheet" />
+    <script>
+        var stateObject = {
+            "Hà Nội": {
+                "Quận Tây Hồ": ["Đội Cấn", "Nguyễn Chí Thanh"],
+                "Cầu Giấy": ["Nguyễn Khang", "Cầu Giấy"],
+                "Quận Thanh Xuân": ["Lê Trung Tán", "Phường Hạ Đình", "Phường Khương Đình", "Phường Khương Mai", "Phường Khương Trung", "Phường Kim Giang", "Phường Nhân Chính", "Phường Phương Liệt", "Phường Thanh Xuân Bắc", "Phường Thanh Xuân Nam", "Phường Thanh Xuân Trung", "Phường Thượng Đình"],
+                "Quận Tây Hồ": ["Phường Bưởi", "Phường Nhật Tân", "Phường Phú Thượng", "Phường Quảng An", "Phường Thuỵ Khuê", "Phường Tứ Liên", "Phường Xuân La", "Phường Yên Phụ"],
+                "Quận Nam Từ Liêm": ["P. Phương Canh", "Phường Cầu Diễn", "Phường Đại Mỗ", "Phường Mễ Trì", "Phường Mỹ Đình 1", "Phường Mỹ Đình 2", "Phường Tây Mỗ", "Phường Trung Văn", "Phường Xuân Phương", "Xã Phú Đô"],
+                "Quận Long Biên": ["Phường Bồ Đề", "Phường Cự Khối", "Phường Đức Giang", "Phường Gia Thuỵ", "Phường Giang Biên", "Phường Long Biên", "Phường Ngọc Lâm", "Phường Ngọc Thuỵ", "Phường Phúc Đồng", "Phường Phúc Lợi", "Phường Sài Đồng", "Phường Thạch Bàn", "Phường Thượng Thanh", "Phường Việt Hưng"],
+                "Quận Hoàng Mai": ["Phường Đại Kim", "Phường Định Công", "Phường Giáp Bát", "Phường Hoàng Liệt", "Phường Hoàng Văn Thụ", "Phường Lĩnh Nam", "Phường Mai Động", "Phường Tân Mai", "Phường Thanh Trì", "Phường Thịnh Liệt", "Phường Trần Phú", "Phường Tương Mai", "Phường Vĩnh Hưng", "Phường Yên Sở"],
+                "Quận Hoàng Kiếm": ["Phường Chương Dương Độ", "Phường Cửa Đông", "Phường Cửa Nam", "Phường Đồng Xuân", "Phường Hàng Bạc", "Phường Hàng Bài", "Phường Hàng Bồ", "Phường Hàng Bông", "Phường Hàng Buồm", "Phường Hàng Đào", "Phường Hàng Gai", "Phường Hàng Mã", "Phường Hàng Trống", "Phường Lý Thái Tổ", "Phường Phan Chu Trinh", "Phường Phúc Tân", "Phường Trần Hưng Đạo", "Phường Tràng Tiền"],
+                "Quận Hai Bà Trưng": ["Phường Bạch Đằng", "Phường Bách Khoa", "Phường Bạch Mai", "Phường Bùi Thị Xuân", "Phường Cầu Dền", "Phường Đống Mác", "Phường Đồng Nhân", "Phường Đồng Tâm", "Phường Lê Đại Hành", "Phường Minh Khai", "Phường Ngô Thì Nhậm", "Phường Nguyễn Du", "Phường Phạm Đình Hổ", "Phường Phố Huế", "Phường Quỳnh Lôi", "Phường Quỳnh Mai", "Phường Thanh Lương", "Phường Thanh Nhàn", "Phường Trương Định", "Phường Vĩnh Tuy"],
+                "Quận Hà Đông": ["Phường Hà Cầu", "Phường La Khê", "Phường Mỗ Lao", "Phường Mộ Lao", "Phường Nguyễn Trãi", "Phường Phú La", "Phường Phúc La", "Phường Quang Trung", "Phường Vạn Phúc", "Phường Văn Quán", "Phường Yên Nghĩa", "Phường Yết Kiêu", "Xã Biên Giang", "Xã Đồng Mai", "Xã Dương Nội", "Xã Kiến Hưng", "Xã Phú Lãm", "Xã Phú Lương"],
+                "Quận Đống Đa": ["Phường Cát Linh", "Phường Hàng Bột", "Phường Khâm Thiên", "Phường Khương Thượng", "Phường Kim Liên", "Phường Láng Hạ", "Phường Láng Thượng", "Phường Nam Đồng", "Phường Ngã Tư Sở", "Phường ô Chợ Dừa", "Phường Phương Liên", "Phường Phương Mai", "Phường Quang Trung", "Phường Quốc Tử Giám", "Phường Thịnh Quang", "Phường Thổ Quan", "Phường Trung Liệt", "Phường Trung Phụng", "Phường Trung Tự", "Phường Văn Chương", "Phường Văn Miếu"],
+                "Quận Cầu Giấy": ["Phường Dịch Vọng", "Phường Dịch Vọng Hậu", "Phường Mai Dịch", "Phường Nghĩa Đô", "Phường Nghĩa Tân", "Phường Quan Hoa", "Phường Trung Hoà", "Phường Yên Hoà"],
+                "Quận Ba Đình": ["P. Nguyễn Trung Trực", "Phường Cống Vị", "Phường Điện Biên", "Phường Đội Cấn", "Phường Giảng Võ", "Phường Kim Mã", "Phường Liễu Giai", "Phường Ngọc Hà", "Phường Ngọc Khánh", "Phường Phúc Xá", "Phường Quán Thánh", "Phường Thành Công", "Phường Trúc Bạch", "Phường Vĩnh Phúc"],
+
+
+            },
+            "Thành Phố Hồ Chí Minh": {
+                "Quận 1": ["Phường Bến Nghé", "Phường Bến Thành", "Phường Cầu Kho", "Phường Cầu Ông Lãnh", "Phường Cô Giang", "Phường Đa Kao", "Phường Nguyễn Cư Trinh", "Phường Nguyễn Thái Bình", "Phường Phạm Ngũ Lão", "Phường Tân Định"],
+                "Quận 2": ["Phường An Khánh", "Phường An Lợi Đông", "Phường An Phú", "Phường Bình An", "Phường Bình Khánh", "Phường Bình Trưng Đông", "Phường Bình Trưng Tây", "Phường Cát Lái", "Phường Thạnh Mỹ Lợi", "Phường Thảo Điền", "Phường Thủ Thiêm"],
+                "Quận 3": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 4": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 5": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 6": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 7": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 8": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 9": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 10": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 11": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận 12": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Tân Bình": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Tân Phú": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Phú Nhuận": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Gò Vấp": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Bình Thạnh": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Thủ Đức": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Quận Bình Tân": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Huyện Hóc Môn": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Huyện Củ Chi": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Huyện Nhà Bè": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Huyện Bình Chánh": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+                "Huyện Cần Giờ": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+            },
+            "Bắc Giang":
+            {
+                "Lục Ngạn": ["Thị Trấn Chũ", "Kim", "Mỹ An"],
+                "Lục Nam": ["Gàng", "Sàn"],
+                "Tân Yên": ["", ""],
+            },
+            "Đà Nẵng": {},
+            "An Giang": {},
+            "Bà Rịa - Vũng Tàu": {},
+            "Bắc Kạn": {},
+            "Bạc Liêu": {},
+            "Bắc Ninh": {},
+            "Bến Tre": {},
+            "Bình Định": {},
+            "Bình Dương": {},
+            "Bình Phước": {},
+            "Bình Thuận": {},
+            "Cà Mau": {},
+            "Cần Thơ": {},
+            "Cao Bằng": {},
+            "Đắk Lắk": {},
+            "Đắk Nông": {},
+            "Điện Biên": {},
+            "Đồng Nai": {},
+            "Đồng Tháp": {},
+            "Gia Lai": {},
+            "Hà Giang": {},
+            "Hà Nam": {},
+            "Hà Tĩnh": {},
+            "Hải Dương": {},
+            "Hải Phòng": {},
+            "Hậu Giang": {},
+            "Hòa Bình": {},
+            "Hưng Yên": {},
+            "Khánh Hòa": {},
+            "Kiên Giang": {},
+            "Kon Tum": {},
+            "Lai Châu": {},
+            "Lâm Đồng": {},
+            "Lạng Sơn": {},
+            "Lào Cai": {},
+            "Long An": {},
+            "Nam Định": {},
+            "Nghệ An": {},
+            "Ninh Bình": {},
+            "Ninh Thuận": {},
+            "Phú Thọ": {},
+            "Phú Yên": {},
+            "Quảng Bình": {},
+            "Quảng Nam": {},
+            "Quảng Ngãi": {},
+            "Quảng Ninh": {},
+            "Quảng Trị": {},
+            "Sóc Trăng": {},
+            "Sơn La": {},
+            "Tây Ninh": {},
+            "Thái Bình": {},
+            "Thái Nguyên": {},
+            "Thanh Hóa": {},
+            "Thừa Thiên Huế": {},
+            "Tiền Giang": {},
+            "Trà Vinh": {},
+            "Tuyên Quang": {},
+            "Vĩnh Long": {},
+            "Vĩnh Phúc": {},
+            "Yên Bái": {},
+
+        };
+        window.onload = function () {
+            var city = document.getElementById("City"),
+                dist = document.getElementById("Dist"),
+                ward = document.getElementById("Ward");
+            for (var c in stateObject) {
+                city.options[city.options.length] = new Option(c, c);
+            }
+            city.onchange = function () {
+                dist.length = 1; // remove all options bar first
+                ward.length = 1; // remove all options bar first
+                if (this.selectedIndex < 1) return; // done
+                for (var d in stateObject[this.value]) {
+                    dist.options[dist.options.length] = new Option(d, d);
+                }
+            }
+            city.onchange(); // reset in case page is reloaded
+            dist.onchange = function () {
+                ward.length = 1; // remove all options bar first
+                if (this.selectedIndex < 1) return; // done
+                var warD = stateObject[city.value][this.value];
+                for (var i = 0; i < warD.length; i++) {
+                    ward.options[ward.options.length] = new Option(warD[i], warD[i]);
+                }
+            }
+        }
+    </script>
+}
+<div class="main-cod" style="background-color:white;">
+    <div class="row">
+        <ul class="listorder">
+            <li data-value="1" id="1">
+                <input type="hidden" id="ProductId" name="ListAccessories[0].ProductId" value="200785">
+                <input type="hidden" name="ListAccessories[0].IsBuy" value="true" class="isbuy">
+                <input type="hidden" name="ListAccessories[0].ProductPrice" value="4990000">
+                <input type="hidden" name="ListAccessories[0].ProductName" value="Tai nghe Bluetooth AirPods 2 Apple MV7N2 Trắng">
+                <input type="hidden" name="ListAccessories[0].PriceClient" value="4990000">
+                <input type="hidden" name="ListAccessories[0].LinkImage" value="//cdn.tgdd.vn/Products/Images/54/200785/tai-nghe-bluetooth-airpods-2-apple-mv7n2-trang-1-1-180x120.jpg">
+                <input type="hidden" class="hdQuantity" name="ListAccessories[0].Quantity" value="1">
+                <input id="TotalMoney" name="TotalMoney" type="hidden" value="4.990.000₫">
+                <div class="colimg">
+                    <a href="#">
+                        <img width="75" src="tainghe.jpg">
+                    </a>
+                </div>
+                <div class="colinfo">
+                    <a href="#">Tai nghe Bluetooth AirPods 2 Apple MV7N2 Trắng</a>
+                    <div style="margin: 5px 0px;">
+                        Giá : <strong style="float: none; margin-right: 0px;">4.190.000₫</strong><span style="margin-left: 10px; text-decoration: line-through; font-size: 14px;">4.990.000₫</span>
+                    </div>
+                    <div class="clr"></div>
+                    <div class="onecolor">
+                        <span>Màu: Trắng</span>
+                    </div>
+                    <input type="hidden" class="ProductCode" id="ProductCode" name="ListAccessories[0].ProductCode" value="0162831000068">
+                    <input type="hidden" class="ProductNameCode" name="ListAccessories[0].ProductNameCode" value="Trắng">
+                    <div class="choosenumber">
+                        <input type="hidden" class="hdQuantity" name="ListAccessories[0].Quantity" value="1">
+                        <div class="abate "><i class="fa fa-minus" aria-hidden="true" style="margin: 10px;"></i></div>
+                        <div class="number">1</div>
+                        <div class="augment "><i class="fa fa-plus" aria-hidden="true" style="margin: 10px;"></i></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="area_total custom" style="display:block;">
+            <div>
+                <span>Giá tiền:</span>
+                <span id="cus_hisprice">4.890.000₫</span>
+            </div>
+            <div>
+                <span>Phí giao hàng:</span>
+                <span id="cus_shipcost">-700.000₫</span>
+            </div>
+            <div class="total">
+                <b>Cần thanh toán:</b>
+                <strong id="cus_totalprice">4.190.000₫</strong>
+            </div>
+            <div class="boxCouponCode" style="text-align: right;">
+                <div class="">
+                    Sử dụng mã giảm giá
+                </div>
+                <div class="inputcode " style="display:none;">
+                    <button type="button">Áp dụng</button>
+                    <input name="CouponCode" id="CouponCode" placeholder="Nhập mã giảm giá" maxlength="20">
+                    <label id="CouponCode-error" class="error" for="CouponCode" style="display: none;"></label>
+                </div>
+                <button type="button" class="btn btn-primary textcode" data-toggle="collapse" data-target="#demo">Sử dụng mã giảm giá</button>
+                <div id="demo" class="collapse show inpucode" style="margin-top: 5px;">
+                    <button type="button" style="float: right;">Áp dụng</button>
+                    <input name="CouponCode" id="CouponCode" placeholder="Nhập mã giảm giá" maxlength="20" style="float: right;">
+                    <label id="CouponCode-error" class="error" for="CouponCode" style="display: none;"></label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        <div class="infouser">
+            <div class="sex">
+                <label class="radio-inline"><input type="radio" name="optradio" checked>Nam</label>
+                <label class="radio-inline"><input type="radio" name="optradio">Nữ</label>
+            </div>
+        </div>
+        <div class="form-group" style="width: 100%;">
+            <label for="name"><b> Họ và tên: </b></label>
+            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="name">
+        </div>
+        <div class="form-group">
+            <label for="phone"><b> SDT:</b></label>
+            <input type="number" class="form-control" id="phone" placeholder="Số điện thoại" name="phone">
+        </div>
+        <div class="form-group" style="margin-left: 48px;width: 58%;">
+            <label for="email"><b> Email: </b></label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+    </div>
+    <div class="row">
+        <div class="area_other" style="width: 100%;">
+            <div class="area_address show onlyhome">
+                <label style="margin-bottom: 10px; "><b> Chọn địa chỉ nhận hàng:</b></label>
+            </div>
+        </div>
+        <div class="form-group" style="margin-left: 10px;width: 30%">
+            <label for="city">Tỉnh/Thành phố</label>
+            <select class="form-control" id="City">
+                <div class="listcity">
+                    <div class="scroll">
+                        <option value="" selected="selected">Chọn Tỉnh/Thành Phố</option>
+                    </div>
+
+                </div>
+            </select>
+        </div>
+        <div class="form-group" style="margin-left: 62px;">
+            <label for="city">Quận/Huyện</label>
+            <select class="form-control" id="Dist">
+                <div class="listdict">
+                    <div class="scroll">
+                        <option value="" selected="selected">Chọn Quận/Huyện</option>
+                    </div>
+
+
+            </select>
+        </div>
+        <div class="form-group" style="width: 30%;margin-left: 10px;">
+            <label for="sel1">Phường/Xã:</label>
+            <select class="form-control" id="Ward">
+
+                <div class="listward layer">
+                    <option value="" selected="selected">Chọn Phường/Xã</option>
+                </div>
+
+            </select>
+        </div>
+        <div class="form-group" style="margin-left: 62px;width: 58%;">
+            <label for="input-sm">Số nhà, tên đường:</label>
+            <input type="text" class="form-control input-sm" id="input-sm"></input>
+        </div>
+        <div class="area_other" style="width: 100%;">
+            <label style="margin-bottom: 10px; "><b> Thời gian giao hàng:</b></label>
+        </div>
+        <div class="form-group" style="margin-left: 10px;width: 30%;">
+            <select class="form-control" id="sel1">
+                <div class="listdate layer" style="display: block;">
+                    <option data-value="1" onclick="ChangeHours(this)">Ngày mai 09/05</option>
+                    <option data-value="2" onclick="ChangeHours(this)">Chủ Nhật  10/05</option>
+                    <option data-value="3" onclick="ChangeHours(this)">Thứ Hai  11/05</option>
+                </div>
+            </select>
+        </div>
+
+    </div>
+    <div class="row" style="width: 50%;margin-left: 35%;padding: 15px 0px;margin-top: 20px;">
+        <button type="button" class="btn btn-primary btn-lg action-button" style="width: 50%;">ĐẶT HÀNG</button>
+        <br />
+        <p style="margin-top: 20px;"><br />Bạn có thể chọn hình thức thanh toán sau khi đặt hàng</p>
+    </div>
+
+</div>

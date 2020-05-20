@@ -1,9 +1,48 @@
 ﻿
 @{
     ViewBag.Title = "Thông tin tài khoản";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
+    var info = ViewBag.information;
+    var email = ViewBag.email;
+    var day =ViewBag.day ;
+    var month = ViewBag.month;
+    var year = ViewBag.year;
 }
 
+@section Scripts{
+    
+    <script>
+        $(document).ready(function () {
+            if (document.getElementById('isChangePass').checked) {
+                $("#changePass").show();
+            } else {
+                $("#changePass").hide();
+            }
+        });
+        function checkChangePass() {
+            if (document.getElementById('isChangePass').checked) {
+                $("#changePass").show();
+            } else {
+                $("#changePass").hide();
+            }
+        }
+
+        $("#img-avt-customer").attr("src", "/public/image/avt/face15.jpg");
+        
+        @if (info.SEX_INFO)
+        {
+            @:$("#female").removeAttr("checked");
+            @:$("#male").attr("checked", true);
+
+        }
+        else
+        {
+            @:$("#male").removeAttr("checked");
+            @:$("#female").attr("checked", true);
+
+        }
+    </script>
+}
 <div class="right-information-user">
     <h3 class="title-information-user">
         Thông tin tài khoản
@@ -15,7 +54,7 @@
                     Họ tên
                 </label>
                 <div class="input-txt">
-                    <input type="text" class="value-input" value="Trần Hoàng Giang" />
+                    <input type="text" class="value-input" value="@info.NAME_INFO" />
                 </div>
             </div>
             <div class="form-control">
@@ -24,24 +63,17 @@
                 </label>
                 <div class="input-txt">
                     <div class="phone-wrap-div">
-                        <input type="tel" placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" value="0362947187" class="value-input" />
+                        <input type="tel" placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" value="@info.PHONE_INFO" class="value-input" />
                         <button type="button">Gửi mã xác thực</button>
                     </div>
                 </div>
             </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Mã xác thực
-                </label>
-                <div class="input-txt">
-                    <input type="text" class="value-input" placeholder="Nhập mã xác thực gửi tới số điện thoại trên" />
-                </div>
-            </div>
+            
             <div class="form-control">
                 <label class="input-label">
                     Email
                 </label>
-                <input type="text" disabled class="value-input" value="hoanggiangutc521999@gmail.com" />
+                <input type="text" disabled class="value-input" value="@email" />
             </div>
             <div class="form-control">
                 <label class="input-label">
@@ -51,7 +83,7 @@
                     <input type="radio" checked class="custom-control-input" id="male" name="gender" value="male">
                     <label class="custom-control-label" for="male">Nam</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
+                <div class="custom-control custom-radio custom-control-inline" style="padding-left: 15px;">
                     <input type="radio" class="custom-control-input" id="female" name="gender" value="female">
                     <label class="custom-control-label" for="female">Nữ</label>
                 </div>
@@ -65,21 +97,45 @@
                         <option value="0">Ngày</option>
                         @for (int i = 1; i <= 31; i++)
                         {
-                            <option value="@i">@i</option>
+                            if (i == day)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                            
                         }
                     </select>
                     <select name="month">
                         <option value="0">Tháng</option>
                         @for (int i = 1; i <= 12; i++)
                         {
-                            <option value="@i">@i</option>
+                            if (i == month)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
+                            
                         }
                     </select>
                     <select name="year">
                         <option value="0">Năm</option>
-                        @for (int i = 2000; i <= 2020; i++)
+                        @for (int i = 1980; i <= 2020; i++)
                         {
-                            <option value="@i">@i</option>
+
+                            if (i == year)
+                            {
+                                <option value="@i" selected>@i</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@i</option>
+                            }
                         }
                     </select>
                 </div>
@@ -87,32 +143,34 @@
             <div class="form-control">
                 <label class="input-label">&nbsp;</label>
                 <label>
-                    <input type="checkbox" />
+                    <input type="checkbox" id="isChangePass" onclick="checkChangePass()" />
                     <span>Thay đổi mật khẩu</span>
                 </label>
             </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Mật khẩu cũ
-                </label>
-                <div class="input-txt">
-                    <input type="password" disabled class="value-input" value="hoanggiangutc521999@gmail.com" />
+            <div id="changePass">
+                <div class="form-control">
+                    <label class="input-label">
+                        Mật khẩu cũ
+                    </label>
+                    <div class="input-txt">
+                        <input type="password" disabled class="value-input" value="abc@gmail.com" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Mật khẩu mới
-                </label>
-                <div class="input-txt">
-                    <input type="password" class="value-input" placeholder="Nhập mật khẩu mới" />
+                <div class="form-control">
+                    <label class="input-label">
+                        Mật khẩu mới
+                    </label>
+                    <div class="input-txt">
+                        <input type="password" class="value-input" placeholder="Nhập mật khẩu mới" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-control">
-                <label class="input-label">
-                    Nhập lại
-                </label>
-                <div class="input-txt">
-                    <input type="password" class="value-input" placeholder="Nhập lại mật khẩu mới" />
+                <div class="form-control">
+                    <label class="input-label">
+                        Nhập lại
+                    </label>
+                    <div class="input-txt">
+                        <input type="password" class="value-input" placeholder="Nhập lại mật khẩu mới" />
+                    </div>
                 </div>
             </div>
             <div class="form-control">
@@ -122,4 +180,3 @@
         </form>
     </div>
 </div>
-

@@ -23,11 +23,10 @@ namespace Maladin.EF
 
         public int? ID_TYPE_NOTI { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? DATE_NOTI { get; set; }
-
         [StringLength(255)]
         public string TITLE_NOTI { get; set; }
+
+        public DateTime? DATE_NOTI { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTI_ACC> NOTI_ACC { get; set; }

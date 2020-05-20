@@ -76,7 +76,7 @@ C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\System.Web.We
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Newtonsoft.Json.xml
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Antlr3.Runtime.pdb
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Release\Maladin.csprojAssemblyReference.cache
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Release\Maladin.csproj.CopyComplete
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Release\Maladin.dll
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Release\Maladin.pdb
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\obj\Release\Maladin.csprojAssemblyReference.cache

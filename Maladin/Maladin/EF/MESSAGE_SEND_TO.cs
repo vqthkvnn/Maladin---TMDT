@@ -22,10 +22,9 @@ namespace Maladin.EF
         [StringLength(30)]
         public string TO_ACC { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime DATA_SEND_MESSAGE { get; set; }
-
         public bool? IS_READ { get; set; }
+
+        public DateTime? DATA_SEND_MESSAGE { get; set; }
 
         public virtual ACCOUNT ACCOUNT { get; set; }
 

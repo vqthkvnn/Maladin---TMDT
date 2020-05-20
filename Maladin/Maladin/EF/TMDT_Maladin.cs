@@ -367,11 +367,6 @@ namespace Maladin.EF
                 .WithRequired(e => e.PRODUCT)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<PRODUCT>()
-                .HasMany(e => e.ACCOUNTs)
-                .WithMany(e => e.PRODUCTs)
-                .Map(m => m.ToTable("FAVORITE_PRODUCT").MapLeftKey("ID_PRODUCT").MapRightKey("USER_ACC"));
-
             modelBuilder.Entity<PRODUCT_ATT>()
                 .Property(e => e.ID_PRODUCT)
                 .IsUnicode(false);

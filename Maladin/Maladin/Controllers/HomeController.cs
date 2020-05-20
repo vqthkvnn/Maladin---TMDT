@@ -18,7 +18,8 @@ namespace Maladin.Controllers
         {
             var dao = new ProductHomeDAO();
             models.GiayProduct = dao.getListProduct(1, "TP001");
-            models.DongHoProduct = dao.getListProduct(1, "TP003");
+            models.DongHoProduct = dao.getListProduct(1, "TP002");
+            models.KinhProduct = dao.getListProduct(1, "TP003");
             if (Session[CustomerSession.CUSTOMER_SESSION] == null)
             {
                 ViewBag.IsLogin = null;
@@ -28,7 +29,7 @@ namespace Maladin.Controllers
                 var da =  new CustomerLoginDAO();
 
                 ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString(),
-                   da.getTypeMax(Session[CustomerSession.CUSTOMER_SESSION].ToString()));
+                   "CT");
             }
             
             return View(models);

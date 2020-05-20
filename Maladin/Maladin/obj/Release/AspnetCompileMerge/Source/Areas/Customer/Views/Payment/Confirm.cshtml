@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "Xác nhận thông tin thanh toán - Maladin.com";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listP = ViewBag.Listproduct;
+    var sum = 0;
+
+}
+<title>@ViewBag.Title</title>
+<link href="~/assets/css/paymentConfirm.css" rel="stylesheet" />
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            
+            var current_fs, next_fs, previous_fs; //fieldsets
+            var opacity;
+
+            $(".next").click(function () {
+
+                current_fs = $(this).parent();
+                next_fs = $(this).parent().next();
+
+                //Add Class Active
+                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                //show the next fieldset
+                next_fs.show();
+                //hide the current fieldset with style
+                current_fs.animate({ opacity: 0 }, {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        next_fs.css({ 'opacity': opacity });
+                    },
+                    duration: 600
+                });
+            });
+
+            $(".previous").click(function () {
+
+                current_fs = $(this).parent();
+                previous_fs = $(this).parent().prev();
+
+                //Remove class active
+                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+                //show the previous fieldset
+                previous_fs.show();
+
+                //hide the current fieldset with style
+                current_fs.animate({ opacity: 0 }, {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        previous_fs.css({ 'opacity': opacity });
+                    },
+                    duration: 600
+                });
+            });
+
+            $('.radio-group .radio').click(function () {
+                $(this).parent().find('.radio').removeClass('selected');
+                $(this).addClass('selected');
+            });
+
+            $(".submit").click(function () {
+                return false;
+            })
+
+        });
+    </script>
+
+    <script>
+        $(".edit-info").click(function () {
+            $("#name-confirm").removeAttr("disabled");
+            $("#street-confirm").removeAttr("disabled");
+            $("#phone-confirm").removeAttr("disabled");
+            $(".edit-info").attr("hidden", true);
+            $("#confirm-info").text("Xác nhận Thông Tin và Thanh Toán");
+        });
+        $("#confirm-info").click(function () {
+            if ($("#confirm-info").val() == "Thanh Toán") {
+                
+            }
+            else {
+                alert("Chú ý thông tin mua hàng của bạn sẽ bị thay đổi!");
+            }
+        })
+        var adr, phoneNum, name;
+        /*
+         * xử lý phần hình thức thành toán
+         */
+        if ($("#COD").is(':checked')) {
+            /*
+             gọi ajax xác nhận đơn hàng
+             */
+        }
+        else {
+            /*
+             * gọi ajax check coin đủ coint thì xác nhận đơn hàng
+             */
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-12">
+        <form id="msform">
+            <!-- progressbar -->
+            <ul id="progressbar">
+                <li class="active" id="account"><strong>Đăng Nhập</strong></li>
+                <li id="personal"><strong>Thông Tin</strong></li>
+                <li id="payment"><strong>Thanh Toán</strong></li>
+                <li id="confirm"><strong>Hoàn Thành</strong></li>
+            </ul> <!-- fieldsets -->
+            <fieldset>
+                <span id="id_accoutn">Đã đăng nhập. Next để tiếp tục xác nhận thông tin.</span>
+                <br>
+                <!-- <div class="form-card">
+                    <h2 class="fs-title">Account Information</h2> <input type="email" name="email" placeholder="Email Id" /> <input type="text" name="uname" placeholder="UserName" /> <input type="password" name="pwd" placeholder="Password" /> <input type="password" name="cpwd" placeholder="Confirm Password" />
+                </div>  -->
+                <input type="button" name="next" class="btn btn-outline-success next action-button" value="Next" />
+            </fieldset>
+            <fieldset>
+                <div class="form-container">
+                    <div class="gKnZVT ">
+                        <label>Họ tên</label>
+                        <input type="text" name="full_name" id="name-confirm" placeholder="Nhập họ tên" class="coLFjn" value="@ViewBag.Name" disabled>
+                    </div>
+                    <div class="gKnZVT">
+                        <label>Điện thoại di động</label>
+                        <input type="text" name="telephone" id="phone-confirm" placeholder="Nhập số điện thoại" class="Input-sc-1sflv1m-0 coLFjn" value="@ViewBag.Phone" disabled>
+                    </div>
+                    <div class="gKnZVT">
+
+                    </div>
+
+
+
+                    <div class="gKnZVT" style="width: 100%;">
+                        <label>Địa chỉ</label>
+                        <textarea type="textarea" name="street" id="street-confirm" placeholder="Ví dụ: 52, đường Trần Hưng Đạo" class="Input__TextArea-sc-1sflv1m-1 lpeTlZ" disabled>@ViewBag.Adress</textarea>
+                    </div>
+
+                    <div class="gKnZVT" style="margin-bottom: 0px;">
+                        <label></label>
+
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-success action-button edit-info" style="width: 20%;margin-top: 20px; height:36px">Sửa thông tin</button>
+                <button type="button" id="confirm-info" class="btn btn-outline-success next action-button" style="width: 35%;margin-top: 20px; height:36px">Thanh Toán</button>
+
+
+
+
+            </fieldset>
+            <fieldset>
+                <div class="form-card">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="fZmtXY">
+                                    <h3 class="title">1. Chọn hình thức giao hàng</h3>
+                                    <div class="fZXXcp">
+                                        <div class="ShippingMethods__StyledMethod-sc-1va2pxk-1 bKBRmR">
+                                            <label class="RadioCheckout__StyledRadio-pmjxn2-0 loEioe">
+                                                <input type="radio" readonly name="shipping-methods" value="1" checked>
+                                                
+                                                <span class="label">
+                                                    <div class="label-no-shippments">
+                                                        <div class="label-no-shippments__etaText">Giao vào Thứ năm, 14/05</div>
+                                                        <div>
+                                                            <span class="no-shipping-fee">Miễn phí</span>
+                                                            <span class="method-name">Giao tiêu chuẩn</span>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="fZmtXY">
+                                    <h3 class="title">2. Chọn hình thức thanh toán</h3>
+                                    <div class="hksbCH">
+                                        <ul class="list">
+                                            <li class="jBZxbd">
+                                                
+                                                <div class="form-check-default box-checkbox">
+                                                    <input class="form-checkbox-input" id="COD" type="radio" name="default-check" checked="checked">
+                                                    <label class="form-checkbox-label-2" for="COD">Thanh toán khi nhận hàng</label>
+                                                </div>
+
+                                                <div class="form-check-default box-checkbox">
+                                                    <input class="form-checkbox-input" id="Coint" type="radio" name="default-check">
+                                                    <label class="form-checkbox-label-2" for="Coint">Thanh toán bằng Maladin Coin</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="jjvaSp">
+                                <div class="hdwMne">
+                                    <div class="title">
+                                        <span>Địa chỉ giao hàng</span>
+                                    </div>
+                                    <div class="address">
+                                        <span class="name">@ViewBag.Name</span>
+                                        <span class="street">Địa chỉ:@ViewBag.Adress</span>
+                                        <span class="phone">Điện thoại: @ViewBag.Phone</span>
+                                    </div>
+                                </div>
+                                <div class="bRtEPM">
+                                    <div class="title">
+                                        <span>Đơn hàng (1 sản phẩm)</span>
+                                        <a href="@Url.Action("Cart","Account", new {Area ="Customer" })">Sửa</a>
+                                    </div>
+                                    <div class="cart-info">
+                                        <div class="product">
+                                            @foreach (var i in listP)
+                                            {
+                                                <div class="cleyxe">
+                                                    <div class="info">
+                                                        <strong class="qty">@i.Item3 x</strong>
+                                                        <a href="#" target="_blank" class="product-name">@i.Item1</a>
+                                                    </div>
+                                                    <div class="price">@i.Item2 ₫</div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="price-summary">
+                                            <div class="dQzaHh">
+                                                <div class="name">Tạm tính</div>
+                                                @foreach (var i in listP)
+                                                {
+                                                    sum += Convert.ToInt32(i.Item2);
+                                                }
+                                            <div class="value">@sum đ</div>
+                                            </div>
+                                            <div class="dQzaHh">
+                                                <div class="name">Giảm giá từ Voucher</div>
+                                                <div class="value" style="color:rgb(38, 188, 78);">- @Convert.ToString(sum - Convert.ToInt32(ViewBag.Vocher)) đ</div>
+                                            </div>
+                                            <div class="total">
+                                                <div class="name">Thành tiền:</div>
+                                                <div class="value">@ViewBag.Vocher ₫<i>(Đã bao gồm VAT nếu có)</i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-button">
+
+                </div>
+                <button type="button" name="next" class="btn btn-outline-success next action-button" style="padding: 15px 25px 10px 15px;width: 50%;">ĐẶT MUA</button>
+                <p>(Xin vui lòng kiểm tra lại đơn hàng trước khi Đặt Mua)</p>
+                </fieldset>
+            <fieldset>
+                <div class="form-card">
+                    <h2 class="fs-title text-center">Hoàn Thành !</h2> <br><br>
+                    <div class="row justify-content-center">
+                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                    </div> <br><br>
+                    <div class="row justify-content-center">
+                        <div class="col-7 text-center">
+                            <h5>Đơn hàng của bạn đã được tiếp nhận</h5>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

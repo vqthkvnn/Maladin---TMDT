@@ -199,7 +199,7 @@ namespace Maladin.Areas.API.DAO
                 }).ToList();
             return data;
         }
-        public List<MessageModel> getChat(string user, string userTo)
+        /*public List<MessageModel> getChat(string user, string userTo)
         {
             string sql = "SELECT ID_MESSAGE as IdMess, CONTEN_MESSAGE as Content, FROM_ACC as FromID, " +
                 "TO_ACC as ToID, DATA_SEND_MESSAGE as DateSend, IS_READ as IsRead " +
@@ -214,6 +214,27 @@ namespace Maladin.Areas.API.DAO
                 IsRead = b.IsRead,
                 ToID = b.ToID
                 
+                }).ToList();
+            return data;
+        }*/
+        public List<MessageModel> getChat(string user, string userTo, int page)
+        { 
+            string sql = "SELECT ID_MESSAGE as IdMess, CONTEN_MESSAGE as Content, FROM_ACC as FromID, " +
+                "TO_ACC as ToID, DATA_SEND_MESSAGE as DateSend, IS_READ as IsRead " +
+                "FROM (SELECT ROW_NUMBER() OVER ( ORDER BY ID_MESSAGE DESC ) AS ROWNUM, * FROM dbo.MESSAGE_SEND_TO WHERE (FROM_ACC = '" + user +
+                "' AND TO_ACC = '" + userTo + "') OR (FROM_ACC = '" +
+                userTo + "' AND TO_ACC='" + user + "')) AS RES WHERE RES.ROWNUM >"+Convert.ToString((page - 1) * 10) 
+                + "  AND RES.ROWNUM <="+Convert.ToString(page * 10)+ " ORDER BY RES.ROWNUM";
+            var data = db.Database.SqlQuery<MessageModel>(sql)
+                .Select(b => new MessageModel
+                {
+                    Content = b.Content,
+                    DateSend = b.DateSend,
+                    FromID = b.FromID,
+                    IdMess = b.IdMess,
+                    IsRead = b.IsRead,
+                    ToID = b.ToID
+
                 }).ToList();
             return data;
         }
@@ -239,5 +260,6 @@ namespace Maladin.Areas.API.DAO
                 }).ToList();
             return data;
         }
+        
     }
 }

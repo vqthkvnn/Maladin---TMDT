@@ -18,7 +18,10 @@ namespace Maladin.Areas.API.Controllers
             {
                 return Json(new {status = 1, user = Session[LoginSession.USER_SESSION].ToString() }, JsonRequestBehavior.AllowGet);
             }
-            
+            if (users == null && password == null)
+            {
+                return Json(new { status = -999}, JsonRequestBehavior.AllowGet);
+            }
             var dao = new AccountDAO();
             var res = dao.Login(users, password);
             if (res == 1)

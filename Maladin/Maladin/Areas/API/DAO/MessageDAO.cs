@@ -54,7 +54,7 @@ namespace Maladin.Areas.API.DAO
             model.content = ListSort[0].CONTEN_MESSAGE;
             model.from = ListSort[0].FROM_ACC;
             model.to = ListSort[0].TO_ACC;
-            model.dateSend = ListSort[0].DATA_SEND_MESSAGE;
+            model.dateSend = (ListSort[0].DATA_SEND_MESSAGE ?? Convert.ToDateTime("01-01-2020"));
             model.messNoneRead = db.MESSAGE_SEND_TO
                 .Where(x => x.FROM_ACC == model.from && x.TO_ACC == model.to && x.IS_READ ==false)
                 .Count()+
@@ -102,7 +102,7 @@ namespace Maladin.Areas.API.DAO
                     model2.content = i.CONTEN_MESSAGE;
                     model2.from = i.FROM_ACC;
                     model2.to = i.TO_ACC;
-                    model2.dateSend = i.DATA_SEND_MESSAGE;
+                    model2.dateSend = (i.DATA_SEND_MESSAGE ?? Convert.ToDateTime("01-01-2020"));
                     model2.messNoneRead = db.MESSAGE_SEND_TO
                         .Where(x => x.FROM_ACC == model2.from && x.TO_ACC == model2.to && x.IS_READ == false)
                         .Count() +
@@ -134,8 +134,8 @@ namespace Maladin.Areas.API.DAO
         }
         public int CountNewMessage(string user, string userTo)
         {
-            return db.MESSAGE_SEND_TO.Where(x => (x.FROM_ACC == user && x.TO_ACC == userTo)
-            || (x.TO_ACC == user && x.FROM_ACC == user)).Where(x=>x.IS_READ == false).Count();
+            return db.MESSAGE_SEND_TO.Where(x => x.FROM_ACC == user && x.TO_ACC == userTo).
+                Where(x=>x.IS_READ == false).Count();
         }
         public List<MessageModel> GetNewMessage(string user, string userTo)
         {
@@ -155,6 +155,23 @@ namespace Maladin.Areas.API.DAO
 
                 }).ToList();
             return data;
+        }
+        public bool UpdateReadAll(string user, string to)
+        {
+            try
+            {
+                string sql = "UPDATE dbo.MESSAGE_SEND_TO SET IS_READ =1 WHERE FROM_ACC ='" + user + "" +
+                "' AND TO_ACC='" + to + "'";
+                db.Database.ExecuteSqlCommand(sql);
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+
+
         }
         public bool UpdateIsRead(int id)
         {

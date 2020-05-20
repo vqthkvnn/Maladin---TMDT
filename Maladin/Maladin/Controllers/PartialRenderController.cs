@@ -43,5 +43,13 @@ namespace Maladin.Controllers
             }
             return PartialView("LeftMenuUser");
         }
+        public ActionResult LeftMenuUser()
+        {
+            var dao = new CustomerLoginDAO();
+            var info = dao.getInformationByUser(Session[CustomerSession.CUSTOMER_SESSION].ToString());
+            ViewBag.name = info.NAME_INFO;
+            ViewBag.avt = info.AVT_ACC;
+            return PartialView("LeftMenuUser");
+        }
     }
 }
