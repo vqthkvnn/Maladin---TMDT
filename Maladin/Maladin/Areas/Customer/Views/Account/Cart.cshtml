@@ -226,7 +226,20 @@
 		function Accept() {
 			var value = $("#coupon").val();
 
-		}
+        }
+
+        $(document).ready(function () {
+            checkNullValue();
+        });
+
+        function checkNullValue() {
+            if ($("#shopping-cart-maladin:has(*)").length) {
+                $("#noContent").hide();
+            } else {
+                $("#cart-payment").hide();
+                $("#noContent").show();
+            }
+        }
 
 	</script>
 
@@ -235,150 +248,149 @@
 @model List<Maladin.Models.CartProductModel>
 
 <div class="row-1">
-	<div class="cart-1">
-		<div class="cart-inner">
-			<div class="">
-				<h5 class="maladin-cart-span-h4">
-					GIỎ HÀNG
-					<span>(0 sản phẩm)</span>
-				</h5>
-			</div>
-			<div class="cart-col-1">
-				<form id="shopping-cart-maladin">
-					@foreach (var i in Model)
-					{
-						<div class="row shopping-cart-item">
-							<div class="shopping-cart-item-inner">
-								<div class="col-xs-3 img-item">
-									<p class="image-item">
-										<img class="img-responsive" src="@i.pathImg" />
-									</p>
-								</div>
-								<div class="infomation-item-right col-right">
-									<div class="box-infor-product">
-										<div class="badge-maladin-a">
-											<p class="name">
-												<a href="#" target="_blank">
-													@i.Name
-												</a>
-											</p>
-										</div>
-										<p class="seller-by">
-											Cung cấp bởi
-											<span class="firm">
-												<a href="#">@i.UserBy</a>
-											</span>
-										</p>
-										<p class="action-button">
-											<a onclick="DeleteCart('@i.ID');" class="btn btn-link btn-item-delete">Xóa</a>
+    <div class="cart-1">
+        <div class="cart-inner">
+            <div class="">
+                <h5 class="maladin-cart-span-h4">
+                    GIỎ HÀNG
+                    <span>(0 sản phẩm)</span>
+                </h5>
+            </div>
+            <div class="cart-col-1">
+                <form id="shopping-cart-maladin">
+                    @foreach (var i in Model)
+                    {
+                        <div class="row shopping-cart-item">
+                            <div class="shopping-cart-item-inner">
+                                <div class="col-xs-3 img-item">
+                                    <p class="image-item">
+                                        <img class="img-responsive" src="@i.pathImg" />
+                                    </p>
+                                </div>
+                                <div class="infomation-item-right col-right">
+                                    <div class="box-infor-product">
+                                        <div class="badge-maladin-a">
+                                            <p class="name">
+                                                <a href="#" target="_blank">
+                                                    @i.Name
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <p class="seller-by">
+                                            Cung cấp bởi
+                                            <span class="firm">
+                                                <a href="#">@i.UserBy</a>
+                                            </span>
+                                        </p>
+                                        <p class="action-button">
+                                            <a onclick="DeleteCart('@i.ID');" class="btn btn-link btn-item-delete">Xóa</a>
 
-										</p>
-									</div>
-									<div class="badge-maladin-a">
-										<div class="box-price">
-											<p class="price @i.ID">
-												@if (i.saleP == 0)
-												{
+                                        </p>
+                                    </div>
+                                    <div class="badge-maladin-a">
+                                        <div class="box-price">
+                                            <p class="price @i.ID">
+                                                @if (i.saleP == 0)
+                                                {
 
-												}
-												else
-												{
-													var mony = i.Price - (i.saleP * i.Price) / 100;
-													@:@mony ₫
-												}
+                                                }
+                                                else
+                                                {
+                                                    var mony = i.Price - (i.saleP * i.Price) / 100;
+                                                    @:@mony ₫
+                                                }
 
-											</p>
-											<p class="price-2">
+                                            </p>
+                                            <p class="price-2">
 
-												@i.Price đ
-												<span class="sale">
-													-@i.saleP %
-												</span>
-											</p>
-										</div>
-									</div>
-									<div class="badge-maladin-b"></div>
-									<div class="quantity-block">
-										<div class="input-group-2 bootstrap-touchspin count-cart">
-											<span class="input-group-btn">
-												<button id="minusTotal" class="btn btn-default bootstrap-touchspin-down @i.ID" type="button" onclick="idpClick('.'+'@i.ID');">-</button>
-											</span>
-											<input type="tel" id="totalCount" class="form-control quantity-r2 quantity @i.ID" min="0" value="@i.TotalCount" style="display: block;" />
-											<span class="input-group-btn">
-												<button id="plusTotal" class="btn btn-default bootstrap-touchspin-up @i.ID" type="button" onclick="idnClick('.'+'@i.ID');">+</button>
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					}
-				</form>
-			</div>
-		</div>
-		<div class="cart-total-prices">
-			<div class="cart-col-2">
-				<div class="affix-top" id="right-affix">
-					<div class="each-row">
-						<div class="box-style fee">
-							<p class="list-info-price">
-								<span>Tạm tính: </span>
-								<strong class="money-sum">
-
-									@foreach (var i in Model)
-									{
-										sum += i.Price * i.TotalCount - i.Price * i.saleP * i.TotalCount / 100;
-									}
-									@sum
-								</strong>
-
-							</p>
-
-
-						</div>
-
-
-						<div class="box-style fee">
-							<div class="total2 clearfix">
-								<span class="text-label">
-									Thành tiền:
-								</span>
-								<div class="amount">
-									<p><strong id="thanhtien">4.990.990đ</strong></p>
-									<p class="text-right">
-										<small>(Đã bao gồm VAT nếu có)</small>
-									</p>
-								</div>
-							</div>
-						</div>
-						<button id="dathang" type="button" class="btn btn-large btn-block btn-danger btn-checkout">Tiến hành đặt hàng</button>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="panel-group coupon" id="accordion">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											Mã giảm giá / Quà tặng
-										</h4>
-									</div>
-									<div class="panel-collapse-2">
-										<div class="panel-body">
-											<div class="input-group">
-												<input id="coupon" placeholder="Nhập ở đây..." type="text" class="form-control" />
-												<span class="input-group-btn">
-													<button class="btn btn-default btn-coupon" type="button" onclick="bs4pop.notice('This is a notification message', {type: 'success'})">Đồng ý</button>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                                @i.Price đ
+                                                <span class="sale">
+                                                    -@i.saleP %
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="badge-maladin-b"></div>
+                                    <div class="quantity-block">
+                                        <div class="input-group-2 bootstrap-touchspin count-cart">
+                                            <span class="input-group-btn">
+                                                <button id="minusTotal" class="btn btn-default bootstrap-touchspin-down @i.ID" type="button" onclick="idpClick('.'+'@i.ID');">-</button>
+                                            </span>
+                                            <input type="tel" id="totalCount" class="form-control quantity-r2 quantity @i.ID" min="0" value="@i.TotalCount" style="display: block;" />
+                                            <span class="input-group-btn">
+                                                <button id="plusTotal" class="btn btn-default bootstrap-touchspin-up @i.ID" type="button" onclick="idnClick('.'+'@i.ID');">+</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+        <div class="cart-total-prices" id="cart-payment">
+            <div class="cart-col-2">
+                <div class="affix-top" id="right-affix">
+                    <div class="each-row">
+                        <div class="box-style fee">
+                            <p class="list-info-price">
+                                <span>Tạm tính: </span>
+                                <strong class="money-sum">
+                                    @foreach (var i in Model)
+                                    {
+                                        sum += i.Price * i.TotalCount - i.Price * i.saleP * i.TotalCount / 100;
+                                    }
+                                    @sum
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="box-style fee">
+                            <div class="total2 clearfix">
+                                <span class="text-label">
+                                    Thành tiền:
+                                </span>
+                                <div class="amount">
+                                    <p><strong id="thanhtien">4.990.990đ</strong></p>
+                                    <p class="text-right">
+                                        <small>(Đã bao gồm VAT nếu có)</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="dathang" type="button" class="btn btn-large btn-block btn-danger btn-checkout">Tiến hành đặt hàng</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-group coupon" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            Mã giảm giá / Quà tặng
+                                        </h4>
+                                    </div>
+                                    <div class="panel-collapse-2">
+                                        <div class="panel-body">
+                                            <div class="input-group">
+                                                <input id="coupon" placeholder="Nhập ở đây..." type="text" class="form-control" />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default btn-coupon" type="button" onclick="bs4pop.notice('This is a notification message', {type: 'success'})">Đồng ý</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="empty-content" id="noContent">
+        <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
+        <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
+        <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
+    </div>
 </div>
 

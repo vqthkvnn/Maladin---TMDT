@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Maladin.Models;
 using Maladin.DAO;
 using Maladin.Areas.Customer.Common;
+using Facebook;
+using Newtonsoft.Json;
+using System.Web.Security;
+
 namespace Maladin.Controllers
 {
     public class HomeController : Controller
@@ -66,6 +70,53 @@ namespace Maladin.Controllers
         public ActionResult Search(string type, string page, string sortBy)
         {
             return View();
+        }
+
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("facebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
+
+        private ActionResult Facebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = "371532303805461",
+                client_secret = "395a4d72c278fb142b6371549e61d2df", 
+                redirect_uri = RedirectUri.AbsoluteUri,
+                respone_type = "code",
+                scope = "email"
+            });
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+
+        public ActionResult FacebookCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = "371532303805461",
+                client_secret = "395a4d72c278fb142b6371549e61d2df",
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code = code
+            });
+            var accessToken = result.access_token;
+            Session["AccessToken"] = accessToken;
+            fb.AccessToken = accessToken;
+            dynamic me = fb.Get("me?fields=link,first_name,currency,last_name,email,gender,locale,timezone,verified,picture,age_range");
+            string email = me.email;
+            string lastName = me.last_name;
+            string picture = me.picture.data.url;
+            FormsAuthentication.SetAuthCookie(email, false);
+            return RedirectToAction("FacebookLogin", "Home");
         }
     }
 }

@@ -5,7 +5,7 @@
 }
 
 <div class="row-1">
-    <div class="cart-1">
+    <div class="cart-1" id="haveContent">
         <div class="cart-inner">
             <div class="">
                 <h5 class="maladin-cart-span-h4">
@@ -16,7 +16,7 @@
             <div class="cart-col-1">
                 <form id="shopping-cart-maladin">
                     @for (int i = 1; i < 3; i++)
-                     {
+                    {
                         <div class="row shopping-cart-item">
                             <div class="shopping-cart-item-inner">
                                 <div class="col-xs-3 img-item">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                     }
+                    }
                 </form>
             </div>
         </div>
@@ -128,4 +128,25 @@
             </div>
         </div>
     </div>
+    <div class="empty-content" id="noContent">
+        <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
+        <p>Bạn chưa có đơn hàng nào</p>
+        <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
+    </div>
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            checkNullValue();
+        });
+
+        function checkNullValue() {
+            if ($("#haveContent:has(*)").length) {
+                $("#noContent").hide();
+            } else {
+                $("#noContent").show();
+            }
+        }
+    </script>
+}
