@@ -242,3 +242,9 @@ D:\BIG PROJECT\Maladin\Maladin\Maladin\obj\Debug\Maladin.csproj.CoreCompileInput
 D:\BIG PROJECT\Maladin\Maladin\Maladin\obj\Debug\Maladin.csproj.CopyComplete
 D:\BIG PROJECT\Maladin\Maladin\Maladin\obj\Debug\Maladin.dll
 D:\BIG PROJECT\Maladin\Maladin\Maladin\obj\Debug\Maladin.pdb
+D:\BIG PROJECT\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.dll
+D:\BIG PROJECT\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.SqlServer.dll
+D:\BIG PROJECT\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.xml
+D:\BIG PROJECT\Maladin---TMDT\Maladin\Maladin\bin\EntityFramework.SqlServer.xml
+D:\BIG PROJECT\Maladin---TMDT\Maladin\Maladin\bin\Facebook.dll
+D:\BIG PROJECT\Maladin---TMDT\Maladin\Maladin\bin\Facebook.xml
