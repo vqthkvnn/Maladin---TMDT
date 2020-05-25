@@ -2554,7 +2554,7 @@ textarea {
     flex-wrap: nowrap;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    margin-bottom: 100px;
+    /*margin-bottom: 100px;*/
 }
 
 .cart-inner {
@@ -4028,11 +4028,12 @@ body.badge-v2 .product-item .review-wrap .review-count {
     white-space: nowrap;
     font-size: 14px;
     user-select: none;
-    width: 236px;
+    /*width: 236px;
     height: 41px;
     line-height: 41px;
-    text-shadow: rgb(171, 171, 171) 0px 0px 1px;
     background: rgb(253, 216, 53);
+    */
+    text-shadow: rgb(171, 171, 171) 0px 0px 1px;
     border-width: 0px;
     border-style: initial;
     border-color: initial;
@@ -4148,9 +4149,74 @@ body.badge-v2 .product-item .review-wrap .review-count {
     text-align: left;
     line-height: 20px;
 }
-/**
-    hover
-*/
+<<<<<<< HEAD
+
+.dRBGls {
+    width: 300px;
+    z-index: 15;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 6px 12px 0px;
+    position: absolute;
+    top: 45px;
+    left: calc(50% + 10px);
+    transform: translateX(-50%);
+    display: block;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(239, 239, 239);
+    border-image: initial;
+    background: rgb(255, 255, 255);
+    list-style: none;
+    margin: 0px;
+    border-radius: 0px 0px 3px 3px;
+}
+
+.dRBGls ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.dRBGls::before {
+    margin-left: -9px;
+    bottom: 100%;
+    left: 50%;
+    content: " ";
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    pointer-events: none;
+    border-width: 9px;
+    border-style: solid;
+    border-color: transparent transparent rgb(255, 255, 255);
+    border-image: initial;
+    border-bottom: 9px solid rgb(255, 255, 255);
+}
+
+.dRBGls::after {
+    content: " ";
+    height: 20px;
+    width: 50px;
+    top: -20px;
+    left: calc(50% - 25px);
+    position: absolute;
+    display: inline-block;
+    background: transparent;
+}
+
+.hgYybT {
+    font-size: 13px!important;
+    color: rgb(51, 51, 51);
+    text-align: center;
+    margin: 15px 0px 15px;
+}
+
+.dRBGls {
+    display: none;
+}
+
+.noti-item:hover .dRBGls {
+    display: block;
+}
+
 .col-12-lg a:hover {
     background-color: aliceblue;
 }

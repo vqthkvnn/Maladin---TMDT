@@ -107,5 +107,11 @@ namespace Maladin.Areas.API.Controllers
             }
             return Json(new { status = "false" }, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult GetInfoForMessageFromIDP(string idp)
+        {
+            var dao = new MessageDAO();
+            return Json(new { data = dao.getInfomationForIDP(idp) }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

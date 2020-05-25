@@ -151,7 +151,7 @@
                         <div class="col-12-lg">
                             @foreach (var i in Model.DongHoProduct)
                             {
-                                <a class="link-item product-item" href="#">
+                                <a class="link-item product-item" href="@Url.Action("Index", "Product", new {Area ="" })?id=@i.ID">
                                     <div class="content">
                                         <span class="image-item">
                                             <img src="@i.PathIamge" class="img-detail img-responsive" />
@@ -222,7 +222,7 @@
                         <div class="col-12-lg">
                             @foreach (var i in Model.DongHoProduct)
                             {
-                                <a class="link-item product-item" href="#">
+                                <a class="link-item product-item" href="@Url.Action("Index", "Product", new {Area ="" })?id=@i.ID">
                                     <div class="content">
                                         <span class="image-item">
                                             <img src="@i.PathIamge" class="img-detail img-responsive" />

@@ -39,10 +39,10 @@ namespace Maladin.Areas.API.DAO
                 iNFOMATION_ACCOUNT.AVT_ACC = "/public/image/avt/avtdefult.png";
                 iNFOMATION_ACCOUNT.CMND_INFO = "null";
                 iNFOMATION_ACCOUNT.NAME_INFO = entity.USER_ACC; 
-                //iNFOMATION_ACCOUNT.SEX_INFO = true;
-                //iNFOMATION_ACCOUNT.PHONE_INFO = "";
-               // iNFOMATION_ACCOUNT.NOTE_INFO = "";
-                //iNFOMATION_ACCOUNT.BIRTH_INFO = Convert.ToDateTime("01-01-2020");
+                iNFOMATION_ACCOUNT.SEX_INFO = true;
+                iNFOMATION_ACCOUNT.PHONE_INFO = "";
+                iNFOMATION_ACCOUNT.NOTE_INFO = "";
+                iNFOMATION_ACCOUNT.BIRTH_INFO = Convert.ToDateTime("01-01-2020");
                 iNFOMATION_ACCOUNT.USER_ACC = entity.USER_ACC;
                 iNFOMATION_ACCOUNT.ID_TYPE_ACC = "CT"; // gan mac dinh la khach
                 db.INFOMATION_ACCOUNT.Add(iNFOMATION_ACCOUNT);
@@ -90,7 +90,7 @@ namespace Maladin.Areas.API.DAO
                 "PHONE_INFO AS phone, NOTE_INFO AS note " +
                 "FROM dbo.ACCOUNT, dbo.INFOMATION_ACCOUNT " +
                 "WHERE ACCOUNT.USER_ACC = INFOMATION_ACCOUNT.USER_ACC AND ACCOUNT.USER_ACC ='"+user+
-                "' AND INFOMATION_ACCOUNT.ID_TYPE_ACC ='" + res.ID_TYPE_ACC+
+                "' AND INFOMATION_ACCOUNT.ID_TYPE_ACC ='" + "CT"+
                 "'";
             var data = db.Database.SqlQuery<AccountModel>(sql)
                 .Select(b => new AccountModel
@@ -179,15 +179,18 @@ namespace Maladin.Areas.API.DAO
                 return 0;
             }
         }
-        public List<NofiAccountModel> getNotiBy(int page)
+        public List<NofiAccountModel> getNotiBy(int page, string user)
         {
             string sql = "SELECT  NOTI.ID_NOTI as id, NOTI.TITLE_NOTI as titel, NOTI.CONTENT_NOTI as content, " +
                 "NOTI.DATE_NOTI as dateTime, " +
                 "NOTI.IMAGE_TYPE_NOTI as ImagePath, NOTI.IS_CHECK_NOTI as isRead FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY DATE_NOTI ) AS RowNum, " +
                 "NOTIFICATION_.ID_NOTI, TITLE_NOTI, CONTENT_NOTI, DATE_NOTI, IMAGE_TYPE_NOTI,IS_CHECK_NOTI " +
                 "FROM dbo.NOTI_ACC, dbo.NOTIFICATION_, dbo.TYPE_NOTIFICATION " +
-                "WHERE NOTI_ACC.ID_NOTI = NOTIFICATION_.ID_NOTI AND NOTIFICATION_.ID_TYPE_NOTI = TYPE_NOTIFICATION.ID_TYPE_NOTI) AS NOTI " +
-                "WHERE RowNum > 0 AND RowNum <= 10 ORDER BY RowNum ASC";
+                "WHERE NOTI_ACC.ID_NOTI = NOTIFICATION_.ID_NOTI AND NOTIFICATION_.ID_TYPE_NOTI = TYPE_NOTIFICATION.ID_TYPE_NOTI and NOTI_ACC.USER_ACC='" +
+                user+"') AS NOTI " +
+                "WHERE RowNum >"+Convert.ToString(10*(page-1))+
+                "AND RowNum <= " + Convert.ToString(10 * page)+
+                " ORDER BY RowNum ASC";
             var data = db.Database.SqlQuery<NofiAccountModel>(sql)
                 .Select(b => new NofiAccountModel {
                 id = b.id,
@@ -243,7 +246,7 @@ namespace Maladin.Areas.API.DAO
             string sql = "SELECT AP.ID_ACC_PRODUCT as ID, NAME_PRODUCT as Name, AMOUNT as Price, " +
                 "SALE_PERCENT as saleP, " +
                 "SALE_MONEY as saleM, CART_COUNT as TotalCount," +
-                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT, dbo.PRODUCT_IMAGE) AS pathImg, AP.USER_ACC as UserBy " +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE where ID_PRODUCT =AP.ID_PRODUCT) AS pathImg, AP.USER_ACC as UserBy " +
                 "FROM dbo.ACC_PRODUCT as AP, dbo.WATCHED_PRODUCT, dbo.PRODUCT WHERE AP.ID_ACC_PRODUCT = WATCHED_PRODUCT.ID_ACC_PRODUCT " +
                 "AND PRODUCT.ID_PRODUCT = AP.ID_PRODUCT AND WATCHED_PRODUCT.USER_ACC = '" + user + "' and CART_COUNT>0";
             var data = db.Database.SqlQuery<CartProductModel>(sql)
@@ -260,6 +263,89 @@ namespace Maladin.Areas.API.DAO
                 }).ToList();
             return data;
         }
-        
+        public List<OderModelItem> getAllOderProduct(string user, int page)
+        {
+            string sql = "SELECT RES.ID_ODER AS IDOder, RES.NAME_PRODUCT AS NameProduct, RES.DATE_ODER AS DateOder, RES.STATUS_ODER AS StatusOder FROM" +
+                " (SELECT ROW_NUMBER() OVER (ORDER BY DATE_ODER DESC) AS NR, NAME_PRODUCT, ID_ODER, DATE_ODER, STATUS_ODER FROM dbo.ODER, dbo.ACC_PRODUCT, dbo.PRODUCT " +
+                "WHERE ACC_PRODUCT.ID_ACC_PRODUCT = ODER.ID_ACC_PRODUCT AND ACC_PRODUCT.ID_PRODUCT = PRODUCT.ID_PRODUCT AND " +
+                "ODER.USER_ACC = '" + user + "') AS RES WHERE RES.NR>" + Convert.ToString((page - 1) * 10) + " AND RES.NR<=" + Convert.ToString(page * 10);
+            var data = db.Database.SqlQuery<OderModelItem>(sql)
+                .Select(b => new OderModelItem
+                {
+                    DateOder = b.DateOder,
+                    IDOder = b.IDOder,
+                    NameProduct = b.NameProduct,
+                    StatusOder = b.StatusOder
+                }).ToList();
+            return data;
+        }
+        public Tuple<int,int> autoGetNotification(string user)
+        {
+            var message = db.MESSAGE_SEND_TO.Where(x => x.TO_ACC == user && x.IS_READ == false).Count();
+            var notification = db.NOTI_ACC.Where(x => x.USER_ACC == user && x.IS_CHECK_NOTI == false).Count();
+            return new Tuple<int, int>(message, notification);
+        }
+        public bool autoUpdateReadNotification(string user)
+        {
+            try
+            {
+                var listMess = db.MESSAGE_SEND_TO.Where(x => x.TO_ACC == user && x.IS_READ == false).ToList();
+                var notification = db.NOTI_ACC.Where(x => x.USER_ACC == user && x.IS_CHECK_NOTI == false).ToList();
+                if (listMess.Count() > 0)
+                {
+                    foreach (var i in listMess)
+                    {
+                        db.MESSAGE_SEND_TO.Attach(i);
+                        i.IS_READ = true;
+                        db.SaveChanges();
+                    }
+                }
+                if (notification.Count() > 0)
+                {
+                    foreach (var i in notification)
+                    {
+                        db.NOTI_ACC.Attach(i);
+                        i.IS_CHECK_NOTI = true;
+                        db.SaveChanges();
+                    }
+                }
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+        public bool Changpass(string pass, string newpass, string user)
+        {
+            var res = db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user && x.PASSWORD_ACC == pass);
+            if(res == null)
+            { return false; }
+            else
+            {
+                db.ACCOUNTs.Attach(res);
+                res.PASSWORD_ACC = newpass;
+                return true;
+            }
+        }
+        public bool UpdateIF(string user, string name, string phone, string adrs, bool gt, DateTime birth)
+        {
+            var res = db.INFOMATION_ACCOUNT.SingleOrDefault(x => x.USER_ACC == user &&x.ID_TYPE_ACC == "CT");
+            if(res == null)
+            {
+                return false;
+            }
+            else
+            {
+                db.INFOMATION_ACCOUNT.Attach(res);
+                res.NAME_INFO = name;
+                res.PHONE_INFO = phone;
+                res.ADRESS_INFO = adrs;
+                res.SEX_INFO = gt;
+                res.BIRTH_INFO = birth;
+                db.SaveChanges();
+                return true;
+            }
+        }
     }
 }

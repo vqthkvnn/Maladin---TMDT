@@ -13,6 +13,7 @@ namespace Maladin.Areas.API.Controllers
     public class AccountController : Controller
     {
         // GET: API/Account
+
         [HttpPost]
         public JsonResult Index()
         {
@@ -41,6 +42,7 @@ namespace Maladin.Areas.API.Controllers
 
 
         }
+        
         [HttpPut]
         public JsonResult Update(string cmnd, string name, string birth,string gt, string adrs, string phone, 
             string note, string type)
@@ -66,16 +68,16 @@ namespace Maladin.Areas.API.Controllers
             return Json(new { status = res }, JsonRequestBehavior.AllowGet);
         }
         [HttpPut]
-        public JsonResult Changepass(string oldpass, string newpass)
+        public JsonResult Changepass(string oldpass, string newpass, string user)
         {
-            string user = Session[LoginSession.USER_SESSION].ToString();
+            
             var res = new AccountDAO().Changepass(user, oldpass, newpass);
             return Json(new { status = res }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult getNotiBy(string page)
+        public JsonResult getNotiBy(string page, string user)
         {
-            var data = new AccountDAO().getNotiBy(1);
+            var data = new AccountDAO().getNotiBy(Convert.ToInt32(page), user);
             
             return Json(new {count=data.Count, data=data }, JsonRequestBehavior.AllowGet);
         }
@@ -91,7 +93,50 @@ namespace Maladin.Areas.API.Controllers
             var data = dao.getAllCart(user);
             return Json(new {data = data, count = data.Count() }, JsonRequestBehavior.AllowGet);
         }
-        
-        
+        [HttpPost]
+        public JsonResult getFavorite(string user, string page)
+        {
+            var dao = new ProductDAO();
+            var res = dao.getFavoriteProduct(user, Convert.ToInt32(page));
+            return Json(new { count = res.Count(), data = res }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult getWatched(string user, string page)
+        {
+            var dao = new ProductDAO();
+            var res = dao.getWatchedProduct(user, Convert.ToInt32(page));
+            return Json(new { count = res.Count(), data = res }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult getAllOderList(string user, string page)
+        {
+            var dao = new AccountDAO();
+            var res = dao.getAllOderProduct(user, Convert.ToInt32(page));
+            return Json(new { data = res, count = res.Count() }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult autoGetNotification(string user)
+        {
+            var dao = new AccountDAO();
+            return Json(new { data = dao.autoGetNotification(user)}, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPut]
+        public JsonResult autoMakeReadNotification(string user)
+        {
+            var dao = new AccountDAO();
+            return Json(new { status = dao.autoUpdateReadNotification(user) }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPut]
+        public JsonResult updateInformationApp(string user, string name, string phone, string adrs, string gt, string birth)
+        {
+            var dao = new AccountDAO();
+            bool sex = true;
+            if(gt=="false")
+            {
+                sex = false;
+            }
+            DateTime date = DateTime.ParseExact(birth, "dd/MM/yyyy", null);
+            return Json(new { status = dao.UpdateIF(user, name, phone, adrs, sex, date) }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -188,5 +188,11 @@ namespace Maladin.Areas.API.DAO
                 return false;
             }
         }
+        public Tuple<string, string, string> getInfomationForIDP(string idp)
+        {
+            var id = db.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idp).USER_ACC;
+            var res = db.INFOMATION_ACCOUNT.SingleOrDefault(x => x.USER_ACC == id && x.ID_TYPE_ACC == "CTV");
+            return new Tuple<string, string, string>(res.USER_ACC, res.AVT_ACC, res.NAME_INFO);
+        }
     }
 }

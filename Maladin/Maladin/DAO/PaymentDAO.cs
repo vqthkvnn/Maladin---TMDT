@@ -80,7 +80,7 @@ namespace Maladin.DAO
                 {
                     oDER.SUM_PRICE_ODER = count * product.AMOUNT - MonneyFromVocher;
                 }
-                oDER.DATE_ODER = DateTime.UtcNow;
+                oDER.DATE_ODER = DateTime.Now;
                 db.ODERs.Add(oDER);
                 db.SaveChanges();
                 

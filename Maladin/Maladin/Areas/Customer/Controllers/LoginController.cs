@@ -95,5 +95,6 @@ namespace Maladin.Areas.Customer.Controllers
             Session.Remove(CustomerLoginSession.CUSTOMER_SESSION);
             return RedirectToAction("Index", "Home", new { Area="" });
         }
+        
     }
 }

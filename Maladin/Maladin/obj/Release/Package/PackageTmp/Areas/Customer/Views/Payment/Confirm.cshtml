@@ -43,13 +43,11 @@
             });
             $("#confirm-tt").click(function () {
                 var res = false;
+                var COD = true;
                 if ($("#COD").is(':checked')) {
-                }
-                else {
-
                     $.ajax({
                     type: "POST",
-                    url: '@Url.Action("CheckCoint", "Payment", new {Area="Customer" })?vocher=' +'@voucher',
+                    url: '@Url.Action("AcceptPaymentNoCoin", "Payment", new {Area="Customer" })?IDVocher=' +'@voucher'+'&type=TT',
                         async: false,
                         dataType: "json",
                         contentType: "application/json",
@@ -67,7 +65,50 @@
                         { alert('Lỗi server!'); }
                         });
                 }
-                if (res) {
+                else {
+
+                    $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("CheckCoint", "Payment", new {Area="Customer" })?vocher=' +'@voucher',
+                        async: false,
+                        dataType: "json",
+                        contentType: "application/json",
+                        jsonpCallback: 'callback',
+                        cache: false,
+                        success: function (json) {
+                            console.log(json.status);
+                            if (json.status) {
+                                res = true;
+                                COD = false;
+                            }
+                            else {  
+                            }
+                            },
+                        error: function ()
+                        { alert('Lỗi server!'); }
+                        });
+                }
+                if (res && !COD) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("AcceptPaymentCoin", "Payment", new {Area="Customer" })?IDVocher=' + '@voucher' + '&type=TK',
+                        async: false,
+                        dataType: "json",
+                        contentType: "application/json",
+                        jsonpCallback: 'callback',
+                        cache: false,
+                        success: function (json) {
+                            console.log(json.status);
+                            if (json.status != "-1") {
+
+                                $("#finally-comfirm").text("Đơn hàng của bạn đã được tiếp nhận và thanh toán thành công với mã thanh toán là:" + json.status);
+                            }
+                            else {
+                                $("#finally-comfirm").text("Đơn hàng k thanh toán thành công!");
+                            }
+                        },
+                        error: function () { alert('Lỗi server!'); }
+                    });
                     current_fs = $(this).parent();
                     next_fs = $(this).parent().next();
                     //Add Class Active
@@ -90,8 +131,35 @@
                         duration: 600
                     });
                 }
-                else {
+                else if (!res && !COD) {
                     alert("Không thể thanh toán bởi bạn không có đủ Maladin Coin!");
+                }
+                else if (res && COD) {
+                    $("#finally-comfirm").text("Đơn hàng của quý khách đã được tiếp nhận! Quý khách vui lòng đợi trong vài ngày để giao hàng cho quý khách!");
+                    current_fs = $(this).parent();
+                    next_fs = $(this).parent().next();
+                    //Add Class Active
+                    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                    //show the next fieldset
+                    next_fs.show();
+                    //hide the current fieldset with style
+                    current_fs.animate({ opacity: 0 }, {
+                        step: function (now) {
+                            // for making fielset appear animation
+                            opacity = 1 - now;
+
+                            current_fs.css({
+                                'display': 'none',
+                                'position': 'relative'
+                            });
+                            next_fs.css({ 'opacity': opacity });
+                        },
+                        duration: 600
+                    });
+                }
+                else if (!res && COD) {
+                     alert("Không thể tạo hóa đơn");
                 }
                 
             });
@@ -337,7 +405,7 @@
                     </div> <br><br>
                     <div class="row justify-content-center">
                         <div class="col-7 text-center">
-                            <h5>Đơn hàng của bạn đã được tiếp nhận</h5>
+                            <h5 id="finally-comfirm">Đơn hàng của bạn đã được tiếp nhận</h5>
                         </div>
                     </div>
                 </div>

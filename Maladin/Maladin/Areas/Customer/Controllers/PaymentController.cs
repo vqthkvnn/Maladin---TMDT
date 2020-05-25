@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 using System.Web.Mvc;
 using Maladin.DAO;
 using Maladin.Common;
@@ -83,6 +88,8 @@ namespace Maladin.Areas.Customer.Controllers
         }
         public ActionResult Confirm(string vocher)
         {
+            // configure email
+            
             var infoDAO = new CustomerLoginDAO();
             var payDAO = new PaymentDAO();
             ViewBag.Voucher = vocher;

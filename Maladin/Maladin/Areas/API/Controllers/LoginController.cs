@@ -55,7 +55,6 @@ namespace Maladin.Areas.API.Controllers
             {
                 return Json(new { status = 0, user = user }, JsonRequestBehavior.AllowGet);
             }
-
         }
         [HttpPost]
         public JsonResult Create(string user, string pass, string email)

@@ -501,11 +501,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Admin/Views/web.config">
       <publishTime>04/18/2020 13:31:13</publishTime>
     </File>
+    <File Include="Areas/API/Controllers/PaymentController.cs">
+      <publishTime>05/23/2020 12:59:54</publishTime>
+    </File>
     <File Include="Areas/API/Views/web.config">
       <publishTime>04/18/2020 13:31:13</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Account/Cart.cshtml">
-      <publishTime>05/15/2020 01:43:17</publishTime>
+      <publishTime>05/22/2020 02:18:27</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Account/Coin.cshtml">
       <publishTime>05/19/2020 02:48:45</publishTime>
@@ -541,7 +544,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2020 17:22:35</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Payment/Confirm.cshtml">
-      <publishTime>05/19/2020 02:44:25</publishTime>
+      <publishTime>05/20/2020 00:04:03</publishTime>
     </File>
     <File Include="Areas/Customer/Views/Shared/_Layout_Login.cshtml">
       <publishTime>04/27/2020 16:22:31</publishTime>
@@ -1008,6 +1011,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/css/productHome.css">
       <publishTime>05/18/2020 02:18:09</publishTime>
     </File>
+    <File Include="assets/css/style-paycod.css">
+      <publishTime>05/19/2020 22:26:18</publishTime>
+    </File>
     <File Include="assets/css/test.css">
       <publishTime>04/29/2020 18:12:58</publishTime>
     </File>
@@ -1071,11 +1077,44 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>04/18/2020 13:31:15</publishTime>
     </File>
+    <File Include="bin/Facebook.dll">
+      <publishTime>05/22/2020 02:18:27</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.dll">
+      <publishTime>04/02/2020 10:45:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.pdb">
+      <publishTime>04/02/2020 10:45:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.PlatformServices.dll">
+      <publishTime>04/02/2020 10:45:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Core.dll">
+      <publishTime>04/02/2020 10:45:46</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Core.pdb">
+      <publishTime>04/02/2020 10:45:46</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.dll">
+      <publishTime>04/02/2020 10:45:48</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Gmail.v1.dll">
+      <publishTime>05/13/2020 16:04:36</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Gmail.v1.pdb">
+      <publishTime>05/13/2020 16:04:36</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.pdb">
+      <publishTime>04/02/2020 10:45:48</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.PlatformServices.dll">
+      <publishTime>04/02/2020 10:45:48</publishTime>
+    </File>
     <File Include="bin/Maladin.dll">
-      <publishTime>05/19/2020 04:25:05</publishTime>
+      <publishTime>05/23/2020 12:59:14</publishTime>
     </File>
     <File Include="bin/Maladin.pdb">
-      <publishTime>05/19/2020 04:25:05</publishTime>
+      <publishTime>05/23/2020 12:59:14</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>04/18/2020 13:31:16</publishTime>
@@ -1084,7 +1123,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2020 13:31:16</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>04/18/2020 13:31:16</publishTime>
+      <publishTime>11/09/2019 00:56:44</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/18/2020 13:31:16</publishTime>
@@ -1303,7 +1342,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/25/2020 23:12:02</publishTime>
     </File>
     <File Include="Content/main.css">
-      <publishTime>05/17/2020 18:43:15</publishTime>
+      <publishTime>05/22/2020 02:18:27</publishTime>
     </File>
     <File Include="Content/prettyPhoto.css">
       <publishTime>04/18/2020 13:31:15</publishTime>
@@ -1352,6 +1391,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Global.asax">
       <publishTime>04/18/2020 13:31:15</publishTime>
+    </File>
+    <File Include="public/client_secret.json">
+      <publishTime>05/23/2020 12:58:41</publishTime>
+    </File>
+    <File Include="public/image/ads/7a57bd5597ca61895dbb62744f7c0187.jpeg">
+      <publishTime>05/20/2020 21:58:48</publishTime>
     </File>
     <File Include="public/image/avt/avtdefult.png">
       <publishTime>04/18/2020 13:31:15</publishTime>
@@ -1525,7 +1570,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2020 15:17:08</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/18/2020 11:33:10</publishTime>
+      <publishTime>05/23/2020 10:27:29</publishTime>
     </File>
     <File Include="Views/Home/ProductDetail.cshtml">
       <publishTime>04/20/2020 14:25:59</publishTime>
@@ -1534,10 +1579,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/29/2020 14:57:29</publishTime>
     </File>
     <File Include="Views/Home/ShoppingCart.cshtml">
-      <publishTime>05/04/2020 22:18:17</publishTime>
+      <publishTime>05/22/2020 02:18:27</publishTime>
     </File>
     <File Include="Views/Product/Index.cshtml">
       <publishTime>05/19/2020 00:59:18</publishTime>
+    </File>
+    <File Include="Views/Product/PayCOD.cshtml">
+      <publishTime>05/19/2020 23:06:53</publishTime>
     </File>
     <File Include="Views/Search/Index.cshtml">
       <publishTime>05/17/2020 18:16:50</publishTime>
@@ -1549,7 +1597,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2020 22:18:17</publishTime>
     </File>
     <File Include="Views/Shared/Header.cshtml">
-      <publishTime>05/19/2020 01:40:51</publishTime>
+      <publishTime>05/22/2020 02:18:27</publishTime>
     </File>
     <File Include="Views/Shared/LeftMenuUser.cshtml">
       <publishTime>05/14/2020 23:55:10</publishTime>
@@ -1573,7 +1621,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2020 22:18:17</publishTime>
     </File>
     <File Include="Views/User/Login.cshtml">
-      <publishTime>04/25/2020 23:12:02</publishTime>
+      <publishTime>05/22/2020 02:18:27</publishTime>
     </File>
     <File Include="Views/User/ManagerMaladinCoin.cshtml">
       <publishTime>05/04/2020 22:18:17</publishTime>
@@ -1603,7 +1651,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/18/2020 13:31:15</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/19/2020 03:04:46</publishTime>
+      <publishTime>05/23/2020 12:02:26</publishTime>
     </File>
   </ItemGroup>
 </Project>

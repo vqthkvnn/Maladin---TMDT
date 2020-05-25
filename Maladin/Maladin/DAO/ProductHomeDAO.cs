@@ -318,7 +318,24 @@ namespace Maladin.DAO
                 return false;
             }
         }
-        
+        public bool AddToWatched(string id, string user)
+        {
+            try
+            {
+                WATCHED_PRODUCT wATCHED_PRODUCT = new WATCHED_PRODUCT();
+                wATCHED_PRODUCT.ID_ACC_PRODUCT = id;
+                wATCHED_PRODUCT.USER_ACC = user;
+                wATCHED_PRODUCT.CART_COUNT = 0;
+                dbContext.WATCHED_PRODUCT.Add(wATCHED_PRODUCT);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
 
 
     }
