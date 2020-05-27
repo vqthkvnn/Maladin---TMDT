@@ -96,3 +96,9 @@ C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Google.Apis.C
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Google.Apis.Core.xml
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Google.Apis.Gmail.v1.pdb
 C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\Google.Apis.Gmail.v1.xml
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\PagedList.dll
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\PagedList.Mvc.dll
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\PagedList.xml
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\PagedList.Mvc.xml
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\BootstrapRating.dll
+C:\Users\Tuyen\Documents\GitHub\Maladin---TMDT\Maladin\Maladin\bin\BootstrapRating.xml

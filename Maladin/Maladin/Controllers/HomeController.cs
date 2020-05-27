@@ -28,8 +28,7 @@ namespace Maladin.Controllers
             {
                 var da =  new CustomerLoginDAO();
 
-                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString(),
-                   "CT");
+                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString());
             }
             
             return View(models);

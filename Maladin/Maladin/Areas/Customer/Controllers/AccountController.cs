@@ -71,13 +71,22 @@ namespace Maladin.Areas.Customer.Controllers
         }
         public ActionResult Favourite()
         {
+            var dao = new CustomerLoginDAO();
+            var data = dao.getAllFVR(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
 
-            return View();
+            return View(data);
         }
         public ActionResult Watched()
         {
 
             return View();
+        }
+        [HttpPost]
+        public JsonResult DeleteFavorite(string id)
+        {
+            var dao = new CustomerLoginDAO();
+            var res = dao.RemoveFavorite(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), id);
+            return Json(new {res = res }, JsonRequestBehavior.AllowGet);
         }
     }
 }

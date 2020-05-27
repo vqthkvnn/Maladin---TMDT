@@ -12,7 +12,7 @@
         session = ViewBag.IsLogin.ToString();
     }
 }
-<title>@ViewBag.Title</title>
+<title>@ViewBag.Title - @ViewBag.Product.name</title>
 @section Scripts{
     <link href="~/assets/css/productHome.css" rel="stylesheet" />
     <style>
@@ -26,17 +26,47 @@
             transform: translate(-50%, 0);
         }
 
-        .star-comment:hover, .star-comment:hover ~ .star-comment {
-            color: gold;
-        }
-
-        .jWoEvw-tdd {
+        .rate {
             float: left;
+            height: 46px;
+            padding: 0 10px;
         }
 
-        .star-comment {
-            float: right;
-        }
+            .rate:not(:checked) > input {
+                position: absolute;
+                top: -9999px;
+            }
+
+            .rate:not(:checked) > label {
+                float: right;
+                width: 1em;
+                overflow: hidden;
+                white-space: nowrap;
+                cursor: pointer;
+                font-size: 30px;
+                color: #ccc;
+            }
+
+                .rate:not(:checked) > label:before {
+                    content: '★ ';
+                }
+
+            .rate > input:checked ~ label {
+                color: #ffc700;
+            }
+
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
     </style>
     <script>
         let bs4pop = {};
@@ -86,15 +116,15 @@
 
                 // alert $el
                 let $el = $(`
-                                    <div class="alert fade alert-${opts.type}" role="alert">${content}</div>
-                                `);
+                                        <div class="alert fade alert-${opts.type}" role="alert">${content}</div>
+                                    `);
                 if (opts.autoClose) {
                     $el
                         .append(`
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        `)
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            `)
                         .addClass('alert-dismissible');
                 }
 
@@ -119,7 +149,7 @@
         })(bs4pop);
     </script>
     <script>
-        
+
         $(function () {
             $(".btn-open-comment-content").on("click", function (e) {
                 console.log($(".btn-open-comment-content").val());
@@ -133,108 +163,116 @@
                 }
             });
         });
-		$(".img-thumbnail").on("click", function () {
-			$("#imagechinh").attr("src",$(this).attr("src"));
-		});
-		$(".btn-add-to-cart").on("click", function () {
+        $(".img-thumbnail").on("click", function () {
+            $("#imagechinh").attr("src",$(this).attr("src"));
+        });
+        $(".btn-add-to-cart").on("click", function () {
 
-			if ("@session" == "null") {
-				bs4pop.notice('Sản phẩm này không hỗ trợ hình thức bán COD. Vui lòng đăng nhập để mua hàng!', { type: 'danger' })
-				setTimeout(() => {
-					$('#alert').alert();
+            if ("@session" == "null") {
+                bs4pop.notice('Sản phẩm này không hỗ trợ hình thức bán COD. Vui lòng đăng nhập để mua hàng!', { type: 'danger' })
+                setTimeout(() => {
+                    $('#alert').alert();
 
-					setTimeout(() => {
-						$('#alert').alert('close');
-					}, 2000);
-				}, 2000);
+                    setTimeout(() => {
+                        $('#alert').alert('close');
+                    }, 2000);
+                }, 2000);
 
-			}
-			else {
-				$.ajax({
-			type: "POST",
-			url: '@Url.Action("AddToCart", "Product", new {Area="" })?id=' +'@ViewBag.Product.id',
-				async: false,
-				dataType: "json",
-				contentType: "application/json",
-				jsonpCallback: 'callback',
-				cache: false,
-				success: function (json) {
-					if (json.status == "1") {
-						console.log(json.status);
-						bs4pop.notice('Thêm vào giỏ hàng thành công', { type: 'success' })
-						setTimeout(() => {
-						$('#alert').alert();
+            }
+            else {
+                $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddToCart", "Product", new {Area="" })?id=' +'@ViewBag.Product.id',
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                jsonpCallback: 'callback',
+                cache: false,
+                success: function (json) {
+                    if (json.status == "1") {
+                        console.log(json.status);
+                        bs4pop.notice('Thêm vào giỏ hàng thành công', { type: 'success' })
+                        setTimeout(() => {
+                        $('#alert').alert();
 
-						setTimeout(() => {
-						$('#alert').alert('close');
-						}, 2000);
-					}, 2000);
+                        setTimeout(() => {
+                        $('#alert').alert('close');
+                        }, 2000);
+                    }, 2000);
 
-					}
-					else {
-						bs4pop.notice('Thêm vào giỏ hàng không thành công do sản phẩm này đã có', { type: 'danger' })
-						setTimeout(() => {
-						$('#alert').alert();
+                    }
+                    else {
+                        bs4pop.notice('Thêm vào giỏ hàng không thành công do sản phẩm này đã có', { type: 'danger' })
+                        setTimeout(() => {
+                        $('#alert').alert();
 
-						setTimeout(() => {
-						$('#alert').alert('close');
-						}, 2000);
-					}, 2000);
-					}
-					},
-					error: function () { alert('fail'); }
-					});
-			}
-		});
-		$(".btn-favorite").on("click", function () {
-			if ("@session" == "null") {
-				bs4pop.notice('Đăng nhập để sử dụng tính năng này!', { type: 'danger' })
-				setTimeout(() => {
-					$('#alert').alert();
+                        setTimeout(() => {
+                        $('#alert').alert('close');
+                        }, 2000);
+                    }, 2000);
+                    }
+                    },
+                    error: function () { alert('fail'); }
+                    });
+            }
+        });
+        $(".btn-favorite").on("click", function () {
+            if ("@session" == "null") {
+                bs4pop.notice('Đăng nhập để sử dụng tính năng này!', { type: 'danger' })
+                setTimeout(() => {
+                    $('#alert').alert();
 
-					setTimeout(() => {
-						$('#alert').alert('close');
-					}, 2000);
-				}, 2000);
+                    setTimeout(() => {
+                        $('#alert').alert('close');
+                    }, 2000);
+                }, 2000);
 
-			}
-			else {
-				$.ajax({
-			type: "POST",
-			url: '@Url.Action("AddToFarotive", "Product", new {Area="" })?id=' +'@ViewBag.Product.id',
-				async: false,
-				dataType: "json",
-				contentType: "application/json",
-				jsonpCallback: 'callback',
-				cache: false,
-				success: function (json) {
-					if (json.status == "1") {
-						console.log(json.status);
-						bs4pop.notice('Thêm vào danh sách yêu thích thành công!', { type: 'success' })
-						setTimeout(() => {
-						$('#alert').alert();
+            }
+            else {
+                $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddToFarotive", "Product", new {Area="" })?id=' +'@ViewBag.Product.id',
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                jsonpCallback: 'callback',
+                cache: false,
+                success: function (json) {
+                    if (json.status == "1") {
+                        console.log(json.status);
+                        bs4pop.notice('Thêm vào danh sách yêu thích thành công!', { type: 'success' })
+                        setTimeout(() => {
+                        $('#alert').alert();
 
-						setTimeout(() => {
-						$('#alert').alert('close');
-						}, 2000);
-					}, 2000);
+                        setTimeout(() => {
+                        $('#alert').alert('close');
+                        }, 2000);
+                    }, 2000);
 
-					}
-					else {
-						bs4pop.notice('Sản phẩm đã có trong danh sách yêu thích!', { type: 'danger' })
-						setTimeout(() => {
-						$('#alert').alert();
+                    }
+                    else {
+                        bs4pop.notice('Sản phẩm đã có trong danh sách yêu thích!', { type: 'danger' })
+                        setTimeout(() => {
+                        $('#alert').alert();
 
-						setTimeout(() => {
-						$('#alert').alert('close');
-						}, 2000);
-					}, 2000);
-					}
-					},
-					error: function () { alert('fail'); }
-					});
-			}
-		});
+                        setTimeout(() => {
+                        $('#alert').alert('close');
+                        }, 2000);
+                    }, 2000);
+                    }
+                    },
+                    error: function () { alert('fail'); }
+                    });
+            }
+        });
+        function SuccessComment(data) {
+            alert(data.content);
+            
+        };
+        function FailComment(data) {
+            alert("Lỗi hệ thống!");
+        }
+
     </script>
 }
 <div class="main">
@@ -306,7 +344,8 @@
                             <div class="group-tdd border-top-tdd">
                                 <div class="dJbIjB-tdd">
                                     <div class="fXfceZ-tdd" style="        margin-top: -7px;
-        margin-right: 20px;">
+        margin-right: 20px;
+">
                                         <p class="label">Số lượng:</p>
                                         <div class="group-input">
                                             <button id="minus-btn">-</button>
@@ -635,32 +674,43 @@
     <div class="row comment-content" style="margin-bottom: 20px; border:solid 1px; margin-bottom:10px;" hidden>
         <div class="col-6">
             <div class="left-tdd">
+                @using (Ajax.BeginForm("Comment", "Product",new {idp=ViewBag.Product.id}, new AjaxOptions() {HttpMethod = "POST", OnSuccess = "SuccessComment", OnFailure = "FailComment",InsertionMode = InsertionMode.Replace,UpdateTargetId = "left-tdd" }))
+                {
                 <h4 style="margin-bottom: 20px;font-size: 18px;font-weight: 400;margin: 0px 0px 10px;color: rgb(51, 51, 51);">GỬI NHẬN XÉT CỦA BẠN</h4>
                 <div class="stars-tdd" style="display: flex;">
                     <p class="label">1. Đánh giá của bạn về sản phẩm này:</p>
-                    <div class="jWoEvw-tdd" style="margin-left: 10px; padding-top: 2px; font-size: 22px;">
-                        <span class="fa fa-star star-comment start-select-1" aria-hidden="true"></span>
-                        <span class="fa fa-star star-comment start-select-2" aria-hidden="true"></span>
-                        <span class="fa fa-star star-comment start-select-3" aria-hidden="true"></span>
-                        <span class="fa fa-star star-comment start-select-4" aria-hidden="true"></span>
-                        <span class="fa fa-star star-comment start-select-5" aria-hidden="true"></span>
+                    <div class="jWoEvw-tdd" style="margin-left: 10px; margin-bottom:5px; font-size: 22px;">
+                        @Html.DropDownList("rating", new List<SelectListItem> {
+                                    new SelectListItem { Value = "1" , Text = "1 ★" },
+                                    new SelectListItem { Value = "2" , Text = "2 ★" },
+                                    new SelectListItem { Value = "3" , Text = "3 ★" },
+                                    new SelectListItem { Value = "4" , Text = "4 ★" },
+                                    new SelectListItem { Value = "5" , Text = "5 ★" }
+                                            },
+                            new { @class = "myselect", style = "background-color:white; color:blue;" })
+
                     </div>
                 </div>
                 <div class="stars-tdd">
                     <div class="form-group" style="width: 90%;">
                         <label for="comment">2. Tiêu đề của nhận xét:</label>
-                        <textarea class="form-control" rows="1" id="comment" style="width: 100%;"></textarea>
+                        @Html.TextArea("title", htmlAttributes: new { @class = "form-control", rows = "1", placeholder = "Tiêu đề của nhận xét", @id = "comment-title", style = "width: 100%;" })
+
                     </div>
                 </div>
                 <div class="stars-tdd">
                     <div class="form-group" style="width: 90%;">
                         <label for="comment">3. Viết nhận xét của bạn vào bên dưới:</label>
-                        <textarea class="form-control" rows="3" placeholder="Nhận xét của bạn về sản phẩm này" id="comment" style="width: 100%;"></textarea>
+                        @Html.TextArea("Content", htmlAttributes: new { @class = "form-control", rows = "3", placeholder = "Nhận xét của bạn về sản phẩm này", @id = "comment-content", style = "width: 100%;", required = "true" })
+
                     </div>
                 </div>
                 <div class="stars-tdd">
-                    <button type="button" class="btn btn-warning">Gửi nhận xét</button>
+                    <input type="submit" value="Gửi nhận xét" class="btn btn-warning" />
+
                 </div>
+                }
+
             </div>
 
         </div>
@@ -690,6 +740,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <!--Người 1-->
     @foreach (var i in ViewBag.ListComment)

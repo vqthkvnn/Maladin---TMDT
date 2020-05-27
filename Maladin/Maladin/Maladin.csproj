@@ -51,6 +51,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BootstrapRating, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\bootstrap-rating.mvc.1.0.0\lib\net452\BootstrapRating.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -81,6 +84,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -160,6 +169,7 @@
     <Compile Include="Areas\Admin\Common\LoginAdminSession.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DataSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExpectController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
@@ -272,11 +282,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartProductModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\CustomerLoginModel.cs" />
     <Compile Include="Models\EF_MORE\ACCOUNT.cs" />
     <Compile Include="Models\EF_MORE\ACC_PRODUCT.cs" />
     <Compile Include="Models\EF_MORE\FAVORITE_PRODUCT.cs" />
     <Compile Include="Models\EF_MORE\FV_Maladin.cs" />
+    <Compile Include="Models\FavoriteModel.cs" />
     <Compile Include="Models\ItemProductModel.cs" />
     <Compile Include="Models\ItemProductModels.cs" />
     <Compile Include="Models\ProductHomeModel.cs" />
@@ -431,6 +443,7 @@
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\popper.min.js" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -442,10 +455,13 @@
     <Content Include="Content\js\ussal-notification.js" />
     <Content Include="Content\loginCss.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\price-range.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\testCss.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\util.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -462,6 +478,8 @@
     <Content Include="public\logo-mini.svg" />
     <Content Include="public\logo.jpg" />
     <Content Include="public\logo.svg" />
+    <Content Include="Scripts\bootstrap-rating\bootstrap-rating.js" />
+    <Content Include="Scripts\bootstrap-rating\bootstrap-rating.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -669,6 +687,16 @@
     <Content Include="Areas\Admin\Views\Expect\ExpectProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Expect\ExpectAccount.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Cart.cshtml" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Views\Shared\_Layout_profile_account.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Notification.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Oder.cshtml" />
@@ -678,6 +706,9 @@
     <Content Include="Areas\Customer\Views\Account\Question.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Comment.cshtml" />
     <Content Include="Areas\Customer\Views\Payment\Confirm.cshtml" />
+    <Content Include="Areas\Admin\Views\DataSystem\Account.cshtml" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <Content Include="public\client_secret.json" />
