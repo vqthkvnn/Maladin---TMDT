@@ -678,6 +678,9 @@
     <Content Include="Areas\Customer\Views\Account\Question.cshtml" />
     <Content Include="Areas\Customer\Views\Account\Comment.cshtml" />
     <Content Include="Areas\Customer\Views\Payment\Confirm.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\CreatAcc.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\EditAcc.cshtml" />
+    <Content Include="Areas\Partner\Views\Oder\ChitietHD.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <Content Include="public\client_secret.json" />

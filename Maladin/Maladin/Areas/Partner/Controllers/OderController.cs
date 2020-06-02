@@ -21,5 +21,9 @@ namespace Maladin.Areas.Partner.Controllers
             models.oders = dao.getAllOder(user);
             return View(models);
         }
+        public ActionResult ChitietHD()
+        {
+            return View();
+        }
     }
 }
