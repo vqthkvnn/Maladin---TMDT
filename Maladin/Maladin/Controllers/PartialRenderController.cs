@@ -21,8 +21,7 @@ namespace Maladin.Controllers
             {
                 var da = new CustomerLoginDAO();
 
-                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString(),
-                   da.getTypeMax(Session[CustomerSession.CUSTOMER_SESSION].ToString()));
+                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString());
                 ViewBag.TotalCart = da.getTotalCart(Session[CustomerSession.CUSTOMER_SESSION].ToString());
             }
             return PartialView("Header");
@@ -37,8 +36,7 @@ namespace Maladin.Controllers
             {
                 var da = new CustomerLoginDAO();
 
-                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString(),
-                   da.getTypeMax(Session[CustomerSession.CUSTOMER_SESSION].ToString()));
+                ViewBag.IsLogin = da.getNameUser(Session[CustomerSession.CUSTOMER_SESSION].ToString());
                 ViewBag.TotalCart = da.getTotalCart(Session[CustomerSession.CUSTOMER_SESSION].ToString());
             }
             return PartialView("LeftMenuUser");

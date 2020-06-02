@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Maladin.Models.FavoriteModel>
 @{
     ViewBag.Title = "Favourite";
     Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
@@ -12,8 +12,27 @@
         function removeEmelent(i) {
             var r = confirm("Bạn có thực sự muốn xóa?");
             if (r == true) {
-                $('#' + i).remove();
-                window.location.reload();   //luu vao DB xoa di phan tu yeu thich sau do load lai trang
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteFavorite", "Account", new {Area="Customer" })?id=' +i,
+                        async: false,
+                        dataType: "json",
+                        contentType: "application/json",
+                        jsonpCallback: 'callback',
+                        cache: false,
+                        success: function (json) {
+                            console.log(json.status);
+                            if (json.res) {
+                                window.location.reload();
+                            }
+                            else { 
+                                
+                            }
+                            },
+                        error: function ()
+                        { alert('Lỗi server!'); }
+                        });
+                   //luu vao DB xoa di phan tu yeu thich sau do load lai trang
             } else {
 
             }
@@ -32,38 +51,45 @@
 <!--start div if have wishlist-->
 <div class="account-wish-list list-item" id="haveWishList">
     <form id="wishlist" method="post">
-        @for (int i = 1; i <= 2; i++)
+        @foreach (var i in Model)
         {
-            <div class="item wishlist-item" id="@i">
+            <div class="item wishlist-item" >
                 <div class="item-col-1">
                     <p class="image">
-                        <a href="#">
-                            <img class="img-responsive" src="~/assets/image/product.png" style="width: 130px; height: 182px" />
+                        <a href="@Url.Action("Index","Product", new {id=i.ID })">
+                            <img class="img-responsive" src="@i.PathIamge" style="width: 125px; height: 125px" />
                         </a>
                     </p>
                 </div>
                 <div class="item-col-2">
                     <div class="information">
                         <p class="title">
-                            <a href="#">
-                                GHẾ AEROCOOL GAMING CHAIR EARL Iron (Đen) - Hàng Chính Hãng
+                            <a href="@Url.Action("Index","Product", new {id=i.ID })">
+                                @i.NameProduct
                             </a>
                         </p>
                         <div class="desciption">
-                            <p>Đây là mô tả của sản phẩm Đây là mô tả của sản phẩm Đây là mô tả của sản phẩm Đây là mô tả của sản phẩm</p>
+                            @if (i.ContentP.Length > 200)
+                            {
+                                <p>@i.ContentP.Substring(0, 200)</p>
+                            }
+                            else
+                            {
+                                <p>@i.ContentP</p>
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="item-col-3">
                     <p class="price-sale">
-                        4.500.000đ
+                        @Convert.ToString(i.PriceGoc - i.PriceGoc * i.SalePricent / 100) đ
                         <br />
-                        <span>600.000đ</span>
+                        <span>@i.PriceGoc đ</span>
                         <span class="sale-tag">
-                            -17%
+                            -@i.SalePricent %
                         </span>
                     </p>
-                    <button class="btn btn-default btn-custom1 delete-wishlist-item" type="button" onclick="removeEmelent(@i)">
+                    <button class="btn btn-default btn-custom1 delete-wishlist-item" type="button" onclick="removeEmelent('@i.ID')">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>

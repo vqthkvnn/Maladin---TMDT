@@ -1,8 +1,10 @@
-﻿using Maladin.EF;
+﻿using Maladin.Areas.Admin.Models;
+using Maladin.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList;
 
 namespace Maladin.Areas.Admin.DAO
 {
@@ -205,5 +207,114 @@ namespace Maladin.Areas.Admin.DAO
                 return false;
             }
         }
+        public bool Insert(ACCOUNT entity)
+        {
+            try
+            {
+                db.ACCOUNTs.Add(entity);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public List<INFOMATION_ACCOUNT> getInfoByAcc(string user)
+        {
+            return db.INFOMATION_ACCOUNT.Where(x => x.USER_ACC == user).ToList();
+        }
+        public bool Delete(string user)
+        {
+            try
+            {
+                var listIF = getInfoByAcc(user);
+                foreach (var i in listIF)
+                {
+                    db.INFOMATION_ACCOUNT.Attach(i);
+                    i.USER_ACC = "null";
+                    
+                    db.SaveChanges();
+                }
+                var product = db.ACCOUNTs.Find(user);
+                db.ACCOUNTs.Remove(product);
+                db.SaveChanges();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
+        }
+        public ACCOUNT GetByNameAccount(string user)
+        {
+            return db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user);
+        }
+        public int CheckLogin(LoginAdminModel account)
+        {
+            var res = db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == account.UserAdmin);
+
+            if (res == null)
+            {
+                return 0; // tài khoản không tồn tại
+            }
+            else
+            {
+                if (res.IS_ACTIVE_ACC == false)
+                {
+                    return -1; // tài khoản chưa được kích hoat
+                }
+                else
+                {
+                    if (res.PASSWORD_ACC == account.PasswordAdmin)
+                    {
+                        if (res.ID_TYPE_ACC == "admin" || res.ID_TYPE_ACC == "ADMIN")
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return -2; // tai khoan k duoc cap quyen
+                        }
+                    }
+                    else
+                    {
+                        return -3; //sai pass
+                    }
+
+                }
+            }
+        }
+        public IPagedList<ACCOUNT> getAllAccountByPage(int page, string q)
+        {
+            if(q == null)
+            {
+                return db.ACCOUNTs.ToList().ToPagedList(page, 10);
+            }
+            else
+            {
+                return db.ACCOUNTs.Where(x => x.USER_ACC.Contains(q)).OrderBy(x=>x.USER_ACC).ToList().ToPagedList(page, 10);
+            }
+            
+        }
+        public bool ActiveAccount(string user, bool action)
+        {
+            try
+            {
+                var res = db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user);
+                db.ACCOUNTs.Attach(res);
+                res.IS_ACTIVE_ACC = action;
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
     }
 }

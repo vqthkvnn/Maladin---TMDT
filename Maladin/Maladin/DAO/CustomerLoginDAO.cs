@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Maladin.Models;
+
 namespace Maladin.DAO
 {
     public class CustomerLoginDAO
     {
         TMDT_Maladin db = null;
+        Maladin.Models.EF_MORE.FV_Maladin dbFV = null;
         public CustomerLoginDAO()
         {
             db = new TMDT_Maladin();
+            dbFV = new Maladin.Models.EF_MORE.FV_Maladin();
         }
         public int Login(string user, string password)
         {
@@ -79,9 +82,9 @@ namespace Maladin.DAO
                 return false;
             }
         }
-        public string getNameUser(string user, string type)
+        public string getNameUser(string user)
         {
-            return db.INFOMATION_ACCOUNT.Where(x => x.USER_ACC == user).Where(x => x.ID_TYPE_ACC == type).SingleOrDefault().NAME_INFO;
+            return db.INFOMATION_ACCOUNT.Where(x => x.USER_ACC == user).Where(x => x.ID_TYPE_ACC == "CT").SingleOrDefault().NAME_INFO;
         }
         public string getTypeUser(string user)
         {
@@ -128,6 +131,41 @@ namespace Maladin.DAO
         public int getCoin(string user)
         {
             return (db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user).COINT_ACC ?? 0 );
+        }
+        public List<FavoriteModel> getAllFVR(string user)
+        {
+            string sql = "SELECT ACC_PRODUCT.ID_ACC_PRODUCT as ID , NAME_PRODUCT as NameProduct, AMOUNT as PriceGoc, SALE_PERCENT as SalePricent, SALE_MONEY as SaleMoney, PD.DESCRIBE_PRODUCT as ContentP," +
+                "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE where ID_PRODUCT = PD.ID_PRODUCT) AS PathIamge " +
+                " FROM dbo.FAVORITE_PRODUCT, dbo.PRODUCT AS PD, dbo.ACC_PRODUCT " +
+                "WHERE ACC_PRODUCT.ID_ACC_PRODUCT = FAVORITE_PRODUCT.ID_ACC_PRODUCT AND ACC_PRODUCT.ID_PRODUCT = PD.ID_PRODUCT " +
+                "AND FAVORITE_PRODUCT.USER_ACC = '" + user + "'";
+            var data = db.Database.SqlQuery<FavoriteModel>(sql)
+                .Select(b => new FavoriteModel
+                {
+                    ID = b.ID,
+                    NameProduct = b.NameProduct,
+                    PathIamge = b.PathIamge,
+                    PriceGoc = b.PriceGoc,
+                    SaleMoney = b.SaleMoney,
+                    SalePricent = b.SalePricent,
+                    ContentP = b.ContentP
+                }).ToList();
+            return data;
+        }
+        public bool RemoveFavorite(string user, string id)
+        {
+            try
+            {
+                var res = dbFV.FAVORITE_PRODUCT.SingleOrDefault(x => x.USER_ACC == user && x.ID_ACC_PRODUCT == id);
+                dbFV.FAVORITE_PRODUCT.Attach(res);
+                dbFV.FAVORITE_PRODUCT.Remove(res);
+                dbFV.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
     }
 }

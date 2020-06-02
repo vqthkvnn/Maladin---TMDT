@@ -9,7 +9,9 @@ namespace Maladin
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js"
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -23,7 +25,14 @@ namespace Maladin
                       //"~/Scripts/bootstrap.js",
                       "~/assets/js/bootstrap.js",
                       "~/assets/js/bootstrap.min.js",
-                      "~/assets/js/popper.min.js"
+                      "~/assets/js/popper.min.js",
+                      "~/Scripts/MicrosoftAjax.js",
+                      "~/Scripts/MicrosoftMvcAjax.js",
+                      "~/Scripts/MicrosoftAjax.debug.js",
+                      "~/Scripts/MicrosoftMvcAjax.debug.js",
+                      "~/Scripts/bootstrap-rating/bootstrap-rating.js",
+                      "~/Scripts/bootstrap-rating/bootstrap-rating.min.js"
+                      
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -31,6 +40,7 @@ namespace Maladin
                       "~/assets/css/bootstrap.css",
                       //"~/Content/bootstrap.min.css",
                       //"~/Content/bootstrap.css",
+                      "~/Content/bootstrap-rating.css",
                       //"~/Content/site.css"
                       "~/Content/main.css"));
             // style for admin
@@ -38,9 +48,8 @@ namespace Maladin
 
                 "~/Areas/Admin/assets/vendors/mdi/css/materialdesignicons.min.css",
                 "~/Areas/Admin/assets/vendors/base/vendor.bundle.base.css",
-                "~/Areas/Admin/assets/css/style.css"
-
-
+                "~/Areas/Admin/assets/css/style.css",
+                "~/Content/toastr.css"
                 ));
 
             bundles.Add(new ScriptBundle("~/Areas/Admin/alljs").Include(
@@ -52,7 +61,8 @@ namespace Maladin
                 "~/Areas/Admin/assets/vendors/justgage/raphael-2.1.4.min.js",
                 "~/Areas/Admin/assets/vendors/justgage/justgage.js",
                 "~/Areas/Admin/assets/js/dashboard.js",
-                "~/Areas/Admin/assets/js/template.js"
+                "~/Areas/Admin/assets/js/template.js",
+                "~/Scripts/toastr.js"
                 
 
                 ));

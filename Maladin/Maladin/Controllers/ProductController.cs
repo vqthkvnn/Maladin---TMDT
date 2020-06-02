@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Maladin.DAO;
 using Maladin.Common;
+using Maladin.Models;
 
 namespace Maladin.Controllers
 {
@@ -51,6 +52,33 @@ namespace Maladin.Controllers
         public ActionResult PayCOD(string id)
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult Comment(int? rating, string title, string content, string idp)
+        {
+            if (Session[CustomerLoginSession.CUSTOMER_SESSION] == null)
+            {
+                return Json(new { status = 0, content = "Bạn chưa đăng nhập" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var dao = new ProductHomeDAO();
+                var status = dao.InsertComment(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), title, content, (rating ?? 5), idp);
+                if (status == 1)
+                {
+                    return Json(new { status = 1, content = "Bình luận thành công!" }, JsonRequestBehavior.AllowGet);
+                }
+                else if (status ==0)
+                {
+                    return Json(new { status = -1, content = "Sản phẩm này đã bình luận" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { status = -2, content = "Lỗi hệ thống!" }, JsonRequestBehavior.AllowGet);
+                }
+                
+            }
+            
         }
     }
 }

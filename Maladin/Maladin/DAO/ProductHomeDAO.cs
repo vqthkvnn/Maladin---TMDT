@@ -335,6 +335,33 @@ namespace Maladin.DAO
                 return false;
             }
         }
+        public int InsertComment(string user, string title, string content, int rating, string idp)
+        {
+            try
+            {
+                var res = dbContext.ACCOUNT_COMMENT.SingleOrDefault(x => x.USER_ACC == user && x.ID_ACC_PRODUCT == idp);
+                if (res != null)
+                {
+                    return 0;
+                }
+                ACCOUNT_COMMENT aCCOUNT_COMMENT = new ACCOUNT_COMMENT();
+                aCCOUNT_COMMENT.USER_ACC = user;
+                aCCOUNT_COMMENT.ID_ACC_PRODUCT = idp;
+                aCCOUNT_COMMENT.TITLE_COMMENT = title;
+                aCCOUNT_COMMENT.CONTEN_COMMENT = content;
+                aCCOUNT_COMMENT.RATING_COMMENT = rating;
+                aCCOUNT_COMMENT.DATE_COMMENT = DateTime.Now;
+                aCCOUNT_COMMENT.IS_READ = false;
+                dbContext.ACCOUNT_COMMENT.Add(aCCOUNT_COMMENT);
+                dbContext.SaveChanges();
+                return 1;
+
+            }catch(Exception e)
+            {
+                return -1;
+            }
+        }
+        
 
 
 
