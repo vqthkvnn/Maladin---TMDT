@@ -21,5 +21,13 @@ namespace Maladin.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult CreatAcc()
+        {
+            return View();
+        }
+        public ActionResult EditAcc()
+        {
+            return View();
+        }
     }
 }

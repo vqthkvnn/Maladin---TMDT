@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "ChitietHD";
+    Layout = "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
+}
+
+<div class="card-body">
+    <h4 class="card-title">Thông tin chi tiết hóa đơn</h4>
+    <form class="form-sample">
+        <p class="card-description">
+            *Chỉ được xem
+        </p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Mã đơn hàng</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Mã Lô hàng</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Danh mục sản phẩm</label>
+                    <div class="col-sm-9">
+                        <select class="form-control">
+                            <option>Điều hòa</option>
+                            <option>Đồng hồ xịn</option>
+                            <option>Áo phông trơn</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Số lượng</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Thành tiền</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" placeholder="VND">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Tổng tiền</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" placeholder="VND">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Loại hình thanh toán</label>
+                    <div class="col-sm-3">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked="">
+                                Tiền mặt
+                                <i class="input-helper"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2">
+                                Thẻ tín dụng
+                                <i class="input-helper"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios3" value="option3">
+                                MLD Coins
+                                <i class="input-helper"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Ngày đặt hàng</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" placeholder="dd/MM/yyyy">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Mã giảm giá</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-success btn-rounded btn-fw" style="position:center">Back</button>
+            </div>          
+        </div>
+    </form>
+</div>

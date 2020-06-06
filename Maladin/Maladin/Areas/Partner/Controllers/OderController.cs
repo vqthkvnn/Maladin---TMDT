@@ -27,5 +27,9 @@ namespace Maladin.Areas.Partner.Controllers
             ViewBag.Option = (option ?? 5);
             return View(models);
         }
+        public ActionResult ChitietHD()
+        {
+            return View();
+        }
     }
 }

@@ -5,92 +5,91 @@
 @section Scripts{
 
 }
-    <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Danh sách tài khoản của hệ thống</h4>
-                    <div class="row">
-                        <div class="col-lg-6 grid-margin stretch-card">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="search">
-                                        <i class="mdi mdi-account-search"></i>
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="search">
-                                <button type="button" class="btn btn-primary btn-icon-text">
-                                    <i class="mdi mdi-magnify"></i>
-                                    Submit
-                                </button>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Danh sách tài khoản của hệ thống</h4>
+                <div class="row">
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="search">
+                                    <i class="mdi mdi-account-search"></i>
+                                </span>
                             </div>
-                        </div>
-                        <div class="col-lg-6 grid-margin stretch-card">
-                            <form class="form-inline">
-                                <label class="col-form-label" style="margin-right:20px;">Tùy chọn hiển thị:</label>
-                                <select class="form-control" style="margin-right:20px;">
-                                    <option>Category1</option>
-                                    <option>Category2</option>
-                                    <option>Category3</option>
-                                    <option>Category4</option>
-                                </select>
-                                <button type="button" class="btn btn-primary mb-2">Áp dụng</button>
-                            </form>
-                            </div>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Tài khoản</th>
-                                        <th>Password</th>
-                                        <th>Email</th>
-                                        <th>Ngày đăng kí tài khoản</th>
-                                        <th>Loại tài khoản</th>
-                                        <th>Trạng thái tài khoản</th>
-                                        <th>Hành động</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <p>admin</p>
-                                        </td>
-                                        <td>
-                                            <p>admin</p>
-                                        </td>
-                                        <td>
-                                            <p>duybeo19121999@@gmail.com</p>
-                                        </td>
-                                        <td>
-                                            <p>May 15, 2020</p>
-                                        </td>
-                                        <td>
-                                            <p>ADMIN</p>
-                                        </td>
-                                        <td>
-                                            <label class="badge badge-success">Đã Kích Hoạt</label>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                                                <i class="mdi mdi-account-plus text-primary"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                                                <i class="mdi mdi-account-check text-primary"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                                                <i class="mdi mdi-account-remove text-primary"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
+                            <input type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="search">
+                            <button type="button" class="btn btn-primary btn-icon-text">
+                                <i class="mdi mdi-magnify"></i>
+                                Submit
+                            </button>
                         </div>
                     </div>
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <a href="@Url.Action("CreatAcc", "Account", new { area = "Admin"})" class="Creat">
+                            <button type="button" class="btn btn-primary">Thêm mới Tài Khoản</button>
+                        </a>         
+                    </div>
+                </div>                
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tài khoản</th>
+                                <th>Password</th>
+                                <th>Email</th>
+                                <th>Ngày đăng kí tài khoản</th>
+                                <th>Loại tài khoản</th>
+                                <th>Số tiền trong tài khoản</th>
+                                <th>Trạng thái tài khoản</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>admin</p>
+                                </td>
+                                <td>
+                                    <p>admin</p>
+                                </td>
+                                <td>
+                                    <p>duybeo19121999@@gmail.com</p>
+                                </td>
+                                <td>
+                                    <p>May 15, 2020</p>
+                                </td>
+                                <td>
+                                    <p>ADMIN</p>
+                                </td>
+                                <td>
+                                    <p>10000000</p>
+                                </td>
+                                <td>
+                                    <label class="badge badge-success">Đã Kích Hoạt</label>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                                        <i class="mdi mdi-account-plus text-primary"></i>
+                                    </button>
+                                    <a href="@Url.Action("EditAcc", "Account", new { area = "Admin"})">
+                                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                                            <i class="mdi mdi-account-check text-primary"></i>
+                                        </button>
+                                    </a>
+                                    
+                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                                        <i class="mdi mdi-account-remove text-primary"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
