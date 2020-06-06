@@ -1,11 +1,87 @@
-﻿
+﻿@using PagedList;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Partner/Views/Shared/_layout_partner.cshtml";
 }
-@model Maladin.Areas.Partner.Models.OderModels
+@model IPagedList<Maladin.Areas.Partner.Models.OderModel>
 @section Scripts{
-    <script></script>
+    <script>
+        var page = @ViewBag.Page;
+        var pageSize = 10;
+        var maxPage = @ViewBag.MaxPage;
+        // hết khai báo biến
+        var choose = $('select[id=selectHienThi] option').filter(':selected').val()
+        $("#selectHienThi").val("@ViewBag.Option");
+        if (page <1)
+        {
+
+        }
+        else if (page == 1) {
+            $("#next").attr("href", "@Url.Action("Index", "Oder")?page=" + String(page + 1) + "&option=" + choose)
+
+        }
+        else if (page == 2) {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#prviewc").removeClass("disabled");
+            $("#next").attr("href", "@Url.Action("Index", "Oder")?page=" + String(page + 1)+"&option=" + choose)
+            $("#prview").attr("href", "@Url.Action("Index", "Oder")?page=" + String(page - 1)+"&option=" + choose)
+        }
+        else {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#num1").text(String(page - 1));
+            $("#num2").text(String(page));
+            if (page >= maxPage) {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#btnPage2").addClass("active");
+                $("#next").removeAttr("href");
+                $("#btnNext").addClass("disabled");
+                $("#btnPage3").addClass("disabled");
+                $("#next").attr("aria-disabled", 'true');
+                $("#prview").attr("href", "@Url.Action("Index", "Oder")?page=" + String(page - 1) +"&option=" + choose)
+            }
+            else {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#next").attr("href", "@Url.Action("Index", "Oder")?page=" + String(page + 1)+"&option=" + choose)
+                $("#prview").attr("href", "@Url.Action("Index", "Oder")?page=" + String(page - 1)+"&option=" + choose)
+            }
+        }
+        // add link
+        var pageNext = parseInt($("#num1").text());
+
+        $("#num1").attr("href", "@Url.Action("Index", "Oder")?page=" + pageNext+"&option=" + choose)
+        $("#num2").attr("href", "@Url.Action("Index", "Oder")?page=" + String(pageNext + 1)+"&option=" + choose)
+        $("#num3").attr("href", "@Url.Action("Index", "Oder")?page=" + String(pageNext + 2)+"&option=" + choose)
+        // remove link href:
+        if (page >= 2) {
+            $("#num2").removeAttr("href");
+        }
+
+        if (maxPage == 1) {
+            $("#num2").removeAttr("href");
+            $("#num3").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+        else if (maxPage == 2) {
+            $("#num3").removeAttr("href");
+            $("#next").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+        // add event click
+        $('#btn-search-product').click(function () {
+            console.log("text:", $('#input-search-product').val());
+            window.location = '@Url.Action("Index", "Oder")?page=' + page+"&option=" + choose;
+        });
+
+        $("#selectHienThi").change(function () {
+            window.location = $(':selected', this).attr('href');
+            $(':selected', this).addClass("selected");
+        });
+
+    </script>
 
 }
 <div class="row">
@@ -17,105 +93,139 @@
                     <div class="row">
                         <div class="col-lg-9 grid-margin stretch-card">
                             Lưu ý:
-                            <p style="color:red;">Những đơn hàng đã hoàn thành không được hiện thị, tùy chọn hiển thị để hiện thị tất cả</p>
-                        </div>
-                        <div class="col-lg-3 grid-margin stretch-card">
-                            <strong style="color:orange">Tùy chọn hiển thị</strong>
-                            <select class="form-control" id="selectHienThi">
-                                <option>Chưa hoàn thành</option>
-                                <option>Đã hủy</option>
-                                <option>Hoàn thành</option>
-                                <option>Tất cả</option>
-
-
-                            </select>
-                        </div>
-                    </div>
-                    
-                    
-                    
+                <p style="color:red;">
+                    Những đơn hàng đã hoàn thành không được hiện thị, tùy chọn hiển thị để
+                    hiện thị tất cả
                 </p>
-                <div class="table-responsive pt-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID Đơn </th>
-                                <th>Mã lô hàng</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Số lượng</th>
-                                <th>Loai hình thanh toán</th>
-                                <th>Ngày đặt</th>
-                                <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
-                                <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var i in Model.oders)
-                            {
-                            <tr>
-                                <td>@i.id</td>
-                                <td>@i.idAccProduct</td>
-                                <td>@i.name</td>
-                                <td>@i.countOder</td>
-                                <td>@i.typeOder</td>
-                                <td>@i.dateOder</td>
-                                <td>@i.sumPrice</td>
-                                <td>
-                                    @if (i.st == 0)
-                                    {
-                                        <label class="badge badge-warning">Đã đặt</label>
-                                    }
-                                    @if (i.st == 1)
-                                    {
-                                        <label class="badge badge-primary">Đang giao hàng</label>
-                                    }
-                                    @if (i.st == 2)
-                                    {
-                                        <label class="badge badge-info">Đã chuyển giao</label>
-                                    }
-                                    @if (i.st == 3)
-                                    {
-                                        <label class="badge badge-success">Hoàn thành</label>
-                                    }
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-call-made"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-inverse-info btn-icon">
-                                        <i class="mdi mdi-playlist-remove"></i>
-                                    </button>
-
-                                </td>
-                            </tr>
-                        }
-
-
-
-
-
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr />
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled" id="prviewc">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" id="prview" disabled>Previous</a>
-                            </li>
-                            <li class="page-item active" id="btnPage1"><a class="page-link" href="#" id="num1">1</a></li>
-                            <li class="page-item" id="btnPage2"><a class="page-link" href="#" id="num2">2</a></li>
-                            <li class="page-item" id="btnPage3"><a class="page-link" href="#" id="num3">3</a></li>
-                            <li class="page-item" id="btnNext">
-                                <a class="page-link" href="#" id="next">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
+
+            <div class="col-lg-3 grid-margin stretch-card">
+                <strong style="color:orange">Tùy chọn hiển thị</strong>
+                <select class="form-control" id="selectHienThi" >
+                    <option href='@Url.Action("Index", "Oder", new {page = 1, option =0 })' value="0">Chưa hoàn thành</option>
+                    <option href='@Url.Action("Index", "Oder", new {page = 1, option =-1 })' value="-1">Đã hủy</option>
+                    <option href='@Url.Action("Index", "Oder", new {page = 1, option =4 })' value="4">Hoàn thành</option>
+                    <option href='@Url.Action("Index", "Oder", new {page = 1, option =5 })' value="5">Tất cả</option>
+
+
+                </select>
+            </div>
+        </div>
+    </div>
+    </p>
+    <div class="table-responsive pt-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID Đơn </th>
+                    <th>Mã lô hàng</th>
+                    <th>Mã Khách</th>
+                    <th>MTT Đặt Hàng</th>
+                    <th>Số lượng</th>
+                    <th>Tổng tiền</th>
+                    <th>HT thanh toán</th>
+                    <th>Ngày đặt</th>
+                    <th>Date Oder Complate</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@i.IDO</td>
+                        <td>@i.IDAP</td>
+                        <td>
+                            @if (@i.AccountO == null)
+                            {
+                                @:Null
+                            }
+                            else
+                            {
+                                @i.AccountO
+                            }
+                        </td>
+                        <td>
+                            @if (@i.GuestO == null)
+                            {
+                                @:Null
+                            }
+                            else
+                            {
+                                @i.GuestO
+                            }
+                        </td>
+                        <td>@i.CountO</td>
+                        <td>@i.SumPriceO</td>
+                        <td>@i.TypeO</td>
+                        <td>@i.DateO</td>
+                        <td>
+                            @if (@i.DateEO == null)
+                            {
+                                @:N/A
+                            }
+                            else
+                            {
+                                @i.DateEO
+                            }
+                        </td>
+                        <td>
+                            @if (i.StatusO == 0)
+                            {
+                                <label class="badge badge-warning">Đã đặt</label>
+                            }
+                            @if (i.StatusO == 1)
+                            {
+                                <label class="badge badge-primary">Đã tiếp nhận</label>
+                            }
+                            @if (i.StatusO == 2)
+                            {
+                                <label class="badge badge-info">Đang chuyển giao</label>
+                            }
+                            @if (i.StatusO == 3)
+                            {
+                                <label class="badge badge-success">Đã Chuyển Giao</label>
+                            }
+                            @if (i.StatusO == 4)
+                            {
+                                <label class="badge badge-success">Hoàn thành</label>
+                            }
+                            @if (i.StatusO == -1)
+                            {
+                                <label class="badge badge-danger">Đã Hủy</label>
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-inverse-info btn-icon">
+                                <i class="mdi mdi-call-made"></i>
+                            </button>
+                            <button type="button" class="btn btn-inverse-info btn-icon">
+                                <i class="mdi mdi-playlist-remove"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <nav aria-label="Page order">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled" id="prviewc">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" id="prview"
+                   disabled>Previous</a>
+            </li>
+            <li class="page-item active" id="btnPage1"><a class="page-link" href="#" id="num1">1</a></li>
+            <li class="page-item" id="btnPage2"><a class="page-link" href="#" id="num2">2</a></li>
+            <li class="page-item" id="btnPage3"><a class="page-link" href="#" id="num3">3</a></li>
+            <li class="page-item" id="btnNext">
+                <a class="page-link" href="#" id="next">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
         </div>
     </div>

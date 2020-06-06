@@ -3134,9 +3134,7 @@ header#header .header-link .item {
     margin-left: 10px;
 }
 
-.noti-item {
-    cursor: pointer;
-}
+
 
 .user-profile {
     cursor: pointer;
@@ -4004,6 +4002,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
     box-shadow: rgba(0, 0, 0, 0.18) 0px 6px 12px 0px;
     position: absolute;
     top: 42px;
+    text-overflow: ellipsis;
     left: calc(50% + 10px);
     transform: translateX(-50%);
     border-width: 1px;
@@ -4038,6 +4037,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
     border-style: initial;
     border-color: initial;
     border-image: initial;
+    
     padding: 0px;
     border-radius: 4px;
     margin: 5px 12px;
@@ -4149,7 +4149,6 @@ body.badge-v2 .product-item .review-wrap .review-count {
     text-align: left;
     line-height: 20px;
 }
-<<<<<<< HEAD
 
 .dRBGls {
     width: 300px;
@@ -4213,9 +4212,7 @@ body.badge-v2 .product-item .review-wrap .review-count {
     display: none;
 }
 
-.noti-item:hover .dRBGls {
-    display: block;
-}
+
 
 .col-12-lg a:hover {
     background-color: aliceblue;

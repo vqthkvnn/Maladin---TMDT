@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PagedList;
 using System.Web;
 using Maladin.EF;
 using Maladin.Areas.Partner.Models;
@@ -42,29 +43,53 @@ namespace Maladin.Areas.Partner.DAO
             }
             catch(Exception e) { return false; }
         }
-        public List<OderModel> getAllOder(string user)
+        public IPagedList<OderModel> getListOder(string user, int page, int option)
         {
-            string sql = "SELECT ID_ODER as id, NAME_PRODUCT as name, COUNT_ODER as countOder, ID_TYPE_ODER as typeOder, DATE_ODER as dateOder, " +
-                "SUM_PRICE_ODER as sumPrice, STATUS_ODER as st, ACC_PRODUCT.ID_ACC_PRODUCT as idAccProduct " +
-                "FROM dbo.ODER, dbo.ACC_PRODUCT, dbo.PRODUCT WHERE ACC_PRODUCT.ID_ACC_PRODUCT = ODER.ID_ACC_PRODUCT " +
-                "AND ACC_PRODUCT.ID_PRODUCT = PRODUCT.ID_PRODUCT AND ACC_PRODUCT.USER_ACC ='"+user+"'";
+            string sql = "";
+            if (option >=0 && option<=3)
+            {
+                sql = "SELECT ID_ODER as IDO,ODER.ID_ACC_PRODUCT as IDAP, ODER.USER_ACC as AccountO, ID_GUEST_NO_ACC as GuestO,COUNT_ODER as CountO, " +
+                "SUM_PRICE_ODER as SumPriceO, ID_TYPE_ODER as TypeO, DATE_ODER as DateO, DATE_COMPLATE_ODER as DateEO, STATUS_ODER as StatusO " +
+                "FROM dbo.ODER, dbo.ACC_PRODUCT WHERE ACC_PRODUCT.ID_ACC_PRODUCT = ODER.ID_ACC_PRODUCT " +
+                "AND ACC_PRODUCT.USER_ACC = '" + user + "' and STATUS_ODER>=0 and STATUS_ODER<=3 ";
+            }
+            else if (option ==5)
+            {
+                sql = "SELECT ID_ODER as IDO,ODER.ID_ACC_PRODUCT as IDAP, ODER.USER_ACC as AccountO, ID_GUEST_NO_ACC as GuestO,COUNT_ODER as CountO, " +
+                "SUM_PRICE_ODER as SumPriceO, ID_TYPE_ODER as TypeO, DATE_ODER as DateO, DATE_COMPLATE_ODER as DateEO, STATUS_ODER as StatusO " +
+                "FROM dbo.ODER, dbo.ACC_PRODUCT WHERE ACC_PRODUCT.ID_ACC_PRODUCT = ODER.ID_ACC_PRODUCT " +
+                "AND ACC_PRODUCT.USER_ACC = '" + user + "'";
+            }
+            else
+            {
+                sql = "SELECT ID_ODER as IDO,ODER.ID_ACC_PRODUCT as IDAP, ODER.USER_ACC as AccountO, ID_GUEST_NO_ACC as GuestO,COUNT_ODER as CountO, " +
+                "SUM_PRICE_ODER as SumPriceO, ID_TYPE_ODER as TypeO, DATE_ODER as DateO, DATE_COMPLATE_ODER as DateEO, STATUS_ODER as StatusO " +
+                "FROM dbo.ODER, dbo.ACC_PRODUCT WHERE ACC_PRODUCT.ID_ACC_PRODUCT = ODER.ID_ACC_PRODUCT " +
+                "AND ACC_PRODUCT.USER_ACC = '" + user + "' and STATUS_ODER = "+Convert.ToString(option);
+            }
+            
             var data = dbContext.Database.SqlQuery<OderModel>(sql)
-                .Select(b => new OderModel
-                { 
-                id = b.id,
-                name = b.name,
-                countOder = b.countOder,
-                typeOder = b.typeOder,
-                dateOder = b.dateOder,
-                sumPrice = b.sumPrice,
-                st = b.st,
-                idAccProduct = b.idAccProduct
-                }).ToList();
+                .Select(b => new OderModel {
+                AccountO = b.AccountO,
+                CountO = b.CountO,
+                DateEO = (DateTime?)b.DateEO,
+                DateO = b.DateO,
+                GuestO = b.GuestO,
+                IDAP = b.IDAP,
+                IDO = b.IDO,
+                StatusO = b.StatusO,
+                SumPriceO =b.SumPriceO,
+                TypeO = b.TypeO
+                }).ToList().ToPagedList(page, 10);
             return data;
         }
         public List<TYPE_ODER> getAllTypeOder()
         {
             return dbContext.TYPE_ODER.ToList();
+        }
+        public int MaxPageOrder(string user)
+        {
+            return dbContext.ODERs.Count()/10;
         }
     }
 }

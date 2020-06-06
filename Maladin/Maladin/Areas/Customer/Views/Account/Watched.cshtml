@@ -1,54 +1,144 @@
-﻿
+﻿@using PagedList;
+@model IPagedList<Maladin.Models.FavoriteModel>
 @{
     ViewBag.Title = "Watched";
     Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
 }
-<h1 class="have-margin">Danh sách sản phẩm đã xem</h1>
-<!--start div if have wishlist-->
-<div class="account-wish-list list-item" id="haveWishList">
-    <form id="wishlist" method="post">
-        @for (int i = 1; i <= 2; i++)
+@section Scripts{
+    <script>
+    var page = @ViewBag.Page;
+        var pageSize = 10;
+        var maxPage = @ViewBag.MaxPage;
+        // hết khai báo biến
+        
+        if (page <1)
         {
-            <div class="item wishlist-item" id="@i">
+
+        }
+        else if (page == 1) {
+            $("#next").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(page + 1))
+
+        }
+        else if (page == 2) {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#prviewc").removeClass("disabled");
+            $("#next").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(page + 1))
+            $("#prview").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(page - 1))
+        }
+        else {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#num1").text(String(page - 1));
+            $("#num2").text(String(page));
+            if (page >= maxPage) {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#btnPage2").addClass("active");
+                $("#next").removeAttr("href");
+                $("#btnNext").addClass("disabled");
+                $("#btnPage3").addClass("disabled");
+                $("#next").attr("aria-disabled", 'true');
+                $("#prview").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(page - 1))
+            }
+            else {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#next").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(page + 1))
+                $("#prview").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(page - 1))
+            }
+        }
+        // add link
+        var pageNext = parseInt($("#num1").text());
+
+        $("#num1").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + pageNext)
+        $("#num2").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(pageNext + 1))
+        $("#num3").attr("href", "@Url.Action("Watched", "Account", new {area="Customer" })?page=" + String(pageNext + 2))
+        // remove link href:
+        if (page >= 2) {
+            $("#num2").removeAttr("href");
+        }
+
+        if (maxPage == 1) {
+            $("#num2").removeAttr("href");
+            $("#num3").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+        else if (maxPage == 2) {
+            $("#num3").removeAttr("href");
+            $("#next").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+    </script>
+}
+<h1 class="have-margin">Danh sách sản phẩm đã xem</h1>
+@if (Model.Count() > 0)
+{
+    <div class="account-wish-list list-item" id="haveWishList">
+        @foreach (var i in Model)
+        {
+            <div class="item wishlist-item">
                 <div class="item-col-1">
                     <p class="image">
-                        <a href="#">
-                            <img class="img-responsive" src="~/assets/image/product.png" style="width: 130px; height: 182px" />
+                        <a href="@Url.Action("Index","Product", new {id=i.ID })">
+                            <img class="img-responsive" src="@i.PathIamge" style="width: 125px; height: 125px" />
                         </a>
                     </p>
                 </div>
                 <div class="item-col-2">
                     <div class="information">
                         <p class="title">
-                            <a href="#">
-                                GHẾ AEROCOOL GAMING CHAIR EARL Iron (Đen) - Hàng Chính Hãng
+                            <a href="@Url.Action("Index","Product", new {id=i.ID })">
+                                @i.NameProduct
                             </a>
                         </p>
                         <div class="desciption">
-                            <p>Đây là mô tả của sản phẩm Đây là mô tả của sản phẩm Đây là mô tả của sản phẩm Đây là mô tả của sản phẩm</p>
+                            @if (i.ContentP.Length > 200)
+                            {
+                                <p>@i.ContentP.Substring(0, 200)</p>
+                            }
+                            else
+                            {
+                                <p>@i.ContentP</p>
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="item-col-3">
                     <p class="price-sale">
-                        4.500.000đ
+                        @Convert.ToString(i.PriceGoc - i.PriceGoc * i.SalePricent / 100) đ
                         <br />
-                        <span>600.000đ</span>
+                        <span>@i.PriceGoc đ</span>
                         <span class="sale-tag">
-                            -17%
+                            -@i.SalePricent %
                         </span>
                     </p>
-                    
+
                 </div>
             </div>
         }
-    </form>
-</div>
-<!--end div if have wishlist-->
-<!--start div if not have wishlist-->
-<div class="empty-content" id="noWishList">
-    <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
-    <p>Hãy <i class="fa fa-heart" aria-hidden="true"></i> sản phẩm bạn yêu thích để xem lại thuận tiện nhất</p>
-    <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
-</div>
-<!--end div if not have wishlist-->
+        <hr />
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" style="width: 100%;display: -webkit-inline-box;">
+                <li class="page-item disabled" id="prviewc">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true" id="prview" disabled="">Previous</a>
+                </li>
+                <li class="page-item active" id="btnPage1"><a class="page-link" href="#" id="num1">1</a></li>
+                <li class="page-item" id="btnPage2"><a class="page-link" href="#" id="num2">2</a></li>
+                <li class="page-item" id="btnPage3"><a class="page-link" href="#" id="num3">3</a></li>
+                <li class="page-item" id="btnNext">
+                    <a class="page-link" href="#" id="next">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+else
+{
+    <div class="empty-content" id="noWishList">
+        <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
+        <p>Hãy <i class="fa fa-heart" aria-hidden="true"></i> sản phẩm bạn yêu thích để xem lại thuận tiện nhất</p>
+        <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
+    </div>
+}
+

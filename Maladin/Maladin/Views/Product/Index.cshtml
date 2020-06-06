@@ -197,8 +197,8 @@
 
                         setTimeout(() => {
                         $('#alert').alert('close');
-                        }, 2000);
-                    }, 2000);
+                        }, 5000);
+                    }, 5000);
 
                     }
                     else {
@@ -208,8 +208,8 @@
 
                         setTimeout(() => {
                         $('#alert').alert('close');
-                        }, 2000);
-                    }, 2000);
+                        }, 5000);
+                    }, 5000);
                     }
                     },
                     error: function () { alert('fail'); }
@@ -224,8 +224,8 @@
 
                     setTimeout(() => {
                         $('#alert').alert('close');
-                    }, 2000);
-                }, 2000);
+                    }, 5000);
+                }, 5000);
 
             }
             else {
@@ -246,8 +246,8 @@
 
                         setTimeout(() => {
                         $('#alert').alert('close');
-                        }, 2000);
-                    }, 2000);
+                        }, 5000);
+                    }, 5000);
 
                     }
                     else {
@@ -257,8 +257,8 @@
 
                         setTimeout(() => {
                         $('#alert').alert('close');
-                        }, 2000);
-                    }, 2000);
+                        }, 5000);
+                    }, 5000);
                     }
                     },
                     error: function () { alert('fail'); }
@@ -270,7 +270,19 @@
             
         };
         function FailComment(data) {
-            alert("Lỗi hệ thống!");
+            alert("Lỗi hệ thống comment!");
+        }
+        function SuccessQuestion(data) {
+            if (data.res) {
+                alert("Gửi câu hỏi thành công!");
+                $("#question").text("");
+            }
+            else {
+                alert("Lỗi khi gửi câu hỏi");
+            }
+        }
+        function FailQuestion(data) {
+            alert("Lỗi hệ thống question");
         }
 
     </script>
@@ -380,7 +392,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -388,80 +399,40 @@
 
 </div>
 <hr>
-<h4 class="cfpgte-tdd">SẢN PHẨM ĐƯỢC XEM CÙNG</h4>
+<h4 class="cfpgte-tdd">SẢN PHẨM CÙNG LOẠI <strong>BÁN CHẠY</strong></h4>
 <div class="main">
     <div class="slider-container-tdd">
         <div class="hkkAKO-tdd">
             <div class="slick-list-tdd">
                 <div class="slick-track" style="width: 100%; opacity: 1; transform: translate3d(0px, 0px, 0px);">
-                    <div class="slick-slide slick-active slick-current" style="outline: none; ">
-                        <div>
-                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
-                                <div class="evEsoa-tdd">
-                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+                    @if (ViewBag.ListWith.Count<=0)
+                    {
+                        <h1>Hệ thống không thể tìm thấy sản phầm nào cùng loại với sản phẩm của bạn đang xem!</h1>
+                    }
+                    else
+                    {
+                        foreach (var i in ViewBag.ListWith)
+                        {
+                            <div class="slick-slide slick-active slick-current" style="outline: none; ">
+                                <div>
+                                    <a href="@Url.Action("Index", "Product", new {id=i.Item1 })" title="@i.Item2" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
+                                        <div class="evEsoa-tdd">
+                                            <img src="@i.Item3" alt="@i.Item2" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
 
 
+                                        </div>
+                                        <p class="title" style="height: 40px;">@i.Item2</p>
+                                        <p class="price">
+                                            @Convert.ToString(i.Item4 - 100 * i.Item5 / i.Item4) ₫
+                                            <span class="percent ">-@i.Item5%</span>
+                                            <span class="original ">@i.Item4 ₫</span>
+                                        </p>
+                                    </a>
                                 </div>
-                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
-                                <p class="price">
-                                    84.000 ₫
-                                    <span class="percent ">-6%</span>
-                                    <span class="original ">89.000 ₫</span>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="slick-slide slick-active slick-current" style="outline: none; ">
-                        <div>
-                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
-                                <div class="evEsoa-tdd">
-                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
+                            </div>
+                        }
+                    }
 
-
-                                </div>
-                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
-                                <p class="price">
-                                    84.000 ₫
-                                    <span class="percent ">-6%</span>
-                                    <span class="original ">89.000 ₫</span>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="slick-slide slick-active slick-current" style="outline: none;">
-                        <div>
-                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
-                                <div class="evEsoa-tdd">
-                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
-
-
-                                </div>
-                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
-                                <p class="price">
-                                    84.000 ₫
-                                    <span class="percent ">-6%</span>
-                                    <span class="original ">89.000 ₫</span>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="slick-slide slick-active slick-current" style="outline: none;">
-                        <div>
-                            <a href="#" title="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="GPUTd-tdd" style="width: 100%; display: inline-block;text-decoration: none;">
-                                <div class="evEsoa-tdd">
-                                    <img src="tainghe2.jpg" alt="Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng" class="dqgcDn-tdd" style="width: auto; height: 100%; opacity: 1;">
-
-
-                                </div>
-                                <p class="title" style="height: 40px;">Tai Nghe Nhét Tai BYZ S389 - Hàng Chính Hãng</p>
-                                <p class="price">
-                                    84.000 ₫
-                                    <span class="percent ">-6%</span>
-                                    <span class="original ">89.000 ₫</span>
-                                </p>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -511,13 +482,12 @@
             <div class="row">
                 <div class="bddLrQ-tdd">
                     <p class="like">
-                        5
-                        <span>Thích</span>
+                        Guest
                     </p>
                     <div class="content">
                         <p class="question"><strong>@i.TITLE_QUESTION</strong></p>
                         <p class="answer">@i.CONTENT_QUESTION</p>
-                        <p class="author">Thời gian hỏi: @i.DATE_QUESTION</p>
+                        <p class="author">Thời gian hỏi: @i.DATE_QUESTION.Date.ToString("dd-MM-yyyy")</p>
                         <div class="buttons">
                             <a class="Nrztj-tdd">
                                 <i class="fa fa-thumbs-up"></i>
@@ -540,17 +510,22 @@
         <a href="#" class="jPPwyr-tdd">Xem tất cả các câu hỏi đã được trả lời</a>
     </div>
     <hr>
-    <div class="row" style="display: flex ;border: solid 1px gray; margin-bottom:5px;">
-        <div class="form-group" style="width: 100%;">
-            <h4 style="margin-left: 10px;">Đặt câu hỏi:</h4>
+    @using (Ajax.BeginForm("QuestionAjax", "Product", new { idp = ViewBag.Product.id }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "SuccessQuestion", OnFailure = "FailQuestion", InsertionMode = InsertionMode.Replace, UpdateTargetId = "left-tdd" }))
+    {
+        <div class="row" style="display: flex ;border: solid 1px gray; margin-bottom:5px;">
+            <div class="form-group" style="width: 100%;">
+                <h4 style="margin-left: 10px;">Đặt câu hỏi:</h4>
+            </div>
+            <div class="form-group" style="width: 80%; margin-left: 10px">
+                @Html.TextArea("title", htmlAttributes: new {@class="form-control", rows="1", @id="question", placeholder="Tiêu đề câu hỏi ...." })
+                
+                @Html.TextArea("content", htmlAttributes: new {@class="form-control", rows="1", placeholder="Hãy đặt câu hỏi liên quan đến sản phẩm...", @id="question" })
+                
+            </div>
+            <button type="submit" class="btn btn-danger" style="width: 18%;margin-left: 10px;height: 39px;;margin-top: 30px;">Gửi câu hỏi</button>
         </div>
-        <div class="form-group" style="width: 80%; margin-left: 10px">
-            <textarea class="form-control" rows="1" id="comment" placeholder="Tiêu đề câu hỏi ...."></textarea>
-            <textarea class="form-control" rows="1" placeholder="Hãy đặt câu hỏi liên quan đến sản phẩm..." id="comment"></textarea>
-        </div>
-        <button type="button" class="btn btn-danger" style="width: 18%;margin-left: 10px;height: 39px;;margin-top: 30px;">Gửi câu hỏi</button>
+    }
 
-    </div>
 
 </div>
 <h4 class="cfpgte-tdd">KHÁCH HÀNG NHẬN XÉT</h4>
@@ -560,13 +535,13 @@
             <div class="escmEg-tdd">
                 <div class="rating">
                     <h4 class="title">Đánh giá trung bình</h4>
-                    <p class="score">@Convert.ToInt32(ViewBag.Product.totalRating)/5</p>
+                    <p class="score">@Convert.ToInt32(ViewBag.StarList.Item1)/5</p>
                     <p class="iQZcjJ-tdd" style="font-size: 20px;">
-                        @for (int i = 0; i < ViewBag.Product.totalRating; i++)
+                        @for (int i = 0; i < ViewBag.StarList.Item1; i++)
                         {
                             <span class="fa fa-star checked"></span>
                         }
-                        @for (int i = 0; i < 5 - ViewBag.Product.totalRating; i++)
+                        @for (int i = 0; i < 5 - ViewBag.StarList.Item1; i++)
                         {
                             <span class="fa fa-star "></span>
                         }
@@ -587,8 +562,8 @@
                     </p>
                     <div class="progress" style="width: 100%;">
                         <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                            70%
+                             aria-valuenow="@Convert.ToString(100*ViewBag.StarList.Item2/ViewBag.StarList.Item7)" aria-valuemin="0" aria-valuemax="100" style="width:@Convert.ToString(100*ViewBag.StarList.Item2 /ViewBag.StarList.Item7)%">
+                            @Convert.ToInt16(100*ViewBag.StarList.Item2/ViewBag.StarList.Item7)%
                         </div>
                     </div>
 
@@ -604,8 +579,8 @@
                     </p>
                     <div class="progress" style="width: 100%;">
                         <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                            50%
+                             aria-valuenow="@Convert.ToString(100*ViewBag.StarList.Item3/ViewBag.StarList.Item7)" aria-valuemin="0" aria-valuemax="100" style="width:@Convert.ToString(100*ViewBag.StarList.Item3/ViewBag.StarList.Item7)%">
+                            @Convert.ToInt16(100*ViewBag.StarList.Item3 /ViewBag.StarList.Item7)%
                         </div>
                     </div>
 
@@ -621,8 +596,8 @@
                     </p>
                     <div class="progress" style="width: 100%;">
                         <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:30%">
-                            30%
+                             aria-valuenow="@Convert.ToString((int)(ViewBag.StarList.Item4 /(float)ViewBag.StarList.Item7)*100)" aria-valuemin="0" aria-valuemax="100" style="width:@Convert.ToString(100*ViewBag.StarList.Item4 /ViewBag.StarList.Item7)%">
+                            @Convert.ToInt16((ViewBag.StarList.Item4 /(float)ViewBag.StarList.Item7)*100)%
                         </div>
                     </div>
 
@@ -638,8 +613,8 @@
                     </p>
                     <div class="progress" style="width: 100%;">
                         <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-                            20%
+                             aria-valuenow="@Convert.ToString((int)(ViewBag.StarList.Item5 /(float)ViewBag.StarList.Item7)*100)" aria-valuemin="0" aria-valuemax="100" style="width:@Convert.ToString((int)(ViewBag.StarList.Item5 /(float)ViewBag.StarList.Item7)*100)%">
+                            @Convert.ToInt16((ViewBag.StarList.Item5 /(float)ViewBag.StarList.Item7)*100)%
                         </div>
                     </div>
 
@@ -655,8 +630,8 @@
                     </p>
                     <div class="progress" style="width: 100%;">
                         <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:1%">
-                            1%
+                             aria-valuenow="@Convert.ToString((int)(ViewBag.StarList.Item6 /(float)ViewBag.StarList.Item7)*100)" aria-valuemin="0" aria-valuemax="100" style="width:@Convert.ToString((int)(100*ViewBag.StarList.Item6 /(float)ViewBag.StarList.Item7))%">
+                            @Convert.ToInt16(100*(ViewBag.StarList.Item6 /(float)ViewBag.StarList.Item7))%
                         </div>
                     </div>
 
@@ -749,67 +724,47 @@
             <div class="col-2">
                 <div class="user-info-tdd">
                     <div class="avatar-tdd">
-                        <img src="avt.png" alt="avt" class="image">
+                        <img src="@i.avt" alt="avt" class="image">
                     </div>
-                    <p class="username-tdd">Nam Can</p>
-                    <p class="text-tdd">một năm trước</p>
+                    <p class="username-tdd">@i.Name</p>
+                    <p class="text-tdd">@i.commment.DATE_COMMENT.Date.ToString("dd-MM-yyyy")</p>
                 </div>
             </div>
             <div class="col-10">
                 <div class="information-tdd">
                     <div class="title-tdd">
                         <div class="iQZcjJ" style="font-size: 16px;">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span>Viết bình luận chính</span>
+                            @for (int j = 0; j < i.commment.RATING_COMMENT; j++)
+                            {
+                                <span class="fa fa-star checked"></span>
+                            }
+                            @for (int j = 5; j > i.commment.RATING_COMMENT; j--)
+                            {
+                                <span class="fa fa-star"></span>
+                            }
+                            
+                            <span>@i.commment.TITLE_COMMENT</span>
                         </div>
                     </div>
                     <p class="purchased-tdd">
-                        <i class="fa fa-check-square"></i>
-                        <span style="margin-left: 6px;">Đã mua hàng</span>
+                        @if (i.isSale)
+                        {
+                            <i class="fa fa-check-square"></i>
+                            <span style="margin-left: 6px;">Đã mua hàng</span>
+                        }
+                        else
+                        {
+                            <span style="margin-left: 6px; color:red;">Chưa mua hàng</span>
+                        }
+
                     </p>
                     <p class="content-tdd">
-                        abc...ádfasddddddddddddddddddddddddkhksdadhfiueheirhiehriheqifkasndkbi8ewqgirqwie
+                        @i.commment.CONTEN_COMMENT
                     </p>
                 </div>
             </div>
         </div>
     }
-    <!--Người 2-->
-    <div class="row">
-        <div class="col-2">
-            <div class="user-info-tdd">
-                <div class="avatar-tdd">
-                    <img src="avt.png" alt="avt" class="image">
-                </div>
-                <p class="username-tdd">Nam Can</p>
-                <p class="text-tdd">một năm trước</p>
-            </div>
-        </div>
-        <div class="col-10">
-            <div class="information-tdd">
-                <div class="title-tdd">
-                    <div class="iQZcjJ" style="font-size: 16px;">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span>Viết bình luận chính</span>
-                    </div>
-                </div>
-                <p class="purchased-tdd">
-                    <i class="fas fa-user-check"></i>
-                    <span style="margin-left: 6px;">Đã mua hàng</span>
-                </p>
-                <p class="content-tdd">
-                    abc...ádfasddddddddddddddddddddddddkhksdadhfiueheirhiehriheqifkasndkbi8ewqgirqwie
-                </p>
-            </div>
-        </div>
-    </div>
+    
 </div>
 

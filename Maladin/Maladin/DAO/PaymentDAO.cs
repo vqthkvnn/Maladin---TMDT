@@ -12,6 +12,7 @@ namespace Maladin.DAO
         {
             db = new TMDT_Maladin();
         }
+        
         public bool InsertGuest(string s)
         {
             return true;
@@ -28,7 +29,7 @@ namespace Maladin.DAO
                  Tao ma cho oder
                  */
                 var product = db.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == IDACC_PRO);
-                string idOder = IDACC_PRO.Substring(0, 4) + Convert.ToString(leght + 1);
+                string idOder = IDACC_PRO.Substring(0, 4) + Convert.ToString(leght + 1)+type;
                 ODER oDER = new ODER();
                 oDER.ID_ODER = idOder;
                 oDER.USER_ACC = User;
@@ -78,7 +79,7 @@ namespace Maladin.DAO
                 }
                 else
                 {
-                    oDER.SUM_PRICE_ODER = count * product.AMOUNT - MonneyFromVocher;
+                    oDER.SUM_PRICE_ODER = count * (product.AMOUNT*(100-product.SALE_PERCENT)/100) - MonneyFromVocher;
                 }
                 oDER.DATE_ODER = DateTime.Now;
                 db.ODERs.Add(oDER);
@@ -144,7 +145,7 @@ namespace Maladin.DAO
                 var leght = db.ODERs.Count();
                 var product = db.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == IDACC_PRO);
                 ODER oDER = new ODER();
-                string idOder = IDACC_PRO.Substring(0, 4) + Convert.ToString(leght + 1);
+                string idOder = IDACC_PRO.Substring(0, 4) + Convert.ToString(leght + 1) + type;
                 oDER.ID_ODER = idOder;
                 oDER.ID_GUEST_NO_ACC = guest;
                 oDER.ID_ACC_PRODUCT = IDACC_PRO;
@@ -224,9 +225,9 @@ namespace Maladin.DAO
              */
             var res = db.ACCOUNTs.SingleOrDefault(x => x.USER_ACC == user);
             double totalPay=0;
-            for(int i=0;i<listoder.Count;i++)
+            foreach(var i in listoder)
             {
-                var product = db.ODERs.SingleOrDefault(x => x.ID_ODER == listoder[i]);
+                var product = db.ODERs.SingleOrDefault(x => x.ID_ODER == i);
                 if (product == null)
                 {
                     totalPay += 0;
@@ -357,7 +358,7 @@ namespace Maladin.DAO
             {
                 var product = db.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idP);
                 var vocher = db.VOCHERs.SingleOrDefault(x => x.ID_VOCHER == idV);
-                var price =Convert.ToInt32(product.AMOUNT * (100-product.SALE_PERCENT)/100 * (100-vocher.PERCENT_VOCHER)/100);
+                var price =Convert.ToInt32(product.AMOUNT * (100-product.SALE_PERCENT)/100* (vocher.PERCENT_VOCHER)/ 100);
                 if (price >= vocher.MAX_SUM_PRICE)
                 {
                     return (vocher.MAX_SUM_PRICE?? price);
@@ -402,6 +403,16 @@ namespace Maladin.DAO
             }
             db.SaveChanges();
             return allIDOder;
+        }
+        public double SumPriceOrder(List<string> listoder)
+        {
+            double sum = 0;
+            foreach(var i in listoder)
+            {
+                sum += db.ODERs.SingleOrDefault(x => x.ID_ODER == i).SUM_PRICE_ODER;
+
+            }
+            return sum;
         }
 
     }

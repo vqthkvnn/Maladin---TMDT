@@ -32,12 +32,12 @@
                 </div>
             </div>
             <div class="header-link">
-                <a href="@Url.Action("ManagerOrder", "User")" title="Kiểm tra trạng thái đơn hàng của bạn" class="tracking-order item">
+                <a href="@Url.Action("FollowOrder", "Product",new {Area ="" })" title="Kiểm tra trạng thái đơn hàng của bạn" class="tracking-order item">
                     <i class="fa fa-truck cart-icon" aria-hidden="true"></i>
                     <span> Theo dõi <br />đơn hàng</span>
                 </a>
-                <a href="@Url.Action("MyNotification", "User")" style="padding-left: 15px;">
-                    <div class="noti-item tracking-noti item" id="header-noti">
+                <a href="@Url.Action("Notification", "Account",new {Area ="Customer" } )" style="padding-left: 15px;">
+                    <div class="item" id="header-noti">
                         <div>
                             <i class="fa fa-bell cart-icon" aria-hidden="true"></i>
                             <span>Thông báo <br />của tôi</span>
@@ -75,13 +75,13 @@
                         </div>
                         <div class="toogler Userstyle_UserDropDown no-user" style="">
                             <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Index", "Account", new {Area ="Customer" })">Thông tin tài khoản</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("MyNotification", "User")">Thông báo của tôi</a> 
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("ManagerOrder", "User")">Quản lý đơn hàng</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("ReviewProductBought", "User")">Nhận xét sản phẩm đã mua</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Favorire", "Account", new {Area ="Customer" })">Sản phẩm yêu thích</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("ManagerMaladinCoin", "User")">Quản lý maladin coin</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("MyReview", "User")">Nhận xét của tôi</a>
-                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Index", "Login", new {Area ="Customer" })">Đăng xuất</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Notification", "Account",new {Area ="Customer" } )">Thông báo của tôi</a> 
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Oder", "Account",new {Area ="Customer" })">Quản lý đơn hàng</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Watched", "Account", new {Area ="Customer" })">Nhận xét sản phẩm đã xem</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Favourite", "Account", new {Area ="Customer" })">Sản phẩm yêu thích</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Coin", "Account",new {Area ="Customer" })">Quản lý maladin coin</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Comment", "Account", new {Area ="Customer" })">Nhận xét của tôi</a>
+                            <a class="btn Userstyle__UserDropDownButton-xrezqc-10 kZkOAY" href="@Url.Action("Logout", "Login", new {Area ="Customer" })">Đăng xuất</a>
                         </div>
                     </div>
                     <!-- End neu co user dang nhap -->

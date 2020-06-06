@@ -35,6 +35,10 @@ namespace Maladin.Areas.Customer.Controllers
                     {
                         ModelState.AddModelError("", "Tài khoản không đúng hoặc không tồn tại");
                     }
+                    else if (res == 2)
+                    {
+                        ModelState.AddModelError("", "Tài khoản đang bị khóa");
+                    }
                     else
                     {
                         ModelState.AddModelError("", "Sai mật khẩu");

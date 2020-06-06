@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
+}
+@model Maladin.Models.OrderDetailModel
+<label for="">Chi tiết đơn hàng @Model.IDOrder</label>
+<span> - </span>
+<label for=""><b>Giao Hàng Thành Công</b></label>
+<h4>THÔNG TIN ĐẶT HÀNG</h4>
+<div class="border">
+    <div class="row">
+
+        <div class="col-3">
+            <p>@Model.DateOrder.ToString("dd-MM-yyyy HH:mm:ss")</p>
+        </div>
+        <div class="col-9">
+            Đặt hàng thành công
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <h6> ĐỊA CHỈ NGƯỜI NHẬN</h6>
+        <div class="">
+            <b>@Model.NameGuest</b>
+            <br>
+            <span>Địa chỉ :@Model.AdressGuest</span>
+        </div>
+    </div>
+    <div class="col-4">
+        <h6> HÌNH THỨC GIAO HÀNG</h6>
+        <div class="">
+
+            <br>
+            <span>Vận chuyển tiết kiệm</span>
+        </div>
+    </div>
+    <div class="col-4">
+        <h6> HÌNH THỨC THANH TOÁN</h6>
+        <div class="">
+
+            <br>
+            @if (Model.TypeOrder == "TK")
+            {
+                <span>Thanh toán sử dụng tài khoản</span>
+            }
+            else
+            {
+                <span>Thanh toán khi nhận tiền mặt</span>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Giảm giá</th>
+                <th>Tạm tính</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="@Model.ImagePath" class="img-thumbnail" alt="" style="max-height:60px; max-width:60px;">
+                        </div>
+                        <div class="col-9">
+                            <span>@Model.NameProduct</span>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-outline-primary">Viết nhận xét</button>
+                            <button type="button" class="btn btn-outline-primary" style="margin-left: 10px;">Mua lại</button>
+                        </div>
+                    </div>
+                </td>
+                <td>@Convert.ToInt32(Model.SalePrice/Model.CountOrder) đ</td>
+                <td>@Model.CountOrder</td>
+                <td>@Convert.ToInt32(Model.SumPrice - Model.SalePrice) đ</td>
+                <td>@Model.SumPrice đ</td>
+            </tr>
+            
+            
+
+        </tbody>
+    </table>
+</div>
+

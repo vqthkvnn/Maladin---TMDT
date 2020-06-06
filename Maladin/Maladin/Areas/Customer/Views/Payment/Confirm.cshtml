@@ -62,7 +62,9 @@
                             }
                             },
                         error: function ()
-                        { alert('Lỗi server!'); }
+                        {
+                            alert('Lỗi server!');
+                        $("#finally-comfirm").text("Đơn hàng k thanh toán thành công!");}
                         });
                 }
                 else {
@@ -85,7 +87,9 @@
                             }
                             },
                         error: function ()
-                        { alert('Lỗi server!'); }
+                        {
+                            alert('Lỗi server!');
+                        $("#finally-comfirm").text("Đơn hàng k thanh toán thành công!");}
                         });
                 }
                 if (res && !COD) {
@@ -107,7 +111,9 @@
                                 $("#finally-comfirm").text("Đơn hàng k thanh toán thành công!");
                             }
                         },
-                        error: function () { alert('Lỗi server!'); }
+                        error: function () {
+                            alert('Lỗi server!');
+                        $("#finally-comfirm").text("Đơn hàng k thanh toán thành công!");}
                     });
                     current_fs = $(this).parent();
                     next_fs = $(this).parent().next();

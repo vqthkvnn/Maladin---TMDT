@@ -14,6 +14,10 @@ namespace Maladin.Controllers
         // GET: Product
         public ActionResult Index(string id)
         {
+            if (id == null)
+            {
+                return View("Error");
+            }
             ViewBag.IsLogin = Session[CustomerLoginSession.CUSTOMER_SESSION];
 
 
@@ -24,8 +28,9 @@ namespace Maladin.Controllers
             ViewBag.CountQuest = dao.countQuestion(id);
             ViewBag.ListQuest = dao.getAllQuest(id);
             ViewBag.ListComment = dao.getAllComment(id);
-            
+            ViewBag.StarList = dao.CountStarAVG(id);
             ViewBag.ListAttr = dao.getAllAttr(id);
+            ViewBag.ListWith = dao.getProductWithOf(id);
             return View();
         }
         [HttpPost]
@@ -79,6 +84,25 @@ namespace Maladin.Controllers
                 
             }
             
+        }
+        [HttpPost]
+        public JsonResult QuestionAjax(string idp, string content, string title)
+        {
+            var dao = new ProductHomeDAO();
+            var res = dao.InsertQuest(idp, content, title);
+            return Json(new { res = res }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult FollowOrder(string ido)
+        {
+            ViewBag.ID = ido;
+            var dao = new CustomerLoginDAO();
+            var res = dao.GetOrderDetailModel(ido);
+
+            return View(res);
+        }
+        public ActionResult Shop(string ids)
+        {
+            return View();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Maladin.DAO
                 "(SELECT TOP 1 IMAGE_PATH FROM dbo.PRODUCT_IMAGE WHERE P.ID_PRODUCT = ID_PRODUCT) AS PathIamge  " +
                 "FROM dbo.PRODUCT AS P, dbo.ACC_PRODUCT AS AP, dbo.TYPE_PRODUCT  " +
                 "WHERE AP.ID_PRODUCT = P.ID_PRODUCT AND P.ID_TYPE_PRODUCT = TYPE_PRODUCT.ID_TYPE_PRODUCT AND TYPE_PRODUCT.ID_TYPE_PRODUCT ='" +
-                idType+"'";
+                idType + "'";
             var data = dbContext.Database.SqlQuery<ItemProductModel>(sql)
                 .Select(b => new ItemProductModel
                 {
@@ -152,8 +152,8 @@ namespace Maladin.DAO
                 " AND RowNum <= " + Convert.ToString(15 * page) +
                 " ORDER BY RowNum ";
             var data = dbContext.Database.SqlQuery<SearchProductModel>(sql)
-                .Select(b => new SearchProductModel { 
-                dateEnd = b.dateEnd,
+                .Select(b => new SearchProductModel {
+                    dateEnd = b.dateEnd,
                     dateStart = b.dateStart,
                     idLo = b.idLo,
                     idproduct = b.idproduct,
@@ -193,8 +193,8 @@ namespace Maladin.DAO
                     dbContext.SaveChanges();
                     return 1; // them thanh cong
                 }
-                else{
-                    if (check.CART_COUNT >0)
+                else {
+                    if (check.CART_COUNT > 0)
                     {
                         return -1; // San pham da co
                     }
@@ -207,7 +207,7 @@ namespace Maladin.DAO
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return -3; // loi khacs
             }
@@ -225,7 +225,7 @@ namespace Maladin.DAO
                 return true;
             }
         }
-       
+
         public bool InsertToFavorite(string user, string idp)
         {
             try
@@ -238,7 +238,7 @@ namespace Maladin.DAO
                 dbContext.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -251,7 +251,7 @@ namespace Maladin.DAO
                 "PD.RATING_PRODUCT as  totalRating, AC.USER_ACC AS ctv " +
                 "FROM dbo.PRODUCT AS PD, dbo.PRODUCER_INFO AS PC, dbo.ACC_PRODUCT AS AC " +
                 "WHERE AC.ID_PRODUCT = PD.ID_PRODUCT AND PC.ID_PRODUCER = PD.ID_PRODUCER AND " +
-                "ID_ACC_PRODUCT='"+id+"'";
+                "ID_ACC_PRODUCT='" + id + "'";
             var data = dbContext.Database.SqlQuery<ProductHomeModel>(sql)
                 .Select(b => new ProductHomeModel
                 {
@@ -283,11 +283,7 @@ namespace Maladin.DAO
         public List<GUEST_QUESTION> getAllQuest(string id)
         {
 
-            return dbContext.GUEST_QUESTION.Where(x => x.ID_ACC_PRODUCT == id).ToList();
-        }
-        public List<ACCOUNT_COMMENT> getAllComment(string id)
-        {
-            return dbContext.ACCOUNT_COMMENT.Where(x => x.ID_ACC_PRODUCT == id).ToList();
+            return dbContext.GUEST_QUESTION.Where(x => x.ID_ACC_PRODUCT == id).OrderByDescending(x => x.DATE_QUESTION).Take(5).ToList();
         }
         public int countTopImage(string id)
         {
@@ -313,7 +309,7 @@ namespace Maladin.DAO
                 dbFV.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -356,13 +352,125 @@ namespace Maladin.DAO
                 dbContext.SaveChanges();
                 return 1;
 
-            }catch(Exception e)
+            } catch (Exception e)
             {
                 return -1;
             }
         }
-        
+        public List<CommentModel> getAllComment(string idp)
+        {
+            List<CommentModel> commentL = new List<CommentModel>();
+            var listComment = dbContext.ACCOUNT_COMMENT.Where(x => x.ID_ACC_PRODUCT == idp);
+            foreach (var i in listComment)
+            {
+                var info = dbContext.INFOMATION_ACCOUNT.SingleOrDefault(x => x.USER_ACC == i.USER_ACC && x.ID_TYPE_ACC == "CT");
+                CommentModel comment = new CommentModel();
+                comment.commment = i;
+                comment.avt = info.AVT_ACC;
+                comment.Name = info.NAME_INFO;
+                var count = dbContext.ODERs.Where(x => x.USER_ACC == i.USER_ACC && x.ID_ACC_PRODUCT == i.ID_ACC_PRODUCT).Count();
+                if (count > 0)
+                {
+                    comment.isSale = true;
+                }
+                else
+                {
+                    comment.isSale = false;
+                }
+                commentL.Add(comment);
+            }
+            return commentL;
+        }
+        public bool InsertQuest(string idp, string content, string title)
+        {
+            try
+            {
+                GUEST_QUESTION gUEST_ = new GUEST_QUESTION();
+                gUEST_.ID_ACC_PRODUCT = idp;
+                gUEST_.CONTENT_QUESTION = content;
+                gUEST_.TITLE_QUESTION = title;
+                gUEST_.DATE_QUESTION = DateTime.Now;
+                gUEST_.IS_READ = false;
+                dbContext.GUEST_QUESTION.Add(gUEST_);
+                dbContext.SaveChanges();
+                return true;
 
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        public Tuple<int, int, int, int, int, int, int> CountStarAVG(string idp)
+        {
+            var allStar = dbContext.ACCOUNT_COMMENT.Where(x => x.ID_ACC_PRODUCT == idp).ToList();
+            int countStar = 20 * 5;
+            int countComment = 20;
+            int totalComment = 20;
+            int st5 = 20;
+            int st4 = 0;
+            int st3 = 0;
+            int st2 = 0;
+            int st1 = 0;
+            foreach(var i in allStar)
+            {
+                var count = dbContext.ODERs.Where(x => x.USER_ACC == i.USER_ACC && x.ID_ACC_PRODUCT == i.ID_ACC_PRODUCT).Count();
+                if (count>0)
+                {
+                    countStar += (i.RATING_COMMENT??5);
+                    countComment++;
+                }
+                if((i.RATING_COMMENT ?? 5) == 5)
+                {
+                    st5++;
+                }
+                else if((i.RATING_COMMENT ?? 5) ==4)
+                {
+                    st4++;
+                }
+                else if ((i.RATING_COMMENT ?? 5) == 3)
+                {
+                    st3++;
+                }
+                else if ((i.RATING_COMMENT ?? 5)==2)
+                {
+                    st2++;
+                }
+                else
+                {
+                    st1++;
+                }
+                totalComment++;
+            }
+            return new Tuple<int, int, int, int, int, int, int>(countStar / countComment, st5, st4, st3, st2, st1, totalComment);
+        }
+        public List<Tuple<string, string,string, int, int>> getProductWithOf(string idp)
+        {
+            List<Tuple<string, string, string, int, int>> tuples = new List<Tuple<string, string, string, int, int>>();
+            var ap = dbContext.ACC_PRODUCT.SingleOrDefault(x => x.ID_ACC_PRODUCT == idp);
+            var Product = dbContext.PRODUCTs.Where(x => x.ID_PRODUCT == ap.ID_PRODUCT).SingleOrDefault();
+            var ListP = dbContext.PRODUCTs.Where(x => x.ID_TYPE_PRODUCT == Product.ID_TYPE_PRODUCT).OrderByDescending(x=>x.DATE_PRODUCT).Take(4).ToList();
+            List<ACC_PRODUCT> list4 = new List<ACC_PRODUCT>();
+            foreach(var i in ListP)
+            {
+                list4.Add(dbContext.ACC_PRODUCT.Where(x => x.ID_PRODUCT == i.ID_PRODUCT).OrderByDescending(x=>x.DATE_START_SELL)
+                    .OrderByDescending(x=>x.SELL_COUNT)
+                    .FirstOrDefault());
+            }
+            foreach(var i in list4)
+            {
+                if (i == null)
+                {
+                    continue;
+                }
+                tuples.Add(new Tuple<string, string, string, int, int>(i.ID_ACC_PRODUCT,
+                    dbContext.PRODUCTs.SingleOrDefault(x => x.ID_PRODUCT == i.ID_PRODUCT).NAME_PRODUCT,
+                    dbContext.PRODUCT_IMAGE.Where(x => x.ID_PRODUCT == i.ID_PRODUCT).FirstOrDefault().IMAGE_PATH,
+                    i.AMOUNT, i.SALE_PERCENT));
+            }
+            return tuples;
+
+        }
 
 
     }

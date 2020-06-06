@@ -10,6 +10,7 @@ namespace Maladin.Models
         public Maladin.EF.ACCOUNT_COMMENT commment { get; set; }
         public string Name { get; set; }
         public string avt { get; set; }
+        public bool isSale { get; set;}
        
     }
 }

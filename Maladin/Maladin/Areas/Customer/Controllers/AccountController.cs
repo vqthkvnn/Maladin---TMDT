@@ -48,10 +48,13 @@ namespace Maladin.Areas.Customer.Controllers
 
             return View();
         }
-        public ActionResult Oder()
+        public ActionResult Oder(int? page)
         {
-
-            return View();
+            var dao = new CustomerLoginDAO();
+            var data = dao.getAllOrder(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), (page??1));
+            ViewBag.Page = (page ?? 1);
+            ViewBag.MaxPage = (int)dao.CountListOrder(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString()) / 10 + 1;
+            return View(data);
         }
         public ActionResult Comment()
         {
@@ -69,17 +72,22 @@ namespace Maladin.Areas.Customer.Controllers
             ViewBag.Coin = dao.getCoin(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
             return View();
         }
-        public ActionResult Favourite()
+        public ActionResult Favourite(int? page)
         {
             var dao = new CustomerLoginDAO();
-            var data = dao.getAllFVR(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
-
+            var data = dao.getAllFVR(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), (page ?? 1));
+            ViewBag.Page = (page ?? 1);
+            ViewBag.MaxPage = (int)dao.CountListFVR(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString()) / 10 + 1;
             return View(data);
         }
-        public ActionResult Watched()
+        public ActionResult Watched(int? page)
         {
-
-            return View();
+            var dao = new CustomerLoginDAO();
+            var data = dao.getAllWatched(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), (page??1));
+            ViewBag.Page = (page ?? 1);
+            ViewBag.MaxPage = (int)dao.CountListWatch(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString()) / 10 +1;
+            return View(data);
+            
         }
         [HttpPost]
         public JsonResult DeleteFavorite(string id)
@@ -87,6 +95,20 @@ namespace Maladin.Areas.Customer.Controllers
             var dao = new CustomerLoginDAO();
             var res = dao.RemoveFavorite(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), id);
             return Json(new {res = res }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult OderDetail(string ido)
+        {
+            var dao = new CustomerLoginDAO();
+            var res = dao.GetOrderDetailModel(ido);
+            
+            return View(res);
+        }
+        [HttpPost]
+        public JsonResult CancelOrder(string id)
+        {
+            var dao = new CustomerLoginDAO();
+            var res = dao.CancelOrder(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), id);
+            return Json(new { res = res }, JsonRequestBehavior.AllowGet);
         }
     }
 }

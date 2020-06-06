@@ -31,8 +31,9 @@ namespace Maladin
                       "~/Scripts/MicrosoftAjax.debug.js",
                       "~/Scripts/MicrosoftMvcAjax.debug.js",
                       "~/Scripts/bootstrap-rating/bootstrap-rating.js",
-                      "~/Scripts/bootstrap-rating/bootstrap-rating.min.js"
-                      
+                      "~/Scripts/bootstrap-rating/bootstrap-rating.min.js",
+                      "~/Scripts/toastr.js"
+
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -41,6 +42,7 @@ namespace Maladin
                       //"~/Content/bootstrap.min.css",
                       //"~/Content/bootstrap.css",
                       "~/Content/bootstrap-rating.css",
+                      "~/Content/toastr.css",
                       //"~/Content/site.css"
                       "~/Content/main.css"));
             // style for admin

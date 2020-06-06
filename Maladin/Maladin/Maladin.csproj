@@ -291,7 +291,10 @@
     <Compile Include="Models\FavoriteModel.cs" />
     <Compile Include="Models\ItemProductModel.cs" />
     <Compile Include="Models\ItemProductModels.cs" />
+    <Compile Include="Models\OrderDetailModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\ProductHomeModel.cs" />
+    <Compile Include="Models\QuestionModel.cs" />
     <Compile Include="Models\RegisterCustomerModel.cs" />
     <Compile Include="Models\SearchProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -468,7 +471,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="public\image\ads\7a57bd5597ca61895dbb62744f7c0187.jpeg" />
+    <Content Include="public\image\ads\1.jpeg" />
+    <Content Include="public\image\ads\2.jpg" />
+    <Content Include="public\image\ads\3.jpg" />
+    <Content Include="public\image\ads\4.jpg" />
     <Content Include="public\image\avt\avtdefult.png" />
     <Content Include="public\image\avt\face15.jpg" />
     <Content Include="public\image\avt\face18.jpg" />
@@ -709,6 +715,8 @@
     <Content Include="Areas\Admin\Views\DataSystem\Account.cshtml" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Areas\Partner\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Customer\Views\Account\OderDetail.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <Content Include="public\client_secret.json" />
@@ -770,6 +778,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\PayCOD.cshtml" />
+    <Content Include="Views\Product\FollowOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

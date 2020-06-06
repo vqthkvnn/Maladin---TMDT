@@ -144,6 +144,15 @@
                 }
             }
         }
+        $('#btn-apply-voucher').click(function () {
+            if ($("#apply-voucher").attr('hidden')) {
+                $("#apply-voucher").removeAttr('hidden');
+            }
+            else {
+                $("#apply-voucher").attr('hidden', true);
+            }
+            
+        });
     </script>
 }
 <div class="main-cod" style="background-color:white;">
@@ -210,8 +219,8 @@
                     <input name="CouponCode" id="CouponCode" placeholder="Nhập mã giảm giá" maxlength="20">
                     <label id="CouponCode-error" class="error" for="CouponCode" style="display: none;"></label>
                 </div>
-                <button type="button" class="btn btn-primary textcode" data-toggle="collapse" data-target="#demo">Sử dụng mã giảm giá</button>
-                <div id="demo" class="collapse show inpucode" style="margin-top: 5px;">
+                <button id="btn-apply-voucher" type="button" class="btn btn-primary textcode" data-toggle="collapse">Sử dụng mã giảm giá</button>
+                <div id="apply-voucher" class="collapse show inpucode" hidden style="margin-top: 5px;">
                     <button type="button" style="float: right;">Áp dụng</button>
                     <input name="CouponCode" id="CouponCode" placeholder="Nhập mã giảm giá" maxlength="20" style="float: right;">
                     <label id="CouponCode-error" class="error" for="CouponCode" style="display: none;"></label>
@@ -221,80 +230,98 @@
 
     </div>
     <hr>
-    <div class="row">
-        <div class="infouser">
-            <div class="sex">
-                <label class="radio-inline"><input type="radio" name="optradio" checked>Nam</label>
-                <label class="radio-inline"><input type="radio" name="optradio">Nữ</label>
+    <div class="row" style="margin-left: 20px;
+    margin-right: 20px;">
+        @using (Ajax.BeginForm("QuestionAjax", "Product", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "SuccessQuestion", OnFailure = "FailQuestion", InsertionMode = InsertionMode.Replace, UpdateTargetId = "row" }, htmlAttributes: new { style = "width: 100%;" }))
+        {
+            <div class="form-group" style="width: 100%;">
+                <label for="name"><b> Họ và tên: </b></label>
+                @Html.TextBox("NameGuest", null, htmlAttributes: new { @class = "form-control", @id = "name", placeholder = "Nhập họ và tên" })
+
             </div>
-        </div>
-        <div class="form-group" style="width: 100%;">
-            <label for="name"><b> Họ và tên: </b></label>
-            <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="name">
-        </div>
-        <div class="form-group">
-            <label for="phone"><b> SDT:</b></label>
-            <input type="number" class="form-control" id="phone" placeholder="Số điện thoại" name="phone">
-        </div>
-        <div class="form-group" style="margin-left: 48px;width: 58%;">
-            <label for="email"><b> Email: </b></label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-        </div>
-    </div>
-    <div class="row">
-        <div class="area_other" style="width: 100%;">
-            <div class="area_address show onlyhome">
-                <label style="margin-bottom: 10px; "><b> Chọn địa chỉ nhận hàng:</b></label>
+            <div class="form-group" style="width: 100%;">
+                <label for="sex"><b> Giới tính: </b></label>
+                <div class="sex">
+                    <label class="radio-inline">
+                        @Html.CheckBox("NamGuest", htmlAttributes: new { @checked = true, value = "Nam" })
+                        Nam
+                    </label>
+                    <label class="radio-inline">
+                        @Html.CheckBox("NuGuest", htmlAttributes: new { @checked = true, value = "Nữ" })
+                        Nữ
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="form-group" style="margin-left: 10px;width: 30%">
-            <label for="city">Tỉnh/Thành phố</label>
-            <select class="form-control" id="City">
-                <div class="listcity">
-                    <div class="scroll">
-                        <option value="" selected="selected">Chọn Tỉnh/Thành Phố</option>
+            <div class="form-group" style="margin-left: 10px;width: 30%">
+                <label for="phone"><b> SDT:</b></label>
+                @Html.TextBox("PhoneGuest", null, htmlAttributes: new { @class = "form-control", @id = "phone", placeholder = "Số điện thoại", type = "phone" })
+            </div>
+            <div class="form-group" style="margin-left: 62px;width:35%">
+                <label for="email"><b> Email: </b></label>
+                @Html.TextBox("EmailGuest", null, htmlAttributes: new { @class = "form-control", @id = "email", placeholder = "Enter email", type = "email" })
+
+            </div>
+            <br />
+            <div class="form-group" style="width: 100%;">
+                <div class="area_address show onlyhome">
+                    <label style="margin-bottom: 10px; "><b> Chọn địa chỉ nhận hàng:</b></label>
+                </div>
+            </div>
+            <div class="form-group" style="margin-left: 10px;width: 30%">
+                <label for="city">Tỉnh/Thành phố</label>
+                <select class="form-control" id="City">
+                    <div class="listcity">
+                        <div class="scroll">
+                            @Html.DropDownList("CityGuest",null, htmlAttributes: new {value="" })
+                            <option value="" selected="selected">Chọn Tỉnh/Thành Phố</option>
+                        </div>
+
+                    </div>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left: 62px;width:35%">
+                <label for="city">Quận/Huyện</label>
+                <select class="form-control" id="Dist">
+                    <div class="listdict">
+                        <div class="scroll">
+                            <option value="" selected="selected">Chọn Quận/Huyện</option>
+                        </div>
+                    </div>
+                </select>
+            </div>
+            <br />
+            <div class="form-group" style="width: 30%;margin-left: 10px;">
+                <label for="sel1">Phường/Xã:</label>
+                <select class="form-control" id="Ward">
+
+                    <div class="listward layer">
+                        <option value="" selected="selected">Chọn Phường/Xã</option>
                     </div>
 
-                </div>
-            </select>
-        </div>
-        <div class="form-group" style="margin-left: 62px;">
-            <label for="city">Quận/Huyện</label>
-            <select class="form-control" id="Dist">
-                <div class="listdict">
-                    <div class="scroll">
-                        <option value="" selected="selected">Chọn Quận/Huyện</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left: 62px;width: 35%;">
+                <label for="input-sm">Số nhà, tên đường:</label>
+                <input type="text" class="form-control input-sm" id="input-sm"></input>
+            </div>
+            <div class="form-group" style="width: 100%;">
+                <label style="margin-bottom: 10px; "><b> Thời gian giao hàng:</b></label>
+            </div>
+            <div class="form-group" style="margin-left: 10px;width: 30%;">
+                <select class="form-control" id="sel1">
+                    <div class="listdate layer" style="display: block;">
+                        <option data-value="1" onclick="ChangeHours(this)">Ngày mai 09/05</option>
+                        <option data-value="2" onclick="ChangeHours(this)">Chủ Nhật  10/05</option>
+                        <option data-value="3" onclick="ChangeHours(this)">Thứ Hai  11/05</option>
                     </div>
+                </select>
+            </div>
 
 
-            </select>
-        </div>
-        <div class="form-group" style="width: 30%;margin-left: 10px;">
-            <label for="sel1">Phường/Xã:</label>
-            <select class="form-control" id="Ward">
+        }
 
-                <div class="listward layer">
-                    <option value="" selected="selected">Chọn Phường/Xã</option>
-                </div>
 
-            </select>
-        </div>
-        <div class="form-group" style="margin-left: 62px;width: 58%;">
-            <label for="input-sm">Số nhà, tên đường:</label>
-            <input type="text" class="form-control input-sm" id="input-sm"></input>
-        </div>
-        <div class="area_other" style="width: 100%;">
-            <label style="margin-bottom: 10px; "><b> Thời gian giao hàng:</b></label>
-        </div>
-        <div class="form-group" style="margin-left: 10px;width: 30%;">
-            <select class="form-control" id="sel1">
-                <div class="listdate layer" style="display: block;">
-                    <option data-value="1" onclick="ChangeHours(this)">Ngày mai 09/05</option>
-                    <option data-value="2" onclick="ChangeHours(this)">Chủ Nhật  10/05</option>
-                    <option data-value="3" onclick="ChangeHours(this)">Thứ Hai  11/05</option>
-                </div>
-            </select>
-        </div>
+
 
     </div>
     <div class="row" style="width: 50%;margin-left: 35%;padding: 15px 0px;margin-top: 20px;">
@@ -302,5 +329,6 @@
         <br />
         <p style="margin-top: 20px;"><br />Bạn có thể chọn hình thức thanh toán sau khi đặt hàng</p>
     </div>
+
 
 </div>

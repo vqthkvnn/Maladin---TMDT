@@ -121,7 +121,7 @@
     <script>
         // add event selected
         $('#selectPageSize').change(function() {
-        window.location = $(':selected',this).attr('href')
+            window.location = $(':selected', this).attr('href');
         });
         
 
@@ -139,7 +139,7 @@
                     <div class="row">
                         <div class="col-md-6"><label for="exampleFormControlSelect3">Tùy Chọn hiển thị:</label></div>
                         <div class="col-md-6">
-                            <select class="form-control" name="chooseSizePage" id="selectPageSize" ">
+                            <select class="form-control" name="chooseSizePage" id="selectPageSize">
                                 <option href='@Url.Action("Index", "Product", new {page = 1, pageSize =8 })'>8</option>
                                 <option href='@Url.Action("Index", "Product", new {page = 1, pageSize =16 })'>16</option>
                                 <option href='@Url.Action("Index", "Product", new {page = 1, pageSize =24 })'>24</option>

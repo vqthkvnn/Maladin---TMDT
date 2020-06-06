@@ -1,21 +1,9 @@
-﻿
+﻿@using PagedList;
 @{
-    ViewBag.Title = "Oder";
+    ViewBag.Title = "Danh sách đơn hàng của tôi";
     Layout = "~/Views/Shared/_Layout_profile_account.cshtml";
 }
-
-<h1 class="have-margin">Đơn hàng của tôi</h1>
-<!--nếu có đơn hàng-->
-<div id="haveContent">
-
-</div>
-<!--nếu không có đơn hàng-->
-<div class="empty-content" id="noContent">
-    <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
-    <p>Bạn chưa có đơn hàng nào</p>
-    <a href="@Url.Action("Index", "Home")" class="btn-blue">Tiếp tục mua sắm</a>
-</div>
-
+@model IPagedList<Maladin.Models.OrderModel>
 @section scripts {
     <script>
         $(document).ready(function () {
@@ -29,7 +17,160 @@
                 $("#noContent").show();
             }
         }
+        var page = @ViewBag.Page;
+        var pageSize = 10;
+        var maxPage = @ViewBag.MaxPage;
+        // hết khai báo biến
+        
+        if (page <1)
+        {
+
+        }
+        else if (page == 1) {
+            $("#next").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(page + 1))
+
+        }
+        else if (page == 2) {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#prviewc").removeClass("disabled");
+            $("#next").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(page + 1))
+            $("#prview").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(page - 1))
+        }
+        else {
+            $("#btnPage2").addClass("active");
+            $("#btnPage1").removeClass("active");
+            $("#num1").text(String(page - 1));
+            $("#num2").text(String(page));
+            if (page >= maxPage) {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#btnPage2").addClass("active");
+                $("#next").removeAttr("href");
+                $("#btnNext").addClass("disabled");
+                $("#btnPage3").addClass("disabled");
+                $("#next").attr("aria-disabled", 'true');
+                $("#prview").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(page - 1))
+            }
+            else {
+                $("#prviewc").removeClass("disabled");
+                $("#num3").text(String(page + 1));
+                $("#next").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(page + 1))
+                $("#prview").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(page - 1))
+            }
+        }
+        // add link
+        var pageNext = parseInt($("#num1").text());
+
+        $("#num1").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + pageNext)
+        $("#num2").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(pageNext + 1))
+        $("#num3").attr("href", "@Url.Action("Oder", "Account", new {area="Customer" })?page=" + String(pageNext + 2))
+        // remove link href:
+        if (page >= 2) {
+            $("#num2").removeAttr("href");
+        }
+
+        if (maxPage == 1) {
+            $("#num2").removeAttr("href");
+            $("#num3").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+        else if (maxPage == 2) {
+            $("#num3").removeAttr("href");
+            $("#next").removeAttr("href");
+            $("#btnNext").addClass("disabled");
+        }
+        function CancelOrder(id) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CancelOrder", "Account", new {Area="Customer"})?id=' + id,
+                        async: false,
+                        dataType: "json",
+                        contentType: "application/json",
+                        jsonpCallback: 'callback',
+                        cache: false,
+                        success: function (json) {
+                            console.log(json.res);
+                            if (json.res) {
+                                
+                                toastr.success('Hủy đơn hàng:' + id+" Thành công");
+                            }
+                            else {
+                                toastr.warning('Hủy đơn hàng:' + id + " Thất Bại");
+                            }
+                            },
+                        error: function ()
+                        { toastr.success("Lỗi Hệ Thống"); }
+                        });
+        }
     </script>
 }
+<title>@ViewBag.Title</title>
+<h1 class="have-margin">Đơn hàng của tôi</h1>
+<!--nếu có đơn hàng-->
+<div id="haveContent">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Đơn hàng</th>
+                <th>Ngày mua</th>
+                <th>Loại hình thanh toán</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái đơn hàng</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.ID</td>
+                    <td>@i.DateOrder.ToString("dd-MM-yyyy")</td>
+                    <td>@i.TypeOrder</td>
+                    <td>@i.SumPrice</td>
+                    @if (i.StatusOrder == -1)
+                    {
+                        <td><code style="color:red;">Đã Hủy</code></td>
+                    }
+                    else if (i.StatusOrder == 4)
+                    {
+                        <td><code style="color:green;">Thành công</code></td>
+                    }
+                    else
+                    {
+                        <td><code style="color:blue;">Đang tiến hành</code></td>
+                    }
+                    <td><a href="@Url.Action("OderDetail", "Account",  new {area="Customer", ido = i.ID })">Xem đơn hàng</a></td>
+                    <td><button type="button" class="btn btn-light" onclick="CancelOrder('@i.ID')"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    <hr />
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center" style="width: 100%;display: -webkit-inline-box;">
+            <li class="page-item disabled" id="prviewc">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" id="prview" disabled="">Previous</a>
+            </li>
+            <li class="page-item active" id="btnPage1"><a class="page-link" href="#" id="num1">1</a></li>
+            <li class="page-item" id="btnPage2"><a class="page-link" href="#" id="num2">2</a></li>
+            <li class="page-item" id="btnPage3"><a class="page-link" href="#" id="num3">3</a></li>
+            <li class="page-item" id="btnNext">
+                <a class="page-link" href="#" id="next">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!--nếu không có đơn hàng-->
+<div class="empty-content" id="noContent">
+    <img src="~/assets/image/Baymax-NoContent.png" alt="" style="height: 230px;" />
+    <p>Bạn chưa có đơn hàng nào</p>
+    <a href="@Url.Action("Index", "Home",new { area = "" })" class="btn-blue">Tiếp tục mua sắm</a>
+</div>
+
+
 
 

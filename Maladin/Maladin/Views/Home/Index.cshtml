@@ -1,81 +1,335 @@
 ﻿@{
     ViewBag.Title = "Trang chủ - Maladin.com";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
 }
 <title>@ViewBag.Title</title>
 @section Scripts{
-    
+    <style>
+        
+        .lzd-site-nav-menu-dropdown {
+            visibility: inherit;
+            padding: 0 !important;
+        }
+
+        .lzd-site-nav-menu-dropdown {
+            width: 200px;
+            height: 344px;
+            position: absolute;
+            color:red;
+            box-shadow: 0 0 2px 0 rgba(0,0,0,.25);
+            background-color: #fff;
+            z-index: 200;
+        }
+
+        .site-nav * {
+            box-sizing: content-box;
+        }
+
+        .lzd-site-nav-menu-dropdown .lzd-site-menu-root, .lzd-site-nav-menu .lzd-site-menu-nav-category .lzd-site-menu-nav-menu .lzd-site-nav-menu-dropdown .root {
+            overflow: hidden;
+        }
+
+        .lzd-site-nav-menu-dropdown .lzd-site-menu-root {
+            padding: 8px 0 12px;
+            list-style: none;
+            height: 100%;
+            margin: 0;
+        }
+
+        li, ol, ul {
+            list-style: none;
+        }
+
+        .lzd-site-nav-menu-dropdown .lzd-site-menu-root-item > a {
+            display: block;
+            padding-left: 8px;
+            height: 27px;
+            line-height: 27px;
+            text-decoration: none;
+        }
+
+            .lzd-site-nav-menu-dropdown .lzd-site-menu-root-item > a > span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
+                white-space: nowrap;
+                width: 172px;
+                font-family: Roboto-Regular;
+                font-size: 13px;
+                line-height: 27px;
+                color: #757575;
+                cursor: pointer;
+            }
+
+        .lzd-site-nav-menu-dropdown .lzd-site-menu-sub {
+            padding: 8px 0 12px;
+            height: 344px;
+            visibility: hidden;
+            position: absolute;
+            width: 200px;
+            list-style: none;
+            margin: 0;
+            left: 200px;
+            top: 0;
+            background: #fff;
+            box-shadow: 0 0 4px 0 rgba(0,0,0,.25);
+        }
+
+        li, ol, ul {
+            list-style: none;
+        }
+
+        .lzd-site-nav-menu-dropdown .lzd-site-menu-sub .sub-item-remove-arrow > a {
+            line-height: 27px;
+            display: block;
+            padding-left: 8px;
+            height: 27px;
+            text-decoration: none;
+        }
+
+            .lzd-site-nav-menu-dropdown .lzd-site-menu-sub .sub-item-remove-arrow > a > span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
+                white-space: nowrap;
+                width: 172px;
+                font-family: Roboto-Regular;
+                font-size: 13px;
+                line-height: 27px;
+                color: #757575;
+                cursor: pointer;
+            }
+
+        .lzd-site-menu-root-item :hover {
+            background-color: red;
+            
+        }
+
+        .sub-item-remove-arrow :hover {
+            background-color: antiquewhite;
+            
+        }
+    </style>
+    <script>
+    function select_(){
+        if ($('.lzd-site-menu-root-item:hover')){
+            $('.sub-item-remove-arrow').css("visibility","visible");
+        }
+    }
+    $(document).ready(function(){
+
+        $("#Level_1_Category_No1").hover(()=>{
+            $("#Level_2_Category_No1").css("visibility", "visible")
+        }, ()=>{
+            if ($("#Level_2_Category_No1:hover").length > 0) {$("#Level_2_Category_No1").css("visibility", "visible");}else {$("#Level_2_Category_No1" ).css("visibility", "hidden");}
+        });
+    $("#Level_2_Category_No1").hover(function(){
+                    $("#Level_2_Category_No1").css("visibility", "visible");
+                    }, function(){
+
+                        if($("#Level_1_Category_No1"+":hover").length > 0){
+
+                            $("#Level_2_Category_No1").css("visibility", "visible");
+                        }
+                        else{
+
+                            $("#Level_2_Category_No1").css("visibility", "hidden");
+
+                        }
+                }
+                );
+                //sss
+                $("#Level_1_Category_No2").hover(()=>{
+            $("#Level_2_Category_No2").css("visibility", "visible")
+        }, ()=>{
+            if ($("#Level_2_Category_No2:hover").length > 0) {$("#Level_2_Category_No2").css("visibility", "visible");}else {$("#Level_2_Category_No2" ).css("visibility", "hidden");}
+        });
+    $("#Level_2_Category_No2").hover(function(){
+                    $("#Level_2_Category_No2").css("visibility", "visible");
+                    }, function(){
+
+                        if($("#Level_1_Category_No2"+":hover").length > 0){
+
+                            $("#Level_2_Category_No2").css("visibility", "visible");
+                        }
+                        else{
+
+                            $("#Level_2_Category_No2").css("visibility", "hidden");
+
+                        }
+                }
+                );
+                //ss
+                $("#Level_1_Category_No3").hover(()=>{
+            $("#Level_2_Category_No3").css("visibility", "visible")
+        }, ()=>{
+            if ($("#Level_2_Category_No3:hover").length > 0) {$("#Level_2_Category_No3").css("visibility", "visible");}else {$("#Level_2_Category_No3" ).css("visibility", "hidden");}
+        });
+    $("#Level_2_Category_No3").hover(function(){
+                    $("#Level_2_Category_No3").css("visibility", "visible");
+                    }, function(){
+
+                        if($("#Level_1_Category_No3"+":hover").length > 0){
+
+                            $("#Level_2_Category_No3").css("visibility", "visible");
+                        }
+                        else{
+
+                            $("#Level_2_Category_No3").css("visibility", "hidden");
+
+                        }
+                }
+                );
+                //ss
+                $("#Level_1_Category_No4").hover(()=>{
+            $("#Level_2_Category_No4").css("visibility", "visible")
+        }, ()=>{
+            if ($("#Level_2_Category_No4:hover").length > 0) {$("#Level_2_Category_No4").css("visibility", "visible");}else {$("#Level_2_Category_No4" ).css("visibility", "hidden");}
+        });
+    $("#Level_2_Category_No4").hover(function(){
+                    $("#Level_2_Category_No4").css("visibility", "visible");
+                    }, function(){
+
+                        if($("#Level_1_Category_No4"+":hover").length > 0){
+
+                            $("#Level_2_Category_No4").css("visibility", "visible");
+                        }
+                        else{
+
+                            $("#Level_2_Category_No4").css("visibility", "hidden");
+
+                        }
+                }
+                );
+
+        
+
+            });
+
+    </script>
 }
 @model Maladin.Models.ItemProductModels
 <div class="row">
-    <div class="header-home col-12" style="margin-top:15px;margin-bottom:15px;display:flex">
-        <ul class="Navigation__Wrapper-knnw0g-0 jJSxyD" style="z-index: 2">
-            <li class="MenuItem-sc-181aa19-0 cOJYFK">
-                <a class="MenuItem__MenuLink-sc-181aa19-1 fKvTQu" href="#">
-                    <span class="icon-wrap"><i class="icon-main-menu-cellphone lv1-icon tikicon"></i></span>
-                    <span class="text">Điện thoại - Máy tính bảng</span>
-                </a>
-            </li>
-            <li class="MenuItem-sc-181aa19-0 cOJYFK">
-                <a class="MenuItem__MenuLink-sc-181aa19-1 fKvTQu" href="#">
-                    <span class="icon-wrap"><i class="icon-main-menu-cellphone lv1-icon tikicon"></i></span>
-                    <span class="text">Điện thoại - Máy tính bảng</span>
-                </a>
-            </li>
-            <li class="MenuItem-sc-181aa19-0 cOJYFK">
-                <a class="MenuItem__MenuLink-sc-181aa19-1 fKvTQu" href="#">
-                    <span class="icon-wrap"><i class="icon-main-menu-cellphone lv1-icon tikicon"></i></span>
-                    <span class="text">Điện thoại - Máy tính bảng</span>
-                </a>
-            </li>
-            <li class="MenuItem-sc-181aa19-0 cOJYFK">
-                <a class="MenuItem__MenuLink-sc-181aa19-1 fKvTQu" href="#">
-                    <span class="icon-wrap"><i class="icon-main-menu-cellphone lv1-icon tikicon"></i></span>
-                    <span class="text">Điện thoại - Máy tính bảng</span>
-                </a>
-            </li>
-            <li class="MenuItem-sc-181aa19-0 cOJYFK">
-                <a class="MenuItem__MenuLink-sc-181aa19-1 fKvTQu" href="#">
-                    <span class="icon-wrap"><i class="icon-main-menu-cellphone lv1-icon tikicon"></i></span>
-                    <span class="text">Điện thoại - Máy tính bảng</span>
-                </a>
-            </li>
-            <li class="MenuItem-sc-181aa19-0 cOJYFK">
-                <a class="MenuItem__MenuLink-sc-181aa19-1 fKvTQu" href="#">
-                    <span class="icon-wrap"><i class="icon-main-menu-cellphone lv1-icon tikicon"></i></span>
-                    <span class="text">Điện thoại - Máy tính bảng</span>
-                </a>
-            </li>
-        </ul>
-        <div class="Banners__MainGrid-sc-1yy2fzy-0 iNmJbx" wrap="true">
-            <div class="Banners__MainGrid-sc-1yy2fzy-0 buXpLe">
-                <div style="width: 100%;" class="Banners__MainGrid-sc-1yy2fzy-0 cFfSYr">
-                    <div class="slideshow-container">
-                        <div class="mySlides2">
-                            <img src="img_band_chicago.jpg" style="width:100%">
-                        </div>
+    <div class="col-2">
+        <div class="lzd-site-nav-menu-dropdown">
+            <ul class="lzd-site-menu-root">
+                <li class="lzd-site-menu-root-item " id="Level_1_Category_No1">
+                    <a class="">
 
-                        <div class="mySlides2">
-                            <img src="img_band_la.jpg" style="width:100%">
-                        </div>
+                        <span>Mỹ Phẩm</span>
 
-                        <div class="mySlides2">
-                            <img src="img_band_ny.jpg" style="width:100%">
-                        </div>
+                    </a>
 
-                        <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
-                        <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
-                    </div>
+                </li>
+                <li class="lzd-site-menu-root-item" id="Level_1_Category_No2">
+                    <a>
+
+                        <span>Quần Áo</span>
+
+                    </a>
+
+                </li>
+                <li class="lzd-site-menu-root-item" id="Level_1_Category_No3">
+                    <a class="">
+
+                        <span >Điện tử</span>
+
+                    </a>
+
+                </li>
+                <li class="lzd-site-menu-root-item" id="Level_1_Category_No4">
+                    <a>
+
+                        <span>Tiêu Dùng</span>
+
+                    </a>
+
+                </li>
+                
+                <ul class="lzd-site-menu-sub " id="Level_2_Category_No1">
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_1">
+                        <a href="#">
+                            <span>Son</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_1">
+                        <a href="#">
+                            <span>Kem Dưỡng Da</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_1">
+                        <a href="#">
+                            <span>Trang Điểm</span>
+                        </a>
+
+                    </li>
+                    
+                    
+                    
+
+                </ul>
+                <ul class="lzd-site-menu-sub " id="Level_2_Category_No2">
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_1">
+                        <a href="//www.lazada.vn/dien-thoai-di-dong/">
+                            <span>Giày</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_2">
+                        <a href="//www.lazada.vn/may-tinh-bang/">
+                            <span>Kính</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_1">
+                        <a href="//www.lazada.vn/dien-thoai-di-dong/">
+                            <span>Mũ</span>
+                        </a>
+
+                    </li>
+                    <li class="sub-item-remove-arrow" data-cate="cate_1_2">
+                        <a href="//www.lazada.vn/may-tinh-bang/">
+                            <span>Đồng Hồ</span>
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col-10">
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" style="height: 344px;">
+                <div class="carousel-item active" data-interval="4000">
+                    <img src="/public/image/ads/2.jpg" class="d-block w-100" alt="..." style="height: 344px;">
+                </div>
+                <div class="carousel-item" data-interval="4000">
+                    <img src="/public/image/ads/3.jpg" class="d-block w-100" alt="..." style="height: 344px;">
+                </div>
+                <div class="carousel-item" data-interval="4000">
+                    <img src="/public/image/ads/4.jpg" class="d-block w-100" alt="..." style="height: 344px;">
                 </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
     <div class="col-12-lg product-list-home">
         <div class="col-12-lg">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Sản phẩm Kính <strong>HOT</strong></h4>
+                    <h4 class="card-title">Sản phẩm Bán Chạy <strong>HOT</strong></h4>
                     <div class="row">
                         <div class="col-12-lg">
                             @foreach (var i in Model.KinhProduct)
@@ -146,7 +400,7 @@
         <div class="col-12-lg">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Sản phẩm Đồng Hồ <strong>HOT</strong></h4>
+                    <h4 class="card-title">Sản phẩm được <strong>Mua Nhiều</strong></h4>
                     <div class="row">
                         <div class="col-12-lg">
                             @foreach (var i in Model.DongHoProduct)
@@ -217,7 +471,7 @@
         <div class="col-12-lg">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Sản phẩm <strong>Giảm giá sock</strong></h4>
+                    <h4 class="card-title">Sản phẩm giảm giá<strong> Sock</strong></h4>
                     <div class="row">
                         <div class="col-12-lg">
                             @foreach (var i in Model.DongHoProduct)

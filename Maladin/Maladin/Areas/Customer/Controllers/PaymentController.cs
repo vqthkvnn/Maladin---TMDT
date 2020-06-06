@@ -8,8 +8,13 @@ using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using System.Web.Mvc;
+
 using Maladin.DAO;
 using Maladin.Common;
+using System.IO;
+using System.Threading;
+using System.Text;
+
 namespace Maladin.Areas.Customer.Controllers
 {
     public class PaymentController : BaseController
@@ -112,6 +117,7 @@ namespace Maladin.Areas.Customer.Controllers
                 }
                 ViewBag.Listproduct = listCart;
                 ViewBag.Vocher = payDAO.SumPriceVoucher(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), vocher);
+                
             }
             else
             {
@@ -178,6 +184,9 @@ namespace Maladin.Areas.Customer.Controllers
              * chấp nhận thanh toán -> xử lý thanh toán theo hình thức có tài khoản
              * thêm mới n-> đơn -> n sản phẩm trong lô hàng
              */
+            string[] Scopes = { GmailService.Scope.GmailSend };
+            string ApplicationName = "SendMail";
+            var infoDAO = new CustomerLoginDAO();
             var daoP = new PaymentDAO();
             List<string> allID = new List<string>();
             allID = daoP.AutoRenderOderFromUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), IDVocher, type);
@@ -185,7 +194,48 @@ namespace Maladin.Areas.Customer.Controllers
              * tiếp theo là thanh toán
              */
             var resIDP = daoP.Payment(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), allID);
+            /*var resdb = infoDAO.getinfo(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
+            string lod = "";
+            foreach (var i in allID)
+                lod += i;
+            string contentemail = "<h1>Chi tiết hóa đơn</h1><br>" +
+                "<p>Họ tên người nhận:" + resdb.name +
+                "</p><br>" +
+                "<p>Số điện thoại:" + resdb.phone +
+                "</p><br>" +
+                "<p>Email:" + resdb.email +
+                "</p><br>" +
+                "<p>Số tiền thanh toán:" + Convert.ToString(daoP.SumPriceOrder(allID)) +
+                " VND</p><br>" +
+                "<p>Hình thức thanh toán:Tài khoản</p><br>" +
+                "<p>Danh sách hóa đơn bạn mua:" + lod +
+                "</p>";
+            UserCredential credential;
+            //read your credentials file
+            using (var stream =
+            new FileStream("C:\\Users\\Tuyen\\Documents\\GitHub\\Maladin---TMDT\\Maladin\\Maladin\\public\\client_secret.json", FileMode.Open, FileAccess.Read))
+            {
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+            }
+            string message = $"To: {resdb.email}\r\nSubject:Maladin.com - Payment Oder\r\nContent-Type: text/html;charset=utf-8\r\n\r\n{contentemail}";
+            //call your gmail service
+            var service = new GmailService(new BaseClientService.Initializer() { HttpClientInitializer = credential, ApplicationName = ApplicationName });
+            var msg = new Google.Apis.Gmail.v1.Data.Message();
+            msg.Raw = Base64UrlEncode(message.ToString());
+            service.Users.Messages.Send(msg, "me").Execute();*/
             return Json(new { status = resIDP}, JsonRequestBehavior.AllowGet);
+        }
+        string Base64UrlEncode(string input)
+        {
+            var data = Encoding.UTF8.GetBytes(input);
+            return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_").Replace("=", "");
         }
         [HttpPost]
         public JsonResult AcceptPaymentNoCoin(string IDVocher, string type)
@@ -194,11 +244,50 @@ namespace Maladin.Areas.Customer.Controllers
              * chấp nhận thanh toán -> xử lý thanh toán theo hình thức có tài khoản
              * thêm mới n-> đơn -> n sản phẩm trong lô hàng
              */
+            string[] Scopes = { GmailService.Scope.GmailSend };
+            string ApplicationName = "SendMail";
+            var infoDAO = new CustomerLoginDAO();
             var daoP = new PaymentDAO();
             List<string> allID = new List<string>();
             try
             {
                 allID = daoP.AutoRenderOderFromUser(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString(), IDVocher, type);
+                var resdb = infoDAO.getinfo(Session[CustomerLoginSession.CUSTOMER_SESSION].ToString());
+                string lod = "";
+                foreach (var i in allID)
+                    lod += i;
+                string contentemail = "<h1>Chi tiết hóa đơn</h1><br>" +
+                    "<p>Họ tên người nhận:" + resdb.name +
+                    "</p><br>" +
+                    "<p>Số điện thoại:" + resdb.phone +
+                    "</p><br>" +
+                    "<p>Email:" + resdb.email +
+                    "</p><br>" +
+                    "<p>Số tiền thanh toán:" + Convert.ToString(daoP.SumPriceOrder(allID)) +
+                    " VND</p><br>" +
+                    "<p>Hình thức thanh toán:Tài khoản</p><br>" +
+                    "<p>Danh sách hóa đơn bạn mua:" + lod +
+                    "</p>";
+                UserCredential credential;
+                //read your credentials file
+                using (var stream =
+                new FileStream("C:\\Users\\Tuyen\\Documents\\GitHub\\Maladin---TMDT\\Maladin\\Maladin\\public\\client_secret.json", FileMode.Open, FileAccess.Read))
+                {
+                    string credPath = "token.json";
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                    Console.WriteLine("Credential file saved to: " + credPath);
+                }
+                string message = $"To: {resdb.email}\r\nSubject:Maladin.com - Payment Oder\r\nContent-Type: text/html;charset=utf-8\r\n\r\n{contentemail}";
+                //call your gmail service
+                var service = new GmailService(new BaseClientService.Initializer() { HttpClientInitializer = credential, ApplicationName = ApplicationName });
+                var msg = new Google.Apis.Gmail.v1.Data.Message();
+                msg.Raw = Base64UrlEncode(message.ToString());
+                service.Users.Messages.Send(msg, "me").Execute();
                 return Json(new { status = true }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception e)
