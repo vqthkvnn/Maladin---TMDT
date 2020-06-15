@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PagedList;
+using PagedList.Mvc;
+using Microsoft.VisualStudio.Services.WebApi;
 
 namespace Maladin.Areas.Admin.DAO
 {
